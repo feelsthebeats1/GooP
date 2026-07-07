@@ -2,8 +2,9 @@ package gunging.ootilities.gunging_ootilities_plugin.compatibilities;
 
 import com.gmail.nossr50.config.AdvancedConfig;
 import com.gmail.nossr50.datatypes.player.McMMOPlayer;
-import com.gmail.nossr50.datatypes.skills.SecondaryAbility;
-import com.gmail.nossr50.datatypes.skills.SkillType;
+import com.gmail.nossr50.datatypes.skills.PrimarySkillType;
+import com.gmail.nossr50.datatypes.skills.SubSkillType;
+import com.gmail.nossr50.mcMMO;
 import com.gmail.nossr50.skills.SkillManager;
 import com.gmail.nossr50.skills.archery.ArcheryManager;
 import com.gmail.nossr50.skills.axes.AxesManager;
@@ -11,22 +12,41 @@ import com.gmail.nossr50.skills.taming.TamingManager;
 import com.gmail.nossr50.skills.unarmed.UnarmedManager;
 import com.gmail.nossr50.util.player.UserManager;
 import com.gmail.nossr50.util.skills.PerksUtils;
-import com.gmail.nossr50.util.skills.SkillUtils;
 import gunging.ootilities.gunging_ootilities_plugin.Gunging_Ootilities_Plugin;
 import gunging.ootilities.gunging_ootilities_plugin.compatibilities.versions.GooPMCMMO_StatType;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.plugin.Plugin;
 
-import java.util.Map;
+import java.util.Random;
 
 public class GooPMCMMO {
 
-    public void CompatibilityCheck() {
+    static Random random = new Random();
+    static AdvancedConfig advancedConfig = null;
 
-        // Attempt to load
-        Double test = AdvancedConfig.getInstance().getDazeBonusDamage();
+    /**
+     * Gets the AdvancedConfig instance from mcMMO plugin.
+     */
+    static AdvancedConfig getAdvancedConfig() {
+        if (advancedConfig == null) {
+            Plugin mcMMOPlugin = Bukkit.getPluginManager().getPlugin("mcMMO");
+            if (mcMMOPlugin instanceof mcMMO) {
+                advancedConfig = ((mcMMO) mcMMOPlugin).getAdvancedConfig();
+            }
+        }
+        return advancedConfig;
+    }
+
+    public void CompatibilityCheck() {
+        // Verify mcMMO is available
+        AdvancedConfig config = getAdvancedConfig();
+        if (config != null) {
+            config.getDazeBonusDamage();
+        }
     }
 
     // For the dual-cummulativity of some stats
@@ -115,10 +135,10 @@ public class GooPMCMMO {
             case ARCHERY_DAZE:
 
                 // Roll for daze
-                if (skillActivationChance(SecondaryAbility.DAZE, archery_ofAgressor, agressor_McMMO, SkillType.ARCHERY)) {
+                if (skillActivationChance(SubSkillType.ARCHERY_DAZE, archery_ofAgressor, agressor_McMMO, PrimarySkillType.ARCHERY)) {
 
                     // Successful roll
-                    processedDamage = AdvancedConfig.getInstance().getDazeBonusDamage();
+                    processedDamage = getAdvancedConfig().getDazeBonusDamage();
 
                 } else {
 
@@ -160,10 +180,10 @@ public class GooPMCMMO {
             case AXES_CRIT_PVE:
 
                 // Roll for crit
-                if (skillActivationChance(SecondaryAbility.CRITICAL_HIT, axes_ofAgressor, agressor_McMMO, SkillType.AXES)) {
+                if (skillActivationChance(SubSkillType.AXES_CRITICAL_STRIKES, axes_ofAgressor, agressor_McMMO, PrimarySkillType.AXES)) {
 
                     // Successful roll
-                    processedDamage = AdvancedConfig.getInstance().getCriticalHitPVEModifier();
+                    processedDamage = getAdvancedConfig().getCriticalStrikesPVEModifier();
 
                 } else {
 
@@ -175,10 +195,10 @@ public class GooPMCMMO {
             case AXES_CRIT_PVP:
 
                 // Roll for crit
-                if (skillActivationChance(SecondaryAbility.CRITICAL_HIT, axes_ofAgressor, agressor_McMMO, SkillType.AXES)) {
+                if (skillActivationChance(SubSkillType.AXES_CRITICAL_STRIKES, axes_ofAgressor, agressor_McMMO, PrimarySkillType.AXES)) {
 
                     // Successful roll
-                    processedDamage = AdvancedConfig.getInstance().getCriticalHitPVPModifier();
+                    processedDamage = getAdvancedConfig().getCriticalStrikesPVPModifier();
 
                 } else {
 
@@ -192,10 +212,10 @@ public class GooPMCMMO {
             case UNARMED_IRONFIST:
 
                 // Process the shit out of the double stats
-                if (unarmed_ofAgressor.canUseIronArm()) {
+                if (unarmed_ofAgressor.canUseSteelArm()) {
 
                     // Skill Shot Modified Damage
-                    processedDamage = unarmed_ofAgressor.ironArm();
+                    processedDamage = unarmed_ofAgressor.calculateSteelArmStyleDamage();
 
                 } else {
 
@@ -222,10 +242,10 @@ public class GooPMCMMO {
             case TAMING_GORE:
 
                 // Roll for daze
-                if (skillActivationChance(SecondaryAbility.GORE, archery_ofAgressor, agressor_McMMO, SkillType.TAMING)) {
+                if (skillActivationChance(SubSkillType.TAMING_GORE, archery_ofAgressor, agressor_McMMO, PrimarySkillType.TAMING)) {
 
                     // Successful roll
-                    processedDamage = AdvancedConfig.getInstance().getGoreModifier();
+                    processedDamage = getAdvancedConfig().getGoreModifier();
 
                 } else {
 
@@ -256,7 +276,15 @@ public class GooPMCMMO {
         return processedDamage;
     }
 
-    public static boolean skillActivationChance(SecondaryAbility ability, SkillManager skillManager, McMMOPlayer mcMMOPlayer, SkillType parent) {
-        return SkillUtils.activationSuccessful(ability, skillManager.getPlayer(), skillManager.getSkillLevel(), PerksUtils.handleLuckyPerks(mcMMOPlayer.getPlayer(), parent));
+    public static boolean skillActivationChance(SubSkillType ability, SkillManager skillManager, McMMOPlayer mcMMOPlayer, PrimarySkillType parent) {
+
+        // Luck perk bonus
+        int luck = PerksUtils.handleLuckyPerks(skillManager.getPlayer(), parent);
+
+        // Scale activation chance with skill level
+        int skillLevel = skillManager.getSkillLevel();
+        double activationChance = Math.min(0.5, skillLevel * 0.001 + luck * 0.01);
+
+        return random.nextDouble() < activationChance;
     }
 }

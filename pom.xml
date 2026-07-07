@@ -6,7 +6,7 @@
 
     <groupId>gunging.ootilities</groupId>
     <artifactId>Gunging_Ootilities_Plugin</artifactId>
-    <version>1.6.4-dev</version>
+    <version>1.6.4-custom</version>
     <packaging>jar</packaging>
 
     <name>Gunging_Ootilities_Plugin</name>
@@ -15,7 +15,7 @@
         them myself.
     </description>
     <properties>
-        <java.version>1.8</java.version>
+        <java.version>17</java.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -25,7 +25,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <version>3.11.0</version>
                 <configuration>
                     <source>${java.version}</source>
                     <target>${java.version}</target>
@@ -46,8 +46,8 @@
             <url>https://hub.spigotmc.org/nexus/content/repositories/snapshots/</url>
         </repository>
         <repository>
-            <id>papermc-repo</id>
-            <url>https://papermc.io/repo/repository/maven-public/</url>
+            <id>papermc</id>
+            <url>https://repo.papermc.io/repository/maven-public/</url>
         </repository>
         <repository>
             <id>sk89q-repo</id>
@@ -79,6 +79,44 @@
             <id>minecraft-repo</id>
             <url>https://libraries.minecraft.net/</url>
         </repository>
+
+        <repository>
+            <id>codemc-releases</id>
+            <url>https://repo.codemc.io/repository/maven-releases/</url>
+        </repository>
+        <repository>
+            <id>codemc-snapshots</id>
+            <url>https://repo.codemc.io/repository/maven-snapshots/</url>
+        </repository>
+
+        <repository>
+            <id>lumine</id>
+            <url>https://mvn.lumine.io/repository/maven-public/</url>
+        </repository>
+        <repository>
+            <id>phoenixdevt</id>
+            <url>https://nexus.phoenixdevt.fr/repository/maven-public/</url>
+        </repository>
+
+        <repository>
+            <id>essentialsx</id>
+            <url>https://repo.essentialsx.net/releases/</url>
+        </repository>
+
+        <repository>
+            <id>glaremasters repo</id>
+            <url>https://repo.glaremasters.me/repository/towny/</url>
+        </repository>
+
+        <repository>
+            <id>Scarsz-Nexus</id>
+            <url>https://nexus.scarsz.me/content/groups/public/</url>
+        </repository>
+
+
+
+
+
     </repositories>
 
     <dependencies>
@@ -94,6 +132,7 @@
             <artifactId>GriefPrevention</artifactId>
             <version>16.17.1</version>
         </dependency>
+
         <!--
         <dependency>
             <groupId>com.destroystokyo.paper</groupId>
@@ -117,10 +156,11 @@
         </dependency>
 
         -->
+
         <dependency>
             <groupId>io.papermc.paper</groupId>
             <artifactId>paper-api</artifactId>
-            <version>1.21.4-R0.1-SNAPSHOT</version>
+            <version>1.20.4-R0.1-SNAPSHOT</version>
             <scope>provided</scope>
         </dependency>
 
@@ -131,13 +171,14 @@
             <scope>provided</scope>
         </dependency>
 
-        <dependency>
-            <groupId>io.lumine.xikage</groupId>
-            <artifactId>MythicMobs</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>
-            <version>4.12.0</version>
-        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>io.lumine.xikage</groupId>-->
+<!--            <artifactId>MythicMobs</artifactId>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${basedir}/lib/MythicMobs.jar</systemPath>-->
+<!--            <version>5.12.0</version>-->
+<!--        </dependency>-->
+
         <!--
         <dependency>
             <groupId>io.lumine.xikage</groupId>
@@ -146,47 +187,67 @@
             <scope>provided</scope>
         </dependency>
         -->
+
         <dependency>
             <groupId>me.clip</groupId>
             <artifactId>placeholderapi</artifactId>
-            <version>2.10.6</version>
+            <version>2.12.2</version>
             <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>net.mmogroup.mmolib</groupId>
-            <artifactId>MythicLib</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MythicLib.jar</systemPath>
-            <version>1.0.10</version>
+            <groupId>io.lumine</groupId>
+            <artifactId>Mythic-Dist</artifactId>
+            <scope>provided</scope>
+<!--            <systemPath>${basedir}/lib/MythicLib.jar</systemPath>-->
+            <version>5.8.2</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>MythicLib-dist</artifactId>
+            <version>1.6.2-SNAPSHOT</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>com.gmail.nossr50</groupId>
+            <artifactId>mcMMO</artifactId>
+            <version>2.1.228</version>
+            <scope>provided</scope>
+        </dependency>
+
         <dependency>
             <groupId>net.mmogroup.agger</groupId>
             <artifactId>HUH</artifactId>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/CMI.jar</systemPath>
+            <systemPath>${basedir}/libs/CMI9.0.0.0API.jar</systemPath>
             <version>1.0.2</version>
         </dependency>
+
         <dependency>
             <groupId>net.mmogroup.grrro</groupId>
             <artifactId>HEUH</artifactId>
             <scope>system</scope>
-            <systemPath>${basedir}/lib/CMILib1.2.3.7.jar</systemPath>
+            <systemPath>${basedir}/libs/CMILib1.5.9.7.jar</systemPath>
             <version>1.0.3</version>
         </dependency>
+
         <dependency>
-            <groupId>net.mmogroup.ess</groupId>
-            <artifactId>HEUH</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Essentials.jar</systemPath>
-            <version>1.0.3</version>
+            <groupId>net.essentialsx</groupId>
+            <artifactId>EssentialsX</artifactId>
+            <scope>provided</scope>
+            <version>2.21.2</version>
         </dependency>
-        <dependency>
-            <groupId>io.lumine.graveyards</groupId>
-            <artifactId>Graveyards</artifactId>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/Graveyards.jar</systemPath>
-            <version>2.7.0</version>
-        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>io.lumine.graveyards</groupId>-->
+<!--            <artifactId>Graveyards</artifactId>-->
+<!--            <scope>system</scope>-->
+<!--            <systemPath>${project.basedir}/lib/Graveyards.jar</systemPath>-->
+<!--            <version>2.7.0</version>-->
+<!--        </dependency>-->
+
         <!--
         <dependency>
             <groupId>gunging.ootilities</groupId>
@@ -203,62 +264,65 @@
             <version>1.0</version>
         </dependency>
         -->
+
         <dependency>
             <groupId>gunging.ootilities</groupId>
             <artifactId>mmoitem_shrubs</artifactId>
             <scope>system</scope>
-            <systemPath>${project.basedir}/lib/MMOItem_Shrubs.jar</systemPath>
+            <systemPath>${project.basedir}/libs/MMOItem_Shrubs-v1.9.1-2021.12.04.jar</systemPath>
             <version>1.0</version>
         </dependency>
-        <dependency>
-            <groupId>net.townaura</groupId>
-            <artifactId>Towny</artifactId>
-            <scope>system</scope>
-            <systemPath>${project.basedir}/lib/Towny.jar</systemPath>
-            <version>2.0</version>
-        </dependency>
+
         <dependency>
             <groupId>net.Indyuce</groupId>
-            <artifactId>mmoitems</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MMOItems.jar</systemPath>
-            <version>5.5.5</version>
+            <artifactId>MMOItems-API</artifactId>
+            <scope>provided</scope>
+<!--            <systemPath>${basedir}/lib/MMOItems.jar</systemPath>-->
+            <version>6.10.1-SNAPSHOT</version>
         </dependency>
+
         <dependency>
-            <groupId>net.Asangarin</groupId>
-            <artifactId>mmocore</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MMOCore.jar</systemPath>
-            <version>5.5.5</version>
+            <groupId>net.Indyuce</groupId>
+            <artifactId>MMOCore-API</artifactId>
+            <scope>provided</scope>
+<!--            <systemPath>${basedir}/lib/MMOCore.jar</systemPath>-->
+            <version>1.13.1-20260531.191531-59</version>
         </dependency>
+
         <dependency>
-            <groupId>mc.mmo</groupId>
-            <artifactId>mcmmo</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MCMMO.jar</systemPath>
-            <version>5.5.5</version>
+            <groupId>com.palmergames.bukkit.towny</groupId>
+            <artifactId>towny</artifactId>
+            <version>0.103.0.0</version>
+            <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>net.milkbowl</groupId>
-            <artifactId>vault</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/Vault.jar</systemPath>
-            <version>5.3.2</version>
+            <groupId>com.github.MilkBowl</groupId>
+            <artifactId>VaultAPI</artifactId>
+            <version>1.7</version>
+            <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>discrd.apprently.anything</groupId>
+            <groupId>com.discordsrv</groupId>
             <artifactId>discordsrv</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/DiscordSRV.jar</systemPath>
-            <version>5.3.2</version>
+            <version>1.29.0</version>
+            <scope>provided</scope>
         </dependency>
+
         <dependency>
-            <groupId>nettus.cruxiblettus</groupId>
-            <artifactId>crux</artifactId>
-            <scope>system</scope>
-            <systemPath>${basedir}/lib/MythicCrucible.jar</systemPath>
-            <version>5.3.2</version>
+            <groupId>io.lumine</groupId>
+            <artifactId>MythicCrucible-API</artifactId>
+            <version>2.2.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>io.lumine</groupId>
+            <artifactId>MythicGraveyards</artifactId>
+            <version>5.1.0</version>
+        </dependency>
+
+
         <!--
         <dependency>
             <groupId>bot.tisco</groupId>

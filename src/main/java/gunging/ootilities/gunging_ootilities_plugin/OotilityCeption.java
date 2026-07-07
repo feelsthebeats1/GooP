@@ -1134,7 +1134,7 @@ public class OotilityCeption {
 
             // Evaluate material itself
             Material type = iStack.getType();
-            return type == Material.WRITABLE_BOOK || type == Material.WRITTEN_BOOK || type == Material.LEGACY_WRITTEN_BOOK;
+            return type == Material.WRITABLE_BOOK || type == Material.WRITTEN_BOOK;
         }
     }
 

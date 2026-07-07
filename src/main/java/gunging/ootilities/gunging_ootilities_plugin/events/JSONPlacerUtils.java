@@ -229,8 +229,16 @@ public class JSONPlacerUtils implements Listener {
         // If not cancelled
         if (!event.isCancelled() && event.getPlayer().getGameMode() != GameMode.ADVENTURE) {
 
+            // Get the item in the player's hand that was used for placement
+            ItemStack itemInHand;
+            if (event.getHand() == EquipmentSlot.OFF_HAND) {
+                itemInHand = event.getPlayer().getInventory().getItemInOffHand();
+            } else {
+                itemInHand = event.getPlayer().getInventory().getItemInMainHand();
+            }
+
             // Is it JSON Furniture?
-            if (IsJSON_Furniture(event.getItemInHand())) {
+            if (IsJSON_Furniture(itemInHand)) {
 
                 // Cancel the event, thats how it works.
                 event.setCancelled(true);
@@ -239,7 +247,7 @@ public class JSONPlacerUtils implements Listener {
                     public void run() {
 
                         // Replace block
-                        boolean success = SetOntoBlock(event.getPlayer(), event.getBlock(), event.getItemInHand(), ArmorStandCardinallyLookingAt(event.getPlayer()));
+                        boolean success = SetOntoBlock(event.getPlayer(), event.getBlock(), itemInHand, ArmorStandCardinallyLookingAt(event.getPlayer()));
 
                         //TXR//OotilityCeption. Log("Success: \u00a7b" + success);
                         //TXR//OotilityCeption. Log("Creativity: \u00a7e" + (event.getPlayer().getGameMode() != GameMode.CREATIVE));
@@ -249,7 +257,7 @@ public class JSONPlacerUtils implements Listener {
                             //TXR//OotilityCeption. Log("\u00a7aStep R");
 
                             // Remove 1 from amount
-                            event.getItemInHand().setAmount(event.getItemInHand().getAmount() - 1);
+                            itemInHand.setAmount(itemInHand.getAmount() - 1);
                         }
 
                     }

@@ -14,7 +14,7 @@ public class MMODamageReplacement extends DamageMechanic {
         construct(mlc);
     }
     public MMODamageReplacement(SkillExecutor manager, String line, MythicLineConfig mlc) {
-        super(manager, line, mlc);
+        super(manager, null, line, mlc);
         construct(mlc);
     }
 

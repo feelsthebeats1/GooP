@@ -708,7 +708,7 @@ public class GooPMythicMobs implements Listener {
         if (!hasMythicItem.isPresent()) { return null; }
 
         // Yeah just that I guess
-        return ((BukkitItemStack)((MythicItem)hasMythicItem.get()).generateItemStack(1)).build();
+        return ((BukkitItemStack)((MythicItem)hasMythicItem.get()).generateItemStack(1)).getItemStack();
     }
     @NotNull public static final String MYTHIC_TYPE = "MYTHIC_TYPE";
     public static boolean isMythicItem(@Nullable ItemStack stack) {

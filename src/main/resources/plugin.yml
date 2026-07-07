@@ -1,7 +1,7 @@
 name: Gunging_Ootilities_Plugin
 version: 1.10.9
 main: gunging.ootilities.gunging_ootilities_plugin.Gunging_Ootilities_Plugin
-api-version: 1.14
+api-version: 1.20
 prefix: GooP
 authors: [Gunging]
 softdepend: [DiscordSRV,MythicMobs,Vault,WorldGuard,MMOItems,MMOCore,MythicLib,Graveyards,PlaceholderAPI,mcMMO,GriefPrevention,Towny,CMI,Essentials,MythicCrucible]

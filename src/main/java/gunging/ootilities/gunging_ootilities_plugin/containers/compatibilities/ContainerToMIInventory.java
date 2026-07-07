@@ -6,8 +6,9 @@ import gunging.ootilities.gunging_ootilities_plugin.compatibilities.GooPMMOItems
 import gunging.ootilities.gunging_ootilities_plugin.compatibilities.GooPMythicMobs;
 import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCPersonal;
 import gunging.ootilities.gunging_ootilities_plugin.containers.loader.GCL_Personal;
+import io.lumine.mythic.lib.api.item.NBTItem;
 import net.Indyuce.mmoitems.api.player.inventory.EquippedItem;
-import net.Indyuce.mmoitems.comp.inventory.PlayerInventory;
+import net.Indyuce.mmoitems.api.player.inventory.EquippedItemImpl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -19,72 +20,49 @@ import java.util.Map;
 
 /**
  * Equips the items stored in storage slots to the player.
+ * Adapted for MMOItems 6.10.1+ API.
  */
-public class ContainerToMIInventory implements PlayerInventory {
+public class ContainerToMIInventory {
 
-    @Override
-    public List<EquippedItem> getInventory(@NotNull Player player) {
-        //EQ//OotilityCeption.Log("Equipping player\u00a7b" + player.getName());
+    private static io.lumine.mythic.lib.api.player.EquipmentSlot anyEqSlot = null;
 
-        // Test for unlocked
-        //if (!GOOPCManager.isPremiumEnabled() && !player.isOp() && !GOOPCManager.isLiteEquipmentEnabled()) { return new ArrayList<>(); }
+    @NotNull private static io.lumine.mythic.lib.api.player.EquipmentSlot getAnyEqSlot() {
+        if (anyEqSlot != null) { return anyEqSlot; }
+        try { anyEqSlot = io.lumine.mythic.lib.api.player.EquipmentSlot.valueOf("ANY"); }
+        catch (IllegalArgumentException ignored) { anyEqSlot = io.lumine.mythic.lib.api.player.EquipmentSlot.valueOf("OTHER"); }
+        return anyEqSlot;
+    }
 
-        ArrayList<EquippedItem> ret = new ArrayList<>();
+    /**
+     * Called by GooPMMOItems to get all equipped items from GooP containers for a player.
+     */
+    @NotNull public List<ContainersEquippedItem> getInventory(@NotNull Player player) {
+        ArrayList<ContainersEquippedItem> ret = new ArrayList<>();
         ArrayList<String> duplicateIDs = new ArrayList<>();
 
-        // Get personal containers?
         for (GOOPCPersonal p : GCL_Personal.getLoaded()) {
-            //EQ//OotilityCeption.Log("Container \u00a7b" + p.getTemplate().getInternalName());
-
-            // Skip non-container
             if (p.getTemplate().getEquipmentSlots().size() <= 0) { continue; }
-            
-            // Load the player
             p.registerInventoryFor(player.getUniqueId());
 
-            // Well
             for (Map.Entry<Integer, ItemStack> itm : p.indexedItemsForEquipment(player).entrySet()) {
                 if (OotilityCeption.IsAirNullAllowed(itm.getValue())) { continue; }
 
-                // It must be a MMOItem
                 String id = GooPMMOItems.GetMMOItemID(itm.getValue(), null);
-
-                // Invalid MMOItems ID? Equip this item.
-                if (id == null) { ret.add(new ContainersEquippedItem(p, player, itm.getKey(), itm.getValue())); continue; }
-
-                // If disallowed duplicates and already equipped, skip this.
+                if (id == null) {
+                    ret.add(new ContainersEquippedItem(p, player, itm.getKey(), itm.getValue(), getAnyEqSlot()));
+                    continue;
+                }
                 if (!p.getTemplate().isAllowDuplicateEquipment() && duplicateIDs.contains(id)) { continue; }
-
-                // Allow MMOItem
-                ret.add(new ContainersEquippedItem(p, player, itm.getKey(), itm.getValue()));
-
-                // Consider this item equipped
+                ret.add(new ContainersEquippedItem(p, player, itm.getKey(), itm.getValue(), getAnyEqSlot()));
                 duplicateIDs.add(id);
             }
         }
-
-        // I guess
         return ret;
-    }
-
-    @Nullable static io.lumine.mythic.lib.api.player.EquipmentSlot anyEqSlot = null;
-
-    @NotNull static io.lumine.mythic.lib.api.player.EquipmentSlot getAnyEqSlot() {
-
-        // Already reflected? Done
-        if (anyEqSlot != null) { return anyEqSlot; }
-
-        // ANY or OTHER
-        try { anyEqSlot = io.lumine.mythic.lib.api.player.EquipmentSlot.valueOf("ANY"); }
-        catch (IllegalArgumentException ignored) { anyEqSlot = io.lumine.mythic.lib.api.player.EquipmentSlot.valueOf("OTHER"); }
-
-        // Yeah
-        return anyEqSlot;
     }
 }
 
 /**
- * He made it abstract :skull: so
+ * MMOItems 6.10.1 compatible EquippedItem.
  */
 class ContainersEquippedItem extends EquippedItem {
 
@@ -92,19 +70,17 @@ class ContainersEquippedItem extends EquippedItem {
     @NotNull Player player;
     int index;
 
-    public ContainersEquippedItem(@NotNull GOOPCPersonal container, @NotNull Player player, int index, @NotNull ItemStack itemStack) {
-        /*CURRENT-MMOITEMS*/super(itemStack, ContainerToMIInventory.getAnyEqSlot());
-        //YE-OLDEN-MMO//super(itemStack, net.Indyuce.mmoitems.api.Type.EquipmentSlot.ANY);
+    public ContainersEquippedItem(@NotNull GOOPCPersonal container, @NotNull Player player, int index,
+                                  @NotNull ItemStack itemStack, @NotNull io.lumine.mythic.lib.api.player.EquipmentSlot slot) {
+        super(new net.Indyuce.mmoitems.inventory.EquippedItem(index, slot, 0, NBTItem.get(itemStack)));
         this.container = container;
         this.player = player;
         this.index = index;
         if (Gunging_Ootilities_Plugin.foundMythicMobs) { GooPMythicMobs.newenOlden = true; }
     }
 
-    /*NEWEN*/@Override
-    /*NEWEN*/public void setItem(@Nullable ItemStack itemStack) {
-
-        // Set and save owner item (real)
-    /*NEWEN*/container.setAndSaveOwnerItem(player.getUniqueId(), index, itemStack, false);
-    /*NEWEN*/}
+    @Override
+    public void setItem(@Nullable ItemStack itemStack) {
+        container.setAndSaveOwnerItem(player.getUniqueId(), index, itemStack, false);
+    }
 }

@@ -8,10 +8,12 @@ import io.lumine.mythic.api.skills.ITargetedEntitySkill;
 import io.lumine.mythic.api.skills.ITargetedLocationSkill;
 import io.lumine.mythic.api.skills.SkillMetadata;
 import io.lumine.mythic.api.skills.SkillResult;
+import io.lumine.mythic.bukkit.BukkitAdapter;
 import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.core.skills.SkillExecutor;
 import io.lumine.mythic.core.skills.mechanics.CustomMechanic;
 import io.lumine.mythic.core.skills.mechanics.ParticleEffect;
+import org.bukkit.Bukkit;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -35,7 +37,7 @@ public class ParticleSlashEffect extends ParticleEffect implements ITargetedEnti
         });
     }
     public ParticleSlashEffect(SkillExecutor manager, String skill, @NotNull MythicLineConfig mlc) {
-        super(manager, skill, mlc);
+        super(manager, null, skill, mlc);
 
         particleEffect = new SlashLocations<>(mlc, (data, slashedLocation, funnies) -> {
 
@@ -47,7 +49,13 @@ public class ParticleSlashEffect extends ParticleEffect implements ITargetedEnti
         });
     }
 
-    public HashSet<AbstractEntity> get(SkillMetadata data) { return new HashSet<>(MythicBukkit.inst().getEntityManager().getPlayers(data.getCaster().getEntity().getWorld())); }
+    public HashSet<AbstractEntity> get(SkillMetadata data) {
+        HashSet<AbstractEntity> entities = new HashSet<>();
+        for (org.bukkit.entity.Player p : BukkitAdapter.adapt(data.getCaster().getEntity().getWorld()).getPlayers()) {
+            entities.add(BukkitAdapter.adapt(p));
+        }
+        return entities;
+    }
 
     /**
      * IDK how audiences work, and honestly it's just a bunch of implementation problems.

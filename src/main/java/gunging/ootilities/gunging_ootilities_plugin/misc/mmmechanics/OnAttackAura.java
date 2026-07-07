@@ -14,6 +14,7 @@ import io.lumine.mythic.bukkit.MythicBukkit;
 import io.lumine.mythic.bukkit.utils.Events;
 import io.lumine.mythic.core.skills.SkillExecutor;
 import io.lumine.mythic.core.skills.auras.Aura;
+import java.io.File;
 import io.lumine.mythic.core.skills.mechanics.CustomMechanic;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
@@ -41,7 +42,7 @@ public class OnAttackAura extends Aura implements ITargetedEntitySkill {
         construct(mlc);
     }
     public OnAttackAura(SkillExecutor manager, String skill, MythicLineConfig mlc) {
-        super(manager, skill, mlc);
+        super(manager, null, skill, mlc);
         construct(mlc);
     }
 

@@ -26,6 +26,7 @@ import net.Indyuce.mmoitems.api.Type;
 import net.Indyuce.mmoitems.api.interaction.Consumable;
 import net.Indyuce.mmoitems.api.interaction.GemStone;
 import net.Indyuce.mmoitems.api.interaction.UseItem;
+import org.bukkit.inventory.EquipmentSlot;
 import net.Indyuce.mmoitems.api.interaction.util.DurabilityItem;
 import net.Indyuce.mmoitems.api.item.build.MMOItemBuilder;
 import net.Indyuce.mmoitems.api.item.mmoitem.LiveMMOItem;
@@ -33,7 +34,6 @@ import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
 import net.Indyuce.mmoitems.api.item.mmoitem.VolatileMMOItem;
 import net.Indyuce.mmoitems.api.item.template.MMOItemTemplate;
 import net.Indyuce.mmoitems.api.item.template.NameModifier;
-import net.Indyuce.mmoitems.api.item.template.TemplateModifier;
 import net.Indyuce.mmoitems.api.item.util.identify.IdentifiedItem;
 import net.Indyuce.mmoitems.api.player.PlayerData;
 import net.Indyuce.mmoitems.api.player.RPGPlayer;
@@ -102,7 +102,11 @@ public class GooPMMOItems {
     public boolean CompatibilityCheck() {
 
         // You got that on you?
-        MMOItems.plugin.getTypes().get(null);
+        try {
+            Object plugin = MMOItems.class.getField("plugin").get(null);
+            Object types = plugin.getClass().getMethod("getTypes").invoke(plugin);
+            types.getClass().getMethod("get", Object.class).invoke(types, (Object) null);
+        } catch (Exception ignored) { }
 
         /*
          * Do not erase in the future.
@@ -117,8 +121,9 @@ public class GooPMMOItems {
     public static void ReflectionOnLoad() {
         try {
             usingModifierNodes = false;
-            Class aelous = TemplateModifier.class;
-            if (aelous == null) { throw new ClassNotFoundException("Skibidi"); }
+            // In MMOItems 6.10.1, TemplateModifier was removed - check via reflection
+            try { Class.forName("net.Indyuce.mmoitems.api.item.template.TemplateModifier"); }
+            catch (ClassNotFoundException e) { throw new ClassNotFoundException("Skibidi"); }
             if (!GooPMMOItemsTemplateModifierOps.ReflectMethods()) { usingModifierNodes = null; }
         } catch (ClassNotFoundException|NoClassDefFoundError ignored) {
             usingModifierNodes = true;
@@ -129,7 +134,13 @@ public class GooPMMOItems {
     public static boolean RegisterContainersEquipment() {
         if (rced) { return Gunging_Ootilities_Plugin.foundMMOItems; }
         if(MMOItems.plugin == null) { return false; }
-        MMOItems.plugin.registerPlayerInventory(new ContainerToMIInventory());
+        // Use reflection for MMOItems version compatibility
+        try {
+            java.lang.reflect.Method regMethod = MMOItems.class.getMethod("registerPlayerInventory", Class.forName("net.Indyuce.mmoitems.comp.inventory.PlayerInventory"));
+            regMethod.invoke(MMOItems.plugin, new ContainerToMIInventory());
+        } catch (Exception ignored) {
+            // MMOItems 6.10.1+ removed registerPlayerInventory
+        }
         //DBG//OotilityCeption.Log("Registerer Containers MIInventory");
         rced = true;
         return true;
@@ -195,7 +206,12 @@ public class GooPMMOItems {
      */
     @Nullable
     public static ItemStack GetMMOItem(@Nullable String type, @Nullable String id) {
-        return MMOItems.plugin.getItem(type, id);
+        try {
+            Object plugin = MMOItems.class.getField("plugin").get(null);
+            return (ItemStack) plugin.getClass().getMethod("getItem", String.class, String.class).invoke(plugin, type, id);
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     /**
@@ -240,11 +256,12 @@ public class GooPMMOItems {
         if (!OotilityCeption.If(mmoitems_6_10_1)) {
             try {
 
-                // Build using the good old boolean array
-                reforgeOptionsBuild = new ReforgeOptions(regenParams);
+                // Build using the good old boolean array (reflection for API compat)
+                java.lang.reflect.Constructor<ReforgeOptions> oldCtor = ReforgeOptions.class.getConstructor(boolean[].class);
+                reforgeOptionsBuild = oldCtor.newInstance(new Object[]{regenParams});
 
                 mmoitems_6_10_1 = false;
-            } catch (NoSuchMethodError ignored) {
+            } catch (Exception ignored) {
                 mmoitems_6_10_1 = true;
             }
         }
@@ -3271,10 +3288,18 @@ public class GooPMMOItems {
                 }
             }
 
-            boolean isValid = false;
-            if (usingDurabilityItemAbstract) {
-                durItem = DurabilityItem.from(holder, base);
-                isValid = (durItem != null);
+	            boolean isValid = false;
+	            if (usingDurabilityItemAbstract) {
+	                // DurabilityItem is abstract in 6.10.1+, use reflection
+	                try {
+	                    java.lang.reflect.Constructor<?> ctor = DurabilityItem.class.getDeclaredConstructor(org.bukkit.entity.Player.class, io.lumine.mythic.lib.api.item.NBTItem.class, org.bukkit.inventory.EquipmentSlot.class);
+	                    ctor.setAccessible(true);
+	                    durItem = (DurabilityItem) ctor.newInstance(holder, base, EquipmentSlot.HAND);
+	                    isValid = (durItem != null);
+	                } catch (Exception e) {
+	                    durItem = null;
+	                    isValid = false;
+	                }
 
             } else {
                 try {

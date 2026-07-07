@@ -17,6 +17,7 @@ import io.lumine.mythic.bukkit.utils.terminable.Terminable;
 import io.lumine.mythic.core.logging.MythicLogger;
 import io.lumine.mythic.core.skills.SkillExecutor;
 import io.lumine.mythic.core.skills.auras.Aura;
+import java.io.File;
 import io.lumine.mythic.core.skills.mechanics.CustomMechanic;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Firework;
@@ -51,7 +52,7 @@ public class OnDamagedAura extends Aura implements ITargetedEntitySkill {
         construct(mlc);
     }
     public OnDamagedAura(SkillExecutor manager, String skill, MythicLineConfig mlc) {
-        super(manager, skill, mlc);
+        super(manager, null, skill, mlc);
         construct(mlc);
     }
 
@@ -159,7 +160,6 @@ public class OnDamagedAura extends Aura implements ITargetedEntitySkill {
     private class Tracker extends AuraTracker implements IParentSkill, Runnable {
         public Tracker(SkillCaster caster, SkillMetadata data, AbstractEntity entity) {
             super(caster, entity, data);
-
             //SOM//OotilityCeption.Log("\u00a7cStep 1 \u00a7eTracker Stride");
             this.start();
         }

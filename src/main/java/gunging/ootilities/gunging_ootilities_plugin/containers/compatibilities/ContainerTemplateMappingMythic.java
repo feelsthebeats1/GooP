@@ -8,11 +8,11 @@ import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCTemplate;
 import gunging.ootilities.gunging_ootilities_plugin.containers.inventory.ContainerInventory;
 import gunging.ootilities.gunging_ootilities_plugin.misc.IntVector2;
 
-import io.lumine.mythiccrucible.items.recipes.crafting.ingredients.MythicBlueprintInventory;
-import io.lumine.mythiccrucible.items.recipes.crafting.ingredients.MythicRecipeInventory;
-import io.lumine.mythiccrucible.items.recipes.crafting.recipes.MythicRecipeStation;
-import io.lumine.mythiccrucible.items.recipes.crafting.recipes.vmp.CustomInventoryCheck;
-import io.lumine.mythiccrucible.items.recipes.crafting.recipes.vmp.VanillaInventoryMapping;
+import io.lumine.mythic.lib.api.crafting.ingredients.MythicBlueprintInventory;
+import io.lumine.mythic.lib.api.crafting.ingredients.MythicRecipeInventory;
+import io.lumine.mythic.lib.api.crafting.recipes.MythicRecipeStation;
+import io.lumine.mythic.lib.api.crafting.recipes.vmp.CustomInventoryCheck;
+import io.lumine.mythic.lib.api.crafting.recipes.vmp.VanillaInventoryMapping;
 
 import org.bukkit.Material;
 import org.bukkit.event.Listener;
@@ -30,7 +30,21 @@ import java.util.UUID;
 
 public class ContainerTemplateMappingMythic extends VanillaInventoryMapping implements CustomInventoryCheck, Listener {
 
-    //region Constructor
+    @Override
+    public boolean isTargetInventory(@NotNull io.lumine.mythic.lib.version.VInventoryView view) {
+        return LegacyIsTargetInventory(view.getTitle(), view.getType(), view.getPlayer().getUniqueId());
+    }
+
+    public boolean LegacyIsTargetInventory(@NotNull InventoryView view) {
+        return LegacyIsTargetInventory(view.getTitle(), view.getType(), view.getTopInventory().getViewers().get(0).getUniqueId());
+    }
+    public boolean LegacyIsTargetInventory(@NotNull String title, @NotNull InventoryType type, @NotNull UUID viewer) {
+        // Logic from ContainerTemplateMappingMMO would go here
+        // For now, match by title containing the template name
+        return title.contains(getTemplate().getInternalName());
+    }
+
+        //region Constructor
     /**
      * @return The template by which this mapping may find items.
      */
@@ -740,7 +754,7 @@ public class ContainerTemplateMappingMythic extends VanillaInventoryMapping impl
     @NotNull @Override public InventoryType getIntendedInventory() { return InventoryType.CHEST; }
     @NotNull @Override public ArrayList<String> getSideInventoryNames() { return sNames; }
     @NotNull final static ArrayList<String> sNames = new ArrayList<>();
-    @Override public boolean IsTargetInventory(@NotNull InventoryView view) {
+    public boolean IsTargetInventory(@NotNull InventoryView view) {
 
         // No more matching
         if (isDiscontinued()) { return false; }

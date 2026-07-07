@@ -139,459 +139,459 @@ public class GooP_MinecraftVersions {
 
         //region Minecraft 1.14+
         if (mcVersion >= 14.0) {
-            versionMaterials.put(GooPVersionMaterials.ACACIA_SIGN, Material.ACACIA_SIGN);
-            versionMaterials.put(GooPVersionMaterials.ACACIA_WALL_SIGN, Material.ACACIA_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.ANDESITE_SLAB, Material.ANDESITE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.ANDESITE_STAIRS, Material.ANDESITE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.ANDESITE_WALL, Material.ANDESITE_WALL);
+            versionMaterials.put(GooPVersionMaterials.ACACIA_SIGN, GetMaterialFromString("ACACIA_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.ACACIA_WALL_SIGN, GetMaterialFromString("ACACIA_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.ANDESITE_SLAB, GetMaterialFromString("ANDESITE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.ANDESITE_STAIRS, GetMaterialFromString("ANDESITE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.ANDESITE_WALL, GetMaterialFromString("ANDESITE_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.BAMBOO, Material.BAMBOO);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_SAPLING, Material.BAMBOO_SAPLING);
-            versionMaterials.put(GooPVersionMaterials.BARREL, Material.BARREL);
-            versionMaterials.put(GooPVersionMaterials.BELL, Material.BELL);
-            versionMaterials.put(GooPVersionMaterials.BIRCH_SIGN, Material.BIRCH_SIGN);
+            versionMaterials.put(GooPVersionMaterials.BAMBOO, GetMaterialFromString("BAMBOO"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_SAPLING, GetMaterialFromString("BAMBOO_SAPLING"));
+            versionMaterials.put(GooPVersionMaterials.BARREL, GetMaterialFromString("BARREL"));
+            versionMaterials.put(GooPVersionMaterials.BELL, GetMaterialFromString("BELL"));
+            versionMaterials.put(GooPVersionMaterials.BIRCH_SIGN, GetMaterialFromString("BIRCH_SIGN"));
 
-            versionMaterials.put(GooPVersionMaterials.BIRCH_WALL_SIGN, Material.BIRCH_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.BLACK_DYE, Material.BLACK_DYE);
-            versionMaterials.put(GooPVersionMaterials.BLAST_FURNACE, Material.BLAST_FURNACE);
-            versionMaterials.put(GooPVersionMaterials.BLUE_DYE, Material.BLUE_DYE);
-            versionMaterials.put(GooPVersionMaterials.BRICK_WALL, Material.BRICK_WALL);
+            versionMaterials.put(GooPVersionMaterials.BIRCH_WALL_SIGN, GetMaterialFromString("BIRCH_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.BLACK_DYE, GetMaterialFromString("BLACK_DYE"));
+            versionMaterials.put(GooPVersionMaterials.BLAST_FURNACE, GetMaterialFromString("BLAST_FURNACE"));
+            versionMaterials.put(GooPVersionMaterials.BLUE_DYE, GetMaterialFromString("BLUE_DYE"));
+            versionMaterials.put(GooPVersionMaterials.BRICK_WALL, GetMaterialFromString("BRICK_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.BROWN_DYE, Material.BROWN_DYE);
+            versionMaterials.put(GooPVersionMaterials.BROWN_DYE, GetMaterialFromString("BROWN_DYE"));
 
-            versionMaterials.put(GooPVersionMaterials.CACTUS_GREEN, Material.GREEN_DYE);
-            versionMaterials.put(GooPVersionMaterials.CAMPFIRE, Material.CAMPFIRE);
-            versionMaterials.put(GooPVersionMaterials.CARTOGRAPHY_TABLE, Material.CARTOGRAPHY_TABLE);
-            versionMaterials.put(GooPVersionMaterials.CAT_SPAWN_EGG, Material.CAT_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.COMPOSTER, Material.COMPOSTER);
+            versionMaterials.put(GooPVersionMaterials.CACTUS_GREEN, GetMaterialFromString("GREEN_DYE"));
+            versionMaterials.put(GooPVersionMaterials.CAMPFIRE, GetMaterialFromString("CAMPFIRE"));
+            versionMaterials.put(GooPVersionMaterials.CARTOGRAPHY_TABLE, GetMaterialFromString("CARTOGRAPHY_TABLE"));
+            versionMaterials.put(GooPVersionMaterials.CAT_SPAWN_EGG, GetMaterialFromString("CAT_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.COMPOSTER, GetMaterialFromString("COMPOSTER"));
 
-            versionMaterials.put(GooPVersionMaterials.CORNFLOWER, Material.CORNFLOWER);
-            versionMaterials.put(GooPVersionMaterials.CREEPER_BANNER_PATTERN, Material.CREEPER_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.CROSSBOW, Material.CROSSBOW);
-            versionMaterials.put(GooPVersionMaterials.CUT_RED_SANDSTONE_SLAB, Material.CUT_RED_SANDSTONE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.CUT_SANDSTONE_SLAB, Material.CUT_SANDSTONE_SLAB);
+            versionMaterials.put(GooPVersionMaterials.CORNFLOWER, GetMaterialFromString("CORNFLOWER"));
+            versionMaterials.put(GooPVersionMaterials.CREEPER_BANNER_PATTERN, GetMaterialFromString("CREEPER_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.CROSSBOW, GetMaterialFromString("CROSSBOW"));
+            versionMaterials.put(GooPVersionMaterials.CUT_RED_SANDSTONE_SLAB, GetMaterialFromString("CUT_RED_SANDSTONE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.CUT_SANDSTONE_SLAB, GetMaterialFromString("CUT_SANDSTONE_SLAB"));
 
-            versionMaterials.put(GooPVersionMaterials.DANDELION_YELLOW, Material.YELLOW_DYE);
-            versionMaterials.put(GooPVersionMaterials.DARK_OAK_SIGN, Material.DARK_OAK_SIGN);
-            versionMaterials.put(GooPVersionMaterials.DARK_OAK_WALL_SIGN, Material.DARK_OAK_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.DIORITE_SLAB, Material.DIORITE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.DIORITE_STAIRS, Material.DIORITE_STAIRS);
+            versionMaterials.put(GooPVersionMaterials.DANDELION_YELLOW, GetMaterialFromString("YELLOW_DYE"));
+            versionMaterials.put(GooPVersionMaterials.DARK_OAK_SIGN, GetMaterialFromString("DARK_OAK_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.DARK_OAK_WALL_SIGN, GetMaterialFromString("DARK_OAK_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.DIORITE_SLAB, GetMaterialFromString("DIORITE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.DIORITE_STAIRS, GetMaterialFromString("DIORITE_STAIRS"));
 
-            versionMaterials.put(GooPVersionMaterials.DIORITE_WALL, Material.DIORITE_WALL);
+            versionMaterials.put(GooPVersionMaterials.DIORITE_WALL, GetMaterialFromString("DIORITE_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.END_STONE_BRICK_SLAB, Material.END_STONE_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.END_STONE_BRICK_STAIRS, Material.END_STONE_BRICK_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.END_STONE_BRICK_WALL, Material.END_STONE_BRICK_WALL);
+            versionMaterials.put(GooPVersionMaterials.END_STONE_BRICK_SLAB, GetMaterialFromString("END_STONE_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.END_STONE_BRICK_STAIRS, GetMaterialFromString("END_STONE_BRICK_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.END_STONE_BRICK_WALL, GetMaterialFromString("END_STONE_BRICK_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.FLETCHING_TABLE, Material.FLETCHING_TABLE);
-            versionMaterials.put(GooPVersionMaterials.FLOWER_BANNER_PATTERN, Material.FLOWER_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.FOX_SPAWN_EGG, Material.FOX_SPAWN_EGG);
+            versionMaterials.put(GooPVersionMaterials.FLETCHING_TABLE, GetMaterialFromString("FLETCHING_TABLE"));
+            versionMaterials.put(GooPVersionMaterials.FLOWER_BANNER_PATTERN, GetMaterialFromString("FLOWER_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.FOX_SPAWN_EGG, GetMaterialFromString("FOX_SPAWN_EGG"));
 
-            versionMaterials.put(GooPVersionMaterials.GLOBE_BANNER_PATTERN, Material.GLOBE_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.GRANITE_SLAB, Material.GRANITE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.GRANITE_STAIRS, Material.GRANITE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.GRANITE_WALL, Material.GRANITE_WALL);
-            versionMaterials.put(GooPVersionMaterials.GREEN_DYE, Material.GREEN_DYE);
+            versionMaterials.put(GooPVersionMaterials.GLOBE_BANNER_PATTERN, GetMaterialFromString("GLOBE_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.GRANITE_SLAB, GetMaterialFromString("GRANITE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.GRANITE_STAIRS, GetMaterialFromString("GRANITE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.GRANITE_WALL, GetMaterialFromString("GRANITE_WALL"));
+            versionMaterials.put(GooPVersionMaterials.GREEN_DYE, GetMaterialFromString("GREEN_DYE"));
 
-            versionMaterials.put(GooPVersionMaterials.GRINDSTONE, Material.GRINDSTONE);
+            versionMaterials.put(GooPVersionMaterials.GRINDSTONE, GetMaterialFromString("GRINDSTONE"));
 
-            versionMaterials.put(GooPVersionMaterials.JIGSAW, Material.JIGSAW);
-            versionMaterials.put(GooPVersionMaterials.JUNGLE_SIGN, Material.JUNGLE_SIGN);
-            versionMaterials.put(GooPVersionMaterials.JUNGLE_WALL_SIGN, Material.JUNGLE_WALL_SIGN);
+            versionMaterials.put(GooPVersionMaterials.JIGSAW, GetMaterialFromString("JIGSAW"));
+            versionMaterials.put(GooPVersionMaterials.JUNGLE_SIGN, GetMaterialFromString("JUNGLE_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.JUNGLE_WALL_SIGN, GetMaterialFromString("JUNGLE_WALL_SIGN"));
 
-            versionMaterials.put(GooPVersionMaterials.LECTERN, Material.LECTERN);
-            versionMaterials.put(GooPVersionMaterials.LANTERN, Material.LANTERN);
-            versionMaterials.put(GooPVersionMaterials.LEATHER_HORSE_ARMOR, Material.LEATHER_HORSE_ARMOR);
-            versionMaterials.put(GooPVersionMaterials.LILY_OF_THE_VALLEY, Material.LILY_OF_THE_VALLEY);
-            versionMaterials.put(GooPVersionMaterials.LOOM, Material.LOOM);
+            versionMaterials.put(GooPVersionMaterials.LECTERN, GetMaterialFromString("LECTERN"));
+            versionMaterials.put(GooPVersionMaterials.LANTERN, GetMaterialFromString("LANTERN"));
+            versionMaterials.put(GooPVersionMaterials.LEATHER_HORSE_ARMOR, GetMaterialFromString("LEATHER_HORSE_ARMOR"));
+            versionMaterials.put(GooPVersionMaterials.LILY_OF_THE_VALLEY, GetMaterialFromString("LILY_OF_THE_VALLEY"));
+            versionMaterials.put(GooPVersionMaterials.LOOM, GetMaterialFromString("LOOM"));
 
-            versionMaterials.put(GooPVersionMaterials.MOJANG_BANNER_PATTERN, Material.MOJANG_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.MOSSY_COBBLESTONE_SLAB, Material.MOSSY_COBBLESTONE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.MOSSY_COBBLESTONE_STAIRS, Material.MOSSY_COBBLESTONE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.MOSSY_STONE_BRICK_SLAB, Material.MOSSY_STONE_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.MOSSY_STONE_BRICK_STAIRS, Material.MOSSY_STONE_BRICK_STAIRS);
+            versionMaterials.put(GooPVersionMaterials.MOJANG_BANNER_PATTERN, GetMaterialFromString("MOJANG_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.MOSSY_COBBLESTONE_SLAB, GetMaterialFromString("MOSSY_COBBLESTONE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.MOSSY_COBBLESTONE_STAIRS, GetMaterialFromString("MOSSY_COBBLESTONE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.MOSSY_STONE_BRICK_SLAB, GetMaterialFromString("MOSSY_STONE_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.MOSSY_STONE_BRICK_STAIRS, GetMaterialFromString("MOSSY_STONE_BRICK_STAIRS"));
 
-            versionMaterials.put(GooPVersionMaterials.MOSSY_STONE_BRICK_WALL, Material.MOSSY_STONE_BRICK_WALL);
+            versionMaterials.put(GooPVersionMaterials.MOSSY_STONE_BRICK_WALL, GetMaterialFromString("MOSSY_STONE_BRICK_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.NETHER_BRICK_WALL, Material.NETHER_BRICK_WALL);
+            versionMaterials.put(GooPVersionMaterials.NETHER_BRICK_WALL, GetMaterialFromString("NETHER_BRICK_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.OAK_SIGN, Material.OAK_SIGN);
-            versionMaterials.put(GooPVersionMaterials.OAK_WALL_SIGN, Material.OAK_WALL_SIGN);
+            versionMaterials.put(GooPVersionMaterials.OAK_SIGN, GetMaterialFromString("OAK_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.OAK_WALL_SIGN, GetMaterialFromString("OAK_WALL_SIGN"));
 
-            versionMaterials.put(GooPVersionMaterials.PANDA_SPAWN_EGG, Material.PANDA_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.PILLAGER_SPAWN_EGG, Material.PILLAGER_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_ANDESITE_SLAB, Material.POLISHED_ANDESITE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_DIORITE_SLAB, Material.POLISHED_DIORITE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_GRANITE_SLAB, Material.POLISHED_GRANITE_SLAB);
+            versionMaterials.put(GooPVersionMaterials.PANDA_SPAWN_EGG, GetMaterialFromString("PANDA_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.PILLAGER_SPAWN_EGG, GetMaterialFromString("PILLAGER_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_ANDESITE_SLAB, GetMaterialFromString("POLISHED_ANDESITE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_DIORITE_SLAB, GetMaterialFromString("POLISHED_DIORITE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_GRANITE_SLAB, GetMaterialFromString("POLISHED_GRANITE_SLAB"));
 
-            versionMaterials.put(GooPVersionMaterials.POTTED_BAMBOO, Material.POTTED_BAMBOO);
-            versionMaterials.put(GooPVersionMaterials.POTTED_CORNFLOWER, Material.POTTED_CORNFLOWER);
-            versionMaterials.put(GooPVersionMaterials.POTTED_LILY_OF_THE_VALLEY, Material.POTTED_LILY_OF_THE_VALLEY);
-            versionMaterials.put(GooPVersionMaterials.POTTED_WITHER_ROSE, Material.POTTED_WITHER_ROSE);
-            versionMaterials.put(GooPVersionMaterials.PRISMARINE_WALL, Material.PRISMARINE_WALL);
+            versionMaterials.put(GooPVersionMaterials.POTTED_BAMBOO, GetMaterialFromString("POTTED_BAMBOO"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_CORNFLOWER, GetMaterialFromString("POTTED_CORNFLOWER"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_LILY_OF_THE_VALLEY, GetMaterialFromString("POTTED_LILY_OF_THE_VALLEY"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_WITHER_ROSE, GetMaterialFromString("POTTED_WITHER_ROSE"));
+            versionMaterials.put(GooPVersionMaterials.PRISMARINE_WALL, GetMaterialFromString("PRISMARINE_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.RAVAGER_SPAWN_EGG, Material.RAVAGER_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.RED_DYE, Material.RED_DYE);
-            versionMaterials.put(GooPVersionMaterials.RED_NETHER_BRICK_SLAB, Material.RED_NETHER_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.RED_NETHER_BRICK_STAIRS, Material.RED_NETHER_BRICK_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.RED_NETHER_BRICK_WALL, Material.RED_NETHER_BRICK_WALL);
+            versionMaterials.put(GooPVersionMaterials.RAVAGER_SPAWN_EGG, GetMaterialFromString("RAVAGER_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.RED_DYE, GetMaterialFromString("RED_DYE"));
+            versionMaterials.put(GooPVersionMaterials.RED_NETHER_BRICK_SLAB, GetMaterialFromString("RED_NETHER_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.RED_NETHER_BRICK_STAIRS, GetMaterialFromString("RED_NETHER_BRICK_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.RED_NETHER_BRICK_WALL, GetMaterialFromString("RED_NETHER_BRICK_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.RED_SANDSTONE_WALL, Material.RED_SANDSTONE_WALL);
-            versionMaterials.put(GooPVersionMaterials.ROSE_RED, Material.RED_DYE);
+            versionMaterials.put(GooPVersionMaterials.RED_SANDSTONE_WALL, GetMaterialFromString("RED_SANDSTONE_WALL"));
+            versionMaterials.put(GooPVersionMaterials.ROSE_RED, GetMaterialFromString("RED_DYE"));
 
-            versionMaterials.put(GooPVersionMaterials.SANDSTONE_WALL, Material.SANDSTONE_WALL);
-            versionMaterials.put(GooPVersionMaterials.SCAFFOLDING, Material.SCAFFOLDING);
-            versionMaterials.put(GooPVersionMaterials.SIGN, Material.OAK_SIGN);
-            versionMaterials.put(GooPVersionMaterials.SKULL_BANNER_PATTERN, Material.SKULL_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.SMITHING_TABLE, Material.SMITHING_TABLE);
+            versionMaterials.put(GooPVersionMaterials.SANDSTONE_WALL, GetMaterialFromString("SANDSTONE_WALL"));
+            versionMaterials.put(GooPVersionMaterials.SCAFFOLDING, GetMaterialFromString("SCAFFOLDING"));
+            versionMaterials.put(GooPVersionMaterials.SIGN, GetMaterialFromString("OAK_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.SKULL_BANNER_PATTERN, GetMaterialFromString("SKULL_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.SMITHING_TABLE, GetMaterialFromString("SMITHING_TABLE"));
 
-            versionMaterials.put(GooPVersionMaterials.SMOKER, Material.SMOKER);
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_QUARTZ_SLAB, Material.SMOOTH_QUARTZ_SLAB);
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_QUARTZ_STAIRS, Material.SMOOTH_QUARTZ_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_RED_SANDSTONE_SLAB, Material.SMOOTH_RED_SANDSTONE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_RED_SANDSTONE_STAIRS, Material.SMOOTH_RED_SANDSTONE_STAIRS);
+            versionMaterials.put(GooPVersionMaterials.SMOKER, GetMaterialFromString("SMOKER"));
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_QUARTZ_SLAB, GetMaterialFromString("SMOOTH_QUARTZ_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_QUARTZ_STAIRS, GetMaterialFromString("SMOOTH_QUARTZ_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_RED_SANDSTONE_SLAB, GetMaterialFromString("SMOOTH_RED_SANDSTONE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_RED_SANDSTONE_STAIRS, GetMaterialFromString("SMOOTH_RED_SANDSTONE_STAIRS"));
 
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_SANDSTONE_SLAB, Material.SMOOTH_SANDSTONE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_SANDSTONE_STAIRS, Material.SMOOTH_SANDSTONE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_STONE_SLAB, Material.SMOOTH_STONE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.SPRUCE_SIGN, Material.SPRUCE_SIGN);
-            versionMaterials.put(GooPVersionMaterials.SPRUCE_WALL_SIGN, Material.SPRUCE_WALL_SIGN);
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_SANDSTONE_SLAB, GetMaterialFromString("SMOOTH_SANDSTONE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_SANDSTONE_STAIRS, GetMaterialFromString("SMOOTH_SANDSTONE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_STONE_SLAB, GetMaterialFromString("SMOOTH_STONE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.SPRUCE_SIGN, GetMaterialFromString("SPRUCE_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.SPRUCE_WALL_SIGN, GetMaterialFromString("SPRUCE_WALL_SIGN"));
 
-            versionMaterials.put(GooPVersionMaterials.STONECUTTER, Material.STONECUTTER);
-            versionMaterials.put(GooPVersionMaterials.STONE_BRICK_WALL, Material.STONE_BRICK_WALL);
-            versionMaterials.put(GooPVersionMaterials.STONE_STAIRS, Material.STONE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.SUSPICIOUS_STEW, Material.SUSPICIOUS_STEW);
-            versionMaterials.put(GooPVersionMaterials.SWEET_BERRIES, Material.SWEET_BERRIES);
+            versionMaterials.put(GooPVersionMaterials.STONECUTTER, GetMaterialFromString("STONECUTTER"));
+            versionMaterials.put(GooPVersionMaterials.STONE_BRICK_WALL, GetMaterialFromString("STONE_BRICK_WALL"));
+            versionMaterials.put(GooPVersionMaterials.STONE_STAIRS, GetMaterialFromString("STONE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.SUSPICIOUS_STEW, GetMaterialFromString("SUSPICIOUS_STEW"));
+            versionMaterials.put(GooPVersionMaterials.SWEET_BERRIES, GetMaterialFromString("SWEET_BERRIES"));
 
-            versionMaterials.put(GooPVersionMaterials.SWEET_BERRY_BUSH, Material.SWEET_BERRY_BUSH);
+            versionMaterials.put(GooPVersionMaterials.SWEET_BERRY_BUSH, GetMaterialFromString("SWEET_BERRY_BUSH"));
 
-            versionMaterials.put(GooPVersionMaterials.TRADER_LLAMA_SPAWN_EGG, Material.TRADER_LLAMA_SPAWN_EGG);
+            versionMaterials.put(GooPVersionMaterials.TRADER_LLAMA_SPAWN_EGG, GetMaterialFromString("TRADER_LLAMA_SPAWN_EGG"));
 
-            versionMaterials.put(GooPVersionMaterials.WALL_SIGN, Material.OAK_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.WANDERING_TRADER_SPAWN_EGG, Material.WANDERING_TRADER_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.WHITE_DYE, Material.WHITE_DYE);
-            versionMaterials.put(GooPVersionMaterials.WITHER_ROSE, Material.WITHER_ROSE);
+            versionMaterials.put(GooPVersionMaterials.WALL_SIGN, GetMaterialFromString("OAK_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.WANDERING_TRADER_SPAWN_EGG, GetMaterialFromString("WANDERING_TRADER_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.WHITE_DYE, GetMaterialFromString("WHITE_DYE"));
+            versionMaterials.put(GooPVersionMaterials.WITHER_ROSE, GetMaterialFromString("WITHER_ROSE"));
 
-            versionMaterials.put(GooPVersionMaterials.YELLOW_DYE, Material.YELLOW_DYE);
+            versionMaterials.put(GooPVersionMaterials.YELLOW_DYE, GetMaterialFromString("YELLOW_DYE"));
         }
         //endregion
 
         //region Minecraft Version 1.15+
         if (mcVersion >= 15.0) {
-            versionMaterials.put(GooPVersionMaterials.BEEHIVE, Material.BEEHIVE);
-            versionMaterials.put(GooPVersionMaterials.BEE_NEST, Material.BEE_NEST);
-            versionMaterials.put(GooPVersionMaterials.BEE_SPAWN_EGG, Material.BEE_SPAWN_EGG);
+            versionMaterials.put(GooPVersionMaterials.BEEHIVE, GetMaterialFromString("BEEHIVE"));
+            versionMaterials.put(GooPVersionMaterials.BEE_NEST, GetMaterialFromString("BEE_NEST"));
+            versionMaterials.put(GooPVersionMaterials.BEE_SPAWN_EGG, GetMaterialFromString("BEE_SPAWN_EGG"));
 
-            versionMaterials.put(GooPVersionMaterials.HONEYCOMB, Material.HONEYCOMB);
-            versionMaterials.put(GooPVersionMaterials.HONEYCOMB_BLOCK, Material.HONEYCOMB_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.HONEY_BLOCK, Material.HONEY_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.HONEY_BOTTLE, Material.HONEY_BOTTLE);
+            versionMaterials.put(GooPVersionMaterials.HONEYCOMB, GetMaterialFromString("HONEYCOMB"));
+            versionMaterials.put(GooPVersionMaterials.HONEYCOMB_BLOCK, GetMaterialFromString("HONEYCOMB_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.HONEY_BLOCK, GetMaterialFromString("HONEY_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.HONEY_BOTTLE, GetMaterialFromString("HONEY_BOTTLE"));
         }
         //endregion
 
         //region Minecraft Version 1.16+
         if (mcVersion >= 16.0) {
-            versionMaterials.put(GooPVersionMaterials.ANCIENT_DEBRIS, Material.ANCIENT_DEBRIS);
+            versionMaterials.put(GooPVersionMaterials.ANCIENT_DEBRIS, GetMaterialFromString("ANCIENT_DEBRIS"));
 
-            versionMaterials.put(GooPVersionMaterials.BASALT, Material.BASALT);
-            versionMaterials.put(GooPVersionMaterials.BLACKSTONE, Material.BLACKSTONE);
-            versionMaterials.put(GooPVersionMaterials.BLACKSTONE_SLAB, Material.BLACKSTONE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.BLACKSTONE_STAIRS, Material.BLACKSTONE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.BLACKSTONE_WALL, Material.BLACKSTONE_WALL);
+            versionMaterials.put(GooPVersionMaterials.BASALT, GetMaterialFromString("BASALT"));
+            versionMaterials.put(GooPVersionMaterials.BLACKSTONE, GetMaterialFromString("BLACKSTONE"));
+            versionMaterials.put(GooPVersionMaterials.BLACKSTONE_SLAB, GetMaterialFromString("BLACKSTONE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.BLACKSTONE_STAIRS, GetMaterialFromString("BLACKSTONE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.BLACKSTONE_WALL, GetMaterialFromString("BLACKSTONE_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.CHAIN, Material.CHAIN);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_NETHER_BRICKS, Material.CHISELED_NETHER_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_POLISHED_BLACKSTONE, Material.CHISELED_POLISHED_BLACKSTONE);
-            versionMaterials.put(GooPVersionMaterials.CRACKED_NETHER_BRICKS, Material.CRACKED_NETHER_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.CRACKED_POLISHED_BLACKSTONE_BRICKS, Material.CRACKED_POLISHED_BLACKSTONE_BRICKS);
+            versionMaterials.put(GooPVersionMaterials.CHAIN, GetMaterialFromString("CHAIN"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_NETHER_BRICKS, GetMaterialFromString("CHISELED_NETHER_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_POLISHED_BLACKSTONE, GetMaterialFromString("CHISELED_POLISHED_BLACKSTONE"));
+            versionMaterials.put(GooPVersionMaterials.CRACKED_NETHER_BRICKS, GetMaterialFromString("CRACKED_NETHER_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.CRACKED_POLISHED_BLACKSTONE_BRICKS, GetMaterialFromString("CRACKED_POLISHED_BLACKSTONE_BRICKS"));
 
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_BUTTON, Material.CRIMSON_BUTTON);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_DOOR, Material.CRIMSON_DOOR);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_FENCE, Material.CRIMSON_FENCE);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_FENCE_GATE, Material.CRIMSON_FENCE_GATE);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_FUNGUS, Material.CRIMSON_FUNGUS);
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_BUTTON, GetMaterialFromString("CRIMSON_BUTTON"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_DOOR, GetMaterialFromString("CRIMSON_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_FENCE, GetMaterialFromString("CRIMSON_FENCE"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_FENCE_GATE, GetMaterialFromString("CRIMSON_FENCE_GATE"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_FUNGUS, GetMaterialFromString("CRIMSON_FUNGUS"));
 
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_HYPHAE, Material.CRIMSON_HYPHAE);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_NYLIUM, Material.CRIMSON_NYLIUM);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_PLANKS, Material.CRIMSON_PLANKS);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_PRESSURE_PLATE, Material.CRIMSON_PRESSURE_PLATE);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_ROOTS, Material.CRIMSON_ROOTS);
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_HYPHAE, GetMaterialFromString("CRIMSON_HYPHAE"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_NYLIUM, GetMaterialFromString("CRIMSON_NYLIUM"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_PLANKS, GetMaterialFromString("CRIMSON_PLANKS"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_PRESSURE_PLATE, GetMaterialFromString("CRIMSON_PRESSURE_PLATE"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_ROOTS, GetMaterialFromString("CRIMSON_ROOTS"));
 
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_SIGN, Material.CRIMSON_SIGN);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_SLAB, Material.CRIMSON_SLAB);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_STAIRS, Material.CRIMSON_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_STEM, Material.CRIMSON_STEM);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_TRAPDOOR, Material.CRIMSON_TRAPDOOR);
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_SIGN, GetMaterialFromString("CRIMSON_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_SLAB, GetMaterialFromString("CRIMSON_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_STAIRS, GetMaterialFromString("CRIMSON_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_STEM, GetMaterialFromString("CRIMSON_STEM"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_TRAPDOOR, GetMaterialFromString("CRIMSON_TRAPDOOR"));
 
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_WALL_SIGN, Material.CRIMSON_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.CRYING_OBSIDIAN, Material.CRYING_OBSIDIAN);
-            versionMaterials.put(GooPVersionMaterials.GILDED_BLACKSTONE, Material.GILDED_BLACKSTONE);
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_WALL_SIGN, GetMaterialFromString("CRIMSON_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.CRYING_OBSIDIAN, GetMaterialFromString("CRYING_OBSIDIAN"));
+            versionMaterials.put(GooPVersionMaterials.GILDED_BLACKSTONE, GetMaterialFromString("GILDED_BLACKSTONE"));
 
-            versionMaterials.put(GooPVersionMaterials.LODESTONE, Material.LODESTONE);
+            versionMaterials.put(GooPVersionMaterials.LODESTONE, GetMaterialFromString("LODESTONE"));
 
-            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_PIGSTEP, Material.MUSIC_DISC_PIGSTEP);
+            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_PIGSTEP, GetMaterialFromString("MUSIC_DISC_PIGSTEP"));
 
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_BLOCK, Material.NETHERITE_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.NETHER_GOLD_ORE, Material.NETHER_GOLD_ORE);
-            versionMaterials.put(GooPVersionMaterials.NETHER_SPROUTS, Material.NETHER_SPROUTS);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_AXE, Material.NETHERITE_AXE);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_BOOTS, Material.NETHERITE_BOOTS);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_CHESTPLATE, Material.NETHERITE_CHESTPLATE);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_HELMET, Material.NETHERITE_HELMET);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_HOE, Material.NETHERITE_HOE);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_INGOT, Material.NETHERITE_INGOT);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_LEGGINGS, Material.NETHERITE_LEGGINGS);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_PICKAXE, Material.NETHERITE_PICKAXE);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_SCRAP, Material.NETHERITE_SCRAP);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_SHOVEL, Material.NETHERITE_SHOVEL);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_SWORD, Material.NETHERITE_SWORD);
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_BLOCK, GetMaterialFromString("NETHERITE_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.NETHER_GOLD_ORE, GetMaterialFromString("NETHER_GOLD_ORE"));
+            versionMaterials.put(GooPVersionMaterials.NETHER_SPROUTS, GetMaterialFromString("NETHER_SPROUTS"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_AXE, GetMaterialFromString("NETHERITE_AXE"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_BOOTS, GetMaterialFromString("NETHERITE_BOOTS"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_CHESTPLATE, GetMaterialFromString("NETHERITE_CHESTPLATE"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_HELMET, GetMaterialFromString("NETHERITE_HELMET"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_HOE, GetMaterialFromString("NETHERITE_HOE"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_INGOT, GetMaterialFromString("NETHERITE_INGOT"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_LEGGINGS, GetMaterialFromString("NETHERITE_LEGGINGS"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_PICKAXE, GetMaterialFromString("NETHERITE_PICKAXE"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_SCRAP, GetMaterialFromString("NETHERITE_SCRAP"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_SHOVEL, GetMaterialFromString("NETHERITE_SHOVEL"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_SWORD, GetMaterialFromString("NETHERITE_SWORD"));
 
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BASALT, Material.POLISHED_BASALT);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE, Material.POLISHED_BLACKSTONE);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICKS, Material.POLISHED_BLACKSTONE_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICK_SLAB, Material.POLISHED_BLACKSTONE_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICK_STAIRS, Material.POLISHED_BLACKSTONE_BRICK_STAIRS);
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BASALT, GetMaterialFromString("POLISHED_BASALT"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE, GetMaterialFromString("POLISHED_BLACKSTONE"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICKS, GetMaterialFromString("POLISHED_BLACKSTONE_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICK_SLAB, GetMaterialFromString("POLISHED_BLACKSTONE_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICK_STAIRS, GetMaterialFromString("POLISHED_BLACKSTONE_BRICK_STAIRS"));
 
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICK_WALL, Material.POLISHED_BLACKSTONE_BRICK_WALL);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BUTTON, Material.POLISHED_BLACKSTONE_BUTTON);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_PRESSURE_PLATE, Material.POLISHED_BLACKSTONE_PRESSURE_PLATE);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_SLAB, Material.POLISHED_BLACKSTONE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_STAIRS, Material.POLISHED_BLACKSTONE_STAIRS);
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BRICK_WALL, GetMaterialFromString("POLISHED_BLACKSTONE_BRICK_WALL"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_BUTTON, GetMaterialFromString("POLISHED_BLACKSTONE_BUTTON"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_PRESSURE_PLATE, GetMaterialFromString("POLISHED_BLACKSTONE_PRESSURE_PLATE"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_SLAB, GetMaterialFromString("POLISHED_BLACKSTONE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_STAIRS, GetMaterialFromString("POLISHED_BLACKSTONE_STAIRS"));
 
-            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_WALL, Material.POLISHED_BLACKSTONE_WALL);
+            versionMaterials.put(GooPVersionMaterials.POLISHED_BLACKSTONE_WALL, GetMaterialFromString("POLISHED_BLACKSTONE_WALL"));
 
-            versionMaterials.put(GooPVersionMaterials.POTTED_CRIMSON_FUNGUS, Material.POTTED_CRIMSON_FUNGUS);
-            versionMaterials.put(GooPVersionMaterials.POTTED_CRIMSON_ROOTS, Material.POTTED_CRIMSON_ROOTS);
-            versionMaterials.put(GooPVersionMaterials.POTTED_WARPED_FUNGUS, Material.POTTED_WARPED_FUNGUS);
-            versionMaterials.put(GooPVersionMaterials.POTTED_WARPED_ROOTS, Material.POTTED_WARPED_ROOTS);
-            versionMaterials.put(GooPVersionMaterials.PIGLIN_BANNER_PATTERN, Material.PIGLIN_BANNER_PATTERN);
+            versionMaterials.put(GooPVersionMaterials.POTTED_CRIMSON_FUNGUS, GetMaterialFromString("POTTED_CRIMSON_FUNGUS"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_CRIMSON_ROOTS, GetMaterialFromString("POTTED_CRIMSON_ROOTS"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_WARPED_FUNGUS, GetMaterialFromString("POTTED_WARPED_FUNGUS"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_WARPED_ROOTS, GetMaterialFromString("POTTED_WARPED_ROOTS"));
+            versionMaterials.put(GooPVersionMaterials.PIGLIN_BANNER_PATTERN, GetMaterialFromString("PIGLIN_BANNER_PATTERN"));
 
-            versionMaterials.put(GooPVersionMaterials.HOGLIN_SPAWN_EGG, Material.HOGLIN_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.PIGLIN_SPAWN_EGG, Material.PIGLIN_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.ZOMBIFIED_PIGLIN_SPAWN_EGG, Material.ZOMBIFIED_PIGLIN_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.STRIDER_SPAWN_EGG, Material.STRIDER_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.ZOGLIN_SPAWN_EGG, Material.ZOGLIN_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.WARPED_FUNGUS_ON_A_STICK, Material.WARPED_FUNGUS_ON_A_STICK);
+            versionMaterials.put(GooPVersionMaterials.HOGLIN_SPAWN_EGG, GetMaterialFromString("HOGLIN_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.PIGLIN_SPAWN_EGG, GetMaterialFromString("PIGLIN_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.ZOMBIFIED_PIGLIN_SPAWN_EGG, GetMaterialFromString("ZOMBIFIED_PIGLIN_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.STRIDER_SPAWN_EGG, GetMaterialFromString("STRIDER_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.ZOGLIN_SPAWN_EGG, GetMaterialFromString("ZOGLIN_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_FUNGUS_ON_A_STICK, GetMaterialFromString("WARPED_FUNGUS_ON_A_STICK"));
 
-            versionMaterials.put(GooPVersionMaterials.QUARTZ_BRICKS, Material.QUARTZ_BRICKS);
+            versionMaterials.put(GooPVersionMaterials.QUARTZ_BRICKS, GetMaterialFromString("QUARTZ_BRICKS"));
 
-            versionMaterials.put(GooPVersionMaterials.RESPAWN_ANCHOR, Material.RESPAWN_ANCHOR);
+            versionMaterials.put(GooPVersionMaterials.RESPAWN_ANCHOR, GetMaterialFromString("RESPAWN_ANCHOR"));
 
-            versionMaterials.put(GooPVersionMaterials.SHROOMLIGHT, Material.SHROOMLIGHT);
-            versionMaterials.put(GooPVersionMaterials.SOUL_CAMPFIRE, Material.SOUL_CAMPFIRE);
-            versionMaterials.put(GooPVersionMaterials.SOUL_FIRE, Material.SOUL_FIRE);
-            versionMaterials.put(GooPVersionMaterials.SOUL_LANTERN, Material.SOUL_LANTERN);
-            versionMaterials.put(GooPVersionMaterials.SOUL_SOIL, Material.SOUL_SOIL);
+            versionMaterials.put(GooPVersionMaterials.SHROOMLIGHT, GetMaterialFromString("SHROOMLIGHT"));
+            versionMaterials.put(GooPVersionMaterials.SOUL_CAMPFIRE, GetMaterialFromString("SOUL_CAMPFIRE"));
+            versionMaterials.put(GooPVersionMaterials.SOUL_FIRE, GetMaterialFromString("SOUL_FIRE"));
+            versionMaterials.put(GooPVersionMaterials.SOUL_LANTERN, GetMaterialFromString("SOUL_LANTERN"));
+            versionMaterials.put(GooPVersionMaterials.SOUL_SOIL, GetMaterialFromString("SOUL_SOIL"));
 
-            versionMaterials.put(GooPVersionMaterials.SOUL_TORCH, Material.SOUL_TORCH);
-            versionMaterials.put(GooPVersionMaterials.SOUL_WALL_TORCH, Material.SOUL_WALL_TORCH);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_CRIMSON_HYPHAE, Material.STRIPPED_CRIMSON_HYPHAE);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_CRIMSON_STEM, Material.STRIPPED_CRIMSON_STEM);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_WARPED_HYPHAE, Material.STRIPPED_WARPED_HYPHAE);
+            versionMaterials.put(GooPVersionMaterials.SOUL_TORCH, GetMaterialFromString("SOUL_TORCH"));
+            versionMaterials.put(GooPVersionMaterials.SOUL_WALL_TORCH, GetMaterialFromString("SOUL_WALL_TORCH"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_CRIMSON_HYPHAE, GetMaterialFromString("STRIPPED_CRIMSON_HYPHAE"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_CRIMSON_STEM, GetMaterialFromString("STRIPPED_CRIMSON_STEM"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_WARPED_HYPHAE, GetMaterialFromString("STRIPPED_WARPED_HYPHAE"));
 
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_WARPED_STEM, Material.STRIPPED_WARPED_STEM);
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_WARPED_STEM, GetMaterialFromString("STRIPPED_WARPED_STEM"));
 
-            versionMaterials.put(GooPVersionMaterials.TARGET, Material.TARGET);
-            versionMaterials.put(GooPVersionMaterials.TWISTING_VINES, Material.TWISTING_VINES);
-            versionMaterials.put(GooPVersionMaterials.TWISTING_VINES_PLANT, Material.TWISTING_VINES_PLANT);
+            versionMaterials.put(GooPVersionMaterials.TARGET, GetMaterialFromString("TARGET"));
+            versionMaterials.put(GooPVersionMaterials.TWISTING_VINES, GetMaterialFromString("TWISTING_VINES"));
+            versionMaterials.put(GooPVersionMaterials.TWISTING_VINES_PLANT, GetMaterialFromString("TWISTING_VINES_PLANT"));
 
-            versionMaterials.put(GooPVersionMaterials.WARPED_BUTTON, Material.WARPED_BUTTON);
-            versionMaterials.put(GooPVersionMaterials.WARPED_DOOR, Material.WARPED_DOOR);
-            versionMaterials.put(GooPVersionMaterials.WARPED_FENCE, Material.WARPED_FENCE);
-            versionMaterials.put(GooPVersionMaterials.WARPED_FENCE_GATE, Material.WARPED_FENCE_GATE);
-            versionMaterials.put(GooPVersionMaterials.WARPED_FUNGUS, Material.WARPED_FUNGUS);
+            versionMaterials.put(GooPVersionMaterials.WARPED_BUTTON, GetMaterialFromString("WARPED_BUTTON"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_DOOR, GetMaterialFromString("WARPED_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_FENCE, GetMaterialFromString("WARPED_FENCE"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_FENCE_GATE, GetMaterialFromString("WARPED_FENCE_GATE"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_FUNGUS, GetMaterialFromString("WARPED_FUNGUS"));
 
-            versionMaterials.put(GooPVersionMaterials.WARPED_HYPHAE, Material.WARPED_HYPHAE);
-            versionMaterials.put(GooPVersionMaterials.WARPED_NYLIUM, Material.WARPED_NYLIUM);
-            versionMaterials.put(GooPVersionMaterials.WARPED_PLANKS, Material.WARPED_PLANKS);
-            versionMaterials.put(GooPVersionMaterials.WARPED_PRESSURE_PLATE, Material.WARPED_PRESSURE_PLATE);
-            versionMaterials.put(GooPVersionMaterials.WARPED_ROOTS, Material.WARPED_ROOTS);
+            versionMaterials.put(GooPVersionMaterials.WARPED_HYPHAE, GetMaterialFromString("WARPED_HYPHAE"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_NYLIUM, GetMaterialFromString("WARPED_NYLIUM"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_PLANKS, GetMaterialFromString("WARPED_PLANKS"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_PRESSURE_PLATE, GetMaterialFromString("WARPED_PRESSURE_PLATE"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_ROOTS, GetMaterialFromString("WARPED_ROOTS"));
 
-            versionMaterials.put(GooPVersionMaterials.WARPED_SIGN, Material.WARPED_SIGN);
-            versionMaterials.put(GooPVersionMaterials.WARPED_SLAB, Material.WARPED_SLAB);
-            versionMaterials.put(GooPVersionMaterials.WARPED_STAIRS, Material.WARPED_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.WARPED_STEM, Material.WARPED_STEM);
-            versionMaterials.put(GooPVersionMaterials.WARPED_TRAPDOOR, Material.WARPED_TRAPDOOR);
+            versionMaterials.put(GooPVersionMaterials.WARPED_SIGN, GetMaterialFromString("WARPED_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_SLAB, GetMaterialFromString("WARPED_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_STAIRS, GetMaterialFromString("WARPED_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_STEM, GetMaterialFromString("WARPED_STEM"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_TRAPDOOR, GetMaterialFromString("WARPED_TRAPDOOR"));
 
-            versionMaterials.put(GooPVersionMaterials.WARPED_WALL_SIGN, Material.WARPED_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.WARPED_WART_BLOCK, Material.WARPED_WART_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.WEEPING_VINES, Material.WEEPING_VINES);
-            versionMaterials.put(GooPVersionMaterials.WEEPING_VINES_PLANT, Material.WEEPING_VINES_PLANT);
+            versionMaterials.put(GooPVersionMaterials.WARPED_WALL_SIGN, GetMaterialFromString("WARPED_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_WART_BLOCK, GetMaterialFromString("WARPED_WART_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.WEEPING_VINES, GetMaterialFromString("WEEPING_VINES"));
+            versionMaterials.put(GooPVersionMaterials.WEEPING_VINES_PLANT, GetMaterialFromString("WEEPING_VINES_PLANT"));
         }
         //endregion
 
         //region Minecraft Version 1.17+
         if (mcVersion >= 17.0) {
             //* YE-OLD-MMO
-            versionMaterials.put(GooPVersionMaterials.AXOLOTL_SPAWN_EGG, Material.AXOLOTL_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.AMETHYST_SHARD, Material.AMETHYST_SHARD);
-            versionMaterials.put(GooPVersionMaterials.AXOLOTL_BUCKET, Material.AXOLOTL_BUCKET);
-            versionMaterials.put(GooPVersionMaterials.AZALEA, Material.AZALEA);
-            versionMaterials.put(GooPVersionMaterials.AZALEA_LEAVES, Material.AZALEA_LEAVES);
-            versionMaterials.put(GooPVersionMaterials.AMETHYST_BLOCK, Material.AMETHYST_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.AMETHYST_CLUSTER, Material.AMETHYST_CLUSTER);
+            versionMaterials.put(GooPVersionMaterials.AXOLOTL_SPAWN_EGG, GetMaterialFromString("AXOLOTL_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.AMETHYST_SHARD, GetMaterialFromString("AMETHYST_SHARD"));
+            versionMaterials.put(GooPVersionMaterials.AXOLOTL_BUCKET, GetMaterialFromString("AXOLOTL_BUCKET"));
+            versionMaterials.put(GooPVersionMaterials.AZALEA, GetMaterialFromString("AZALEA"));
+            versionMaterials.put(GooPVersionMaterials.AZALEA_LEAVES, GetMaterialFromString("AZALEA_LEAVES"));
+            versionMaterials.put(GooPVersionMaterials.AMETHYST_BLOCK, GetMaterialFromString("AMETHYST_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.AMETHYST_CLUSTER, GetMaterialFromString("AMETHYST_CLUSTER"));
 
-            versionMaterials.put(GooPVersionMaterials.BUDDING_AMETHYST, Material.BUDDING_AMETHYST);
-            versionMaterials.put(GooPVersionMaterials.BIG_DRIPLEAF, Material.BIG_DRIPLEAF);
-            versionMaterials.put(GooPVersionMaterials.BUNDLE, Material.BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.BIG_DRIPLEAF_STEM, Material.BIG_DRIPLEAF_STEM);
-            versionMaterials.put(GooPVersionMaterials.BLACK_CANDLE_CAKE, Material.BLACK_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.BLUE_CANDLE, Material.BLUE_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.BROWN_CANDLE, Material.BROWN_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.BLACK_CANDLE, Material.BLACK_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.BLUE_CANDLE_CAKE, Material.BLUE_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.BROWN_CANDLE_CAKE, Material.BROWN_CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.BUDDING_AMETHYST, GetMaterialFromString("BUDDING_AMETHYST"));
+            versionMaterials.put(GooPVersionMaterials.BIG_DRIPLEAF, GetMaterialFromString("BIG_DRIPLEAF"));
+            versionMaterials.put(GooPVersionMaterials.BUNDLE, GetMaterialFromString("BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.BIG_DRIPLEAF_STEM, GetMaterialFromString("BIG_DRIPLEAF_STEM"));
+            versionMaterials.put(GooPVersionMaterials.BLACK_CANDLE_CAKE, GetMaterialFromString("BLACK_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.BLUE_CANDLE, GetMaterialFromString("BLUE_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.BROWN_CANDLE, GetMaterialFromString("BROWN_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.BLACK_CANDLE, GetMaterialFromString("BLACK_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.BLUE_CANDLE_CAKE, GetMaterialFromString("BLUE_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.BROWN_CANDLE_CAKE, GetMaterialFromString("BROWN_CANDLE_CAKE"));
 
-            versionMaterials.put(GooPVersionMaterials.CANDLE, Material.CANDLE);
-            versionMaterials.put(GooPVersionMaterials.COPPER_INGOT, Material.COPPER_INGOT);
-            versionMaterials.put(GooPVersionMaterials.CUT_COPPER, Material.CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.CUT_COPPER_STAIRS, Material.CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.COPPER_BLOCK, Material.COPPER_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.COPPER_ORE, Material.COPPER_ORE);
-            versionMaterials.put(GooPVersionMaterials.CALCITE, Material.CALCITE);
-            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE, Material.COBBLED_DEEPSLATE);
-            versionMaterials.put(GooPVersionMaterials.CUT_COPPER_SLAB, Material.CUT_COPPER_SLAB);
-            versionMaterials.put(GooPVersionMaterials.CRACKED_DEEPSLATE_BRICKS, Material.CRACKED_DEEPSLATE_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.CRACKED_DEEPSLATE_TILES, Material.CRACKED_DEEPSLATE_TILES);
-            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE_WALL, Material.COBBLED_DEEPSLATE_WALL);
-            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE_STAIRS, Material.COBBLED_DEEPSLATE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE_SLAB, Material.COBBLED_DEEPSLATE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.CUT_RED_SANDSTONE, Material.CUT_RED_SANDSTONE);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_DEEPSLATE, Material.CHISELED_DEEPSLATE);
-            versionMaterials.put(GooPVersionMaterials.CYAN_CANDLE_CAKE, Material.CYAN_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.CAVE_VINES, Material.CAVE_VINES);
-            versionMaterials.put(GooPVersionMaterials.CAVE_VINES_PLANT, Material.CAVE_VINES_PLANT);
-            versionMaterials.put(GooPVersionMaterials.CYAN_CANDLE, Material.CYAN_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.CANDLE_CAKE, Material.CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.CANDLE, GetMaterialFromString("CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.COPPER_INGOT, GetMaterialFromString("COPPER_INGOT"));
+            versionMaterials.put(GooPVersionMaterials.CUT_COPPER, GetMaterialFromString("CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.CUT_COPPER_STAIRS, GetMaterialFromString("CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.COPPER_BLOCK, GetMaterialFromString("COPPER_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.COPPER_ORE, GetMaterialFromString("COPPER_ORE"));
+            versionMaterials.put(GooPVersionMaterials.CALCITE, GetMaterialFromString("CALCITE"));
+            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE, GetMaterialFromString("COBBLED_DEEPSLATE"));
+            versionMaterials.put(GooPVersionMaterials.CUT_COPPER_SLAB, GetMaterialFromString("CUT_COPPER_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.CRACKED_DEEPSLATE_BRICKS, GetMaterialFromString("CRACKED_DEEPSLATE_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.CRACKED_DEEPSLATE_TILES, GetMaterialFromString("CRACKED_DEEPSLATE_TILES"));
+            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE_WALL, GetMaterialFromString("COBBLED_DEEPSLATE_WALL"));
+            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE_STAIRS, GetMaterialFromString("COBBLED_DEEPSLATE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.COBBLED_DEEPSLATE_SLAB, GetMaterialFromString("COBBLED_DEEPSLATE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.CUT_RED_SANDSTONE, GetMaterialFromString("CUT_RED_SANDSTONE"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_DEEPSLATE, GetMaterialFromString("CHISELED_DEEPSLATE"));
+            versionMaterials.put(GooPVersionMaterials.CYAN_CANDLE_CAKE, GetMaterialFromString("CYAN_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.CAVE_VINES, GetMaterialFromString("CAVE_VINES"));
+            versionMaterials.put(GooPVersionMaterials.CAVE_VINES_PLANT, GetMaterialFromString("CAVE_VINES_PLANT"));
+            versionMaterials.put(GooPVersionMaterials.CYAN_CANDLE, GetMaterialFromString("CYAN_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.CANDLE_CAKE, GetMaterialFromString("CANDLE_CAKE"));
 
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_COPPER_ORE, Material.DEEPSLATE_COPPER_ORE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_GOLD_ORE, Material.DEEPSLATE_GOLD_ORE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_REDSTONE_ORE, Material.DEEPSLATE_REDSTONE_ORE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_EMERALD_ORE, Material.DEEPSLATE_EMERALD_ORE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_LAPIS_ORE, Material.DEEPSLATE_LAPIS_ORE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_DIAMOND_ORE, Material.DEEPSLATE_DIAMOND_ORE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE, Material.DEEPSLATE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_COAL_ORE, Material.DEEPSLATE_COAL_ORE);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_IRON_ORE, Material.DEEPSLATE_IRON_ORE);
-            versionMaterials.put(GooPVersionMaterials.DRIPSTONE_BLOCK, Material.DRIPSTONE_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILES, Material.DEEPSLATE_TILES);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICKS, Material.DEEPSLATE_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICK_WALL, Material.DEEPSLATE_BRICK_WALL);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILE_WALL, Material.DEEPSLATE_TILE_WALL);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICK_STAIRS, Material.DEEPSLATE_BRICK_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILE_STAIRS, Material.DEEPSLATE_TILE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICK_SLAB, Material.DEEPSLATE_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILE_SLAB, Material.DEEPSLATE_TILE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.DIRT_PATH, Material.DIRT_PATH);   //renamed from GRASS_PATH
-            versionMaterials.put(GooPVersionMaterials.GRASS_PATH, Material.DIRT_PATH);   //renamed from GRASS_PATH
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_COPPER_ORE, GetMaterialFromString("DEEPSLATE_COPPER_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_GOLD_ORE, GetMaterialFromString("DEEPSLATE_GOLD_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_REDSTONE_ORE, GetMaterialFromString("DEEPSLATE_REDSTONE_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_EMERALD_ORE, GetMaterialFromString("DEEPSLATE_EMERALD_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_LAPIS_ORE, GetMaterialFromString("DEEPSLATE_LAPIS_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_DIAMOND_ORE, GetMaterialFromString("DEEPSLATE_DIAMOND_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE, GetMaterialFromString("DEEPSLATE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_COAL_ORE, GetMaterialFromString("DEEPSLATE_COAL_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_IRON_ORE, GetMaterialFromString("DEEPSLATE_IRON_ORE"));
+            versionMaterials.put(GooPVersionMaterials.DRIPSTONE_BLOCK, GetMaterialFromString("DRIPSTONE_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILES, GetMaterialFromString("DEEPSLATE_TILES"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICKS, GetMaterialFromString("DEEPSLATE_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICK_WALL, GetMaterialFromString("DEEPSLATE_BRICK_WALL"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILE_WALL, GetMaterialFromString("DEEPSLATE_TILE_WALL"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICK_STAIRS, GetMaterialFromString("DEEPSLATE_BRICK_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILE_STAIRS, GetMaterialFromString("DEEPSLATE_TILE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_BRICK_SLAB, GetMaterialFromString("DEEPSLATE_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.DEEPSLATE_TILE_SLAB, GetMaterialFromString("DEEPSLATE_TILE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.DIRT_PATH, GetMaterialFromString("DIRT_PATH"));   //renamed from GRASS_PATH
+            versionMaterials.put(GooPVersionMaterials.GRASS_PATH, GetMaterialFromString("DIRT_PATH"));   //renamed from GRASS_PATH
 
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_CUT_COPPER_STAIRS, Material.EXPOSED_CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_CUT_COPPER, Material.EXPOSED_CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER, Material.EXPOSED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_CUT_COPPER_SLAB, Material.EXPOSED_CUT_COPPER_SLAB);
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_CUT_COPPER_STAIRS, GetMaterialFromString("EXPOSED_CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_CUT_COPPER, GetMaterialFromString("EXPOSED_CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER, GetMaterialFromString("EXPOSED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_CUT_COPPER_SLAB, GetMaterialFromString("EXPOSED_CUT_COPPER_SLAB"));
 
-            versionMaterials.put(GooPVersionMaterials.FLOWERING_AZALEA_LEAVES, Material.FLOWERING_AZALEA_LEAVES);
-            versionMaterials.put(GooPVersionMaterials.FLOWERING_AZALEA, Material.FLOWERING_AZALEA);
+            versionMaterials.put(GooPVersionMaterials.FLOWERING_AZALEA_LEAVES, GetMaterialFromString("FLOWERING_AZALEA_LEAVES"));
+            versionMaterials.put(GooPVersionMaterials.FLOWERING_AZALEA, GetMaterialFromString("FLOWERING_AZALEA"));
 
-            versionMaterials.put(GooPVersionMaterials.GLOW_LICHEN, Material.GLOW_LICHEN);
-            versionMaterials.put(GooPVersionMaterials.GLOW_INK_SAC, Material.GLOW_INK_SAC);
-            versionMaterials.put(GooPVersionMaterials.GLOW_SQUID_SPAWN_EGG, Material.GLOW_SQUID_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.GOAT_SPAWN_EGG, Material.GOAT_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.GLOW_ITEM_FRAME, Material.GLOW_ITEM_FRAME);
-            versionMaterials.put(GooPVersionMaterials.GLOW_BERRIES, Material.GLOW_BERRIES);
-            versionMaterials.put(GooPVersionMaterials.GRAY_CANDLE, Material.GRAY_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.GREEN_CANDLE, Material.GREEN_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.GRAY_CANDLE_CAKE, Material.GRAY_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.GREEN_CANDLE_CAKE, Material.GREEN_CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.GLOW_LICHEN, GetMaterialFromString("GLOW_LICHEN"));
+            versionMaterials.put(GooPVersionMaterials.GLOW_INK_SAC, GetMaterialFromString("GLOW_INK_SAC"));
+            versionMaterials.put(GooPVersionMaterials.GLOW_SQUID_SPAWN_EGG, GetMaterialFromString("GLOW_SQUID_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.GOAT_SPAWN_EGG, GetMaterialFromString("GOAT_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.GLOW_ITEM_FRAME, GetMaterialFromString("GLOW_ITEM_FRAME"));
+            versionMaterials.put(GooPVersionMaterials.GLOW_BERRIES, GetMaterialFromString("GLOW_BERRIES"));
+            versionMaterials.put(GooPVersionMaterials.GRAY_CANDLE, GetMaterialFromString("GRAY_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.GREEN_CANDLE, GetMaterialFromString("GREEN_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.GRAY_CANDLE_CAKE, GetMaterialFromString("GRAY_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.GREEN_CANDLE_CAKE, GetMaterialFromString("GREEN_CANDLE_CAKE"));
 
-            versionMaterials.put(GooPVersionMaterials.HANGING_ROOTS, Material.HANGING_ROOTS);
+            versionMaterials.put(GooPVersionMaterials.HANGING_ROOTS, GetMaterialFromString("HANGING_ROOTS"));
 
-            versionMaterials.put(GooPVersionMaterials.LIGHT, Material.LIGHT);
-            versionMaterials.put(GooPVersionMaterials.LIGHT_GRAY_CANDLE, Material.LIGHT_GRAY_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.LIME_CANDLE, Material.LIME_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.LIGHTNING_ROD, Material.LIGHTNING_ROD);
-            versionMaterials.put(GooPVersionMaterials.LIGHT_BLUE_CANDLE, Material.LIGHT_BLUE_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.LARGE_AMETHYST_BUD, Material.LARGE_AMETHYST_BUD);
-            versionMaterials.put(GooPVersionMaterials.LAVA_CAULDRON, Material.LAVA_CAULDRON);
-            versionMaterials.put(GooPVersionMaterials.LIGHT_BLUE_CANDLE_CAKE, Material.LIGHT_BLUE_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.LIME_CANDLE_CAKE, Material.LIME_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.LIGHT_GRAY_CANDLE_CAKE, Material.LIGHT_GRAY_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.INFESTED_DEEPSLATE, Material.INFESTED_DEEPSLATE);
+            versionMaterials.put(GooPVersionMaterials.LIGHT, GetMaterialFromString("LIGHT"));
+            versionMaterials.put(GooPVersionMaterials.LIGHT_GRAY_CANDLE, GetMaterialFromString("LIGHT_GRAY_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.LIME_CANDLE, GetMaterialFromString("LIME_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.LIGHTNING_ROD, GetMaterialFromString("LIGHTNING_ROD"));
+            versionMaterials.put(GooPVersionMaterials.LIGHT_BLUE_CANDLE, GetMaterialFromString("LIGHT_BLUE_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.LARGE_AMETHYST_BUD, GetMaterialFromString("LARGE_AMETHYST_BUD"));
+            versionMaterials.put(GooPVersionMaterials.LAVA_CAULDRON, GetMaterialFromString("LAVA_CAULDRON"));
+            versionMaterials.put(GooPVersionMaterials.LIGHT_BLUE_CANDLE_CAKE, GetMaterialFromString("LIGHT_BLUE_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.LIME_CANDLE_CAKE, GetMaterialFromString("LIME_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.LIGHT_GRAY_CANDLE_CAKE, GetMaterialFromString("LIGHT_GRAY_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.INFESTED_DEEPSLATE, GetMaterialFromString("INFESTED_DEEPSLATE"));
 
-            versionMaterials.put(GooPVersionMaterials.MOSS_CARPET, Material.MOSS_CARPET);
-            versionMaterials.put(GooPVersionMaterials.MOSS_BLOCK, Material.MOSS_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.MAGENTA_CANDLE, Material.MAGENTA_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.MEDIUM_AMETHYST_BUD, Material.MEDIUM_AMETHYST_BUD);
-            versionMaterials.put(GooPVersionMaterials.MAGENTA_CANDLE_CAKE, Material.MAGENTA_CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.MOSS_CARPET, GetMaterialFromString("MOSS_CARPET"));
+            versionMaterials.put(GooPVersionMaterials.MOSS_BLOCK, GetMaterialFromString("MOSS_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.MAGENTA_CANDLE, GetMaterialFromString("MAGENTA_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.MEDIUM_AMETHYST_BUD, GetMaterialFromString("MEDIUM_AMETHYST_BUD"));
+            versionMaterials.put(GooPVersionMaterials.MAGENTA_CANDLE_CAKE, GetMaterialFromString("MAGENTA_CANDLE_CAKE"));
 
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CUT_COPPER_STAIRS, Material.OXIDIZED_CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CUT_COPPER, Material.OXIDIZED_CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER, Material.OXIDIZED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CUT_COPPER_SLAB, Material.OXIDIZED_CUT_COPPER_SLAB);
-            versionMaterials.put(GooPVersionMaterials.ORANGE_CANDLE, Material.ORANGE_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.ORANGE_CANDLE_CAKE, Material.ORANGE_CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CUT_COPPER_STAIRS, GetMaterialFromString("OXIDIZED_CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CUT_COPPER, GetMaterialFromString("OXIDIZED_CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER, GetMaterialFromString("OXIDIZED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CUT_COPPER_SLAB, GetMaterialFromString("OXIDIZED_CUT_COPPER_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.ORANGE_CANDLE, GetMaterialFromString("ORANGE_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.ORANGE_CANDLE_CAKE, GetMaterialFromString("ORANGE_CANDLE_CAKE"));
 
-            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE, Material.POLISHED_DEEPSLATE);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE_WALL, Material.POLISHED_DEEPSLATE_WALL);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE_STAIRS, Material.POLISHED_DEEPSLATE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE_SLAB, Material.POLISHED_DEEPSLATE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.PURPLE_CANDLE_CAKE, Material.PURPLE_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.POWDER_SNOW, Material.POWDER_SNOW);
-            versionMaterials.put(GooPVersionMaterials.POTTED_AZALEA_BUSH, Material.POTTED_AZALEA_BUSH);
-            versionMaterials.put(GooPVersionMaterials.POTTED_FLOWERING_AZALEA_BUSH, Material.POTTED_FLOWERING_AZALEA_BUSH);
-            versionMaterials.put(GooPVersionMaterials.POWDER_SNOW_BUCKET, Material.POWDER_SNOW_BUCKET);
-            versionMaterials.put(GooPVersionMaterials.PINK_CANDLE, Material.PINK_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.POINTED_DRIPSTONE, Material.POINTED_DRIPSTONE);
-            versionMaterials.put(GooPVersionMaterials.PURPLE_CANDLE, Material.PURPLE_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.POWDER_SNOW_CAULDRON, Material.POWDER_SNOW_CAULDRON);
-            versionMaterials.put(GooPVersionMaterials.PINK_CANDLE_CAKE, Material.PINK_CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE, GetMaterialFromString("POLISHED_DEEPSLATE"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE_WALL, GetMaterialFromString("POLISHED_DEEPSLATE_WALL"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE_STAIRS, GetMaterialFromString("POLISHED_DEEPSLATE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_DEEPSLATE_SLAB, GetMaterialFromString("POLISHED_DEEPSLATE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.PURPLE_CANDLE_CAKE, GetMaterialFromString("PURPLE_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.POWDER_SNOW, GetMaterialFromString("POWDER_SNOW"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_AZALEA_BUSH, GetMaterialFromString("POTTED_AZALEA_BUSH"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_FLOWERING_AZALEA_BUSH, GetMaterialFromString("POTTED_FLOWERING_AZALEA_BUSH"));
+            versionMaterials.put(GooPVersionMaterials.POWDER_SNOW_BUCKET, GetMaterialFromString("POWDER_SNOW_BUCKET"));
+            versionMaterials.put(GooPVersionMaterials.PINK_CANDLE, GetMaterialFromString("PINK_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.POINTED_DRIPSTONE, GetMaterialFromString("POINTED_DRIPSTONE"));
+            versionMaterials.put(GooPVersionMaterials.PURPLE_CANDLE, GetMaterialFromString("PURPLE_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.POWDER_SNOW_CAULDRON, GetMaterialFromString("POWDER_SNOW_CAULDRON"));
+            versionMaterials.put(GooPVersionMaterials.PINK_CANDLE_CAKE, GetMaterialFromString("PINK_CANDLE_CAKE"));
 
-            versionMaterials.put(GooPVersionMaterials.ROOTED_DIRT, Material.ROOTED_DIRT);
-            versionMaterials.put(GooPVersionMaterials.RAW_IRON_BLOCK, Material.RAW_IRON_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.RAW_COPPER_BLOCK, Material.RAW_COPPER_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.RAW_GOLD_BLOCK, Material.RAW_GOLD_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.RAW_IRON, Material.RAW_IRON);
-            versionMaterials.put(GooPVersionMaterials.RAW_COPPER, Material.RAW_COPPER);
-            versionMaterials.put(GooPVersionMaterials.RAW_GOLD, Material.RAW_GOLD);
-            versionMaterials.put(GooPVersionMaterials.RED_CANDLE, Material.RED_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.RED_CANDLE_CAKE, Material.RED_CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.ROOTED_DIRT, GetMaterialFromString("ROOTED_DIRT"));
+            versionMaterials.put(GooPVersionMaterials.RAW_IRON_BLOCK, GetMaterialFromString("RAW_IRON_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.RAW_COPPER_BLOCK, GetMaterialFromString("RAW_COPPER_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.RAW_GOLD_BLOCK, GetMaterialFromString("RAW_GOLD_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.RAW_IRON, GetMaterialFromString("RAW_IRON"));
+            versionMaterials.put(GooPVersionMaterials.RAW_COPPER, GetMaterialFromString("RAW_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.RAW_GOLD, GetMaterialFromString("RAW_GOLD"));
+            versionMaterials.put(GooPVersionMaterials.RED_CANDLE, GetMaterialFromString("RED_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.RED_CANDLE_CAKE, GetMaterialFromString("RED_CANDLE_CAKE"));
 
-            versionMaterials.put(GooPVersionMaterials.SMALL_DRIPLEAF, Material.SMALL_DRIPLEAF);
-            versionMaterials.put(GooPVersionMaterials.SMOOTH_BASALT, Material.SMOOTH_BASALT);
-            versionMaterials.put(GooPVersionMaterials.SPORE_BLOSSOM, Material.SPORE_BLOSSOM);
-            versionMaterials.put(GooPVersionMaterials.SPYGLASS, Material.SPYGLASS);
-            versionMaterials.put(GooPVersionMaterials.SCULK_SENSOR, Material.SCULK_SENSOR);
-            versionMaterials.put(GooPVersionMaterials.SMALL_AMETHYST_BUD, Material.SMALL_AMETHYST_BUD);
+            versionMaterials.put(GooPVersionMaterials.SMALL_DRIPLEAF, GetMaterialFromString("SMALL_DRIPLEAF"));
+            versionMaterials.put(GooPVersionMaterials.SMOOTH_BASALT, GetMaterialFromString("SMOOTH_BASALT"));
+            versionMaterials.put(GooPVersionMaterials.SPORE_BLOSSOM, GetMaterialFromString("SPORE_BLOSSOM"));
+            versionMaterials.put(GooPVersionMaterials.SPYGLASS, GetMaterialFromString("SPYGLASS"));
+            versionMaterials.put(GooPVersionMaterials.SCULK_SENSOR, GetMaterialFromString("SCULK_SENSOR"));
+            versionMaterials.put(GooPVersionMaterials.SMALL_AMETHYST_BUD, GetMaterialFromString("SMALL_AMETHYST_BUD"));
 
-            versionMaterials.put(GooPVersionMaterials.TUFF, Material.TUFF);
-            versionMaterials.put(GooPVersionMaterials.TINTED_GLASS, Material.TINTED_GLASS);
+            versionMaterials.put(GooPVersionMaterials.TUFF, GetMaterialFromString("TUFF"));
+            versionMaterials.put(GooPVersionMaterials.TINTED_GLASS, GetMaterialFromString("TINTED_GLASS"));
 
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_CUT_COPPER_SLAB, Material.WEATHERED_CUT_COPPER_SLAB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_BLOCK, Material.WAXED_COPPER_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER, Material.WAXED_EXPOSED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER, Material.WAXED_WEATHERED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER, Material.WAXED_OXIDIZED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_CUT_COPPER, Material.WAXED_CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CUT_COPPER, Material.WAXED_EXPOSED_CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CUT_COPPER, Material.WAXED_WEATHERED_CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CUT_COPPER, Material.WAXED_OXIDIZED_CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_CUT_COPPER_STAIRS, Material.WAXED_CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CUT_COPPER_STAIRS, Material.WAXED_EXPOSED_CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CUT_COPPER_STAIRS, Material.WAXED_WEATHERED_CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CUT_COPPER_STAIRS, Material.WAXED_OXIDIZED_CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.WAXED_CUT_COPPER_SLAB, Material.WAXED_CUT_COPPER_SLAB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CUT_COPPER_SLAB, Material.WAXED_EXPOSED_CUT_COPPER_SLAB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CUT_COPPER_SLAB, Material.WAXED_WEATHERED_CUT_COPPER_SLAB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CUT_COPPER_SLAB, Material.WAXED_OXIDIZED_CUT_COPPER_SLAB);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_CUT_COPPER_STAIRS, Material.WEATHERED_CUT_COPPER_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_CUT_COPPER, Material.WEATHERED_CUT_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER, Material.WEATHERED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WHITE_CANDLE, Material.WHITE_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.WHITE_CANDLE_CAKE, Material.WHITE_CANDLE_CAKE);
-            versionMaterials.put(GooPVersionMaterials.WATER_CAULDRON, Material.WATER_CAULDRON);
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_CUT_COPPER_SLAB, GetMaterialFromString("WEATHERED_CUT_COPPER_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_BLOCK, GetMaterialFromString("WAXED_COPPER_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER, GetMaterialFromString("WAXED_EXPOSED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER, GetMaterialFromString("WAXED_WEATHERED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER, GetMaterialFromString("WAXED_OXIDIZED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_CUT_COPPER, GetMaterialFromString("WAXED_CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CUT_COPPER, GetMaterialFromString("WAXED_EXPOSED_CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CUT_COPPER, GetMaterialFromString("WAXED_WEATHERED_CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CUT_COPPER, GetMaterialFromString("WAXED_OXIDIZED_CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_CUT_COPPER_STAIRS, GetMaterialFromString("WAXED_CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CUT_COPPER_STAIRS, GetMaterialFromString("WAXED_EXPOSED_CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CUT_COPPER_STAIRS, GetMaterialFromString("WAXED_WEATHERED_CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CUT_COPPER_STAIRS, GetMaterialFromString("WAXED_OXIDIZED_CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_CUT_COPPER_SLAB, GetMaterialFromString("WAXED_CUT_COPPER_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CUT_COPPER_SLAB, GetMaterialFromString("WAXED_EXPOSED_CUT_COPPER_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CUT_COPPER_SLAB, GetMaterialFromString("WAXED_WEATHERED_CUT_COPPER_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CUT_COPPER_SLAB, GetMaterialFromString("WAXED_OXIDIZED_CUT_COPPER_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_CUT_COPPER_STAIRS, GetMaterialFromString("WEATHERED_CUT_COPPER_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_CUT_COPPER, GetMaterialFromString("WEATHERED_CUT_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER, GetMaterialFromString("WEATHERED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WHITE_CANDLE, GetMaterialFromString("WHITE_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.WHITE_CANDLE_CAKE, GetMaterialFromString("WHITE_CANDLE_CAKE"));
+            versionMaterials.put(GooPVersionMaterials.WATER_CAULDRON, GetMaterialFromString("WATER_CAULDRON"));
 
-            versionMaterials.put(GooPVersionMaterials.YELLOW_CANDLE, Material.YELLOW_CANDLE);
-            versionMaterials.put(GooPVersionMaterials.YELLOW_CANDLE_CAKE, Material.YELLOW_CANDLE_CAKE);
+            versionMaterials.put(GooPVersionMaterials.YELLOW_CANDLE, GetMaterialFromString("YELLOW_CANDLE"));
+            versionMaterials.put(GooPVersionMaterials.YELLOW_CANDLE_CAKE, GetMaterialFromString("YELLOW_CANDLE_CAKE"));
             // YE-OLD-MMO */
         }
         //endregion
@@ -605,202 +605,202 @@ public class GooP_MinecraftVersions {
         //region Minecraft Version 1.18+
         if (mcVersion >= 18.0) {
             //* YE-OLD-MMO
-            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_OTHERSIDE, Material.MUSIC_DISC_OTHERSIDE);
+            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_OTHERSIDE, GetMaterialFromString("MUSIC_DISC_OTHERSIDE"));
             // YE-OLD-MMO */
         }
         //endregion
 
         //region Minecraft Version 1.19+
         if (mcVersion >= 19.0) {
-            versionMaterials.put(GooPVersionMaterials.MUD, Material.MUD);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_PLANKS, Material.MANGROVE_PLANKS);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_PROPAGULE, Material.MANGROVE_PROPAGULE);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_LOG, Material.MANGROVE_LOG);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_ROOTS, Material.MANGROVE_ROOTS);
-            versionMaterials.put(GooPVersionMaterials.MUDDY_MANGROVE_ROOTS, Material.MUDDY_MANGROVE_ROOTS);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_MANGROVE_LOG, Material.STRIPPED_MANGROVE_LOG);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_MANGROVE_WOOD, Material.STRIPPED_MANGROVE_WOOD);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_WOOD, Material.MANGROVE_WOOD);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_LEAVES, Material.MANGROVE_LEAVES);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_SLAB, Material.MANGROVE_SLAB);
-            versionMaterials.put(GooPVersionMaterials.MUD_BRICK_SLAB, Material.MUD_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_FENCE, Material.MANGROVE_FENCE);
-            versionMaterials.put(GooPVersionMaterials.PACKED_MUD, Material.PACKED_MUD);
-            versionMaterials.put(GooPVersionMaterials.MUD_BRICKS, Material.MUD_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.REINFORCED_DEEPSLATE, Material.REINFORCED_DEEPSLATE);
-            versionMaterials.put(GooPVersionMaterials.MUD_BRICK_STAIRS, Material.MUD_BRICK_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.SCULK, Material.SCULK);
-            versionMaterials.put(GooPVersionMaterials.SCULK_VEIN, Material.SCULK_VEIN);
-            versionMaterials.put(GooPVersionMaterials.SCULK_CATALYST, Material.SCULK_CATALYST);
-            versionMaterials.put(GooPVersionMaterials.SCULK_SHRIEKER, Material.SCULK_SHRIEKER);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_STAIRS, Material.MANGROVE_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.MUD_BRICK_WALL, Material.MUD_BRICK_WALL);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_BUTTON, Material.MANGROVE_BUTTON);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_PRESSURE_PLATE, Material.MANGROVE_PRESSURE_PLATE);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_DOOR, Material.MANGROVE_DOOR);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_TRAPDOOR, Material.MANGROVE_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_FENCE_GATE, Material.MANGROVE_FENCE_GATE);
-            versionMaterials.put(GooPVersionMaterials.OAK_CHEST_BOAT, Material.OAK_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.SPRUCE_CHEST_BOAT, Material.SPRUCE_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.BIRCH_CHEST_BOAT, Material.BIRCH_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.JUNGLE_CHEST_BOAT, Material.JUNGLE_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.ACACIA_CHEST_BOAT, Material.ACACIA_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.DARK_OAK_CHEST_BOAT, Material.DARK_OAK_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_BOAT, Material.MANGROVE_BOAT);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_CHEST_BOAT, Material.MANGROVE_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_SIGN, Material.MANGROVE_SIGN);
-            versionMaterials.put(GooPVersionMaterials.TADPOLE_BUCKET, Material.TADPOLE_BUCKET);
-            versionMaterials.put(GooPVersionMaterials.RECOVERY_COMPASS, Material.RECOVERY_COMPASS);
-            versionMaterials.put(GooPVersionMaterials.ALLAY_SPAWN_EGG, Material.ALLAY_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.FROG_SPAWN_EGG, Material.FROG_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.TADPOLE_SPAWN_EGG, Material.TADPOLE_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.WARDEN_SPAWN_EGG, Material.WARDEN_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_5, Material.MUSIC_DISC_5);
-            versionMaterials.put(GooPVersionMaterials.DISC_FRAGMENT_5, Material.DISC_FRAGMENT_5);
-            versionMaterials.put(GooPVersionMaterials.GOAT_HORN, Material.GOAT_HORN);
-            versionMaterials.put(GooPVersionMaterials.OCHRE_FROGLIGHT, Material.OCHRE_FROGLIGHT);
-            versionMaterials.put(GooPVersionMaterials.VERDANT_FROGLIGHT, Material.VERDANT_FROGLIGHT);
-            versionMaterials.put(GooPVersionMaterials.PEARLESCENT_FROGLIGHT, Material.PEARLESCENT_FROGLIGHT);
-            versionMaterials.put(GooPVersionMaterials.FROGSPAWN, Material.FROGSPAWN);
-            versionMaterials.put(GooPVersionMaterials.ECHO_SHARD, Material.ECHO_SHARD);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_WALL_SIGN, Material.MANGROVE_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.POTTED_MANGROVE_PROPAGULE, Material.POTTED_MANGROVE_PROPAGULE);
+            versionMaterials.put(GooPVersionMaterials.MUD, GetMaterialFromString("MUD"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_PLANKS, GetMaterialFromString("MANGROVE_PLANKS"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_PROPAGULE, GetMaterialFromString("MANGROVE_PROPAGULE"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_LOG, GetMaterialFromString("MANGROVE_LOG"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_ROOTS, GetMaterialFromString("MANGROVE_ROOTS"));
+            versionMaterials.put(GooPVersionMaterials.MUDDY_MANGROVE_ROOTS, GetMaterialFromString("MUDDY_MANGROVE_ROOTS"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_MANGROVE_LOG, GetMaterialFromString("STRIPPED_MANGROVE_LOG"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_MANGROVE_WOOD, GetMaterialFromString("STRIPPED_MANGROVE_WOOD"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_WOOD, GetMaterialFromString("MANGROVE_WOOD"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_LEAVES, GetMaterialFromString("MANGROVE_LEAVES"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_SLAB, GetMaterialFromString("MANGROVE_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.MUD_BRICK_SLAB, GetMaterialFromString("MUD_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_FENCE, GetMaterialFromString("MANGROVE_FENCE"));
+            versionMaterials.put(GooPVersionMaterials.PACKED_MUD, GetMaterialFromString("PACKED_MUD"));
+            versionMaterials.put(GooPVersionMaterials.MUD_BRICKS, GetMaterialFromString("MUD_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.REINFORCED_DEEPSLATE, GetMaterialFromString("REINFORCED_DEEPSLATE"));
+            versionMaterials.put(GooPVersionMaterials.MUD_BRICK_STAIRS, GetMaterialFromString("MUD_BRICK_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.SCULK, GetMaterialFromString("SCULK"));
+            versionMaterials.put(GooPVersionMaterials.SCULK_VEIN, GetMaterialFromString("SCULK_VEIN"));
+            versionMaterials.put(GooPVersionMaterials.SCULK_CATALYST, GetMaterialFromString("SCULK_CATALYST"));
+            versionMaterials.put(GooPVersionMaterials.SCULK_SHRIEKER, GetMaterialFromString("SCULK_SHRIEKER"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_STAIRS, GetMaterialFromString("MANGROVE_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.MUD_BRICK_WALL, GetMaterialFromString("MUD_BRICK_WALL"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_BUTTON, GetMaterialFromString("MANGROVE_BUTTON"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_PRESSURE_PLATE, GetMaterialFromString("MANGROVE_PRESSURE_PLATE"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_DOOR, GetMaterialFromString("MANGROVE_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_TRAPDOOR, GetMaterialFromString("MANGROVE_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_FENCE_GATE, GetMaterialFromString("MANGROVE_FENCE_GATE"));
+            versionMaterials.put(GooPVersionMaterials.OAK_CHEST_BOAT, GetMaterialFromString("OAK_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.SPRUCE_CHEST_BOAT, GetMaterialFromString("SPRUCE_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.BIRCH_CHEST_BOAT, GetMaterialFromString("BIRCH_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.JUNGLE_CHEST_BOAT, GetMaterialFromString("JUNGLE_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.ACACIA_CHEST_BOAT, GetMaterialFromString("ACACIA_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.DARK_OAK_CHEST_BOAT, GetMaterialFromString("DARK_OAK_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_BOAT, GetMaterialFromString("MANGROVE_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_CHEST_BOAT, GetMaterialFromString("MANGROVE_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_SIGN, GetMaterialFromString("MANGROVE_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.TADPOLE_BUCKET, GetMaterialFromString("TADPOLE_BUCKET"));
+            versionMaterials.put(GooPVersionMaterials.RECOVERY_COMPASS, GetMaterialFromString("RECOVERY_COMPASS"));
+            versionMaterials.put(GooPVersionMaterials.ALLAY_SPAWN_EGG, GetMaterialFromString("ALLAY_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.FROG_SPAWN_EGG, GetMaterialFromString("FROG_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.TADPOLE_SPAWN_EGG, GetMaterialFromString("TADPOLE_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.WARDEN_SPAWN_EGG, GetMaterialFromString("WARDEN_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_5, GetMaterialFromString("MUSIC_DISC_5"));
+            versionMaterials.put(GooPVersionMaterials.DISC_FRAGMENT_5, GetMaterialFromString("DISC_FRAGMENT_5"));
+            versionMaterials.put(GooPVersionMaterials.GOAT_HORN, GetMaterialFromString("GOAT_HORN"));
+            versionMaterials.put(GooPVersionMaterials.OCHRE_FROGLIGHT, GetMaterialFromString("OCHRE_FROGLIGHT"));
+            versionMaterials.put(GooPVersionMaterials.VERDANT_FROGLIGHT, GetMaterialFromString("VERDANT_FROGLIGHT"));
+            versionMaterials.put(GooPVersionMaterials.PEARLESCENT_FROGLIGHT, GetMaterialFromString("PEARLESCENT_FROGLIGHT"));
+            versionMaterials.put(GooPVersionMaterials.FROGSPAWN, GetMaterialFromString("FROGSPAWN"));
+            versionMaterials.put(GooPVersionMaterials.ECHO_SHARD, GetMaterialFromString("ECHO_SHARD"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_WALL_SIGN, GetMaterialFromString("MANGROVE_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_MANGROVE_PROPAGULE, GetMaterialFromString("POTTED_MANGROVE_PROPAGULE"));
         }
         //endregion
 
         //region Minecraft Version 1.19.4+
         if (mcVersion >= 19.4) {
-            versionMaterials.put(GooPVersionMaterials.CHERRY_PLANKS, Material.CHERRY_PLANKS);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_PLANKS, Material.BAMBOO_PLANKS);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_MOSAIC, Material.BAMBOO_MOSAIC);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_SAPLING, Material.CHERRY_SAPLING);
-            versionMaterials.put(GooPVersionMaterials.SUSPICIOUS_SAND, Material.SUSPICIOUS_SAND);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_LOG, Material.CHERRY_LOG);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_BLOCK, Material.BAMBOO_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_CHERRY_LOG, Material.STRIPPED_CHERRY_LOG);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_CHERRY_WOOD, Material.STRIPPED_CHERRY_WOOD);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_BAMBOO_BLOCK, Material.STRIPPED_BAMBOO_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_WOOD, Material.CHERRY_WOOD);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_LEAVES, Material.CHERRY_LEAVES);
-            versionMaterials.put(GooPVersionMaterials.TORCHFLOWER, Material.TORCHFLOWER);
-            versionMaterials.put(GooPVersionMaterials.PINK_PETALS, Material.PINK_PETALS);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_SLAB, Material.CHERRY_SLAB);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_SLAB, Material.BAMBOO_SLAB);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_MOSAIC_SLAB, Material.BAMBOO_MOSAIC_SLAB);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_BOOKSHELF, Material.CHISELED_BOOKSHELF);
-            versionMaterials.put(GooPVersionMaterials.DECORATED_POT, Material.DECORATED_POT);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_FENCE, Material.CHERRY_FENCE);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_FENCE, Material.BAMBOO_FENCE);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_STAIRS, Material.CHERRY_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_STAIRS, Material.BAMBOO_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_MOSAIC_STAIRS, Material.BAMBOO_MOSAIC_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_BUTTON, Material.CHERRY_BUTTON);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_BUTTON, Material.BAMBOO_BUTTON);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_PRESSURE_PLATE, Material.CHERRY_PRESSURE_PLATE);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_PRESSURE_PLATE, Material.BAMBOO_PRESSURE_PLATE);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_DOOR, Material.CHERRY_DOOR);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_DOOR, Material.BAMBOO_DOOR);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_TRAPDOOR, Material.CHERRY_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_TRAPDOOR, Material.BAMBOO_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_FENCE_GATE, Material.CHERRY_FENCE_GATE);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_FENCE_GATE, Material.BAMBOO_FENCE_GATE);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_BOAT, Material.CHERRY_BOAT);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_CHEST_BOAT, Material.CHERRY_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_RAFT, Material.BAMBOO_RAFT);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_CHEST_RAFT, Material.BAMBOO_CHEST_RAFT);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_SIGN, Material.CHERRY_SIGN);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_SIGN, Material.BAMBOO_SIGN);
-            versionMaterials.put(GooPVersionMaterials.OAK_HANGING_SIGN, Material.OAK_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.SPRUCE_HANGING_SIGN, Material.SPRUCE_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.BIRCH_HANGING_SIGN, Material.BIRCH_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.JUNGLE_HANGING_SIGN, Material.JUNGLE_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.ACACIA_HANGING_SIGN, Material.ACACIA_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_HANGING_SIGN, Material.CHERRY_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.DARK_OAK_HANGING_SIGN, Material.DARK_OAK_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_HANGING_SIGN, Material.MANGROVE_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_HANGING_SIGN, Material.BAMBOO_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_HANGING_SIGN, Material.CRIMSON_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.WARPED_HANGING_SIGN, Material.WARPED_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.CAMEL_SPAWN_EGG, Material.CAMEL_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.ENDER_DRAGON_SPAWN_EGG, Material.ENDER_DRAGON_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.IRON_GOLEM_SPAWN_EGG, Material.IRON_GOLEM_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.SNIFFER_SPAWN_EGG, Material.SNIFFER_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.SNOW_GOLEM_SPAWN_EGG, Material.SNOW_GOLEM_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.WITHER_SPAWN_EGG, Material.WITHER_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.PIGLIN_HEAD, Material.PIGLIN_HEAD);
-            versionMaterials.put(GooPVersionMaterials.TORCHFLOWER_SEEDS, Material.TORCHFLOWER_SEEDS);
-            versionMaterials.put(GooPVersionMaterials.BRUSH, Material.BRUSH);
-            versionMaterials.put(GooPVersionMaterials.NETHERITE_UPGRADE_SMITHING_TEMPLATE, Material.NETHERITE_UPGRADE_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE, Material.SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE, Material.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.COAST_ARMOR_TRIM_SMITHING_TEMPLATE, Material.COAST_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.WILD_ARMOR_TRIM_SMITHING_TEMPLATE, Material.WILD_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.WARD_ARMOR_TRIM_SMITHING_TEMPLATE, Material.WARD_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.EYE_ARMOR_TRIM_SMITHING_TEMPLATE, Material.EYE_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.VEX_ARMOR_TRIM_SMITHING_TEMPLATE, Material.VEX_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.TIDE_ARMOR_TRIM_SMITHING_TEMPLATE, Material.TIDE_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE, Material.SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.RIB_ARMOR_TRIM_SMITHING_TEMPLATE, Material.RIB_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE, Material.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_WALL_SIGN, Material.CHERRY_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_WALL_SIGN, Material.BAMBOO_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.OAK_WALL_HANGING_SIGN, Material.OAK_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.SPRUCE_WALL_HANGING_SIGN, Material.SPRUCE_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.BIRCH_WALL_HANGING_SIGN, Material.BIRCH_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.ACACIA_WALL_HANGING_SIGN, Material.ACACIA_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.CHERRY_WALL_HANGING_SIGN, Material.CHERRY_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.JUNGLE_WALL_HANGING_SIGN, Material.JUNGLE_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.DARK_OAK_WALL_HANGING_SIGN, Material.DARK_OAK_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.MANGROVE_WALL_HANGING_SIGN, Material.MANGROVE_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.CRIMSON_WALL_HANGING_SIGN, Material.CRIMSON_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.WARPED_WALL_HANGING_SIGN, Material.WARPED_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.BAMBOO_WALL_HANGING_SIGN, Material.BAMBOO_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.POTTED_TORCHFLOWER, Material.POTTED_TORCHFLOWER);
-            versionMaterials.put(GooPVersionMaterials.POTTED_CHERRY_SAPLING, Material.POTTED_CHERRY_SAPLING);
-            versionMaterials.put(GooPVersionMaterials.PIGLIN_WALL_HEAD, Material.PIGLIN_WALL_HEAD);
-            versionMaterials.put(GooPVersionMaterials.TORCHFLOWER_CROP, Material.TORCHFLOWER_CROP);
+            versionMaterials.put(GooPVersionMaterials.CHERRY_PLANKS, GetMaterialFromString("CHERRY_PLANKS"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_PLANKS, GetMaterialFromString("BAMBOO_PLANKS"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_MOSAIC, GetMaterialFromString("BAMBOO_MOSAIC"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_SAPLING, GetMaterialFromString("CHERRY_SAPLING"));
+            versionMaterials.put(GooPVersionMaterials.SUSPICIOUS_SAND, GetMaterialFromString("SUSPICIOUS_SAND"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_LOG, GetMaterialFromString("CHERRY_LOG"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_BLOCK, GetMaterialFromString("BAMBOO_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_CHERRY_LOG, GetMaterialFromString("STRIPPED_CHERRY_LOG"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_CHERRY_WOOD, GetMaterialFromString("STRIPPED_CHERRY_WOOD"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_BAMBOO_BLOCK, GetMaterialFromString("STRIPPED_BAMBOO_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_WOOD, GetMaterialFromString("CHERRY_WOOD"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_LEAVES, GetMaterialFromString("CHERRY_LEAVES"));
+            versionMaterials.put(GooPVersionMaterials.TORCHFLOWER, GetMaterialFromString("TORCHFLOWER"));
+            versionMaterials.put(GooPVersionMaterials.PINK_PETALS, GetMaterialFromString("PINK_PETALS"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_SLAB, GetMaterialFromString("CHERRY_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_SLAB, GetMaterialFromString("BAMBOO_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_MOSAIC_SLAB, GetMaterialFromString("BAMBOO_MOSAIC_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_BOOKSHELF, GetMaterialFromString("CHISELED_BOOKSHELF"));
+            versionMaterials.put(GooPVersionMaterials.DECORATED_POT, GetMaterialFromString("DECORATED_POT"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_FENCE, GetMaterialFromString("CHERRY_FENCE"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_FENCE, GetMaterialFromString("BAMBOO_FENCE"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_STAIRS, GetMaterialFromString("CHERRY_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_STAIRS, GetMaterialFromString("BAMBOO_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_MOSAIC_STAIRS, GetMaterialFromString("BAMBOO_MOSAIC_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_BUTTON, GetMaterialFromString("CHERRY_BUTTON"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_BUTTON, GetMaterialFromString("BAMBOO_BUTTON"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_PRESSURE_PLATE, GetMaterialFromString("CHERRY_PRESSURE_PLATE"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_PRESSURE_PLATE, GetMaterialFromString("BAMBOO_PRESSURE_PLATE"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_DOOR, GetMaterialFromString("CHERRY_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_DOOR, GetMaterialFromString("BAMBOO_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_TRAPDOOR, GetMaterialFromString("CHERRY_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_TRAPDOOR, GetMaterialFromString("BAMBOO_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_FENCE_GATE, GetMaterialFromString("CHERRY_FENCE_GATE"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_FENCE_GATE, GetMaterialFromString("BAMBOO_FENCE_GATE"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_BOAT, GetMaterialFromString("CHERRY_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_CHEST_BOAT, GetMaterialFromString("CHERRY_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_RAFT, GetMaterialFromString("BAMBOO_RAFT"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_CHEST_RAFT, GetMaterialFromString("BAMBOO_CHEST_RAFT"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_SIGN, GetMaterialFromString("CHERRY_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_SIGN, GetMaterialFromString("BAMBOO_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.OAK_HANGING_SIGN, GetMaterialFromString("OAK_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.SPRUCE_HANGING_SIGN, GetMaterialFromString("SPRUCE_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.BIRCH_HANGING_SIGN, GetMaterialFromString("BIRCH_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.JUNGLE_HANGING_SIGN, GetMaterialFromString("JUNGLE_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.ACACIA_HANGING_SIGN, GetMaterialFromString("ACACIA_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_HANGING_SIGN, GetMaterialFromString("CHERRY_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.DARK_OAK_HANGING_SIGN, GetMaterialFromString("DARK_OAK_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_HANGING_SIGN, GetMaterialFromString("MANGROVE_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_HANGING_SIGN, GetMaterialFromString("BAMBOO_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_HANGING_SIGN, GetMaterialFromString("CRIMSON_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_HANGING_SIGN, GetMaterialFromString("WARPED_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.CAMEL_SPAWN_EGG, GetMaterialFromString("CAMEL_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.ENDER_DRAGON_SPAWN_EGG, GetMaterialFromString("ENDER_DRAGON_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.IRON_GOLEM_SPAWN_EGG, GetMaterialFromString("IRON_GOLEM_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.SNIFFER_SPAWN_EGG, GetMaterialFromString("SNIFFER_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.SNOW_GOLEM_SPAWN_EGG, GetMaterialFromString("SNOW_GOLEM_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.WITHER_SPAWN_EGG, GetMaterialFromString("WITHER_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.PIGLIN_HEAD, GetMaterialFromString("PIGLIN_HEAD"));
+            versionMaterials.put(GooPVersionMaterials.TORCHFLOWER_SEEDS, GetMaterialFromString("TORCHFLOWER_SEEDS"));
+            versionMaterials.put(GooPVersionMaterials.BRUSH, GetMaterialFromString("BRUSH"));
+            versionMaterials.put(GooPVersionMaterials.NETHERITE_UPGRADE_SMITHING_TEMPLATE, GetMaterialFromString("NETHERITE_UPGRADE_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("SENTRY_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.DUNE_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("DUNE_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.COAST_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("COAST_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.WILD_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("WILD_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.WARD_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("WARD_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.EYE_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("EYE_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.VEX_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("VEX_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.TIDE_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("TIDE_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("SNOUT_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.RIB_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("RIB_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("SPIRE_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_WALL_SIGN, GetMaterialFromString("CHERRY_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_WALL_SIGN, GetMaterialFromString("BAMBOO_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.OAK_WALL_HANGING_SIGN, GetMaterialFromString("OAK_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.SPRUCE_WALL_HANGING_SIGN, GetMaterialFromString("SPRUCE_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.BIRCH_WALL_HANGING_SIGN, GetMaterialFromString("BIRCH_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.ACACIA_WALL_HANGING_SIGN, GetMaterialFromString("ACACIA_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.CHERRY_WALL_HANGING_SIGN, GetMaterialFromString("CHERRY_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.JUNGLE_WALL_HANGING_SIGN, GetMaterialFromString("JUNGLE_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.DARK_OAK_WALL_HANGING_SIGN, GetMaterialFromString("DARK_OAK_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.MANGROVE_WALL_HANGING_SIGN, GetMaterialFromString("MANGROVE_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.CRIMSON_WALL_HANGING_SIGN, GetMaterialFromString("CRIMSON_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.WARPED_WALL_HANGING_SIGN, GetMaterialFromString("WARPED_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.BAMBOO_WALL_HANGING_SIGN, GetMaterialFromString("BAMBOO_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_TORCHFLOWER, GetMaterialFromString("POTTED_TORCHFLOWER"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_CHERRY_SAPLING, GetMaterialFromString("POTTED_CHERRY_SAPLING"));
+            versionMaterials.put(GooPVersionMaterials.PIGLIN_WALL_HEAD, GetMaterialFromString("PIGLIN_WALL_HEAD"));
+            versionMaterials.put(GooPVersionMaterials.TORCHFLOWER_CROP, GetMaterialFromString("TORCHFLOWER_CROP"));
         }
         //endregion
 
         //region Minecraft Version 1.20.1+
         if (mcVersion >= 20.1) {
-            versionMaterials.put(GooPVersionMaterials.SUSPICIOUS_GRAVEL, Material.SUSPICIOUS_GRAVEL);
-            versionMaterials.put(GooPVersionMaterials.PITCHER_PLANT, Material.PITCHER_PLANT);
-            versionMaterials.put(GooPVersionMaterials.SNIFFER_EGG, Material.SNIFFER_EGG);
-            versionMaterials.put(GooPVersionMaterials.CALIBRATED_SCULK_SENSOR, Material.CALIBRATED_SCULK_SENSOR);
-            versionMaterials.put(GooPVersionMaterials.PITCHER_POD, Material.PITCHER_POD);
-            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_RELIC, Material.MUSIC_DISC_RELIC);
-            versionMaterials.put(GooPVersionMaterials.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE, Material.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE, Material.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, Material.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE, Material.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.HOST_ARMOR_TRIM_SMITHING_TEMPLATE, Material.HOST_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.ANGLER_POTTERY_SHERD, Material.ANGLER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.ARCHER_POTTERY_SHERD, Material.ARCHER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.ARMS_UP_POTTERY_SHERD, Material.ARMS_UP_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.BLADE_POTTERY_SHERD, Material.BLADE_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.BREWER_POTTERY_SHERD, Material.BREWER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.BURN_POTTERY_SHERD, Material.BURN_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.DANGER_POTTERY_SHERD, Material.DANGER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.EXPLORER_POTTERY_SHERD, Material.EXPLORER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.FRIEND_POTTERY_SHERD, Material.FRIEND_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.HEART_POTTERY_SHERD, Material.HEART_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.HEARTBREAK_POTTERY_SHERD, Material.HEARTBREAK_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.HOWL_POTTERY_SHERD, Material.HOWL_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.MINER_POTTERY_SHERD, Material.MINER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.MOURNER_POTTERY_SHERD, Material.MOURNER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.PLENTY_POTTERY_SHERD, Material.PLENTY_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.PRIZE_POTTERY_SHERD, Material.PRIZE_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.SHEAF_POTTERY_SHERD, Material.SHEAF_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.SHELTER_POTTERY_SHERD, Material.SHELTER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.SKULL_POTTERY_SHERD, Material.SKULL_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.SNORT_POTTERY_SHERD, Material.SNORT_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.PITCHER_CROP, Material.PITCHER_CROP);
+            versionMaterials.put(GooPVersionMaterials.SUSPICIOUS_GRAVEL, GetMaterialFromString("SUSPICIOUS_GRAVEL"));
+            versionMaterials.put(GooPVersionMaterials.PITCHER_PLANT, GetMaterialFromString("PITCHER_PLANT"));
+            versionMaterials.put(GooPVersionMaterials.SNIFFER_EGG, GetMaterialFromString("SNIFFER_EGG"));
+            versionMaterials.put(GooPVersionMaterials.CALIBRATED_SCULK_SENSOR, GetMaterialFromString("CALIBRATED_SCULK_SENSOR"));
+            versionMaterials.put(GooPVersionMaterials.PITCHER_POD, GetMaterialFromString("PITCHER_POD"));
+            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_RELIC, GetMaterialFromString("MUSIC_DISC_RELIC"));
+            versionMaterials.put(GooPVersionMaterials.WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("WAYFINDER_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("SHAPER_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("SILENCE_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.RAISER_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("RAISER_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.HOST_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("HOST_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.ANGLER_POTTERY_SHERD, GetMaterialFromString("ANGLER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.ARCHER_POTTERY_SHERD, GetMaterialFromString("ARCHER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.ARMS_UP_POTTERY_SHERD, GetMaterialFromString("ARMS_UP_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.BLADE_POTTERY_SHERD, GetMaterialFromString("BLADE_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.BREWER_POTTERY_SHERD, GetMaterialFromString("BREWER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.BURN_POTTERY_SHERD, GetMaterialFromString("BURN_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.DANGER_POTTERY_SHERD, GetMaterialFromString("DANGER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.EXPLORER_POTTERY_SHERD, GetMaterialFromString("EXPLORER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.FRIEND_POTTERY_SHERD, GetMaterialFromString("FRIEND_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.HEART_POTTERY_SHERD, GetMaterialFromString("HEART_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.HEARTBREAK_POTTERY_SHERD, GetMaterialFromString("HEARTBREAK_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.HOWL_POTTERY_SHERD, GetMaterialFromString("HOWL_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.MINER_POTTERY_SHERD, GetMaterialFromString("MINER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.MOURNER_POTTERY_SHERD, GetMaterialFromString("MOURNER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.PLENTY_POTTERY_SHERD, GetMaterialFromString("PLENTY_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.PRIZE_POTTERY_SHERD, GetMaterialFromString("PRIZE_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.SHEAF_POTTERY_SHERD, GetMaterialFromString("SHEAF_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.SHELTER_POTTERY_SHERD, GetMaterialFromString("SHELTER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.SKULL_POTTERY_SHERD, GetMaterialFromString("SKULL_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.SNORT_POTTERY_SHERD, GetMaterialFromString("SNORT_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.PITCHER_CROP, GetMaterialFromString("PITCHER_CROP"));
 
-            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_SKULL, Material.SKULL_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_PRIZE, Material.PRIZE_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_ARMS_UP, Material.ARMS_UP_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_ARCHER, Material.ARCHER_POTTERY_SHERD);
+            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_SKULL, GetMaterialFromString("SKULL_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_PRIZE, GetMaterialFromString("PRIZE_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_ARMS_UP, GetMaterialFromString("ARMS_UP_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.POTTERY_SHARD_ARCHER, GetMaterialFromString("ARCHER_POTTERY_SHERD"));
         }
         //endregion
 
@@ -822,86 +822,86 @@ public class GooP_MinecraftVersions {
 
         //region Minecraft Version 1.20.6+
         if (mcVersion >= 20.6) {
-            versionMaterials.put(GooPVersionMaterials.SHORT_GRASS, Material.SHORT_GRASS);
-            versionMaterials.put(GooPVersionMaterials.TURTLE_SCUTE, Material.TURTLE_SCUTE);
-            versionMaterials.put(GooPVersionMaterials.TUFF_SLAB, Material.TUFF_SLAB);
-            versionMaterials.put(GooPVersionMaterials.TUFF_STAIRS, Material.TUFF_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.TUFF_WALL, Material.TUFF_WALL);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_TUFF, Material.CHISELED_TUFF);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF, Material.POLISHED_TUFF);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF_SLAB, Material.POLISHED_TUFF_SLAB);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF_STAIRS, Material.POLISHED_TUFF_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF_WALL, Material.POLISHED_TUFF_WALL);
-            versionMaterials.put(GooPVersionMaterials.TUFF_BRICKS, Material.TUFF_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.TUFF_BRICK_SLAB, Material.TUFF_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.TUFF_BRICK_STAIRS, Material.TUFF_BRICK_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.TUFF_BRICK_WALL, Material.TUFF_BRICK_WALL);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_TUFF_BRICKS, Material.CHISELED_TUFF_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.HEAVY_CORE, Material.HEAVY_CORE);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_COPPER, Material.CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_CHISELED_COPPER, Material.EXPOSED_CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_CHISELED_COPPER, Material.WEATHERED_CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CHISELED_COPPER, Material.OXIDIZED_CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_CHISELED_COPPER, Material.WAXED_CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CHISELED_COPPER, Material.WAXED_EXPOSED_CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CHISELED_COPPER, Material.WAXED_WEATHERED_CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CHISELED_COPPER, Material.WAXED_OXIDIZED_CHISELED_COPPER);
-            versionMaterials.put(GooPVersionMaterials.COPPER_DOOR, Material.COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_DOOR, Material.EXPOSED_COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_DOOR, Material.WEATHERED_COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_DOOR, Material.OXIDIZED_COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_DOOR, Material.WAXED_COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_DOOR, Material.WAXED_EXPOSED_COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_DOOR, Material.WAXED_WEATHERED_COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_DOOR, Material.WAXED_OXIDIZED_COPPER_DOOR);
-            versionMaterials.put(GooPVersionMaterials.COPPER_TRAPDOOR, Material.COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_TRAPDOOR, Material.EXPOSED_COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_TRAPDOOR, Material.WEATHERED_COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_TRAPDOOR, Material.OXIDIZED_COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_TRAPDOOR, Material.WAXED_COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_TRAPDOOR, Material.WAXED_EXPOSED_COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_TRAPDOOR, Material.WAXED_WEATHERED_COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_TRAPDOOR, Material.WAXED_OXIDIZED_COPPER_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.ARMADILLO_SCUTE, Material.ARMADILLO_SCUTE);
-            versionMaterials.put(GooPVersionMaterials.WOLF_ARMOR, Material.WOLF_ARMOR);
-            versionMaterials.put(GooPVersionMaterials.CRAFTER, Material.CRAFTER);
-            versionMaterials.put(GooPVersionMaterials.ARMADILLO_SPAWN_EGG, Material.ARMADILLO_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.BOGGED_SPAWN_EGG, Material.BOGGED_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.BREEZE_SPAWN_EGG, Material.BREEZE_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.WIND_CHARGE, Material.WIND_CHARGE);
-            versionMaterials.put(GooPVersionMaterials.MACE, Material.MACE);
-            versionMaterials.put(GooPVersionMaterials.FLOW_BANNER_PATTERN, Material.FLOW_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.GUSTER_BANNER_PATTERN, Material.GUSTER_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.FLOW_ARMOR_TRIM_SMITHING_TEMPLATE, Material.FLOW_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE, Material.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE);
-            versionMaterials.put(GooPVersionMaterials.FLOW_POTTERY_SHERD, Material.FLOW_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.GUSTER_POTTERY_SHERD, Material.GUSTER_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.SCRAPE_POTTERY_SHERD, Material.SCRAPE_POTTERY_SHERD);
-            versionMaterials.put(GooPVersionMaterials.COPPER_GRATE, Material.COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_GRATE, Material.EXPOSED_COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_GRATE, Material.WEATHERED_COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_GRATE, Material.OXIDIZED_COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_GRATE, Material.WAXED_COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_GRATE, Material.WAXED_EXPOSED_COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_GRATE, Material.WAXED_WEATHERED_COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_GRATE, Material.WAXED_OXIDIZED_COPPER_GRATE);
-            versionMaterials.put(GooPVersionMaterials.COPPER_BULB, Material.COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_BULB, Material.EXPOSED_COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_BULB, Material.WEATHERED_COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_BULB, Material.OXIDIZED_COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_BULB, Material.WAXED_COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_BULB, Material.WAXED_EXPOSED_COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_BULB, Material.WAXED_WEATHERED_COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_BULB, Material.WAXED_OXIDIZED_COPPER_BULB);
-            versionMaterials.put(GooPVersionMaterials.TRIAL_SPAWNER, Material.TRIAL_SPAWNER);
-            versionMaterials.put(GooPVersionMaterials.TRIAL_KEY, Material.TRIAL_KEY);
-            versionMaterials.put(GooPVersionMaterials.OMINOUS_TRIAL_KEY, Material.OMINOUS_TRIAL_KEY);
-            versionMaterials.put(GooPVersionMaterials.VAULT, Material.VAULT);
-            versionMaterials.put(GooPVersionMaterials.OMINOUS_BOTTLE, Material.OMINOUS_BOTTLE);
-            versionMaterials.put(GooPVersionMaterials.BREEZE_ROD, Material.BREEZE_ROD);
+            versionMaterials.put(GooPVersionMaterials.SHORT_GRASS, GetMaterialFromString("SHORT_GRASS"));
+            versionMaterials.put(GooPVersionMaterials.TURTLE_SCUTE, GetMaterialFromString("TURTLE_SCUTE"));
+            versionMaterials.put(GooPVersionMaterials.TUFF_SLAB, GetMaterialFromString("TUFF_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.TUFF_STAIRS, GetMaterialFromString("TUFF_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.TUFF_WALL, GetMaterialFromString("TUFF_WALL"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_TUFF, GetMaterialFromString("CHISELED_TUFF"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF, GetMaterialFromString("POLISHED_TUFF"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF_SLAB, GetMaterialFromString("POLISHED_TUFF_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF_STAIRS, GetMaterialFromString("POLISHED_TUFF_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.POLISHED_TUFF_WALL, GetMaterialFromString("POLISHED_TUFF_WALL"));
+            versionMaterials.put(GooPVersionMaterials.TUFF_BRICKS, GetMaterialFromString("TUFF_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.TUFF_BRICK_SLAB, GetMaterialFromString("TUFF_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.TUFF_BRICK_STAIRS, GetMaterialFromString("TUFF_BRICK_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.TUFF_BRICK_WALL, GetMaterialFromString("TUFF_BRICK_WALL"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_TUFF_BRICKS, GetMaterialFromString("CHISELED_TUFF_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.HEAVY_CORE, GetMaterialFromString("HEAVY_CORE"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_COPPER, GetMaterialFromString("CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_CHISELED_COPPER, GetMaterialFromString("EXPOSED_CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_CHISELED_COPPER, GetMaterialFromString("WEATHERED_CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_CHISELED_COPPER, GetMaterialFromString("OXIDIZED_CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_CHISELED_COPPER, GetMaterialFromString("WAXED_CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_CHISELED_COPPER, GetMaterialFromString("WAXED_EXPOSED_CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_CHISELED_COPPER, GetMaterialFromString("WAXED_WEATHERED_CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_CHISELED_COPPER, GetMaterialFromString("WAXED_OXIDIZED_CHISELED_COPPER"));
+            versionMaterials.put(GooPVersionMaterials.COPPER_DOOR, GetMaterialFromString("COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_DOOR, GetMaterialFromString("EXPOSED_COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_DOOR, GetMaterialFromString("WEATHERED_COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_DOOR, GetMaterialFromString("OXIDIZED_COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_DOOR, GetMaterialFromString("WAXED_COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_DOOR, GetMaterialFromString("WAXED_EXPOSED_COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_DOOR, GetMaterialFromString("WAXED_WEATHERED_COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_DOOR, GetMaterialFromString("WAXED_OXIDIZED_COPPER_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.COPPER_TRAPDOOR, GetMaterialFromString("COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_TRAPDOOR, GetMaterialFromString("EXPOSED_COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_TRAPDOOR, GetMaterialFromString("WEATHERED_COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_TRAPDOOR, GetMaterialFromString("OXIDIZED_COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_TRAPDOOR, GetMaterialFromString("WAXED_COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_TRAPDOOR, GetMaterialFromString("WAXED_EXPOSED_COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_TRAPDOOR, GetMaterialFromString("WAXED_WEATHERED_COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_TRAPDOOR, GetMaterialFromString("WAXED_OXIDIZED_COPPER_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.ARMADILLO_SCUTE, GetMaterialFromString("ARMADILLO_SCUTE"));
+            versionMaterials.put(GooPVersionMaterials.WOLF_ARMOR, GetMaterialFromString("WOLF_ARMOR"));
+            versionMaterials.put(GooPVersionMaterials.CRAFTER, GetMaterialFromString("CRAFTER"));
+            versionMaterials.put(GooPVersionMaterials.ARMADILLO_SPAWN_EGG, GetMaterialFromString("ARMADILLO_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.BOGGED_SPAWN_EGG, GetMaterialFromString("BOGGED_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.BREEZE_SPAWN_EGG, GetMaterialFromString("BREEZE_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.WIND_CHARGE, GetMaterialFromString("WIND_CHARGE"));
+            versionMaterials.put(GooPVersionMaterials.MACE, GetMaterialFromString("MACE"));
+            versionMaterials.put(GooPVersionMaterials.FLOW_BANNER_PATTERN, GetMaterialFromString("FLOW_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.GUSTER_BANNER_PATTERN, GetMaterialFromString("GUSTER_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.FLOW_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("FLOW_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.BOLT_ARMOR_TRIM_SMITHING_TEMPLATE, GetMaterialFromString("BOLT_ARMOR_TRIM_SMITHING_TEMPLATE"));
+            versionMaterials.put(GooPVersionMaterials.FLOW_POTTERY_SHERD, GetMaterialFromString("FLOW_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.GUSTER_POTTERY_SHERD, GetMaterialFromString("GUSTER_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.SCRAPE_POTTERY_SHERD, GetMaterialFromString("SCRAPE_POTTERY_SHERD"));
+            versionMaterials.put(GooPVersionMaterials.COPPER_GRATE, GetMaterialFromString("COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_GRATE, GetMaterialFromString("EXPOSED_COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_GRATE, GetMaterialFromString("WEATHERED_COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_GRATE, GetMaterialFromString("OXIDIZED_COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_GRATE, GetMaterialFromString("WAXED_COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_GRATE, GetMaterialFromString("WAXED_EXPOSED_COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_GRATE, GetMaterialFromString("WAXED_WEATHERED_COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_GRATE, GetMaterialFromString("WAXED_OXIDIZED_COPPER_GRATE"));
+            versionMaterials.put(GooPVersionMaterials.COPPER_BULB, GetMaterialFromString("COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.EXPOSED_COPPER_BULB, GetMaterialFromString("EXPOSED_COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.WEATHERED_COPPER_BULB, GetMaterialFromString("WEATHERED_COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.OXIDIZED_COPPER_BULB, GetMaterialFromString("OXIDIZED_COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_COPPER_BULB, GetMaterialFromString("WAXED_COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_EXPOSED_COPPER_BULB, GetMaterialFromString("WAXED_EXPOSED_COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_WEATHERED_COPPER_BULB, GetMaterialFromString("WAXED_WEATHERED_COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.WAXED_OXIDIZED_COPPER_BULB, GetMaterialFromString("WAXED_OXIDIZED_COPPER_BULB"));
+            versionMaterials.put(GooPVersionMaterials.TRIAL_SPAWNER, GetMaterialFromString("TRIAL_SPAWNER"));
+            versionMaterials.put(GooPVersionMaterials.TRIAL_KEY, GetMaterialFromString("TRIAL_KEY"));
+            versionMaterials.put(GooPVersionMaterials.OMINOUS_TRIAL_KEY, GetMaterialFromString("OMINOUS_TRIAL_KEY"));
+            versionMaterials.put(GooPVersionMaterials.VAULT, GetMaterialFromString("VAULT"));
+            versionMaterials.put(GooPVersionMaterials.OMINOUS_BOTTLE, GetMaterialFromString("OMINOUS_BOTTLE"));
+            versionMaterials.put(GooPVersionMaterials.BREEZE_ROD, GetMaterialFromString("BREEZE_ROD"));
 
-            versionMaterials.put(GooPVersionMaterials.SCUTE, Material.TURTLE_SCUTE);
-            versionMaterials.put(GooPVersionMaterials.GRASS, Material.SHORT_GRASS);
+            versionMaterials.put(GooPVersionMaterials.SCUTE, GetMaterialFromString("TURTLE_SCUTE"));
+            versionMaterials.put(GooPVersionMaterials.GRASS, GetMaterialFromString("SHORT_GRASS"));
         }
         //endregion
 
@@ -917,76 +917,76 @@ public class GooP_MinecraftVersions {
 
         //region Minecraft Version 1.21.1+
         if (mcVersion >= 21.1) {
-            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_CREATOR, Material.MUSIC_DISC_CREATOR);
-            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_CREATOR_MUSIC_BOX, Material.MUSIC_DISC_CREATOR_MUSIC_BOX);
-            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_PRECIPICE, Material.MUSIC_DISC_PRECIPICE);
+            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_CREATOR, GetMaterialFromString("MUSIC_DISC_CREATOR"));
+            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_CREATOR_MUSIC_BOX, GetMaterialFromString("MUSIC_DISC_CREATOR_MUSIC_BOX"));
+            versionMaterials.put(GooPVersionMaterials.MUSIC_DISC_PRECIPICE, GetMaterialFromString("MUSIC_DISC_PRECIPICE"));
         }
         //endregion
 
         //region Minecraft Version 1.21.3+
         if (mcVersion >= 21.3) {
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_PLANKS, Material.PALE_OAK_PLANKS);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_SAPLING, Material.PALE_OAK_SAPLING);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_LOG, Material.PALE_OAK_LOG);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_PALE_OAK_LOG, Material.STRIPPED_PALE_OAK_LOG);
-            versionMaterials.put(GooPVersionMaterials.STRIPPED_PALE_OAK_WOOD, Material.STRIPPED_PALE_OAK_WOOD);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_WOOD, Material.PALE_OAK_WOOD);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_LEAVES, Material.PALE_OAK_LEAVES);
-            versionMaterials.put(GooPVersionMaterials.PALE_MOSS_CARPET, Material.PALE_MOSS_CARPET);
-            versionMaterials.put(GooPVersionMaterials.PALE_HANGING_MOSS, Material.PALE_HANGING_MOSS);
-            versionMaterials.put(GooPVersionMaterials.PALE_MOSS_BLOCK, Material.PALE_MOSS_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_SLAB, Material.PALE_OAK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.CREAKING_HEART, Material.CREAKING_HEART);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_FENCE, Material.PALE_OAK_FENCE);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_STAIRS, Material.PALE_OAK_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_BUTTON, Material.PALE_OAK_BUTTON);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_PRESSURE_PLATE, Material.PALE_OAK_PRESSURE_PLATE);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_DOOR, Material.PALE_OAK_DOOR);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_TRAPDOOR, Material.PALE_OAK_TRAPDOOR);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_FENCE_GATE, Material.PALE_OAK_FENCE_GATE);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_BOAT, Material.PALE_OAK_BOAT);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_CHEST_BOAT, Material.PALE_OAK_CHEST_BOAT);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_SIGN, Material.PALE_OAK_SIGN);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_HANGING_SIGN, Material.PALE_OAK_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.WHITE_BUNDLE, Material.WHITE_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.ORANGE_BUNDLE, Material.ORANGE_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.MAGENTA_BUNDLE, Material.MAGENTA_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.LIGHT_BLUE_BUNDLE, Material.LIGHT_BLUE_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.YELLOW_BUNDLE, Material.YELLOW_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.LIME_BUNDLE, Material.LIME_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.PINK_BUNDLE, Material.PINK_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.GRAY_BUNDLE, Material.GRAY_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.LIGHT_GRAY_BUNDLE, Material.LIGHT_GRAY_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.CYAN_BUNDLE, Material.CYAN_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.PURPLE_BUNDLE, Material.PURPLE_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.BLUE_BUNDLE, Material.BLUE_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.BROWN_BUNDLE, Material.BROWN_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.GREEN_BUNDLE, Material.GREEN_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.RED_BUNDLE, Material.RED_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.BLACK_BUNDLE, Material.BLACK_BUNDLE);
-            versionMaterials.put(GooPVersionMaterials.CREAKING_SPAWN_EGG, Material.CREAKING_SPAWN_EGG);
-            versionMaterials.put(GooPVersionMaterials.FIELD_MASONED_BANNER_PATTERN, Material.FIELD_MASONED_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.BORDURE_INDENTED_BANNER_PATTERN, Material.BORDURE_INDENTED_BANNER_PATTERN);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_WALL_SIGN, Material.PALE_OAK_WALL_SIGN);
-            versionMaterials.put(GooPVersionMaterials.PALE_OAK_WALL_HANGING_SIGN, Material.PALE_OAK_WALL_HANGING_SIGN);
-            versionMaterials.put(GooPVersionMaterials.POTTED_PALE_OAK_SAPLING, Material.POTTED_PALE_OAK_SAPLING);
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_PLANKS, GetMaterialFromString("PALE_OAK_PLANKS"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_SAPLING, GetMaterialFromString("PALE_OAK_SAPLING"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_LOG, GetMaterialFromString("PALE_OAK_LOG"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_PALE_OAK_LOG, GetMaterialFromString("STRIPPED_PALE_OAK_LOG"));
+            versionMaterials.put(GooPVersionMaterials.STRIPPED_PALE_OAK_WOOD, GetMaterialFromString("STRIPPED_PALE_OAK_WOOD"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_WOOD, GetMaterialFromString("PALE_OAK_WOOD"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_LEAVES, GetMaterialFromString("PALE_OAK_LEAVES"));
+            versionMaterials.put(GooPVersionMaterials.PALE_MOSS_CARPET, GetMaterialFromString("PALE_MOSS_CARPET"));
+            versionMaterials.put(GooPVersionMaterials.PALE_HANGING_MOSS, GetMaterialFromString("PALE_HANGING_MOSS"));
+            versionMaterials.put(GooPVersionMaterials.PALE_MOSS_BLOCK, GetMaterialFromString("PALE_MOSS_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_SLAB, GetMaterialFromString("PALE_OAK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.CREAKING_HEART, GetMaterialFromString("CREAKING_HEART"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_FENCE, GetMaterialFromString("PALE_OAK_FENCE"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_STAIRS, GetMaterialFromString("PALE_OAK_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_BUTTON, GetMaterialFromString("PALE_OAK_BUTTON"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_PRESSURE_PLATE, GetMaterialFromString("PALE_OAK_PRESSURE_PLATE"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_DOOR, GetMaterialFromString("PALE_OAK_DOOR"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_TRAPDOOR, GetMaterialFromString("PALE_OAK_TRAPDOOR"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_FENCE_GATE, GetMaterialFromString("PALE_OAK_FENCE_GATE"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_BOAT, GetMaterialFromString("PALE_OAK_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_CHEST_BOAT, GetMaterialFromString("PALE_OAK_CHEST_BOAT"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_SIGN, GetMaterialFromString("PALE_OAK_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_HANGING_SIGN, GetMaterialFromString("PALE_OAK_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.WHITE_BUNDLE, GetMaterialFromString("WHITE_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.ORANGE_BUNDLE, GetMaterialFromString("ORANGE_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.MAGENTA_BUNDLE, GetMaterialFromString("MAGENTA_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.LIGHT_BLUE_BUNDLE, GetMaterialFromString("LIGHT_BLUE_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.YELLOW_BUNDLE, GetMaterialFromString("YELLOW_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.LIME_BUNDLE, GetMaterialFromString("LIME_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.PINK_BUNDLE, GetMaterialFromString("PINK_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.GRAY_BUNDLE, GetMaterialFromString("GRAY_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.LIGHT_GRAY_BUNDLE, GetMaterialFromString("LIGHT_GRAY_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.CYAN_BUNDLE, GetMaterialFromString("CYAN_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.PURPLE_BUNDLE, GetMaterialFromString("PURPLE_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.BLUE_BUNDLE, GetMaterialFromString("BLUE_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.BROWN_BUNDLE, GetMaterialFromString("BROWN_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.GREEN_BUNDLE, GetMaterialFromString("GREEN_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.RED_BUNDLE, GetMaterialFromString("RED_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.BLACK_BUNDLE, GetMaterialFromString("BLACK_BUNDLE"));
+            versionMaterials.put(GooPVersionMaterials.CREAKING_SPAWN_EGG, GetMaterialFromString("CREAKING_SPAWN_EGG"));
+            versionMaterials.put(GooPVersionMaterials.FIELD_MASONED_BANNER_PATTERN, GetMaterialFromString("FIELD_MASONED_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.BORDURE_INDENTED_BANNER_PATTERN, GetMaterialFromString("BORDURE_INDENTED_BANNER_PATTERN"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_WALL_SIGN, GetMaterialFromString("PALE_OAK_WALL_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.PALE_OAK_WALL_HANGING_SIGN, GetMaterialFromString("PALE_OAK_WALL_HANGING_SIGN"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_PALE_OAK_SAPLING, GetMaterialFromString("POTTED_PALE_OAK_SAPLING"));
         }
         //endregion
 
         //region Minecraft Version 1.21.4+
         if (mcVersion >= 21.4) {
-            versionMaterials.put(GooPVersionMaterials.OPEN_EYEBLOSSOM, Material.OPEN_EYEBLOSSOM);
-            versionMaterials.put(GooPVersionMaterials.CLOSED_EYEBLOSSOM, Material.CLOSED_EYEBLOSSOM);
-            versionMaterials.put(GooPVersionMaterials.RESIN_CLUMP, Material.RESIN_CLUMP);
-            versionMaterials.put(GooPVersionMaterials.RESIN_BLOCK, Material.RESIN_BLOCK);
-            versionMaterials.put(GooPVersionMaterials.RESIN_BRICKS, Material.RESIN_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK_STAIRS, Material.RESIN_BRICK_STAIRS);
-            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK_SLAB, Material.RESIN_BRICK_SLAB);
-            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK_WALL, Material.RESIN_BRICK_WALL);
-            versionMaterials.put(GooPVersionMaterials.CHISELED_RESIN_BRICKS, Material.CHISELED_RESIN_BRICKS);
-            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK, Material.RESIN_BRICK);
-            versionMaterials.put(GooPVersionMaterials.POTTED_OPEN_EYEBLOSSOM, Material.POTTED_OPEN_EYEBLOSSOM);
-            versionMaterials.put(GooPVersionMaterials.POTTED_CLOSED_EYEBLOSSOM, Material.POTTED_CLOSED_EYEBLOSSOM);
+            versionMaterials.put(GooPVersionMaterials.OPEN_EYEBLOSSOM, GetMaterialFromString("OPEN_EYEBLOSSOM"));
+            versionMaterials.put(GooPVersionMaterials.CLOSED_EYEBLOSSOM, GetMaterialFromString("CLOSED_EYEBLOSSOM"));
+            versionMaterials.put(GooPVersionMaterials.RESIN_CLUMP, GetMaterialFromString("RESIN_CLUMP"));
+            versionMaterials.put(GooPVersionMaterials.RESIN_BLOCK, GetMaterialFromString("RESIN_BLOCK"));
+            versionMaterials.put(GooPVersionMaterials.RESIN_BRICKS, GetMaterialFromString("RESIN_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK_STAIRS, GetMaterialFromString("RESIN_BRICK_STAIRS"));
+            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK_SLAB, GetMaterialFromString("RESIN_BRICK_SLAB"));
+            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK_WALL, GetMaterialFromString("RESIN_BRICK_WALL"));
+            versionMaterials.put(GooPVersionMaterials.CHISELED_RESIN_BRICKS, GetMaterialFromString("CHISELED_RESIN_BRICKS"));
+            versionMaterials.put(GooPVersionMaterials.RESIN_BRICK, GetMaterialFromString("RESIN_BRICK"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_OPEN_EYEBLOSSOM, GetMaterialFromString("POTTED_OPEN_EYEBLOSSOM"));
+            versionMaterials.put(GooPVersionMaterials.POTTED_CLOSED_EYEBLOSSOM, GetMaterialFromString("POTTED_CLOSED_EYEBLOSSOM"));
         }
         //endregion
 
@@ -997,7 +997,7 @@ public class GooP_MinecraftVersions {
             if (!versionMaterials.containsKey(gvm)) {
 
                 // Add it as VOID_AIR
-                versionMaterials.put(gvm, Material.VOID_AIR);
+                versionMaterials.put(gvm, GetMaterialFromString("VOID_AIR"));
             }
         }
         //endregion
@@ -1011,31 +1011,31 @@ public class GooP_MinecraftVersions {
 
         //region Minecraft 1.14+
         if (mcVersion >= 14.0) {
-            versionEntityTypes.put(GooPVersionEntities.CAT, EntityType.CAT);
-            versionEntityTypes.put(GooPVersionEntities.PANDA, EntityType.PANDA);
-            versionEntityTypes.put(GooPVersionEntities.PILLAGER, EntityType.PILLAGER);
-            versionEntityTypes.put(GooPVersionEntities.RAVAGER, EntityType.RAVAGER);
-            versionEntityTypes.put(GooPVersionEntities.TRADER_LLAMA, EntityType.TRADER_LLAMA);
-            versionEntityTypes.put(GooPVersionEntities.WANDERING_TRADER, EntityType.WANDERING_TRADER);
-            versionEntityTypes.put(GooPVersionEntities.FOX, EntityType.FOX);
+            versionEntityTypes.put(GooPVersionEntities.CAT, GetEntityTypeFromString("CAT"));
+            versionEntityTypes.put(GooPVersionEntities.PANDA, GetEntityTypeFromString("PANDA"));
+            versionEntityTypes.put(GooPVersionEntities.PILLAGER, GetEntityTypeFromString("PILLAGER"));
+            versionEntityTypes.put(GooPVersionEntities.RAVAGER, GetEntityTypeFromString("RAVAGER"));
+            versionEntityTypes.put(GooPVersionEntities.TRADER_LLAMA, GetEntityTypeFromString("TRADER_LLAMA"));
+            versionEntityTypes.put(GooPVersionEntities.WANDERING_TRADER, GetEntityTypeFromString("WANDERING_TRADER"));
+            versionEntityTypes.put(GooPVersionEntities.FOX, GetEntityTypeFromString("FOX"));
         }
         //endregion
 
         //region Minecraft 1.15+
         if (mcVersion >= 15.0) {
-            versionEntityTypes.put(GooPVersionEntities.BEE, EntityType.BEE);
+            versionEntityTypes.put(GooPVersionEntities.BEE, GetEntityTypeFromString("BEE"));
         }
         //endregion
 
         //region Minecraft 1.16+
         if (mcVersion >= 16.0) {
-            versionEntityTypes.put(GooPVersionEntities.ZOMBIFIED_PIGLIN, EntityType.ZOMBIFIED_PIGLIN);
-            versionEntityTypes.put(GooPVersionEntities.HOGLIN, EntityType.HOGLIN);
-            versionEntityTypes.put(GooPVersionEntities.PIGLIN, EntityType.PIGLIN);
-            versionEntityTypes.put(GooPVersionEntities.STRIDER, EntityType.STRIDER);
-            versionEntityTypes.put(GooPVersionEntities.ZOGLIN, EntityType.ZOGLIN);
+            versionEntityTypes.put(GooPVersionEntities.ZOMBIFIED_PIGLIN, GetEntityTypeFromString("ZOMBIFIED_PIGLIN"));
+            versionEntityTypes.put(GooPVersionEntities.HOGLIN, GetEntityTypeFromString("HOGLIN"));
+            versionEntityTypes.put(GooPVersionEntities.PIGLIN, GetEntityTypeFromString("PIGLIN"));
+            versionEntityTypes.put(GooPVersionEntities.STRIDER, GetEntityTypeFromString("STRIDER"));
+            versionEntityTypes.put(GooPVersionEntities.ZOGLIN, GetEntityTypeFromString("ZOGLIN"));
 
-            versionEntityTypes.put(GooPVersionEntities.PIG_ZOMBIE, EntityType.ZOMBIFIED_PIGLIN);
+            versionEntityTypes.put(GooPVersionEntities.PIG_ZOMBIE, GetEntityTypeFromString("ZOMBIFIED_PIGLIN"));
         }
         //endregion
 
@@ -1049,11 +1049,11 @@ public class GooP_MinecraftVersions {
         //region Minecraft 1.17+
         if (mcVersion >= 17.0) {
             //* YE-OLD-MMO
-            versionEntityTypes.put(GooPVersionEntities.AXOLOTL, EntityType.AXOLOTL);
-            versionEntityTypes.put(GooPVersionEntities.GLOW_ITEM_FRAME, EntityType.GLOW_ITEM_FRAME);
-            versionEntityTypes.put(GooPVersionEntities.GLOW_SQUID, EntityType.GLOW_SQUID);
-            versionEntityTypes.put(GooPVersionEntities.GOAT, EntityType.GOAT);
-            versionEntityTypes.put(GooPVersionEntities.MARKER, EntityType.MARKER);
+            versionEntityTypes.put(GooPVersionEntities.AXOLOTL, GetEntityTypeFromString("AXOLOTL"));
+            versionEntityTypes.put(GooPVersionEntities.GLOW_ITEM_FRAME, GetEntityTypeFromString("GLOW_ITEM_FRAME"));
+            versionEntityTypes.put(GooPVersionEntities.GLOW_SQUID, GetEntityTypeFromString("GLOW_SQUID"));
+            versionEntityTypes.put(GooPVersionEntities.GOAT, GetEntityTypeFromString("GOAT"));
+            versionEntityTypes.put(GooPVersionEntities.MARKER, GetEntityTypeFromString("MARKER"));
             // YE-OLD-MMO */
         }
         //endregion
@@ -1061,80 +1061,80 @@ public class GooP_MinecraftVersions {
         //region Minecraft 1.17+
         if (mcVersion >= 17.0) {
             //* YE-OLD-MMO
-            versionEntityTypes.put(GooPVersionEntities.AXOLOTL, EntityType.AXOLOTL);
-            versionEntityTypes.put(GooPVersionEntities.GLOW_ITEM_FRAME, EntityType.GLOW_ITEM_FRAME);
-            versionEntityTypes.put(GooPVersionEntities.GLOW_SQUID, EntityType.GLOW_SQUID);
-            versionEntityTypes.put(GooPVersionEntities.GOAT, EntityType.GOAT);
-            versionEntityTypes.put(GooPVersionEntities.MARKER, EntityType.MARKER);
+            versionEntityTypes.put(GooPVersionEntities.AXOLOTL, GetEntityTypeFromString("AXOLOTL"));
+            versionEntityTypes.put(GooPVersionEntities.GLOW_ITEM_FRAME, GetEntityTypeFromString("GLOW_ITEM_FRAME"));
+            versionEntityTypes.put(GooPVersionEntities.GLOW_SQUID, GetEntityTypeFromString("GLOW_SQUID"));
+            versionEntityTypes.put(GooPVersionEntities.GOAT, GetEntityTypeFromString("GOAT"));
+            versionEntityTypes.put(GooPVersionEntities.MARKER, GetEntityTypeFromString("MARKER"));
             // YE-OLD-MMO */
         }
         //endregion
 
         //region Minecraft 1.19+
         if (mcVersion >= 19.0) {
-            versionEntityTypes.put(GooPVersionEntities.ALLAY, EntityType.ALLAY);
-            versionEntityTypes.put(GooPVersionEntities.FROG, EntityType.FROG);
-            versionEntityTypes.put(GooPVersionEntities.TADPOLE, EntityType.TADPOLE);
-            versionEntityTypes.put(GooPVersionEntities.WARDEN, EntityType.WARDEN);
+            versionEntityTypes.put(GooPVersionEntities.ALLAY, GetEntityTypeFromString("ALLAY"));
+            versionEntityTypes.put(GooPVersionEntities.FROG, GetEntityTypeFromString("FROG"));
+            versionEntityTypes.put(GooPVersionEntities.TADPOLE, GetEntityTypeFromString("TADPOLE"));
+            versionEntityTypes.put(GooPVersionEntities.WARDEN, GetEntityTypeFromString("WARDEN"));
         }
         //endregion
 
         //region Minecraft 1.19.4+
         if (mcVersion >= 19.4) {
-            versionEntityTypes.put(GooPVersionEntities.CAMEL, EntityType.CAMEL);
-            versionEntityTypes.put(GooPVersionEntities.BLOCK_DISPLAY, EntityType.BLOCK_DISPLAY);
-            versionEntityTypes.put(GooPVersionEntities.INTERACTION, EntityType.INTERACTION);
-            versionEntityTypes.put(GooPVersionEntities.ITEM_DISPLAY, EntityType.ITEM_DISPLAY);
-            versionEntityTypes.put(GooPVersionEntities.SNIFFER, EntityType.SNIFFER);
-            versionEntityTypes.put(GooPVersionEntities.TEXT_DISPLAY, EntityType.TEXT_DISPLAY);
+            versionEntityTypes.put(GooPVersionEntities.CAMEL, GetEntityTypeFromString("CAMEL"));
+            versionEntityTypes.put(GooPVersionEntities.BLOCK_DISPLAY, GetEntityTypeFromString("BLOCK_DISPLAY"));
+            versionEntityTypes.put(GooPVersionEntities.INTERACTION, GetEntityTypeFromString("INTERACTION"));
+            versionEntityTypes.put(GooPVersionEntities.ITEM_DISPLAY, GetEntityTypeFromString("ITEM_DISPLAY"));
+            versionEntityTypes.put(GooPVersionEntities.SNIFFER, GetEntityTypeFromString("SNIFFER"));
+            versionEntityTypes.put(GooPVersionEntities.TEXT_DISPLAY, GetEntityTypeFromString("TEXT_DISPLAY"));
         }
         //endregion
 
         //region Minecraft 1.20.6+
         if (mcVersion >= 20.6) {
-            versionEntityTypes.put(GooPVersionEntities.ITEM, EntityType.ITEM);
-            versionEntityTypes.put(GooPVersionEntities.LEASH_KNOT, EntityType.LEASH_KNOT);
-            versionEntityTypes.put(GooPVersionEntities.EYE_OF_ENDER, EntityType.EYE_OF_ENDER);
-            versionEntityTypes.put(GooPVersionEntities.POTION, EntityType.POTION);
-            versionEntityTypes.put(GooPVersionEntities.EXPERIENCE_BOTTLE, EntityType.EXPERIENCE_BOTTLE);
-            versionEntityTypes.put(GooPVersionEntities.TNT, EntityType.TNT);
-            versionEntityTypes.put(GooPVersionEntities.FIREWORK_ROCKET, EntityType.FIREWORK_ROCKET);
-            versionEntityTypes.put(GooPVersionEntities.COMMAND_BLOCK_MINECART, EntityType.COMMAND_BLOCK_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.CHEST_MINECART, EntityType.CHEST_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.FURNACE_MINECART, EntityType.FURNACE_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.TNT_MINECART, EntityType.TNT_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.HOPPER_MINECART, EntityType.HOPPER_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.SPAWNER_MINECART, EntityType.SPAWNER_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.MOOSHROOM, EntityType.MOOSHROOM);
-            versionEntityTypes.put(GooPVersionEntities.SNOW_GOLEM, EntityType.SNOW_GOLEM);
-            versionEntityTypes.put(GooPVersionEntities.END_CRYSTAL, EntityType.END_CRYSTAL);
-            versionEntityTypes.put(GooPVersionEntities.FISHING_BOBBER, EntityType.FISHING_BOBBER);
-            versionEntityTypes.put(GooPVersionEntities.LIGHTNING_BOLT, EntityType.LIGHTNING_BOLT);
-            versionEntityTypes.put(GooPVersionEntities.BREEZE, EntityType.BREEZE);
-            versionEntityTypes.put(GooPVersionEntities.WIND_CHARGE, EntityType.WIND_CHARGE);
-            versionEntityTypes.put(GooPVersionEntities.BREEZE_WIND_CHARGE, EntityType.BREEZE_WIND_CHARGE);
-            versionEntityTypes.put(GooPVersionEntities.ARMADILLO, EntityType.ARMADILLO);
-            versionEntityTypes.put(GooPVersionEntities.BOGGED, EntityType.BOGGED);
-            versionEntityTypes.put(GooPVersionEntities.OMINOUS_ITEM_SPAWNER, EntityType.OMINOUS_ITEM_SPAWNER);
+            versionEntityTypes.put(GooPVersionEntities.ITEM, GetEntityTypeFromString("ITEM"));
+            versionEntityTypes.put(GooPVersionEntities.LEASH_KNOT, GetEntityTypeFromString("LEASH_KNOT"));
+            versionEntityTypes.put(GooPVersionEntities.EYE_OF_ENDER, GetEntityTypeFromString("EYE_OF_ENDER"));
+            versionEntityTypes.put(GooPVersionEntities.POTION, GetEntityTypeFromString("POTION"));
+            versionEntityTypes.put(GooPVersionEntities.EXPERIENCE_BOTTLE, GetEntityTypeFromString("EXPERIENCE_BOTTLE"));
+            versionEntityTypes.put(GooPVersionEntities.TNT, GetEntityTypeFromString("TNT"));
+            versionEntityTypes.put(GooPVersionEntities.FIREWORK_ROCKET, GetEntityTypeFromString("FIREWORK_ROCKET"));
+            versionEntityTypes.put(GooPVersionEntities.COMMAND_BLOCK_MINECART, GetEntityTypeFromString("COMMAND_BLOCK_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.CHEST_MINECART, GetEntityTypeFromString("CHEST_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.FURNACE_MINECART, GetEntityTypeFromString("FURNACE_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.TNT_MINECART, GetEntityTypeFromString("TNT_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.HOPPER_MINECART, GetEntityTypeFromString("HOPPER_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.SPAWNER_MINECART, GetEntityTypeFromString("SPAWNER_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.MOOSHROOM, GetEntityTypeFromString("MOOSHROOM"));
+            versionEntityTypes.put(GooPVersionEntities.SNOW_GOLEM, GetEntityTypeFromString("SNOW_GOLEM"));
+            versionEntityTypes.put(GooPVersionEntities.END_CRYSTAL, GetEntityTypeFromString("END_CRYSTAL"));
+            versionEntityTypes.put(GooPVersionEntities.FISHING_BOBBER, GetEntityTypeFromString("FISHING_BOBBER"));
+            versionEntityTypes.put(GooPVersionEntities.LIGHTNING_BOLT, GetEntityTypeFromString("LIGHTNING_BOLT"));
+            versionEntityTypes.put(GooPVersionEntities.BREEZE, GetEntityTypeFromString("BREEZE"));
+            versionEntityTypes.put(GooPVersionEntities.WIND_CHARGE, GetEntityTypeFromString("WIND_CHARGE"));
+            versionEntityTypes.put(GooPVersionEntities.BREEZE_WIND_CHARGE, GetEntityTypeFromString("BREEZE_WIND_CHARGE"));
+            versionEntityTypes.put(GooPVersionEntities.ARMADILLO, GetEntityTypeFromString("ARMADILLO"));
+            versionEntityTypes.put(GooPVersionEntities.BOGGED, GetEntityTypeFromString("BOGGED"));
+            versionEntityTypes.put(GooPVersionEntities.OMINOUS_ITEM_SPAWNER, GetEntityTypeFromString("OMINOUS_ITEM_SPAWNER"));
 
-            versionEntityTypes.put(GooPVersionEntities.LIGHTNING, EntityType.LIGHTNING_BOLT);
-            versionEntityTypes.put(GooPVersionEntities.FISHING_HOOK, EntityType.FISHING_BOBBER);
-            versionEntityTypes.put(GooPVersionEntities.ENDER_CRYSTAL, EntityType.END_CRYSTAL);
-            versionEntityTypes.put(GooPVersionEntities.SNOWMAN, EntityType.SNOW_GOLEM);
-            versionEntityTypes.put(GooPVersionEntities.MUSHROOM_COW, EntityType.MOOSHROOM);
-            versionEntityTypes.put(GooPVersionEntities.MINECART_MOB_SPAWNER, EntityType.SPAWNER_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.MINECART_HOPPER, EntityType.HOPPER_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.MINECART_TNT, EntityType.TNT_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.MINECART_FURNACE, EntityType.FURNACE_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.MINECART_CHEST, EntityType.CHEST_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.MINECART_COMMAND, EntityType.COMMAND_BLOCK_MINECART);
-            versionEntityTypes.put(GooPVersionEntities.FIREWORK, EntityType.FIREWORK_ROCKET);
-            versionEntityTypes.put(GooPVersionEntities.PRIMED_TNT, EntityType.TNT);
-            versionEntityTypes.put(GooPVersionEntities.THROWN_EXP_BOTTLE, EntityType.EXPERIENCE_BOTTLE);
-            versionEntityTypes.put(GooPVersionEntities.SPLASH_POTION, EntityType.POTION);
-            versionEntityTypes.put(GooPVersionEntities.ENDER_SIGNAL, EntityType.EYE_OF_ENDER);
-            versionEntityTypes.put(GooPVersionEntities.LEASH_HITCH, EntityType.LEASH_KNOT);
-            versionEntityTypes.put(GooPVersionEntities.DROPPED_ITEM, EntityType.ITEM);
+            versionEntityTypes.put(GooPVersionEntities.LIGHTNING, GetEntityTypeFromString("LIGHTNING_BOLT"));
+            versionEntityTypes.put(GooPVersionEntities.FISHING_HOOK, GetEntityTypeFromString("FISHING_BOBBER"));
+            versionEntityTypes.put(GooPVersionEntities.ENDER_CRYSTAL, GetEntityTypeFromString("END_CRYSTAL"));
+            versionEntityTypes.put(GooPVersionEntities.SNOWMAN, GetEntityTypeFromString("SNOW_GOLEM"));
+            versionEntityTypes.put(GooPVersionEntities.MUSHROOM_COW, GetEntityTypeFromString("MOOSHROOM"));
+            versionEntityTypes.put(GooPVersionEntities.MINECART_MOB_SPAWNER, GetEntityTypeFromString("SPAWNER_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.MINECART_HOPPER, GetEntityTypeFromString("HOPPER_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.MINECART_TNT, GetEntityTypeFromString("TNT_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.MINECART_FURNACE, GetEntityTypeFromString("FURNACE_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.MINECART_CHEST, GetEntityTypeFromString("CHEST_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.MINECART_COMMAND, GetEntityTypeFromString("COMMAND_BLOCK_MINECART"));
+            versionEntityTypes.put(GooPVersionEntities.FIREWORK, GetEntityTypeFromString("FIREWORK_ROCKET"));
+            versionEntityTypes.put(GooPVersionEntities.PRIMED_TNT, GetEntityTypeFromString("TNT"));
+            versionEntityTypes.put(GooPVersionEntities.THROWN_EXP_BOTTLE, GetEntityTypeFromString("EXPERIENCE_BOTTLE"));
+            versionEntityTypes.put(GooPVersionEntities.SPLASH_POTION, GetEntityTypeFromString("POTION"));
+            versionEntityTypes.put(GooPVersionEntities.ENDER_SIGNAL, GetEntityTypeFromString("EYE_OF_ENDER"));
+            versionEntityTypes.put(GooPVersionEntities.LEASH_HITCH, GetEntityTypeFromString("LEASH_KNOT"));
+            versionEntityTypes.put(GooPVersionEntities.DROPPED_ITEM, GetEntityTypeFromString("ITEM"));
         }
         //endregion
 
@@ -1182,30 +1182,30 @@ public class GooP_MinecraftVersions {
 
         //region Minecraft 1.21.3+
         if (mcVersion >= 21.3) {
-            versionEntityTypes.put(GooPVersionEntities.OAK_BOAT, EntityType.OAK_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.OAK_CHEST_BOAT, EntityType.OAK_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.ACACIA_BOAT, EntityType.ACACIA_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.ACACIA_CHEST_BOAT, EntityType.ACACIA_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.BAMBOO_RAFT, EntityType.BAMBOO_RAFT);
-            versionEntityTypes.put(GooPVersionEntities.BAMBOO_CHEST_RAFT, EntityType.BAMBOO_CHEST_RAFT);
-            versionEntityTypes.put(GooPVersionEntities.BIRCH_BOAT, EntityType.BIRCH_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.BIRCH_CHEST_BOAT, EntityType.BIRCH_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.CHERRY_BOAT, EntityType.CHERRY_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.CHERRY_CHEST_BOAT, EntityType.CHERRY_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.DARK_OAK_BOAT, EntityType.DARK_OAK_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.DARK_OAK_CHEST_BOAT, EntityType.DARK_OAK_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.JUNGLE_BOAT, EntityType.JUNGLE_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.JUNGLE_CHEST_BOAT, EntityType.JUNGLE_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.MANGROVE_BOAT, EntityType.MANGROVE_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.MANGROVE_CHEST_BOAT, EntityType.MANGROVE_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.PALE_OAK_BOAT, EntityType.PALE_OAK_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.PALE_OAK_CHEST_BOAT, EntityType.PALE_OAK_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.SPRUCE_BOAT, EntityType.SPRUCE_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.SPRUCE_CHEST_BOAT, EntityType.SPRUCE_CHEST_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.CREAKING, EntityType.CREAKING);
+            versionEntityTypes.put(GooPVersionEntities.OAK_BOAT, GetEntityTypeFromString("OAK_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.OAK_CHEST_BOAT, GetEntityTypeFromString("OAK_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.ACACIA_BOAT, GetEntityTypeFromString("ACACIA_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.ACACIA_CHEST_BOAT, GetEntityTypeFromString("ACACIA_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.BAMBOO_RAFT, GetEntityTypeFromString("BAMBOO_RAFT"));
+            versionEntityTypes.put(GooPVersionEntities.BAMBOO_CHEST_RAFT, GetEntityTypeFromString("BAMBOO_CHEST_RAFT"));
+            versionEntityTypes.put(GooPVersionEntities.BIRCH_BOAT, GetEntityTypeFromString("BIRCH_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.BIRCH_CHEST_BOAT, GetEntityTypeFromString("BIRCH_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.CHERRY_BOAT, GetEntityTypeFromString("CHERRY_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.CHERRY_CHEST_BOAT, GetEntityTypeFromString("CHERRY_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.DARK_OAK_BOAT, GetEntityTypeFromString("DARK_OAK_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.DARK_OAK_CHEST_BOAT, GetEntityTypeFromString("DARK_OAK_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.JUNGLE_BOAT, GetEntityTypeFromString("JUNGLE_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.JUNGLE_CHEST_BOAT, GetEntityTypeFromString("JUNGLE_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.MANGROVE_BOAT, GetEntityTypeFromString("MANGROVE_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.MANGROVE_CHEST_BOAT, GetEntityTypeFromString("MANGROVE_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.PALE_OAK_BOAT, GetEntityTypeFromString("PALE_OAK_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.PALE_OAK_CHEST_BOAT, GetEntityTypeFromString("PALE_OAK_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.SPRUCE_BOAT, GetEntityTypeFromString("SPRUCE_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.SPRUCE_CHEST_BOAT, GetEntityTypeFromString("SPRUCE_CHEST_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.CREAKING, GetEntityTypeFromString("CREAKING"));
 
-            versionEntityTypes.put(GooPVersionEntities.BOAT, EntityType.OAK_BOAT);
-            versionEntityTypes.put(GooPVersionEntities.CHEST_BOAT, EntityType.OAK_CHEST_BOAT);
+            versionEntityTypes.put(GooPVersionEntities.BOAT, GetEntityTypeFromString("OAK_BOAT"));
+            versionEntityTypes.put(GooPVersionEntities.CHEST_BOAT, GetEntityTypeFromString("OAK_CHEST_BOAT"));
         }
         //endregion
 
@@ -1233,7 +1233,7 @@ public class GooP_MinecraftVersions {
             if (!versionEntityTypes.containsKey(gvm)) {
 
                 // Add it as UNKNOWN
-                versionEntityTypes.put(gvm, EntityType.UNKNOWN);
+                versionEntityTypes.put(gvm, GetEntityTypeFromString("UNKNOWN"));
             }
         }
         //endregion
@@ -1241,68 +1241,68 @@ public class GooP_MinecraftVersions {
         //region Enchantments
         //region Minecraft 1.14+
         if (mcVersion >= 14.0) {
-            versionEnchantments.put(GooPVersionEnchantments.MULTISHOT, Enchantment.MULTISHOT);
-            versionEnchantments.put(GooPVersionEnchantments.QUICK_CHARGE, Enchantment.QUICK_CHARGE);
-            versionEnchantments.put(GooPVersionEnchantments.PIERCING, Enchantment.PIERCING);
+            versionEnchantments.put(GooPVersionEnchantments.MULTISHOT, GetEnchantmentFromString("MULTISHOT"));
+            versionEnchantments.put(GooPVersionEnchantments.QUICK_CHARGE, GetEnchantmentFromString("QUICK_CHARGE"));
+            versionEnchantments.put(GooPVersionEnchantments.PIERCING, GetEnchantmentFromString("PIERCING"));
         }
         //endregion
 
         //region Minecraft 1.16+
         if (mcVersion >= 16.0) {
-            versionEnchantments.put(GooPVersionEnchantments.SOUL_SPEED, Enchantment.SOUL_SPEED);
+            versionEnchantments.put(GooPVersionEnchantments.SOUL_SPEED, GetEnchantmentFromString("SOUL_SPEED"));
         }
         //endregion
 
         //region Minecraft 1.19+
         if (mcVersion >= 19.0) {
-            versionEnchantments.put(GooPVersionEnchantments.SWIFT_SNEAK, Enchantment.SWIFT_SNEAK);
+            versionEnchantments.put(GooPVersionEnchantments.SWIFT_SNEAK, GetEnchantmentFromString("SWIFT_SNEAK"));
         }
         //endregion
 
         //region Minecraft 1.20.6+
         if (mcVersion >= 20.6) {
-            versionEnchantments.put(GooPVersionEnchantments.PROTECTION, Enchantment.PROTECTION);
-            versionEnchantments.put(GooPVersionEnchantments.FIRE_PROTECTION, Enchantment.FIRE_PROTECTION);
-            versionEnchantments.put(GooPVersionEnchantments.FEATHER_FALLING, Enchantment.FEATHER_FALLING);
-            versionEnchantments.put(GooPVersionEnchantments.BLAST_PROTECTION, Enchantment.BLAST_PROTECTION);
-            versionEnchantments.put(GooPVersionEnchantments.PROJECTILE_PROTECTION, Enchantment.PROJECTILE_PROTECTION);
-            versionEnchantments.put(GooPVersionEnchantments.RESPIRATION, Enchantment.RESPIRATION);
-            versionEnchantments.put(GooPVersionEnchantments.AQUA_AFFINITY, Enchantment.AQUA_AFFINITY);
-            versionEnchantments.put(GooPVersionEnchantments.SHARPNESS, Enchantment.SHARPNESS);
-            versionEnchantments.put(GooPVersionEnchantments.SMITE, Enchantment.SMITE);
-            versionEnchantments.put(GooPVersionEnchantments.BANE_OF_ARTHROPODS, Enchantment.BANE_OF_ARTHROPODS);
-            versionEnchantments.put(GooPVersionEnchantments.LOOTING, Enchantment.LOOTING);
-            versionEnchantments.put(GooPVersionEnchantments.EFFICIENCY, Enchantment.EFFICIENCY);
-            versionEnchantments.put(GooPVersionEnchantments.UNBREAKING, Enchantment.UNBREAKING);
-            versionEnchantments.put(GooPVersionEnchantments.FORTUNE, Enchantment.FORTUNE);
-            versionEnchantments.put(GooPVersionEnchantments.POWER, Enchantment.POWER);
-            versionEnchantments.put(GooPVersionEnchantments.PUNCH, Enchantment.PUNCH);
-            versionEnchantments.put(GooPVersionEnchantments.FLAME, Enchantment.FLAME);
-            versionEnchantments.put(GooPVersionEnchantments.INFINITY, Enchantment.INFINITY);
-            versionEnchantments.put(GooPVersionEnchantments.LUCK_OF_THE_SEA, Enchantment.LUCK_OF_THE_SEA);
-            versionEnchantments.put(GooPVersionEnchantments.DENSITY, Enchantment.DENSITY);
-            versionEnchantments.put(GooPVersionEnchantments.BREACH, Enchantment.BREACH);
-            versionEnchantments.put(GooPVersionEnchantments.WIND_BURST, Enchantment.WIND_BURST);
+            versionEnchantments.put(GooPVersionEnchantments.PROTECTION, GetEnchantmentFromString("PROTECTION"));
+            versionEnchantments.put(GooPVersionEnchantments.FIRE_PROTECTION, GetEnchantmentFromString("FIRE_PROTECTION"));
+            versionEnchantments.put(GooPVersionEnchantments.FEATHER_FALLING, GetEnchantmentFromString("FEATHER_FALLING"));
+            versionEnchantments.put(GooPVersionEnchantments.BLAST_PROTECTION, GetEnchantmentFromString("BLAST_PROTECTION"));
+            versionEnchantments.put(GooPVersionEnchantments.PROJECTILE_PROTECTION, GetEnchantmentFromString("PROJECTILE_PROTECTION"));
+            versionEnchantments.put(GooPVersionEnchantments.RESPIRATION, GetEnchantmentFromString("RESPIRATION"));
+            versionEnchantments.put(GooPVersionEnchantments.AQUA_AFFINITY, GetEnchantmentFromString("AQUA_AFFINITY"));
+            versionEnchantments.put(GooPVersionEnchantments.SHARPNESS, GetEnchantmentFromString("SHARPNESS"));
+            versionEnchantments.put(GooPVersionEnchantments.SMITE, GetEnchantmentFromString("SMITE"));
+            versionEnchantments.put(GooPVersionEnchantments.BANE_OF_ARTHROPODS, GetEnchantmentFromString("BANE_OF_ARTHROPODS"));
+            versionEnchantments.put(GooPVersionEnchantments.LOOTING, GetEnchantmentFromString("LOOTING"));
+            versionEnchantments.put(GooPVersionEnchantments.EFFICIENCY, GetEnchantmentFromString("EFFICIENCY"));
+            versionEnchantments.put(GooPVersionEnchantments.UNBREAKING, GetEnchantmentFromString("UNBREAKING"));
+            versionEnchantments.put(GooPVersionEnchantments.FORTUNE, GetEnchantmentFromString("FORTUNE"));
+            versionEnchantments.put(GooPVersionEnchantments.POWER, GetEnchantmentFromString("POWER"));
+            versionEnchantments.put(GooPVersionEnchantments.PUNCH, GetEnchantmentFromString("PUNCH"));
+            versionEnchantments.put(GooPVersionEnchantments.FLAME, GetEnchantmentFromString("FLAME"));
+            versionEnchantments.put(GooPVersionEnchantments.INFINITY, GetEnchantmentFromString("INFINITY"));
+            versionEnchantments.put(GooPVersionEnchantments.LUCK_OF_THE_SEA, GetEnchantmentFromString("LUCK_OF_THE_SEA"));
+            versionEnchantments.put(GooPVersionEnchantments.DENSITY, GetEnchantmentFromString("DENSITY"));
+            versionEnchantments.put(GooPVersionEnchantments.BREACH, GetEnchantmentFromString("BREACH"));
+            versionEnchantments.put(GooPVersionEnchantments.WIND_BURST, GetEnchantmentFromString("WIND_BURST"));
 
-            versionEnchantments.put(GooPVersionEnchantments.LUCK, Enchantment.LUCK_OF_THE_SEA);
-            versionEnchantments.put(GooPVersionEnchantments.ARROW_INFINITE, Enchantment.INFINITY);
-            versionEnchantments.put(GooPVersionEnchantments.ARROW_FIRE, Enchantment.FLAME);
-            versionEnchantments.put(GooPVersionEnchantments.ARROW_KNOCKBACK, Enchantment.PUNCH);
-            versionEnchantments.put(GooPVersionEnchantments.ARROW_DAMAGE, Enchantment.POWER);
-            versionEnchantments.put(GooPVersionEnchantments.LOOT_BONUS_BLOCKS, Enchantment.FORTUNE);
-            versionEnchantments.put(GooPVersionEnchantments.DURABILITY, Enchantment.UNBREAKING);
-            versionEnchantments.put(GooPVersionEnchantments.DIG_SPEED, Enchantment.EFFICIENCY);
-            versionEnchantments.put(GooPVersionEnchantments.LOOT_BONUS_MOBS, Enchantment.LOOTING);
-            versionEnchantments.put(GooPVersionEnchantments.DAMAGE_ARTHROPODS, Enchantment.BANE_OF_ARTHROPODS);
-            versionEnchantments.put(GooPVersionEnchantments.DAMAGE_UNDEAD, Enchantment.SMITE);
-            versionEnchantments.put(GooPVersionEnchantments.DAMAGE_ALL, Enchantment.SHARPNESS);
-            versionEnchantments.put(GooPVersionEnchantments.WATER_WORKER, Enchantment.AQUA_AFFINITY);
-            versionEnchantments.put(GooPVersionEnchantments.OXYGEN, Enchantment.RESPIRATION);
-            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_PROJECTILE, Enchantment.PROJECTILE_PROTECTION);
-            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_EXPLOSIONS, Enchantment.BLAST_PROTECTION);
-            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_FALL, Enchantment.FEATHER_FALLING);
-            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_FIRE, Enchantment.FIRE_PROTECTION);
-            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL, Enchantment.PROTECTION);
+            versionEnchantments.put(GooPVersionEnchantments.LUCK, GetEnchantmentFromString("LUCK_OF_THE_SEA"));
+            versionEnchantments.put(GooPVersionEnchantments.ARROW_INFINITE, GetEnchantmentFromString("INFINITY"));
+            versionEnchantments.put(GooPVersionEnchantments.ARROW_FIRE, GetEnchantmentFromString("FLAME"));
+            versionEnchantments.put(GooPVersionEnchantments.ARROW_KNOCKBACK, GetEnchantmentFromString("PUNCH"));
+            versionEnchantments.put(GooPVersionEnchantments.ARROW_DAMAGE, GetEnchantmentFromString("POWER"));
+            versionEnchantments.put(GooPVersionEnchantments.LOOT_BONUS_BLOCKS, GetEnchantmentFromString("FORTUNE"));
+            versionEnchantments.put(GooPVersionEnchantments.DURABILITY, GetEnchantmentFromString("UNBREAKING"));
+            versionEnchantments.put(GooPVersionEnchantments.DIG_SPEED, GetEnchantmentFromString("EFFICIENCY"));
+            versionEnchantments.put(GooPVersionEnchantments.LOOT_BONUS_MOBS, GetEnchantmentFromString("LOOTING"));
+            versionEnchantments.put(GooPVersionEnchantments.DAMAGE_ARTHROPODS, GetEnchantmentFromString("BANE_OF_ARTHROPODS"));
+            versionEnchantments.put(GooPVersionEnchantments.DAMAGE_UNDEAD, GetEnchantmentFromString("SMITE"));
+            versionEnchantments.put(GooPVersionEnchantments.DAMAGE_ALL, GetEnchantmentFromString("SHARPNESS"));
+            versionEnchantments.put(GooPVersionEnchantments.WATER_WORKER, GetEnchantmentFromString("AQUA_AFFINITY"));
+            versionEnchantments.put(GooPVersionEnchantments.OXYGEN, GetEnchantmentFromString("RESPIRATION"));
+            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_PROJECTILE, GetEnchantmentFromString("PROJECTILE_PROTECTION"));
+            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_EXPLOSIONS, GetEnchantmentFromString("BLAST_PROTECTION"));
+            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_FALL, GetEnchantmentFromString("FEATHER_FALLING"));
+            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_FIRE, GetEnchantmentFromString("FIRE_PROTECTION"));
+            versionEnchantments.put(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL, GetEnchantmentFromString("PROTECTION"));
         }
         //endregion
 
@@ -1365,51 +1365,51 @@ public class GooP_MinecraftVersions {
         //region Attributes
         //region Minecraft 1.20.6+
         if (mcVersion >= 20.6) {
-            versionAttributes.put(GooPVersionAttributes.GENERIC_MAX_HEALTH, Attribute.MAX_HEALTH);
-            versionAttributes.put(GooPVersionAttributes.MAX_HEALTH, Attribute.MAX_HEALTH);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_FOLLOW_RANGE, Attribute.FOLLOW_RANGE);
-            versionAttributes.put(GooPVersionAttributes.FOLLOW_RANGE, Attribute.FOLLOW_RANGE);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_KNOCKBACK_RESISTANCE, Attribute.KNOCKBACK_RESISTANCE);
-            versionAttributes.put(GooPVersionAttributes.KNOCKBACK_RESISTANCE, Attribute.KNOCKBACK_RESISTANCE);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_MOVEMENT_SPEED, Attribute.MOVEMENT_SPEED);
-            versionAttributes.put(GooPVersionAttributes.MOVEMENT_SPEED, Attribute.MOVEMENT_SPEED);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_FLYING_SPEED, Attribute.FLYING_SPEED);
-            versionAttributes.put(GooPVersionAttributes.FLYING_SPEED, Attribute.FLYING_SPEED);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_ATTACK_DAMAGE, Attribute.ATTACK_DAMAGE);
-            versionAttributes.put(GooPVersionAttributes.ATTACK_DAMAGE, Attribute.ATTACK_DAMAGE);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_ATTACK_KNOCKBACK, Attribute.ATTACK_KNOCKBACK);
-            versionAttributes.put(GooPVersionAttributes.ATTACK_KNOCKBACK, Attribute.ATTACK_KNOCKBACK);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_ATTACK_SPEED, Attribute.ATTACK_SPEED);
-            versionAttributes.put(GooPVersionAttributes.ATTACK_SPEED, Attribute.ATTACK_SPEED);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_ARMOR, Attribute.ARMOR);
-            versionAttributes.put(GooPVersionAttributes.ARMOR, Attribute.ARMOR);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_ARMOR_TOUGHNESS, Attribute.ARMOR_TOUGHNESS);
-            versionAttributes.put(GooPVersionAttributes.ARMOR_TOUGHNESS, Attribute.ARMOR_TOUGHNESS);
-            versionAttributes.put(GooPVersionAttributes.FALL_DAMAGE_MULTIPLIER, Attribute.FALL_DAMAGE_MULTIPLIER);
-            versionAttributes.put(GooPVersionAttributes.GENERIC_LUCK, Attribute.LUCK);
-            versionAttributes.put(GooPVersionAttributes.LUCK, Attribute.LUCK);
-            versionAttributes.put(GooPVersionAttributes.MAX_ABSORPTION, Attribute.MAX_ABSORPTION);
-            versionAttributes.put(GooPVersionAttributes.SAFE_FALL_DISTANCE, Attribute.SAFE_FALL_DISTANCE);
-            versionAttributes.put(GooPVersionAttributes.SCALE, Attribute.SCALE);
-            versionAttributes.put(GooPVersionAttributes.STEP_HEIGHT, Attribute.STEP_HEIGHT);
-            versionAttributes.put(GooPVersionAttributes.GRAVITY, Attribute.GRAVITY);
-            versionAttributes.put(GooPVersionAttributes.HORSE_JUMP_STRENGTH, Attribute.JUMP_STRENGTH);
-            versionAttributes.put(GooPVersionAttributes.JUMP_STRENGTH, Attribute.JUMP_STRENGTH);
-            versionAttributes.put(GooPVersionAttributes.BURNING_TIME, Attribute.BURNING_TIME);
-            versionAttributes.put(GooPVersionAttributes.EXPLOSION_KNOCKBACK_RESISTANCE, Attribute.EXPLOSION_KNOCKBACK_RESISTANCE);
-            versionAttributes.put(GooPVersionAttributes.MOVEMENT_EFFICIENCY, Attribute.MOVEMENT_EFFICIENCY);
-            versionAttributes.put(GooPVersionAttributes.OXYGEN_BONUS, Attribute.OXYGEN_BONUS);
-            versionAttributes.put(GooPVersionAttributes.WATER_MOVEMENT_EFFICIENCY, Attribute.WATER_MOVEMENT_EFFICIENCY);
-            versionAttributes.put(GooPVersionAttributes.TEMPT_RANGE, Attribute.TEMPT_RANGE);
-            versionAttributes.put(GooPVersionAttributes.BLOCK_INTERACTION_RANGE, Attribute.BLOCK_INTERACTION_RANGE);
-            versionAttributes.put(GooPVersionAttributes.ENTITY_INTERACTION_RANGE, Attribute.ENTITY_INTERACTION_RANGE);
-            versionAttributes.put(GooPVersionAttributes.BLOCK_BREAK_SPEED, Attribute.BLOCK_BREAK_SPEED);
-            versionAttributes.put(GooPVersionAttributes.MINING_EFFICIENCY, Attribute.MINING_EFFICIENCY);
-            versionAttributes.put(GooPVersionAttributes.SNEAKING_SPEED, Attribute.SNEAKING_SPEED);
-            versionAttributes.put(GooPVersionAttributes.SUBMERGED_MINING_SPEED, Attribute.SUBMERGED_MINING_SPEED);
-            versionAttributes.put(GooPVersionAttributes.SWEEPING_DAMAGE_RATIO, Attribute.SWEEPING_DAMAGE_RATIO);
-            versionAttributes.put(GooPVersionAttributes.ZOMBIE_SPAWN_REINFORCEMENTS, Attribute.SPAWN_REINFORCEMENTS);
-            versionAttributes.put(GooPVersionAttributes.SPAWN_REINFORCEMENTS, Attribute.SPAWN_REINFORCEMENTS);
+            versionAttributes.put(GooPVersionAttributes.GENERIC_MAX_HEALTH, GetAttributeFromString("MAX_HEALTH"));
+            versionAttributes.put(GooPVersionAttributes.MAX_HEALTH, GetAttributeFromString("MAX_HEALTH"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_FOLLOW_RANGE, GetAttributeFromString("FOLLOW_RANGE"));
+            versionAttributes.put(GooPVersionAttributes.FOLLOW_RANGE, GetAttributeFromString("FOLLOW_RANGE"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_KNOCKBACK_RESISTANCE, GetAttributeFromString("KNOCKBACK_RESISTANCE"));
+            versionAttributes.put(GooPVersionAttributes.KNOCKBACK_RESISTANCE, GetAttributeFromString("KNOCKBACK_RESISTANCE"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_MOVEMENT_SPEED, GetAttributeFromString("MOVEMENT_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.MOVEMENT_SPEED, GetAttributeFromString("MOVEMENT_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_FLYING_SPEED, GetAttributeFromString("FLYING_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.FLYING_SPEED, GetAttributeFromString("FLYING_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_ATTACK_DAMAGE, GetAttributeFromString("ATTACK_DAMAGE"));
+            versionAttributes.put(GooPVersionAttributes.ATTACK_DAMAGE, GetAttributeFromString("ATTACK_DAMAGE"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_ATTACK_KNOCKBACK, GetAttributeFromString("ATTACK_KNOCKBACK"));
+            versionAttributes.put(GooPVersionAttributes.ATTACK_KNOCKBACK, GetAttributeFromString("ATTACK_KNOCKBACK"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_ATTACK_SPEED, GetAttributeFromString("ATTACK_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.ATTACK_SPEED, GetAttributeFromString("ATTACK_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_ARMOR, GetAttributeFromString("ARMOR"));
+            versionAttributes.put(GooPVersionAttributes.ARMOR, GetAttributeFromString("ARMOR"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_ARMOR_TOUGHNESS, GetAttributeFromString("ARMOR_TOUGHNESS"));
+            versionAttributes.put(GooPVersionAttributes.ARMOR_TOUGHNESS, GetAttributeFromString("ARMOR_TOUGHNESS"));
+            versionAttributes.put(GooPVersionAttributes.FALL_DAMAGE_MULTIPLIER, GetAttributeFromString("FALL_DAMAGE_MULTIPLIER"));
+            versionAttributes.put(GooPVersionAttributes.GENERIC_LUCK, GetAttributeFromString("LUCK"));
+            versionAttributes.put(GooPVersionAttributes.LUCK, GetAttributeFromString("LUCK"));
+            versionAttributes.put(GooPVersionAttributes.MAX_ABSORPTION, GetAttributeFromString("MAX_ABSORPTION"));
+            versionAttributes.put(GooPVersionAttributes.SAFE_FALL_DISTANCE, GetAttributeFromString("SAFE_FALL_DISTANCE"));
+            versionAttributes.put(GooPVersionAttributes.SCALE, GetAttributeFromString("SCALE"));
+            versionAttributes.put(GooPVersionAttributes.STEP_HEIGHT, GetAttributeFromString("STEP_HEIGHT"));
+            versionAttributes.put(GooPVersionAttributes.GRAVITY, GetAttributeFromString("GRAVITY"));
+            versionAttributes.put(GooPVersionAttributes.HORSE_JUMP_STRENGTH, GetAttributeFromString("JUMP_STRENGTH"));
+            versionAttributes.put(GooPVersionAttributes.JUMP_STRENGTH, GetAttributeFromString("JUMP_STRENGTH"));
+            versionAttributes.put(GooPVersionAttributes.BURNING_TIME, GetAttributeFromString("BURNING_TIME"));
+            versionAttributes.put(GooPVersionAttributes.EXPLOSION_KNOCKBACK_RESISTANCE, GetAttributeFromString("EXPLOSION_KNOCKBACK_RESISTANCE"));
+            versionAttributes.put(GooPVersionAttributes.MOVEMENT_EFFICIENCY, GetAttributeFromString("MOVEMENT_EFFICIENCY"));
+            versionAttributes.put(GooPVersionAttributes.OXYGEN_BONUS, GetAttributeFromString("OXYGEN_BONUS"));
+            versionAttributes.put(GooPVersionAttributes.WATER_MOVEMENT_EFFICIENCY, GetAttributeFromString("WATER_MOVEMENT_EFFICIENCY"));
+            versionAttributes.put(GooPVersionAttributes.TEMPT_RANGE, GetAttributeFromString("TEMPT_RANGE"));
+            versionAttributes.put(GooPVersionAttributes.BLOCK_INTERACTION_RANGE, GetAttributeFromString("BLOCK_INTERACTION_RANGE"));
+            versionAttributes.put(GooPVersionAttributes.ENTITY_INTERACTION_RANGE, GetAttributeFromString("ENTITY_INTERACTION_RANGE"));
+            versionAttributes.put(GooPVersionAttributes.BLOCK_BREAK_SPEED, GetAttributeFromString("BLOCK_BREAK_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.MINING_EFFICIENCY, GetAttributeFromString("MINING_EFFICIENCY"));
+            versionAttributes.put(GooPVersionAttributes.SNEAKING_SPEED, GetAttributeFromString("SNEAKING_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.SUBMERGED_MINING_SPEED, GetAttributeFromString("SUBMERGED_MINING_SPEED"));
+            versionAttributes.put(GooPVersionAttributes.SWEEPING_DAMAGE_RATIO, GetAttributeFromString("SWEEPING_DAMAGE_RATIO"));
+            versionAttributes.put(GooPVersionAttributes.ZOMBIE_SPAWN_REINFORCEMENTS, GetAttributeFromString("SPAWN_REINFORCEMENTS"));
+            versionAttributes.put(GooPVersionAttributes.SPAWN_REINFORCEMENTS, GetAttributeFromString("SPAWN_REINFORCEMENTS"));
         }
         //endregion
 
@@ -1448,44 +1448,44 @@ public class GooP_MinecraftVersions {
         //region Potion Effects
         //region Minecraft 1.14.4+
         if (mcVersion >= 14.4) {
-            versionPotionEffects.put(GooPVersionPotionEffects.BAD_OMEN, PotionEffectType.BAD_OMEN);
-            versionPotionEffects.put(GooPVersionPotionEffects.HERO_OF_THE_VILLAGE, PotionEffectType.HERO_OF_THE_VILLAGE);
+            versionPotionEffects.put(GooPVersionPotionEffects.BAD_OMEN, GetPotionEffectFromString("BAD_OMEN"));
+            versionPotionEffects.put(GooPVersionPotionEffects.HERO_OF_THE_VILLAGE, GetPotionEffectFromString("HERO_OF_THE_VILLAGE"));
         }
         //endregion
 
         //region Minecraft 1.19+
         if (mcVersion >= 19.0) {
-            versionPotionEffects.put(GooPVersionPotionEffects.DARKNESS, PotionEffectType.DARKNESS);
+            versionPotionEffects.put(GooPVersionPotionEffects.DARKNESS, GetPotionEffectFromString("DARKNESS"));
         }
         //endregion
 
         //region Minecraft 1.20.6+
         if (mcVersion >= 20.6) {
-            versionPotionEffects.put(GooPVersionPotionEffects.SLOW, PotionEffectType.SLOWNESS);
-            versionPotionEffects.put(GooPVersionPotionEffects.SLOWNESS, PotionEffectType.SLOWNESS);
-            versionPotionEffects.put(GooPVersionPotionEffects.FAST_DIGGING, PotionEffectType.HASTE);
-            versionPotionEffects.put(GooPVersionPotionEffects.HASTE, PotionEffectType.HASTE);
-            versionPotionEffects.put(GooPVersionPotionEffects.SLOW_DIGGING, PotionEffectType.MINING_FATIGUE);
-            versionPotionEffects.put(GooPVersionPotionEffects.MINING_FATIGUE, PotionEffectType.MINING_FATIGUE);
-            versionPotionEffects.put(GooPVersionPotionEffects.INCREASE_DAMAGE, PotionEffectType.STRENGTH);
-            versionPotionEffects.put(GooPVersionPotionEffects.STRENGTH, PotionEffectType.STRENGTH);
-            versionPotionEffects.put(GooPVersionPotionEffects.HEAL, PotionEffectType.INSTANT_HEALTH);
-            versionPotionEffects.put(GooPVersionPotionEffects.INSTANT_HEALTH, PotionEffectType.INSTANT_HEALTH);
-            versionPotionEffects.put(GooPVersionPotionEffects.HARM, PotionEffectType.INSTANT_DAMAGE);
-            versionPotionEffects.put(GooPVersionPotionEffects.INSTANT_DAMAGE, PotionEffectType.INSTANT_DAMAGE);
-            versionPotionEffects.put(GooPVersionPotionEffects.JUMP, PotionEffectType.JUMP_BOOST);
-            versionPotionEffects.put(GooPVersionPotionEffects.JUMP_BOOST, PotionEffectType.JUMP_BOOST);
-            versionPotionEffects.put(GooPVersionPotionEffects.CONFUSION, PotionEffectType.NAUSEA);
-            versionPotionEffects.put(GooPVersionPotionEffects.NAUSEA, PotionEffectType.NAUSEA);
-            versionPotionEffects.put(GooPVersionPotionEffects.REGENERATION, PotionEffectType.REGENERATION);
-            versionPotionEffects.put(GooPVersionPotionEffects.DAMAGE_RESISTANCE, PotionEffectType.RESISTANCE);
-            versionPotionEffects.put(GooPVersionPotionEffects.RESISTANCE, PotionEffectType.RESISTANCE);
-            versionPotionEffects.put(GooPVersionPotionEffects.TRIAL_OMEN, PotionEffectType.TRIAL_OMEN);
-            versionPotionEffects.put(GooPVersionPotionEffects.RAID_OMEN, PotionEffectType.RAID_OMEN);
-            versionPotionEffects.put(GooPVersionPotionEffects.WIND_CHARGED, PotionEffectType.WIND_CHARGED);
-            versionPotionEffects.put(GooPVersionPotionEffects.WEAVING, PotionEffectType.WEAVING);
-            versionPotionEffects.put(GooPVersionPotionEffects.OOZING, PotionEffectType.OOZING);
-            versionPotionEffects.put(GooPVersionPotionEffects.INFESTED, PotionEffectType.INFESTED);
+            versionPotionEffects.put(GooPVersionPotionEffects.SLOW, GetPotionEffectFromString("SLOWNESS"));
+            versionPotionEffects.put(GooPVersionPotionEffects.SLOWNESS, GetPotionEffectFromString("SLOWNESS"));
+            versionPotionEffects.put(GooPVersionPotionEffects.FAST_DIGGING, GetPotionEffectFromString("HASTE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.HASTE, GetPotionEffectFromString("HASTE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.SLOW_DIGGING, GetPotionEffectFromString("MINING_FATIGUE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.MINING_FATIGUE, GetPotionEffectFromString("MINING_FATIGUE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.INCREASE_DAMAGE, GetPotionEffectFromString("STRENGTH"));
+            versionPotionEffects.put(GooPVersionPotionEffects.STRENGTH, GetPotionEffectFromString("STRENGTH"));
+            versionPotionEffects.put(GooPVersionPotionEffects.HEAL, GetPotionEffectFromString("INSTANT_HEALTH"));
+            versionPotionEffects.put(GooPVersionPotionEffects.INSTANT_HEALTH, GetPotionEffectFromString("INSTANT_HEALTH"));
+            versionPotionEffects.put(GooPVersionPotionEffects.HARM, GetPotionEffectFromString("INSTANT_DAMAGE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.INSTANT_DAMAGE, GetPotionEffectFromString("INSTANT_DAMAGE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.JUMP, GetPotionEffectFromString("JUMP_BOOST"));
+            versionPotionEffects.put(GooPVersionPotionEffects.JUMP_BOOST, GetPotionEffectFromString("JUMP_BOOST"));
+            versionPotionEffects.put(GooPVersionPotionEffects.CONFUSION, GetPotionEffectFromString("NAUSEA"));
+            versionPotionEffects.put(GooPVersionPotionEffects.NAUSEA, GetPotionEffectFromString("NAUSEA"));
+            versionPotionEffects.put(GooPVersionPotionEffects.REGENERATION, GetPotionEffectFromString("REGENERATION"));
+            versionPotionEffects.put(GooPVersionPotionEffects.DAMAGE_RESISTANCE, GetPotionEffectFromString("RESISTANCE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.RESISTANCE, GetPotionEffectFromString("RESISTANCE"));
+            versionPotionEffects.put(GooPVersionPotionEffects.TRIAL_OMEN, GetPotionEffectFromString("TRIAL_OMEN"));
+            versionPotionEffects.put(GooPVersionPotionEffects.RAID_OMEN, GetPotionEffectFromString("RAID_OMEN"));
+            versionPotionEffects.put(GooPVersionPotionEffects.WIND_CHARGED, GetPotionEffectFromString("WIND_CHARGED"));
+            versionPotionEffects.put(GooPVersionPotionEffects.WEAVING, GetPotionEffectFromString("WEAVING"));
+            versionPotionEffects.put(GooPVersionPotionEffects.OOZING, GetPotionEffectFromString("OOZING"));
+            versionPotionEffects.put(GooPVersionPotionEffects.INFESTED, GetPotionEffectFromString("INFESTED"));
         }
         //endregion
 
@@ -1533,7 +1533,7 @@ public class GooP_MinecraftVersions {
         } catch (IllegalArgumentException ex) {
 
             // Return Air
-            return Material.VOID_AIR;
+            return GetMaterialFromString("VOID_AIR");
         }
     }
 
@@ -1543,7 +1543,7 @@ public class GooP_MinecraftVersions {
      */
     public static Material GetVersionMaterial(GooPVersionMaterials mat, Material defaultIfMissing) {
         Material mt = GetVersionMaterial(mat);
-        if (mt != Material.VOID_AIR) {
+        if (mt != GetMaterialFromString("VOID_AIR")) {
             return mt;
         } else {
             return defaultIfMissing;
@@ -1577,8 +1577,12 @@ public class GooP_MinecraftVersions {
             // Not recognized
         } catch (IllegalArgumentException ex) {
 
-            // Return Air
-            return EntityType.UNKNOWN;
+            // Retry with lowercase via registry
+            try {
+                return org.bukkit.Registry.ENTITY_TYPE.get(NamespacedKey.minecraft(str.toLowerCase()));
+            } catch (Exception ignored2) {
+                return GetEntityTypeFromString("UNKNOWN");
+            }
         }
     }
 
@@ -1588,7 +1592,7 @@ public class GooP_MinecraftVersions {
      */
     public static EntityType GetVersionEntityType(GooPVersionEntities ent, EntityType defaultIfMissing) {
         EntityType mt = GetVersionEntityType(ent);
-        if (mt != EntityType.UNKNOWN) {
+        if (mt != GetEntityTypeFromString("UNKNOWN")) {
             return mt;
         } else {
             return defaultIfMissing;
@@ -1622,7 +1626,7 @@ public class GooP_MinecraftVersions {
                 return org.bukkit.Registry.ENCHANTMENT.get(NamespacedKey.minecraft(str));
 
             } else {
-                return io.papermc.paper.registry.RegistryAccess.registryAccess().getRegistry(io.papermc.paper.registry.RegistryKey.ENCHANTMENT).get(NamespacedKey.minecraft(str));
+                return org.bukkit.Registry.ENCHANTMENT.get(NamespacedKey.minecraft(str));
             }
         }
     }
@@ -1657,17 +1661,22 @@ public class GooP_MinecraftVersions {
      */
     @Nullable public static Attribute GetAttributeFromString(@Nullable String str) {
         if (str == null) { return null; };
-        str = str.toLowerCase();
+        String upperStr = str.toUpperCase();
+        String lowerStr = str.toLowerCase();
 
         if (mcVersion < 21.3) {
-            return Attribute.valueOf(str);
+            try {
+                return Attribute.valueOf(upperStr);
+            } catch (IllegalArgumentException e) {
+                return org.bukkit.Registry.ATTRIBUTE.get(NamespacedKey.minecraft(lowerStr));
+            }
 
         } else {
             if (!Gunging_Ootilities_Plugin.asPaperSpigot) {
-                return org.bukkit.Registry.ATTRIBUTE.get(NamespacedKey.minecraft(str));
+                return org.bukkit.Registry.ATTRIBUTE.get(NamespacedKey.minecraft(lowerStr));
 
             } else {
-                return io.papermc.paper.registry.RegistryAccess.registryAccess().getRegistry(io.papermc.paper.registry.RegistryKey.ATTRIBUTE).get(NamespacedKey.minecraft(str));
+                return org.bukkit.Registry.ATTRIBUTE.get(NamespacedKey.minecraft(lowerStr));
             }
         }
     }

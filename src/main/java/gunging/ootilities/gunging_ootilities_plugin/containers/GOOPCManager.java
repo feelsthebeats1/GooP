@@ -32,8 +32,6 @@ import org.bukkit.scheduler.BukkitRunnable;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import sun.nio.cs.DoubleByte;
-
 import javax.swing.*;
 import java.nio.charset.CharsetEncoder;
 import java.util.*;
@@ -876,7 +874,12 @@ public class GOOPCManager {
         ItemStack processed = new ItemStack(stacc);
 
         ItemMeta iMeta = processed.getItemMeta();
-        iMeta.addAttributeModifier(GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.ZOMBIE_SPAWN_REINFORCEMENTS), DEFAULT_ATTRIBUTE);
+
+        // Use a safe attribute that exists in 1.20.4
+        Attribute defaultAttr = GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+        if (defaultAttr == null) { defaultAttr = GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.GENERIC_ARMOR); }
+        if (defaultAttr == null) { defaultAttr = Attribute.GENERIC_ARMOR; }
+        iMeta.addAttributeModifier(defaultAttr, DEFAULT_ATTRIBUTE);
         iMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         if (!iMeta.hasDisplayName()) { iMeta.setDisplayName("\u00a73\u00a7f\u00a7r"); }
         processed.setItemMeta(iMeta);
@@ -904,7 +907,12 @@ public class GOOPCManager {
         // Good question
         ItemMeta iMeta = stacc.getItemMeta();
         if (!iMeta.hasAttributeModifiers()) { return false; }
-        Collection<AttributeModifier> mods = iMeta.getAttributeModifiers(GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.ZOMBIE_SPAWN_REINFORCEMENTS));
+
+        // Use the same attribute as toDefaultItem
+        Attribute defaultAttr = GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.ZOMBIE_SPAWN_REINFORCEMENTS);
+        if (defaultAttr == null) { defaultAttr = GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.GENERIC_ARMOR); }
+        if (defaultAttr == null) { defaultAttr = Attribute.GENERIC_ARMOR; }
+        Collection<AttributeModifier> mods = iMeta.getAttributeModifiers(defaultAttr);
 
         // No spawn reinforcements ~ no default
         if (mods == null) { return false; }
