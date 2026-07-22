@@ -77,7 +77,7 @@ public class ConverterTypes {
             else if (OotilityCeption.IsStone(mat)) { material = "_STONE"; }
             else if (OotilityCeption.IsWooden(mat)) { material = "_WOODEN"; }
             else if (mat == Material.TURTLE_HELMET) { material = "_TURTLE"; }
-            else { material = "_" + mat.toString(); }
+            else { material = "_" + mat; }
 
             // Per equipment
             String equipment = "";

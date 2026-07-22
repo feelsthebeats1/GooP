@@ -43,7 +43,6 @@ import io.lumine.mythic.core.skills.variables.VariableScope;
 import io.lumine.mythic.core.skills.variables.VariableType;
 import io.lumine.mythic.core.utils.jnbt.CompoundTag;
 import org.bukkit.Bukkit;
-import org.bukkit.attribute.Attribute;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.entity.Entity;
 import org.bukkit.Location;
@@ -254,13 +253,13 @@ public class GooPMythicMobs implements Listener {
         }
     }
     @EventHandler public void OnRegisterCustomConditions(MythicConditionLoadEvent event) {
-        //MM//OotilityCeption.Log("\u00a7aConditions Load Event");
-        //MM//OotilityCeption.Log("\u00a77Name: \u00a76" + event.getConditionName());
-        //MM//OotilityCeption.Log("\u00a72Line: \u00a7e" + event.getConfig().getLine());
-        //MM//OotilityCeption.Log("\u00a72Key: \u00a7e" + event.getConfig().getKey());
-        //MM//OotilityCeption.Log("\u00a72FileName: \u00a7e" + event.getConfig().getFileName());
-        //MM//OotilityCeption.Log("\u00a73Argument: \u00a7e" + event.getContainer().getConditionArgument());
-        //MM//OotilityCeption.Log("\u00a73ActionVar: \u00a7e" + event.getContainer().getActionVar());
+        //MM//OotilityCeption.Log("§aConditions Load Event");
+        //MM//OotilityCeption.Log("§7Name: §6" + event.getConditionName());
+        //MM//OotilityCeption.Log("§2Line: §e" + event.getConfig().getLine());
+        //MM//OotilityCeption.Log("§2Key: §e" + event.getConfig().getKey());
+        //MM//OotilityCeption.Log("§2FileName: §e" + event.getConfig().getFileName());
+        //MM//OotilityCeption.Log("§3Argument: §e" + event.getContainer().getConditionArgument());
+        //MM//OotilityCeption.Log("§3ActionVar: §e" + event.getContainer().getActionVar());
 
         // Switch Mechanic ig
         String nmae = event.getConditionName().toLowerCase();
@@ -482,14 +481,14 @@ public class GooPMythicMobs implements Listener {
                         } else {
 
                             // Notify
-                            Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("Player ~OnTimer","Error when loading Player ~OnTimer \u00a7b" + onTim + "\u00a77: Skill does not exist \u00a7e" + split[0]));
+                            Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("Player ~OnTimer","Error when loading Player ~OnTimer §b" + onTim + "§7: Skill does not exist §e" + split[0]));
                         }
 
                     // Gruno
                     } else {
 
                         // Notify
-                        Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("Player ~OnTimer","Error when loading Player ~OnTimer \u00a7b" + onTim + "\u00a77: Ticks must be an integer number, not \u00a7e" + split[1]));
+                        Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("Player ~OnTimer","Error when loading Player ~OnTimer §b" + onTim + "§7: Ticks must be an integer number, not §e" + split[1]));
                     }
                 }
             }
@@ -551,7 +550,7 @@ public class GooPMythicMobs implements Listener {
                     List<String> rawList = ofgStorage.getStringList(tName);
 
                     // If long enough
-                    if (rawList.size() > 0) {
+                    if (!rawList.isEmpty()) {
 
                         // Create
                         ListPlaceholder nLPH = new ListPlaceholder(tName, new ArrayList<>(rawList));
@@ -562,13 +561,13 @@ public class GooPMythicMobs implements Listener {
                     } else {
 
                         // Notify
-                        oots.CLog(OotilityCeption.LogFormat("List Placeholders","Error when loading LPH '\u00a73" + tName + "\u00a77': This list is empty"));
+                        oots.CLog(OotilityCeption.LogFormat("List Placeholders","Error when loading LPH '§3" + tName + "§7': This list is empty"));
                     }
 
                 } else {
 
                     // Notify
-                    oots.CLog(OotilityCeption.LogFormat("List Placeholders","Error when loading LPH '\u00a73" + tName + "\u00a77': There is already an LPH with that name!"));
+                    oots.CLog(OotilityCeption.LogFormat("List Placeholders","Error when loading LPH '§3" + tName + "§7': There is already an LPH with that name!"));
                 }
             }
         }
@@ -641,20 +640,23 @@ public class GooPMythicMobs implements Listener {
             if (arg == null) { return tPlayer.getUniqueId().toString(); }
 
             // Get From Caster
-            switch (arg) {
-                case "name": return tPlayer.getName();
-                case "distance": return String.valueOf(tPlayer.getLocation().distance(metadata.getCaster().getEntity().getBukkitEntity().getLocation()));
-                case "x": return String.valueOf(tPlayer.getLocation().getX());
-                case "y": return String.valueOf(tPlayer.getLocation().getY());
-                case "z": return String.valueOf(tPlayer.getLocation().getZ());
-                case "w": return String.valueOf(tPlayer.getLocation().getWorld());
-                case "health": return (tPlayer instanceof LivingEntity) ? String.valueOf(((LivingEntity) tPlayer).getHealth()) : "0";
-                case "max_health": return (tPlayer instanceof LivingEntity) ? String.valueOf(((LivingEntity) tPlayer).getAttribute(GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.GENERIC_MAX_HEALTH))) : "0";
-            }
+            return switch (arg) {
+                case "name" -> tPlayer.getName();
+                case "distance" ->
+                        String.valueOf(tPlayer.getLocation().distance(metadata.getCaster().getEntity().getBukkitEntity().getLocation()));
+                case "x" -> String.valueOf(tPlayer.getLocation().getX());
+                case "y" -> String.valueOf(tPlayer.getLocation().getY());
+                case "z" -> String.valueOf(tPlayer.getLocation().getZ());
+                case "w" -> String.valueOf(tPlayer.getLocation().getWorld());
+                case "health" ->
+                        (tPlayer instanceof LivingEntity) ? String.valueOf(((LivingEntity) tPlayer).getHealth()) : "0";
+                case "max_health" ->
+                        (tPlayer instanceof LivingEntity) ? String.valueOf(((LivingEntity) tPlayer).getAttribute(GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.GENERIC_MAX_HEALTH))) : "0";
+                default ->
 
-            // Return thay
-            return tPlayer.getUniqueId().toString();
-
+                    // Return thay
+                        tPlayer.getUniqueId().toString();
+            };
         }));
 
         // Owner PAPI
@@ -705,10 +707,9 @@ public class GooPMythicMobs implements Listener {
         Optional<MythicItem> hasMythicItem = MythicBukkit.inst().getItemManager().getItem(name);
 
         // Cancel present
-        if (!hasMythicItem.isPresent()) { return null; }
+        return hasMythicItem.map(mythicItem -> ((BukkitItemStack) mythicItem.generateItemStack(1)).getItemStack()).orElse(null);
 
         // Yeah just that I guess
-        return ((BukkitItemStack)((MythicItem)hasMythicItem.get()).generateItemStack(1)).getItemStack();
     }
     @NotNull public static final String MYTHIC_TYPE = "MYTHIC_TYPE";
     public static boolean isMythicItem(@Nullable ItemStack stack) {
@@ -798,7 +799,7 @@ public class GooPMythicMobs implements Listener {
             return abs.getBukkitEntity();
 
         } else {
-            //DBG//OotilityCeption.Log("\u00a7cMythicMob Not Loaded:\u00a77 " + name);
+            //DBG//OotilityCeption.Log("§cMythicMob Not Loaded:§7 " + name);
             return null;
         }
     }
@@ -820,7 +821,7 @@ public class GooPMythicMobs implements Listener {
             if (MythicBukkit.inst().getAPIHelper().getMythicMobInstance(targetEntity).getType().getInternalName().equals(mythicmobName)) {
 
                 // Success
-                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Entity is indeed a MythicMob instance of \u00a7e" + mythicmobName + "\u00a77!");
+                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Entity is indeed a MythicMob instance of §e" + mythicmobName + "§7!");
 
                 // Yes
                 return true;
@@ -828,7 +829,7 @@ public class GooPMythicMobs implements Listener {
             // No lol
             } else {
                 // Success
-                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Entity is a MythicMob, but not an instance of \u00a7e" + mythicmobName);
+                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Entity is a MythicMob, but not an instance of §e" + mythicmobName);
 
                 // No
                 return false;
@@ -837,26 +838,27 @@ public class GooPMythicMobs implements Listener {
         } else {
 
             // Log Return
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Such entity is not a mythicmob, thus it is not an instance of \u00a7e" + mythicmobName);
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Such entity is not a mythicmob, thus it is not an instance of §e" + mythicmobName);
 
             // Cant be such MythicMob Internal ID cuz its not a MythicMob to begin with.
             return false;
         }
     }
-    public static Boolean IsMythicMob(Entity targetEntity) {
 
+    public static Boolean IsMythicMob(Entity targetEntity) {
         // Solid yes or no
         return MythicBukkit.inst().getAPIHelper().isMythicMob(targetEntity);
     }
+
     public static Boolean GraveyardsRespawnSkill(String skillName, Location loc, Player pl) {
-        Optional mSkillFk = MythicBukkit.inst().getSkillManager().getSkill(skillName);
+        Optional<Skill> mSkillFk = MythicBukkit.inst().getSkillManager().getSkill(skillName);
 
         // Is there a skill of that name?
         if (mSkillFk.isPresent()) {
 
             try {
                 // Ok then retrieve the skill
-                Skill mSkill = (Skill) mSkillFk.get();
+                Skill mSkill = mSkillFk.get();
 
                 // Git Player 2.0
                 AbstractPlayer skPlayer = BukkitAdapter.adapt(pl);
@@ -870,7 +872,7 @@ public class GooPMythicMobs implements Listener {
                 skHash.add(skPlayer);
 
                 // Cast!
-                mSkill.execute(SkillTriggers.API, skCaster, skPlayer, skLocation, skHash, (HashSet)null, 1);
+                mSkill.execute(SkillTriggers.API, skCaster, skPlayer, skLocation, skHash, null, 1);
 
                 // Success
                 return true;
@@ -888,6 +890,7 @@ public class GooPMythicMobs implements Listener {
             return false;
         }
     }
+
     public static boolean SkillExists(String skillName) {
         // If null no
         if (skillName == null) { return false; }
@@ -899,7 +902,7 @@ public class GooPMythicMobs implements Listener {
 
             try {
                 // Ok then retrieve the skill
-                Skill mSkill = (Skill) mSkillFk.get();
+                Skill mSkill = mSkillFk.get();
 
                 // Success
                 return true;
@@ -917,13 +920,13 @@ public class GooPMythicMobs implements Listener {
             return false;
         }
     }
+
     public static Skill GetSkill(String skillName) {
 
         if (SkillExists(skillName)) {
 
             Optional<Skill> mSkillFk = MythicBukkit.inst().getSkillManager().getSkill(skillName);
-            if (mSkillFk == null) { return null; }
-            if (mSkillFk.isPresent()) { return mSkillFk.get(); }
+            return mSkillFk.orElse(null);
         }
 
         return null;
@@ -1033,18 +1036,18 @@ public class GooPMythicMobs implements Listener {
         AbstractLocation skCaLocation = BukkitAdapter.adapt(caster.getLocation());
 
         // Trigger - Adapt Item
-        AbstractEntity skTrEntity = null;
+        AbstractEntity skTrEntity;
         if (trigger != null) { skTrEntity = BukkitAdapter.adapt(trigger); } else { skTrEntity = skCaEntity; }
 
         // Origin - Adapt Item Location
-        AbstractLocation skLocation = null;
+        AbstractLocation skLocation;
         if (origin != null) { skLocation = BukkitAdapter.adapt(origin); } else { skLocation = skCaLocation; }
 
         // Some UUID I suppose
         HashSet<AbstractEntity> skHash = Sets.newHashSet();
         HashSet<AbstractLocation> skHashL = Sets.newHashSet();
         if (entityTargets != null) {
-            if (entityTargets.size() > 0) {
+            if (!entityTargets.isEmpty()) {
 
                 // Add every target
                 for (Entity ent : entityTargets) {
@@ -1060,7 +1063,7 @@ public class GooPMythicMobs implements Listener {
         }
 
         if (locationTargets != null) {
-            if (locationTargets.size() > 0) {
+            if (!locationTargets.isEmpty()) {
 
                 // Add every target
                 for (Location ent : locationTargets) {
@@ -1076,7 +1079,7 @@ public class GooPMythicMobs implements Listener {
         }
 
         // UUUuuuh idk what happens if targets size is 0
-        if (skHash.size() == 0) {
+        if (skHash.isEmpty()) {
 
             // Targets is only the player
             skHash.add(skCaEntity);

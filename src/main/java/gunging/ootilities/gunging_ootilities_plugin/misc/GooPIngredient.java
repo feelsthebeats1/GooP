@@ -68,7 +68,7 @@ public class GooPIngredient {
                 n--;
 
                 // Log
-                Gunging_Ootilities_Plugin.theOots.CPLog("\u00a7cYou must not use the \u00a76i (ingredient)\u00a7c Item NBT Filter to define ingredients.\u00a77 Line \u00a7e" + nbt.toString() + "\u00a77 when defining ingredient \u00a73" + getName() + "\u00a77. \u00a74Ignored.");
+                Gunging_Ootilities_Plugin.theOots.CPLog("\u00a7cYou must not use the \u00a76i (ingredient)\u00a7c Item NBT Filter to define ingredients.\u00a77 Line \u00a7e" + nbt + "\u00a77 when defining ingredient \u00a73" + getName() + "\u00a77. \u00a74Ignored.");
             }
         }
     }

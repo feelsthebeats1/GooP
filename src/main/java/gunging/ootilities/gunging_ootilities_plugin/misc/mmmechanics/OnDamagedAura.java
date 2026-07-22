@@ -63,7 +63,7 @@ public class OnDamagedAura extends Aura implements ITargetedEntitySkill {
         this.traceSource = mlc.getBoolean(new String[]{"tracesource", "ts"}, true);
         this.damageSub = mlc.getDouble(new String[]{"damagesub", "sub", "s"}, 0.0D);
         this.damageMult = mlc.getDouble(new String[]{"damagemultiplier", "multiplier", "m"}, 1.0D);
-        PlaceholderString strDamageMod = mlc.getPlaceholderString(new String[]{"damagemodifiers", "damagemods", "damagemod"}, (String)null, new String[0]);
+        PlaceholderString strDamageMod = mlc.getPlaceholderString(new String[]{"damagemodifiers", "damagemods", "damagemod"}, null);
         if (strDamageMod != null) {
             String[] lstDamageMod = strDamageMod.toString().split(",");
             String[] var5 = lstDamageMod;
@@ -152,7 +152,7 @@ public class OnDamagedAura extends Aura implements ITargetedEntitySkill {
                 damageType = event.getCause().toString();
             }
 
-            double mod = (Double)this.damageModifiers.getOrDefault(damageType.toUpperCase(), 1.0D);
+            double mod = this.damageModifiers.getOrDefault(damageType.toUpperCase(), 1.0D);
             return (damage - this.damageSub) * this.damageMult * mod;
         }
     }
@@ -169,79 +169,77 @@ public class OnDamagedAura extends Aura implements ITargetedEntitySkill {
             //SOM//OotilityCeption.Log("\u00a7cStep 2 \u00a7eAura Start");
 
             // Subscribe Event
-            this.registerAuraComponent((Terminable)
-                    Events.subscribe(EntityDamageByEntityEvent.class, EventPriority.HIGHEST)
-                            .filter((event) -> {
+            this.registerAuraComponent(Events.subscribe(EntityDamageByEntityEvent.class, EventPriority.HIGHEST)
+                    .filter((event) -> {
 
-                            //SOM//OotilityCeption.Log("\u00a7cStep 3 \u00a7Subscribe Run");
+                    //SOM//OotilityCeption.Log("\u00a7cStep 3 \u00a7Subscribe Run");
 
-                            return event.getEntity().getUniqueId().equals(((AbstractEntity)this.entity.get()).getUniqueId());
+                    return event.getEntity().getUniqueId().equals(this.entity.get().getUniqueId());
 
-                            }).handler((event) -> {
+                    }).handler((event) -> {
 
 
-                                //SOM//OotilityCeption.Log("\u00a7cStep 4 \u00a7eEvent Run");
+                        //SOM//OotilityCeption.Log("\u00a7cStep 4 \u00a7eEvent Run");
 
-                                // Deep Clone ofc
-                                SkillMetadata meta = this.skillMetadata.deepClone();
+                        // Deep Clone ofc
+                        SkillMetadata meta = this.skillMetadata.deepClone();
 
-                                // Find the true entity
-                                Entity trueDamager = event.getDamager();
+                        // Find the true entity
+                        Entity trueDamager = event.getDamager();
 
-                                // Get True Damager
-                                if (traceSource) {
-                                    if (event.getDamager() instanceof Projectile) {
+                        // Get True Damager
+                        if (traceSource) {
+                            if (event.getDamager() instanceof Projectile) {
 
-                                        // If shooter is not null
-                                        Projectile arrow = (Projectile) trueDamager;
-                                        if (arrow.getShooter() instanceof Entity) {
+                                // If shooter is not null
+                                Projectile arrow = (Projectile) trueDamager;
+                                if (arrow.getShooter() instanceof Entity) {
 
-                                            // Real damager is the one who fired this
-                                            trueDamager = (Entity) arrow.getShooter();
-                                        }
-                                    }
-                                    if (event.getDamager() instanceof Firework) {
-
-                                        // If shooter is not null
-                                        Firework arrow = (Firework) event.getDamager();
-                                        if (XBow_Rockets.fireworkSources.containsKey(arrow.getUniqueId())) {
-
-                                            // Real damager is the one who fired this
-                                            trueDamager = XBow_Rockets.fireworkSources.get(arrow.getUniqueId());
-                                        }
-                                    }
+                                    // Real damager is the one who fired this
+                                    trueDamager = (Entity) arrow.getShooter();
                                 }
+                            }
+                            if (event.getDamager() instanceof Firework arrow) {
 
-                                // Set the target of the skill to be the attacking entity
-                                if (metaskill == null) { metaskill = GooPMythicMobs.GetSkill(skillName.get(meta, meta.getCaster().getEntity()));}
-                                AbstractEntity targ = BukkitAdapter.adapt(trueDamager);
-                                meta.setTrigger(targ);
-                                BukkitTriggerMetadata.apply(meta, event);
+                                // If shooter is not null
+                                if (XBow_Rockets.fireworkSources.containsKey(arrow.getUniqueId())) {
 
-                                //SOM//OotilityCeption.Log("\u00a7cStep 5 \u00a7eTarget Set");
-                                //SOM//OotilityCeption.Log("\u00a7cStep 5.5 \u00a7eMetrics");
-                                //SOM//OotilityCeption.Log("\u00a7cStep 5.5 \u00a7e*\u00a77 Entity Present?\u00a7b " + entity.isPresent());
-                                //SOM//OotilityCeption.Log("\u00a7cStep 5.5 \u00a7e*\u00a77 Skill Present?\u00a7b " + (metaskill != null));
-                                //SOM//if (metaskill != null) OotilityCeption.Log("\u00a7cStep 5.5 \u00a7e*\u00a77 Skill Usable?\u00a7b " + metaskill.isUsable(meta));
-
-                                // Consume charge whatever
-                                if (this.executeAuraSkill(Optional.ofNullable(metaskill), meta, false)) {
-
-                                    //SOM//OotilityCeption.Log("\u00a7cStep 6 \u00a7eExecuted Aura Skill");
-                                    this.consumeCharge();
-                                    if (cancelDamage) {
-
-                                        //SOM//OotilityCeption.Log("\u00a7cStep 6.5 \u00a7eCancelling Damage");
-                                        event.setCancelled(true);
-                                    } else if (modDamage) {
-
-                                        //SOM//OotilityCeption.Log("\u00a7cStep 6.5 \u00a7eModified Damage");
-                                        double damage = calculateDamage((AbstractEntity)this.entity.get(), event);
-                                        event.setDamage(damage);
-                                    }
+                                    // Real damager is the one who fired this
+                                    trueDamager = XBow_Rockets.fireworkSources.get(arrow.getUniqueId());
                                 }
+                            }
+                        }
 
-                            }));
+                        // Set the target of the skill to be the attacking entity
+                        if (metaskill == null) { metaskill = GooPMythicMobs.GetSkill(skillName.get(meta, meta.getCaster().getEntity()));}
+                        AbstractEntity targ = BukkitAdapter.adapt(trueDamager);
+                        meta.setTrigger(targ);
+                        BukkitTriggerMetadata.apply(meta, event);
+
+                        //SOM//OotilityCeption.Log("\u00a7cStep 5 \u00a7eTarget Set");
+                        //SOM//OotilityCeption.Log("\u00a7cStep 5.5 \u00a7eMetrics");
+                        //SOM//OotilityCeption.Log("\u00a7cStep 5.5 \u00a7e*\u00a77 Entity Present?\u00a7b " + entity.isPresent());
+                        //SOM//OotilityCeption.Log("\u00a7cStep 5.5 \u00a7e*\u00a77 Skill Present?\u00a7b " + (metaskill != null));
+                        //SOM//if (metaskill != null) OotilityCeption.Log("\u00a7cStep 5.5 \u00a7e*\u00a77 Skill Usable?\u00a7b " + metaskill.isUsable(meta));
+
+                        // Consume charge whatever
+                        if (this.executeAuraSkill(Optional.ofNullable(metaskill), meta, false)) {
+
+                            //SOM//OotilityCeption.Log("\u00a7cStep 6 \u00a7eExecuted Aura Skill");
+                            this.consumeCharge();
+                            if (cancelDamage) {
+
+                                //SOM//OotilityCeption.Log("\u00a7cStep 6.5 \u00a7eCancelling Damage");
+                                event.setCancelled(true);
+                            } else if (modDamage) {
+
+                                //SOM//OotilityCeption.Log("\u00a7cStep 6.5 \u00a7eModified Damage");
+                                double damage = calculateDamage(this.entity.get(), event);
+                                event.setDamage(damage);
+                            }
+                        }
+
+                    }));
 
             //SOM//OotilityCeption.Log("\u00a7cStep 2.5 \u00a7eAura Applied");
 

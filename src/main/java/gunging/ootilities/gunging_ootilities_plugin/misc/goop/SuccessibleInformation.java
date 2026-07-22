@@ -166,5 +166,5 @@ public class SuccessibleInformation {
     public SuccessibleInformation() {}
 
     @NotNull final StringBuilder slots4Success = new StringBuilder();
-    @NotNull public StringBuilder getSlots4Success() { return slots4Success; };
+    @NotNull public StringBuilder getSlots4Success() { return slots4Success; }
 }

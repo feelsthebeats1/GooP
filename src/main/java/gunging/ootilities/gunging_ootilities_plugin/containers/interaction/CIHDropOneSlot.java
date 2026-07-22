@@ -44,7 +44,7 @@ public class CIHDropOneSlot extends ContainersClickHandler {
 
         // Preview mode? No more actions.
         if (GOOPCManager.isUsage_Preview(event.getView())) {
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e -\u00a77 Preview Mode");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§e -§7 Preview Mode");
             return null; }
 
         // What is the meaning of this?
@@ -79,10 +79,10 @@ public class CIHDropOneSlot extends ContainersClickHandler {
             // No more business if there is no Commands On Click
             if (!slot.hasCommandsOnClick()) {
 
-                //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 No Commands On Click");
+                //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 No Commands On Click");
                 return null; }
 
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e *\u00a77 Running On-Click Commands");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§e *§7 Running On-Click Commands");
 
             // All the commands on click are included, and that's it.
             return new ContainersInteractionResult(interactingSlot, CIRClickType.CLICK);
@@ -96,7 +96,7 @@ public class CIHDropOneSlot extends ContainersClickHandler {
             /*
              * Allow taking of the item, MythicLib will handle the rest.
              */
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7ePCK\u00a73 +\u00a77 Delegating Handling to MythicLib");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §ePCK§3 +§7 Delegating Handling to MythicLib");
             event.setCancelled(false);
             return null;
         }
@@ -139,8 +139,8 @@ public class CIHDropOneSlot extends ContainersClickHandler {
         // Allowing the event to drop the item will decrease the amount in other places
         //interactingSlot.setItem(finalStored);
 
-        //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7a +\u00a77 Storing " + OotilityCeption.GetItemName(finalStored, true));
-        //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7a +\u00a77 Dropping One " + OotilityCeption.GetItemName(GOOPCManager.cloneItem(event.getCurrentItem()), true));
+        //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§a +§7 Storing " + OotilityCeption.GetItemName(finalStored, true));
+        //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§a +§7 Dropping One " + OotilityCeption.GetItemName(GOOPCManager.cloneItem(event.getCurrentItem()), true));
 
         // Finally, allow drop
         event.setCancelled(false);

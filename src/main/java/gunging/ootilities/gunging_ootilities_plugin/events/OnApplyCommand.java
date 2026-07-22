@@ -90,10 +90,9 @@ public class OnApplyCommand implements Listener {
          * Villager? :flushed:
          */
         Entity entity = event.getRightClicked();
-        if (!(entity instanceof Merchant)) { return; }
+        if (!(entity instanceof Merchant merchant)) { return; }
 
         // Cast it
-        Merchant merchant = (Merchant) entity;
         for (int m = 0; m < merchant.getRecipes().size(); m++) {
             MerchantRecipe recipe = merchant.getRecipe(m);
 
@@ -639,7 +638,7 @@ public class OnApplyCommand implements Listener {
     public void OnApply(InventoryClickEvent event) {
 
         // Inminent cancellation
-        if (!(event.getWhoClicked() instanceof Player)) { return; }
+        if (!(event.getWhoClicked() instanceof Player player)) { return; }
         if (event.getClickedInventory() == null) { return; }
 
         //HAT//OotilityCeption. Log(" §8>§3Ͽ§8<§7 Hat Equip Test");
@@ -660,7 +659,6 @@ public class OnApplyCommand implements Listener {
         //HAT//OotilityCeption. Log("    §8>§fϿ§8<§7 Cursor Item: \u00a7f" + OotilityCeption.GetItemName(cursor));
 
         // Get Player who did
-        Player player = (Player)event.getWhoClicked();
 
         // Get the action
         if (event.getAction() == InventoryAction.SWAP_WITH_CURSOR) {
@@ -1106,8 +1104,7 @@ public class OnApplyCommand implements Listener {
         //SMH//OotilityCeption.Log("\u00a78Smith \u00a73PR\u00a77 Prep Begin -----------------------------------------------");
 
         // Only players ffs
-        if (!(event.getView().getPlayer() instanceof Player)) { return; }
-        Player player = (Player) event.getView().getPlayer();
+        if (!(event.getView().getPlayer() instanceof Player player)) { return; }
         ItemStack eventResultItem = event.getInventory().getResult();
 
         if (eventResultItem != null) {
@@ -1191,8 +1188,7 @@ public class OnApplyCommand implements Listener {
         //SMH//OotilityCeption.Log("\u00a78Smith \u00a76EV\u00a77 Event Begin");
 
         // Only players ffs
-        if (!(event.getView().getPlayer() instanceof Player)) { return; }
-        Player player = (Player) event.getView().getPlayer();
+        if (!(event.getView().getPlayer() instanceof Player player)) { return; }
 
         // Get
         ItemStack originalResult = craftPrep.get(player.getUniqueId());
@@ -1341,9 +1337,8 @@ public class OnApplyCommand implements Listener {
         if (!ConverterTypes.hasConverterOptions(ConvertingReason.CRAFT)) { return; }
 
         // Only players ffs
-        if (!(event.getView().getPlayer() instanceof Player)) { return; }
+        if (!(event.getView().getPlayer() instanceof Player player)) { return; }
         if (event.getInventory().getResult() == null) { return; }
-        Player player = (Player) event.getView().getPlayer();
 
         //CFT//OotilityCeption.Log("\u00a78Craft \u00a73PR\u00a77 Prep Begin ------------------------------> " + OotilityCeption.GetItemName(event.getInventory().getResult()));
 
@@ -1382,8 +1377,7 @@ public class OnApplyCommand implements Listener {
         if (!ConverterTypes.hasConverterOptions(ConvertingReason.CRAFT)) { return; }
 
         // Only players ffs
-        if (!(event.getView().getPlayer() instanceof Player)) { return; }
-        Player player = (Player) event.getView().getPlayer();
+        if (!(event.getView().getPlayer() instanceof Player player)) { return; }
 
         // Get predicted result
         ItemStack postConvertedResult = craftPrepResult.get(player.getUniqueId());

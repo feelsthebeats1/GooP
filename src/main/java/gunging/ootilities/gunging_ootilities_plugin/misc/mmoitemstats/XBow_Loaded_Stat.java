@@ -35,10 +35,9 @@ public class XBow_Loaded_Stat extends StringStat {
         // Get meta
         ItemMeta iiMeta = item.getMeta();
 
-        if (iiMeta instanceof CrossbowMeta) {
+        if (iiMeta instanceof CrossbowMeta iMeta) {
 
             // Edit actual item
-            CrossbowMeta iMeta = (CrossbowMeta) iiMeta;
             ArrayList<ItemStack> ldds = new ArrayList<>();
             ldds.add(loadd);
             iMeta.setChargedProjectiles(ldds);

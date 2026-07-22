@@ -160,7 +160,7 @@ public class QuickNumberRange {
         if (hasMax()) {
 
             // Fail if above maximum
-            if (test > getMaximumInclusive()) { return false; }
+            return !(test > getMaximumInclusive());
         }
 
         // Success

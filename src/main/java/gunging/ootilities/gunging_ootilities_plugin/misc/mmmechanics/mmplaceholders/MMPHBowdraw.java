@@ -21,7 +21,7 @@ public class MMPHBowdraw extends MMPlaceholder {
         if (arg == null) { return "{arg}"; }
 
         // <goop.bowdraw.caster> To get last amount of bow drawin the caster did
-        if (arg.toLowerCase().equals("caster")) {
+        if (arg.equalsIgnoreCase("caster")) {
 
             // Get or default
             Float f = XBow_Rockets.bowDrawForce.get(metadata.getCaster().getEntity().getUniqueId());
@@ -30,7 +30,7 @@ public class MMPHBowdraw extends MMPlaceholder {
             return OotilityCeption.RemoveDecimalZeros(String.valueOf(f));
 
             // <goop.bowdraw.trigger> To get last amount of bow drawing the trigger did
-        } else if (arg.toLowerCase().equals("trigger")) {
+        } else if (arg.equalsIgnoreCase("trigger")) {
 
             if (XBow_Rockets.bowDrawForce.containsKey(metadata.getTrigger().getUniqueId())) {
 

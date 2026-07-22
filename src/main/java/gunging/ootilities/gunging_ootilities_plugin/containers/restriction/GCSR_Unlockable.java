@@ -83,7 +83,7 @@ public class GCSR_Unlockable extends SlotRestriction {
         for (String clas : goals) { OotilityCeption.ListIntoBuilder(sb, clas, " \u00a77or\u00a7b "); }
 
         // Yes
-        item.add(OotilityCeption.ParseColour("\u00a73>\u00a77 GooPUnlocked:\u00a7b " + sb.toString()));
+        item.add(OotilityCeption.ParseColour("\u00a73>\u00a77 GooPUnlocked:\u00a7b " + sb));
 
         // Return thay
         return item;

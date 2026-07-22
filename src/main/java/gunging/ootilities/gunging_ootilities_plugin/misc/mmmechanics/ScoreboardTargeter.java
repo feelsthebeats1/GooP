@@ -26,7 +26,7 @@ public class ScoreboardTargeter extends IEntitySelector {
 
     public ScoreboardTargeter(SkillExecutor manager, MythicLineConfig mlc) {
         super(manager, mlc);
-        sreQ = mlc.getPlaceholderString(new String[]{"scores", "score", "sc", "s"}, (String)null);
+        sreQ = mlc.getPlaceholderString(new String[]{"scores", "score", "sc", "s"}, null);
         //DBG//OotilityCeption.Log("\u00a7b> > > > > > > > > > Loading \u00a73GooPScore:\u00a7b " + sreQ);
     }
 

@@ -86,7 +86,7 @@ public class GOOPCPersonal extends GOOPCDeployed {
         if (ret != null) { return ret; }
 
         // This should never actually happen
-        Gunging_Ootilities_Plugin.theOots.CPLog("Could not register inventory for \u00a73" + owner.toString() + "\u00a77 in\u00a7e " + getTemplate().getInternalName());
+        Gunging_Ootilities_Plugin.theOots.CPLog("Could not register inventory for \u00a73" + owner + "\u00a77 in\u00a7e " + getTemplate().getInternalName());
         ret = new HashMap<>();
         return ret;
     }

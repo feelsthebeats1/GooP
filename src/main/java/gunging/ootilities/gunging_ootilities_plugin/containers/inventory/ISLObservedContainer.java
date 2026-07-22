@@ -67,10 +67,9 @@ public class ISLObservedContainer extends ItemStackLocation {
         if (getDeployed().getTemplate().isStorageSlot(getSlot())) {
 
             // Treating as personal container
-            if (getDeployed() instanceof GOOPCPersonal) {
+            if (getDeployed() instanceof GOOPCPersonal personal) {
 
                 // Reference
-                GOOPCPersonal personal = (GOOPCPersonal) getDeployed();
 
                 // Get Owner
                 UUID personalOwner = personal.getLookingAt(getObserver());
@@ -86,10 +85,9 @@ public class ISLObservedContainer extends ItemStackLocation {
                     GooPMMOItems.UpdatePlayerEquipment(personalOwner); }
 
             // Treating as physical container
-            } else if (getDeployed() instanceof GOOPCPhysical) {
+            } else if (getDeployed() instanceof GOOPCPhysical physical) {
 
                 // Reference
-                GOOPCPhysical physical = (GOOPCPhysical) getDeployed();
 
                 // Get Location
                 Location physicalLocation = physical.getPlayerLookingAt().get(getObserver());

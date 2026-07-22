@@ -55,16 +55,18 @@ public class CIInteractingSlot {
     public boolean hasPreferenceFor(@NotNull ItemStack item) {
 
         // So, its armor eh?
-        switch (getSlotNumber()) {
-            case 103: return OotilityCeption.IsHelmet(item.getType());
-            case 102: return OotilityCeption.IsChestplate(item.getType());
-            case 101: return OotilityCeption.IsLeggings(item.getType());
-            case 100: return OotilityCeption.IsBoots(item.getType());
-            case -106: return Material.SHIELD == item.getType();
-        }
+        return switch (getSlotNumber()) {
+            case 103 -> OotilityCeption.IsHelmet(item.getType());
+            case 102 -> OotilityCeption.IsChestplate(item.getType());
+            case 101 -> OotilityCeption.IsLeggings(item.getType());
+            case 100 -> OotilityCeption.IsBoots(item.getType());
+            case -106 -> Material.SHIELD == item.getType();
+            default ->
 
-        // No special preference
-        return false;
+                // No special preference
+                    false;
+        };
+
     }
 
     /**

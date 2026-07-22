@@ -335,9 +335,6 @@ public class GooPPlaceholderAPI extends PlaceholderExpansion {
                 long secondsRemianing = OotilityCeption.SecondsElapsedSince(OptimizedTimeFormat.Current(), otf);
 
                 switch (uckArg) {
-                    default:
-                        interim = uck.IsUnlocked() ? "1" : "0";
-                        break;
                     case "remaining_time_seconds_full":
                         interim = String.valueOf(Math.max(secondsRemianing, 0));
                         break;
@@ -383,6 +380,9 @@ public class GooPPlaceholderAPI extends PlaceholderExpansion {
                         break;
                     case "time_years":
                         interim = String.valueOf(Math.max(otf.year, 0));
+                        break;
+                    default:
+                        interim = uck.IsUnlocked() ? "1" : "0";
                         break;
                 }
 

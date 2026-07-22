@@ -68,10 +68,9 @@ public class AdminCondition extends CustomMMCondition implements IEntityConditio
         if (abstractEntity == null) {
             //MM//OotilityCeption.Log("\u00a76AC\u00a77 Failed:\u00a7c No entity");
             return neg(false); }
-        if (!(abstractEntity.getBukkitEntity() instanceof Player)) {
+        if (!(abstractEntity.getBukkitEntity() instanceof Player p)) {
             //MM//OotilityCeption.Log("\u00a76AC\u00a77 Failed:\u00a7c Not a player");
             return neg(false); }
-        Player p = (Player) abstractEntity.getBukkitEntity();
 
         if (requireOP && !p.isOp()) {
             //MM//OotilityCeption.Log("\u00a76AC\u00a77 Failed:\u00a7c Not OP");

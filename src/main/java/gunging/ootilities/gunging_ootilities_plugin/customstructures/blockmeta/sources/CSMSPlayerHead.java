@@ -34,10 +34,9 @@ public class CSMSPlayerHead extends CSMSString {
         //TEX// OotilityCeption.Log("\u00a78APPLY \u00a7bSK\u00a77 Skull Eval\u00a73 " + block.getType());
 
         // Block data bisected??
-        if (!(input instanceof Skull)) {
+        if (!(input instanceof Skull skull)) {
             //TEX// OotilityCeption.Log("\u00a78APPLY \u00a7bSK\u00a77 Not skull");
             return block; }
-        Skull skull = (Skull) input;
 
         // Player skull right
         if (skull.getType() != Material.PLAYER_HEAD && skull.getType() != Material.PLAYER_WALL_HEAD) {

@@ -35,14 +35,14 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
      *  #2 The player is picking up a default/display item
      */
     @Override @Nullable public ContainersInteractionResult handleContainersOperation(@Nullable GOOPCDeployed deployed, @Nullable ContainerInventory observed, @Nullable GOOPCPlayer rpg, @NotNull Player player, @NotNull InventoryClickEvent event) {
-        //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS-HFI\u00a77 Handling from Inventory");
+        //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS-HFI§7 Handling from Inventory");
 
         // Only proceed if allowed
         event.setCancelled(true);
 
         // Preview mode? No more actions.
         if (GOOPCManager.isUsage_Preview(event.getView())) {
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e -\u00a77 Preview Mode");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§e -§7 Preview Mode");
             return null; }
 
         // Easy reference
@@ -50,14 +50,14 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
         // Is it the default item? You can't take that
         if (OotilityCeption.IsAirNullAllowed(movingItem)) {
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eMVI\u00a7c -\u00a77 Aborting Operation ~ target item is AIR");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eMVI§c -§7 Aborting Operation ~ target item is AIR");
             return null; }
 
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Slot \u00a7b#" + event.getSlot() + " \u00a78(Raw\u00a79 #" + event.getRawSlot() + "\u00a78) -\u00a75 " + event.getView().getType().toString());
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Affects Container?\u00a73 " + affectsContainer);
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Affects RPGInvent?\u00a73 " + affectsRPGInven);
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Current?\u00a73 " + OotilityCeption.GetItemName(event.getCurrentItem()));
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Cursor?\u00a73 " + OotilityCeption.GetItemName(event.getCursor()));
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Slot §b#" + event.getSlot() + " §8(Raw§9 #" + event.getRawSlot() + "§8) -§5 " + event.getView().getType().toString());
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Affects Container?§3 " + affectsContainer);
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Affects RPGInvent?§3 " + affectsRPGInven);
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Current?§3 " + OotilityCeption.GetItemName(event.getCurrentItem()));
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Cursor?§3 " + OotilityCeption.GetItemName(event.getCursor()));
 
         // What is the meaning of this?
         CIInteractionSpecs specs = new CIInteractionSpecs(player, event, deployed, observed, rpg);
@@ -70,7 +70,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
         // Get interacting slot
         CIInteractingSlot interactingSlot = ContainersClickHandler.eventTarget(specs.getClickedDeployed(), specs.getClickedSlot(), event.getClickedInventory(), event.getView(), observed);
         if (interactingSlot == null) {
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c Failed to build source interacting slot. ");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c Failed to build source interacting slot. ");
             return null; }
 
         // Identifying
@@ -97,10 +97,10 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
                 // No more business if there is no Commands On Click
                 if (!sourceSlot.hasCommandsOnClick()) {
 
-                    //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 No Commands On Click");
+                    //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 No Commands On Click");
                     return null; }
 
-                //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e *\u00a77 Running On-Click Commands");
+                //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§e *§7 Running On-Click Commands");
 
                 // All the commands on click are included, and that's it.
                 return new ContainersInteractionResult(interactingSlot, CIRClickType.CLICK);
@@ -112,7 +112,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
                 /*
                  * Allow taking of the item, MythicLib will handle the rest.
                  */
-                //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7ePCK\u00a73 +\u00a77 Delegating Handling to MythicLib");
+                //CLI// OotilityCeption.Log("§8CONTAINERS §ePCK§3 +§7 Delegating Handling to MythicLib");
                 event.setCancelled(false);
                 return null;
             }
@@ -137,7 +137,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
             // The target slots are all those for the player inventory
             if (rpg != null) {
-                //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e From top container to bottom RPG inventory. ");
+                //CLI//OotilityCeption.Log("§8CIH§a EV§e From top container to bottom RPG inventory. ");
 
                 // Crafting with the workbench must be allowed and is kind of unsupported
                 if (event.getView().getType() == InventoryType.WORKBENCH && event.getRawSlot() == 0) {
@@ -158,7 +158,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
             // Target vanilla inventory
             } else {
-                //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e From top container to bottom vanilla inventory. ");
+                //CLI//OotilityCeption.Log("§8CIH§a EV§e From top container to bottom vanilla inventory. ");
 
                 // Reference base inventory slots (apparently fits hotbar from right to left)
                 for (int i = 8; i >= 0; i--) {
@@ -181,7 +181,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
             if (event.getView().getType() == InventoryType.CRAFTING) {
 
                 if (rpg != null) {
-                    //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e Move around RPG Inventory");
+                    //CLI//OotilityCeption.Log("§8CIH§a EV§e Move around RPG Inventory");
 
                     boolean inHotbar = event.getSlot() >= 0 && event.getSlot() < 9;
 
@@ -207,14 +207,14 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
                 } else {
 
-                    Gunging_Ootilities_Plugin.theOots.CLog("Containers has no business over this event,\u00a7c why is it involved? ");
+                    Gunging_Ootilities_Plugin.theOots.CLog("Containers has no business over this event,§c why is it involved? ");
                 }
 
             // Normal chest view, use normal mode
             } else {
 
                 if (observed != null) {
-                    //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e From bottom inventory to top container. ");
+                    //CLI//OotilityCeption.Log("§8CIH§a EV§e From bottom inventory to top container. ");
 
                     // All the slots in that template being seen
                     for (int i = 0; i < observed.getTemplate().getTotalSlotCount(); i++) {
@@ -225,7 +225,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
                 } else {
 
-                    //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e From bottom inventory to non-container top inventory. ");
+                    //CLI//OotilityCeption.Log("§8CIH§a EV§e From bottom inventory to non-container top inventory. ");
                     int remainder = movingItem.getAmount();
 
                     // Examine top inventory for stacking success
@@ -253,14 +253,14 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
         int initialRemainder = movingItem.getAmount();
         RefSimulator<Integer> remainder = new RefSimulator<>(initialRemainder);
         ArrayList<CIStackingWay> targetSlot = distribute(targetSlots, movingItem, player, remainder);
-        //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7ePCK\u00a73 +\u00a77 Remainder of operation: " + remainder.getValue());
+        //CLI// OotilityCeption.Log("§8CONTAINERS §ePCK§3 +§7 Remainder of operation: " + remainder.getValue());
 
 
         // Failure?
-        if (targetSlot.size() == 0) {
+        if (targetSlot.isEmpty()) {
 
             // Nothing to do
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eMVI\u00a7c -\u00a77 Operation incomplete, no stacking operations. ");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eMVI§c -§7 Operation incomplete, no stacking operations. ");
             return null;
         }
 
@@ -280,7 +280,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
             // Perform stacking operation
             sw.getLocation().setItem(sw.getAmountedItem());
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7ePCK\u00a7a +\u00a77 Storing @" + sw.getLocation().getSlotNumber() + " " + OotilityCeption.GetItemName(sw.getAmountedItem(), true));
+            //CLI// OotilityCeption.Log("§8CONTAINERS §ePCK§a +§7 Storing @" + sw.getLocation().getSlotNumber() + " " + OotilityCeption.GetItemName(sw.getAmountedItem(), true));
 
             // Add commands or whatever if its a container slot
             if (!(sw.getLocation() instanceof CIContainerInteracting)) { continue; }
@@ -320,7 +320,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
             // Get observed
             CIInteractingSlot interactingSlot = inventories.get(s);
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Validating Slot \u00a7e#" + interactingSlot.getSlotNumber() + "\u00a77 of\u00a7b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "\u00a7cvanilla"));
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Validating Slot §e#" + interactingSlot.getSlotNumber() + "§7 of§b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "§cvanilla"));
 
             // Cant interact cant consider
             RefSimulator<CIInteractingFailReason> reason = new RefSimulator<>(null);
@@ -330,7 +330,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
                 // Is it default item? You are allowed to stack items on top of them :flushed:
                 isDefault = reason.getValue() == CIInteractingFailReason.DEFAULT_ITEM;
                 if (!(isDefault && interactingSlot instanceof CIContainerInteracting && ((CIContainerInteracting) interactingSlot).getContainerSlot().isForStorage())) {
-                    //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7c -\u00a77 Removed - cannot interact");
+                    //ACT//OotilityCeption.Log("§8CIH§c MTO§c -§7 Removed - cannot interact");
 
                     // Remove
                     inventories.remove(s);
@@ -344,7 +344,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
             // Slots that are occupied well, obviously won't work!
             ItemStack obs = interactingSlot.getCurrentItem();
             if (!isDefault && !OotilityCeption.IsAirNullAllowed(obs) && !item.isSimilar(obs)) {
-                //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7c -\u00a77 Removed - occupied");
+                //ACT//OotilityCeption.Log("§8CIH§c MTO§c -§7 Removed - occupied");
 
                 // Remove
                 inventories.remove(s);
@@ -353,10 +353,10 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
                 //ACT//continue;
             }
 
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7a +\u00a77 Accepted");
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§a +§7 Accepted");
         }
 
-        //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Distributing Amount:\u00a73 " + kount);
+        //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Distributing Amount:§3 " + kount);
 
         /*
          * First scourge: Slots where this item preferably fits
@@ -366,25 +366,25 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
             // Slot must be preferred
             CIInteractingSlot interactingSlot = inventories.get(s);
             if (!interactingSlot.hasPreferenceFor(item)) { continue; }
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Preference Slot \u00a7e#" + interactingSlot.getSlotNumber() + "\u00a77 of\u00a7b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "\u00a7cvanilla"));
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Preference Slot §e#" + interactingSlot.getSlotNumber() + "§7 of§b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "§cvanilla"));
 
             // Compare to current item
             ItemStack obs = interactingSlot.getCurrentItem();
             if (OotilityCeption.IsAirNullAllowed(obs) || GOOPCManager.isDefaultItem(obs)) {
-                //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 (empty Slot, operation should end after this)");
+                //ACT//OotilityCeption.Log("§8CIH§c MTO§7 (empty Slot, operation should end after this)");
                 obs = OotilityCeption.asQuantity(item, 0);
 
             }  else if (!item.isSimilar(obs)) {
-                //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a75 -\u00a77 Ignored, not stackable");
+                //ACT//OotilityCeption.Log("§8CIH§c MTO§5 -§7 Ignored, not stackable");
                 continue; }
 
             // Dekrease kount
             int absorbed = item.getMaxStackSize() - obs.getAmount();
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Absorbing " + item.getMaxStackSize() + " - " + obs.getAmount() + " = \u00a7e" + absorbed);
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Absorbing " + item.getMaxStackSize() + " - " + obs.getAmount() + " = §e" + absorbed);
 
             // Will absorb?
             if (absorbed > 0) {
-                //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7b +\u00a77 Applied \u00a7b+");
+                //ACT//OotilityCeption.Log("§8CIH§c MTO§b +§7 Applied §b+");
 
                 // If greater than kount, we dne
                 if (absorbed > kount) {
@@ -408,12 +408,12 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
             s--;
         }
 
-        //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Distributing Amount:\u00a73 " + kount);
+        //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Distributing Amount:§3 " + kount);
 
         // Operation complete
         if (kount <= 0) {
 
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7a Closing Success");
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§a Closing Success");
             remainder.setValue(0); return ret; }
 
         /*
@@ -428,7 +428,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
             // Must be able to stack
             if (!item.isSimilar(obs)) { continue; }
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Stackable Slot \u00a7e#" + interactingSlot.getSlotNumber() + "\u00a77 of\u00a7b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "\u00a7cvanilla"));
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Stackable Slot §e#" + interactingSlot.getSlotNumber() + "§7 of§b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "§cvanilla"));
 
 
             // Dekrease kount
@@ -436,7 +436,7 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
 
             // Will absorb?
             if (absorbed > 0) {
-                //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7b +\u00a77 Applied \u00a7b+");
+                //ACT//OotilityCeption.Log("§8CIH§c MTO§b +§7 Applied §b+");
 
                 // If greater than kount, we dne
                 if (absorbed > kount) {
@@ -460,18 +460,18 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
             s--;
         }
 
-        //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Distributing Amount:\u00a73 " + kount);
+        //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Distributing Amount:§3 " + kount);
 
         // Operation complete
         if (kount <= 0) {
 
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7a Closing Success");
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§a Closing Success");
             remainder.setValue(0); return ret; }
 
         /*
          * Last scourge: Any empty slot to store the remainder
          */
-        if (inventories.size() > 0) {
+        if (!inventories.isEmpty()) {
 
             // Only need an empty slot
             CIInteractingSlot interactingSlot = inventories.get(0);
@@ -480,11 +480,11 @@ public class CIHMoveToOtherInventory extends ContainersClickHandler {
             ret.add(new CIStackingWay(interactingSlot, OotilityCeption.asQuantity(item, kount)));
             kount = 0;
 
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Empty Slot \u00a7e#" + interactingSlot.getSlotNumber() + "\u00a77 of\u00a7b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "\u00a7cvanilla"));
-            //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a7b +\u00a77 Applied \u00a7b+");
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Empty Slot §e#" + interactingSlot.getSlotNumber() + "§7 of§b " + ((interactingSlot instanceof CIContainerInteracting) ? ((CIContainerInteracting) interactingSlot).getTemplate().getInternalName() : "§cvanilla"));
+            //ACT//OotilityCeption.Log("§8CIH§c MTO§b +§7 Applied §b+");
         }
 
-        //ACT//OotilityCeption.Log("\u00a78CIH\u00a7c MTO\u00a77 Remaining Amount:\u00a73 " + kount);
+        //ACT//OotilityCeption.Log("§8CIH§c MTO§7 Remaining Amount:§3 " + kount);
 
         remainder.setValue(kount);
         return ret;

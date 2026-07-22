@@ -41,7 +41,7 @@ public class CIHNothing extends ContainersClickHandler {
 
         // Preview mode? No more actions.
         if (GOOPCManager.isUsage_Preview(event.getView())) {
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e -\u00a77 Preview Mode");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§e -§7 Preview Mode");
             return null; }
 
         // What is the meaning of this?
@@ -76,10 +76,10 @@ public class CIHNothing extends ContainersClickHandler {
             // No more business if there is no Commands On Click
             if (!slot.hasCommandsOnClick()) {
 
-                //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 No Commands On Click");
+                //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 No Commands On Click");
                 return null; }
 
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e *\u00a77 Running On-Click Commands");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§e *§7 Running On-Click Commands");
 
             // All the commands on click are included, and that's it.
             return new ContainersInteractionResult(interactingSlot, CIRClickType.CLICK);

@@ -13,8 +13,6 @@ import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCDeployed;
 import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCManager;
 import gunging.ootilities.gunging_ootilities_plugin.containers.inventory.*;
 import gunging.ootilities.gunging_ootilities_plugin.containers.loader.GCL_Personal;
-import gunging.ootilities.gunging_ootilities_plugin.containers.options.ContainerSlotTypes;
-import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCTemplate;
 import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCPersonal;
 import gunging.ootilities.gunging_ootilities_plugin.misc.*;
 import gunging.ootilities.gunging_ootilities_plugin.misc.goop.SuccessibleFlareReceptor;
@@ -28,7 +26,6 @@ import org.bukkit.attribute.AttributeModifier;
 import org.bukkit.block.Block;
 import org.bukkit.block.BlockFace;
 import org.bukkit.block.Container;
-import org.bukkit.block.ShulkerBox;
 import org.bukkit.block.data.Bisected;
 import org.bukkit.command.CommandSender;
 import org.bukkit.command.ConsoleCommandSender;
@@ -41,7 +38,6 @@ import org.bukkit.inventory.EquipmentSlot;
 import org.bukkit.inventory.InventoryView;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
-import org.bukkit.inventory.meta.BlockStateMeta;
 import org.bukkit.inventory.meta.Damageable;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -53,7 +49,6 @@ import org.bukkit.util.Vector;
 import org.jetbrains.annotations.Contract;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import org.bukkit.attribute.Attribute;
 
 import java.lang.reflect.Field;
 import java.util.*;
@@ -90,8 +85,7 @@ public class OotilityCeption {
     public void CPLog(String arg2format) {
         getServer().getConsoleSender().sendMessage(LogFormat(arg2format));
     }
-    public void PPLog(Player verysoft, String arg2format) { verysoft.sendMessage(LogFormat(arg2format)); }
-    public void DPLog(Player verysoft, String arg2format) { CPLog(arg2format); PPLog(verysoft, arg2format); }
+
     public void PLog(Player verysoft, String arg2format) { verysoft.sendMessage(arg2format); }
     public void DLog(Player verysoft, String arg2format) { CLog(arg2format); PLog(verysoft, arg2format); }
     public void CLog(String arg) { getServer().getConsoleSender().sendMessage(arg); }
@@ -146,10 +140,10 @@ public class OotilityCeption {
     }
 
     public static String LogFormat(String message) {
-        return "\u00a73[\u00a7eGooP\u00a73] \u00a77" + message;
+        return "§3[§eGooP§3] §7" + message;
     }
     public static String LogFormat(String specificommand, String message) {
-        return "\u00a73[\u00a7eGooP \u00a7b\u00a7o" + specificommand + "\u00a73] \u00a77" + message;
+        return "§3[§eGooP §b§o" + specificommand + "§3] §7" + message;
     }
 
     static boolean nextMessagesRunning = false;
@@ -157,7 +151,7 @@ public class OotilityCeption {
     static HashMap<Player, ArrayList<Integer>> concurrencyForTheFrame = new HashMap<>();
     /**
      * Sends a list of messages to that player 1 tick after this is called.
-     *
+     * <p>
      * Latest Concurrency ID: 12
      * @param player Player who to send those messages
      * @param message Message to add to the list
@@ -206,31 +200,31 @@ public class OotilityCeption {
 
                     }
 
-                }).runTaskLater(Gunging_Ootilities_Plugin.theMain.getPlugin(), 2L);
+                }).runTaskLater(Gunging_Ootilities_Plugin.getPlugin(), 2L);
             }
         }
     }
 
     @NotNull public static ArrayList<OrderedScoreboardEntry> SortEntriesOf(@Nullable Objective obj, @Nullable ArrayList<String> entries, int emergencyEscape) {
 
-        //SCR//OotilityCeption.Log("\u00a7e-\u00a7b-\u00a73-\u00a77 Ordering scoreboard entries of \u00a7e" + obj.getName());
+        //SCR//OotilityCeption.Log("§e-§b-§3-§7 Ordering scoreboard entries of §e" + obj.getName());
 
         // Get all participants
         ArrayList<OrderedScoreboardEntry> ret = new ArrayList<>();
 
         if (obj == null || obj.getScoreboard() == null) {
-            //SCR//OotilityCeption.Log("\u00a7e-\u00a7b-\u00a73-\u00a7c Scoreboard was null, cancelling.");
+            //SCR//OotilityCeption.Log("§e-§b-§3-§c Scoreboard was null, cancelling.");
             return ret; }
 
         // Get Entries IG
         if (entries == null) { entries = new ArrayList<>(obj.getScoreboard().getEntries()); }
 
-        //SCR//OotilityCeption.Log("\u00a7e-\u00a7b-\u00a73-\u00a77 Found \u00a7b" + entries.size() + "\u00a77 entries:");
-        //SCR//try { for (String str : io.lumine.mythic.lib.api.util.ui.SilentNumbers.transcribeList(entries, (s) -> (s == null ? "null" : ((String) s) + " \u00a7b" + obj.getScore((String) s).getScore()))) { OotilityCeption.Log("\u00a7e:\u00a73:\u00a77 " + str); } } catch (IllegalArgumentException ignored) {}
+        //SCR//OotilityCeption.Log("§e-§b-§3-§7 Found §b" + entries.size() + "§7 entries:");
+        //SCR//try { for (String str : io.lumine.mythic.lib.api.util.ui.SilentNumbers.transcribeList(entries, (s) -> (s == null ? "null" : ((String) s) + " §b" + obj.getScore((String) s).getScore()))) { OotilityCeption.Log("§e:§3:§7 " + str); } } catch (IllegalArgumentException ignored) {}
 
         int emergencyEscaper = 0;
         // Get Participants
-        for (String r : entries) { emergencyEscaper++; if (emergencyEscaper > emergencyEscape) { Gunging_Ootilities_Plugin.theOots.CPLog("\u00a7cFatal Loop Error\u00a77 (I guess), Escaped at 200th iteration, seems an infinite cycle."); break; }
+        for (String r : entries) { emergencyEscaper++; if (emergencyEscaper > emergencyEscape) { Gunging_Ootilities_Plugin.theOots.CPLog("§cFatal Loop Error§7 (I guess), Escaped at 200th iteration, seems an infinite cycle."); break; }
 
             // Just check validity
             if (r != null) {
@@ -246,12 +240,12 @@ public class OotilityCeption {
 
                         // Theres
                         ret.add(new OrderedScoreboardEntry(tar));
-                        //SCR//OotilityCeption.Log("\u00a7e:\u00a7b:\u00a73:\u00a77 Included \u00a7a" + r + "\u00a77, score \u00a7b" + tar.getScore());
+                        //SCR//OotilityCeption.Log("§e:§b:§3:§7 Included §a" + r + "§7, score §b" + tar.getScore());
 
                     }
-                    //SCR//else { OotilityCeption.Log("\u00a7e:\u00a7b:\u00a73:\u00a77 Excluded \u00a7c" + r + "\u00a77, score \u00a7b" + tar.getScore()); }
+                    //SCR//else { OotilityCeption.Log("§e:§b:§3:§7 Excluded §c" + r + "§7, score §b" + tar.getScore()); }
                 }
-                //SCR// else { OotilityCeption.Log("\u00a7e:\u00a7b:\u00a73:\u00a77 Excluded \u00a7c" + r + "\u00a77, too long."); }
+                //SCR// else { OotilityCeption.Log("§e:§b:§3:§7 Excluded §c" + r + "§7, too long."); }
 
             } }
 
@@ -264,14 +258,9 @@ public class OotilityCeption {
 
     //region External Module Logging
     public void ECPLog(String ePrefix, String arg2format) { getServer().getConsoleSender().sendMessage(ELogFormat(ePrefix, arg2format)); }
-    public void EPPLog(Player verysoft, String ePrefix, String arg2format) { verysoft.sendMessage(ELogFormat(ePrefix, arg2format)); }
-    public void EDPLog(Player verysoft, String ePrefix, String arg2format) { ECPLog(ePrefix, arg2format); EPPLog(verysoft, ePrefix, arg2format); }
 
-    public String ELogFormat(String ePrefix, String message) { return "\u00a73[\u00a7e" + ePrefix + "\u00a73] \u00a77" + message; }
+    public String ELogFormat(String ePrefix, String message) { return "§3[§e" + ePrefix + "§3] §7" + message; }
 
-    public String ELogFormat(String ePrefix, String specificommand, String message) {
-        return "\u00a73[\u00a7e" + ePrefix + " \u00a7b\u00a7o" + specificommand + "\u00a73] \u00a77" + message;
-    }
     //endregion
     //protected static String[] errMsgs = new String[] { "Ticking entity detected at chunk -2 65 in world world", "Error when parsing config file at column 19", "Using legacy materials is deprecated.", "Error while loading registry, please enable debug mode for stack trace.", "Stored position of entity 069a79f4-44e9-4726-a5be-fca90e38aaf5 is corrupt.", "Unkown parameter '94726a5bef' at c34, p4", "No se ha podido aplicar el protocolo en la entidad ZOMBIE porque esta deshabilitado en el mundo WORLD por otro plugin. Por favor, desactivalo en el archivo config.yml de este plugin o evita que el otro plugin meta sus narices donde no debe." };
     //endregion
@@ -385,11 +374,6 @@ public class OotilityCeption {
         return clonium;
     }
 
-    public static boolean ChanceSuccess(int percentChance) {
-        Random rand = new Random();
-        return rand.nextInt(100) <= percentChance;
-    }
-
     /**
      * Gets the Display Name of that item. If it has no display name, then the material name.
      *
@@ -419,13 +403,13 @@ public class OotilityCeption {
                 if (tItem.getItemMeta().hasDisplayName()) {
                     ret = tItem.getItemMeta().getDisplayName();
 
-                    //NME//Log("\u00a78Display Name:\u00a7f   " + tItem.getItemMeta().getDisplayName());
+                    //NME//Log("§8Display Name:§f   " + tItem.getItemMeta().getDisplayName());
                 }
 
                 // Well it may be like empty or smthn
-                if (ret.length() == 0) { ret = "\u00a77\u00a7f" + TitleCaseConversion(tItem.getType().name().replace("_", " ")); }
+                if (ret.isEmpty()) { ret = "§7§f" + TitleCaseConversion(tItem.getType().name().replace("_", " ")); }
 
-                if (appendAmount) { ret = "\u00a7f" + tItem.getAmount() + "x" + ret; }
+                if (appendAmount) { ret = "§f" + tItem.getAmount() + "x" + ret; }
 
                 // Return that
                 return ret;
@@ -433,7 +417,7 @@ public class OotilityCeption {
             } else {
 
                 // I guess its air
-                return "\u00a77\u00a7fAir";
+                return "§7§fAir";
             }
 
         // That shit's null wth
@@ -481,10 +465,10 @@ public class OotilityCeption {
         return ParseAsGoop((OfflinePlayer) asPlayer, cmd);
     }
     public static String ParseAsGoop(@NotNull OfflinePlayer asPlayer, @NotNull String cmd) {
-        cmd = cmd.replace("%player%", asPlayer.getName());
+        cmd = cmd.replace("%player%", Objects.requireNonNull(asPlayer.getName()));
         cmd = cmd.replace("%player_name%", asPlayer.getName());
         cmd = cmd.replace("%player_uuid%", asPlayer.getUniqueId().toString());
-        cmd = cmd.replace("%player_world%", asPlayer.getPlayer().getLocation().getWorld().getName());
+        cmd = cmd.replace("%player_world%", Objects.requireNonNull(asPlayer.getPlayer()).getLocation().getWorld().getName());
         cmd = cmd.replace("%player_x%", String.valueOf(asPlayer.getPlayer().getLocation().getX()));
         cmd = cmd.replace("%player_y%", String.valueOf(asPlayer.getPlayer().getLocation().getY()));
         cmd = cmd.replace("%player_z%", String.valueOf(asPlayer.getPlayer().getLocation().getZ()));
@@ -536,7 +520,7 @@ public class OotilityCeption {
     @NotNull
     public static String ParseAsEntity(@NotNull Entity asEntity, @NotNull  String cmd) {
         cmd = cmd.replace("%entity%", String.valueOf(asEntity.getType().toString()));
-        cmd = cmd.replace("%entity_name%", String.valueOf(asEntity.getName()));
+        cmd = cmd.replace("%entity_name%", asEntity.getName());
         cmd = cmd.replace("%entity_uuid%", String.valueOf(asEntity.getUniqueId().toString()));
         cmd = cmd.replace("%entity_world%", asEntity.getLocation().getWorld().getName());
         cmd = cmd.replace("%entity_x%", String.valueOf(asEntity.getLocation().getX()));
@@ -649,7 +633,7 @@ public class OotilityCeption {
 
             if (!perm && !silent) {
 
-                sender.sendMessage("\u00a7cYou dont have permission!");
+                sender.sendMessage("§cYou dont have permission!");
             }
 
             return perm;
@@ -662,7 +646,7 @@ public class OotilityCeption {
 
     @NotNull
     public static ArrayList<String> chop(@NotNull String longString, int paragraphWide, @NotNull String colorPrefix) {
-        ArrayList<String> ret = new ArrayList();
+        ArrayList<String> ret = new ArrayList<>();
         boolean skip = false;
 
         while(longString.length() > paragraphWide) {
@@ -1113,8 +1097,7 @@ public class OotilityCeption {
         if (IsAirNullAllowed(iStack)) { return false; }
 
         // Dip search?
-        if (iStack.getItemMeta() instanceof Container) {
-            Container boxx = (Container) iStack.getItemMeta();
+        if (iStack.getItemMeta() instanceof Container boxx) {
 
             // For every slot
             for (int sl = 0; sl < 27; sl++) {
@@ -1153,8 +1136,7 @@ public class OotilityCeption {
         if (!Gunging_Ootilities_Plugin.foundMMOItems) { return false; }
 
         // Dip search?
-        if (iStack.getItemMeta() instanceof Container) {
-            Container boxx = (Container) iStack.getItemMeta();
+        if (iStack.getItemMeta() instanceof Container boxx) {
 
             // For every slot
             for (int sl = 0; sl < 27; sl++) {
@@ -1200,7 +1182,7 @@ public class OotilityCeption {
                 if (eLvl == null) {
 
                     // Log if appropiate
-                    OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Found item with the \u00a7acorrect \u00a77enchantment.");
+                    OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Found item with the §acorrect §7enchantment.");
 
                     // Yes! It works
                     return true;
@@ -1209,7 +1191,7 @@ public class OotilityCeption {
                 } else if (eItem.getEnchantmentLevel(targetEnch) == eLvl) {
 
                     // Log if appropiate
-                    OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Found item with the \u00a7acorrect \u00a77enchantment and enchantment level.");
+                    OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Found item with the §acorrect §7enchantment and enchantment level.");
 
 
                     // Yes! It works
@@ -1219,7 +1201,7 @@ public class OotilityCeption {
                 } else {
 
                     // Log if appropiate
-                    OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Target Item \u00a73" + eItem.getItemMeta().getDisplayName() + "\u00a77 does not have the expected \u00a73" + targetEnch.getKey().getKey() + "\u00a77 level '\u00a73" + eLvl + "\u00a77.'");
+                    OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Target Item §3" + eItem.getItemMeta().getDisplayName() + "§7 does not have the expected §3" + targetEnch.getKey().getKey() + "§7 level '§3" + eLvl + "§7.'");
 
                 }
 
@@ -1232,14 +1214,14 @@ public class OotilityCeption {
                 if (meta != null) { itName = " " + meta.getDisplayName(); }
 
                 // Log if appropiate
-                OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Target Item\u00a73" + itName + "\u00a77 does not contain such enchantment '\u00a73" + targetEnch.getKey().getKey() + "\u00a77'.");
+                OotilityCeption.Log4Success(logOutput, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Target Item§3" + itName + "§7 does not contain such enchantment '§3" + targetEnch.getKey().getKey() + "§7'.");
             }
 
             // The enchantment does not exist
         } else {
 
             // Log if appropiate
-            OotilityCeption.Log4Success(logOutput, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Enchantment '\u00a73" + targetEnch.getKey().getKey() + "\u00a77' not found. Remember to use vanilla enchantment names.");
+            OotilityCeption.Log4Success(logOutput, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Enchantment '§3" + targetEnch.getKey().getKey() + "§7' not found. Remember to use vanilla enchantment names.");
         }
 
         return false;
@@ -1251,9 +1233,6 @@ public class OotilityCeption {
 
             if (enchant == null) {
                 enchant = Enchantment.getByKey(NamespacedKey.minecraft(name.toUpperCase()));
-                if (enchant == null) {
-                    return null;
-                }
             }
             return enchant;
 
@@ -1290,17 +1269,17 @@ public class OotilityCeption {
             } else {
 
                 // Product to bake
-                ItemStack iProduct = iSource;
-                Boolean success = false;
+                boolean success = false;
 
                 // Any enchantment already of required level?
                 for (Map.Entry<Enchantment, Integer> cEnchant : iSource.getEnchantments().entrySet()) {
 
                     // There seems to be an enchantment of target level already
-                    if (cEnchant.getValue() == eLevel) {
+                    if (Objects.equals(cEnchant.getValue(), eLevel)) {
 
                         // This shit was born ready
                         success = true;
+                        break;
                     }
                 }
 
@@ -1313,21 +1292,21 @@ public class OotilityCeption {
                         EntityType e;
 
                         // Check for the Ultimate Enchantments - Those that don't work over lvl 1
-                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 1) { iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); success = true; }
-                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE)) == 1) { iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE), eLevel);  success = true; }
-                        if (!success && GetEnchLevel(iSource, Enchantment.SILK_TOUCH) == 1) { iProduct.addUnsafeEnchantment(Enchantment.SILK_TOUCH, eLevel);  success = true; }
-                        if (!success && GetEnchLevel(iSource, Enchantment.VANISHING_CURSE) == 1) { iProduct.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, eLevel);  success = true; }
-                        if (!success && GetEnchLevel(iSource, Enchantment.CHANNELING) == 1) { iProduct.addUnsafeEnchantment(Enchantment.CHANNELING, eLevel);  success = true; }
-                        if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT)) == 1) { iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT), eLevel);  success = true; } }
-                        if (!success && GetEnchLevel(iSource, Enchantment.BINDING_CURSE) == 1) { iProduct.addUnsafeEnchantment(Enchantment.BINDING_CURSE, eLevel);  success = true; }
-                        if (!success && GetEnchLevel(iSource, Enchantment.DEPTH_STRIDER) == 3 && eLevel > 3) { iProduct.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, eLevel); success = true;  }
+                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 1) { iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); success = true; }
+                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE)) == 1) { iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE), eLevel);  success = true; }
+                        if (!success && GetEnchLevel(iSource, Enchantment.SILK_TOUCH) == 1) { iSource.addUnsafeEnchantment(Enchantment.SILK_TOUCH, eLevel);  success = true; }
+                        if (!success && GetEnchLevel(iSource, Enchantment.VANISHING_CURSE) == 1) { iSource.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, eLevel);  success = true; }
+                        if (!success && GetEnchLevel(iSource, Enchantment.CHANNELING) == 1) { iSource.addUnsafeEnchantment(Enchantment.CHANNELING, eLevel);  success = true; }
+                        if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT)) == 1) { iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT), eLevel);  success = true; } }
+                        if (!success && GetEnchLevel(iSource, Enchantment.BINDING_CURSE) == 1) { iSource.addUnsafeEnchantment(Enchantment.BINDING_CURSE, eLevel);  success = true; }
+                        if (!success && GetEnchLevel(iSource, Enchantment.DEPTH_STRIDER) == 3 && eLevel > 3) { iSource.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, eLevel); success = true;  }
                     }
 
                     // At this point, adding a new enchantment is what must be done.
                     if (!success) {
 
                         // What the fuck is it?
-                        Boolean isArmor = IsArmor(iSource.getType()),
+                        boolean isArmor = IsArmor(iSource.getType()),
                                 isBow = IsRangedWeapon(iSource.getType()),
                                 isCrossbow = IsCrossbow(iSource.getType()),
                                 isWeapon = IsMeleeWeapon(iSource.getType()),
@@ -1337,103 +1316,103 @@ public class OotilityCeption {
                                 isRod = IsFishingRod(iSource.getType());
 
                         //region Lolz Priority: P2W Scuba Diving Helmet from blocks
-                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 0 && (!isArmor && !isBow && !isWeapon && !isTool && !isRod)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); }
-                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN)) == 0 && (!isArmor && !isBow && !isWeapon && !isTool && !isRod)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN), eLevel); }
+                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 0 && !isArmor && !isBow && !isWeapon && !isTool && !isRod) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); }
+                        if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN)) == 0 && (!isArmor && !isBow && !isWeapon && !isTool && !isRod)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN), eLevel); }
                         //endregion
 
                         //region High Priority: Per-item comp. useless enchantments
                         if (!success) {
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK)) == 0 && (!isRod)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.LURE) == 0 && (!isRod)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.LURE, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN)) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.LOYALTY) == 0 && (!isTrident)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.LOYALTY, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.RIPTIDE) == 0 && (!isTrident)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.RIPTIDE, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED)) == 0 && (!isTool)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.IMPALING) == 0 && (!isWeapon)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.IMPALING, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE)) == 0 && (!isBow)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE), eLevel); }
-                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING)) == 0 && (!isCrossbow)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING), eLevel); } }
-                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT)) == 0 && (!isCrossbow)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT), eLevel); } }
-                            if (!success && GetEnchLevel(iSource, Enchantment.CHANNELING) == 0 && (!isTrident)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.CHANNELING, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE)) == 0 && (!isBow)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.FROST_WALKER) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.FROST_WALKER, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.DEPTH_STRIDER) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.SWEEPING_EDGE) == 0 && (!isSword)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, eLevel); }
-                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE)) == 0 && (!isCrossbow)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE), eLevel); } }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK)) == 0 && (!isBow)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE)) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL)) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS)) == 0 && (!isTool)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE)) == 0 && (!isBow || isCrossbow)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS)) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE)) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL)) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK)) == 0 && (!isRod)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.LURE) == 0 && (!isRod)) { success = true; iSource.addUnsafeEnchantment(Enchantment.LURE, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN)) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.LOYALTY) == 0 && (!isTrident)) { success = true; iSource.addUnsafeEnchantment(Enchantment.LOYALTY, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.RIPTIDE) == 0 && (!isTrident)) { success = true; iSource.addUnsafeEnchantment(Enchantment.RIPTIDE, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED)) == 0 && (!isTool)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.IMPALING) == 0 && (!isWeapon)) { success = true; iSource.addUnsafeEnchantment(Enchantment.IMPALING, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE)) == 0 && (!isBow)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE), eLevel); }
+                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING)) == 0 && (!isCrossbow)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING), eLevel); } }
+                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT)) == 0 && (!isCrossbow)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT), eLevel); } }
+                            if (!success && GetEnchLevel(iSource, Enchantment.CHANNELING) == 0 && (!isTrident)) { success = true; iSource.addUnsafeEnchantment(Enchantment.CHANNELING, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE)) == 0 && (!isBow)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.FROST_WALKER) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(Enchantment.FROST_WALKER, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.DEPTH_STRIDER) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.SWEEPING_EDGE) == 0 && (!isSword)) { success = true; iSource.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, eLevel); }
+                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE)) == 0 && (!isCrossbow)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE), eLevel); } }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK)) == 0 && (!isBow)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE)) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL)) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS)) == 0 && (!isTool)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE)) == 0 && (!isBow || isCrossbow)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS)) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE)) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL)) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL), eLevel); }
                         }
                         //endregion
 
                         //region Medium Priority: Marginaly Useful Enchantments
                         if (!success) {
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL)) == 0 && (!isWeapon)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.FIRE_ASPECT) == 0 && (!isWeapon)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD)) == 0 && (!isWeapon)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS)) == 0 && (!isWeapon)) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_MOBS)) == 0 && (!isWeapon && !isBow)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.KNOCKBACK, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.SILK_TOUCH) == 0 && (!isTool)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.SILK_TOUCH, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL)) == 0 && (!isWeapon)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.FIRE_ASPECT) == 0 && (!isWeapon)) { success = true; iSource.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD)) == 0 && (!isWeapon)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS)) == 0 && (!isWeapon)) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_MOBS)) == 0 && (!isWeapon && !isBow)) { success = true; iSource.addUnsafeEnchantment(Enchantment.KNOCKBACK, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.SILK_TOUCH) == 0 && (!isTool)) { success = true; iSource.addUnsafeEnchantment(Enchantment.SILK_TOUCH, eLevel); }
                         }
                         //endregion
 
                         //region Low Priority: Useful Enchantments
                         if (!success) {
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.CHANNELING) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.CHANNELING, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.FIRE_ASPECT) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.DEPTH_STRIDER) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.FROST_WALKER) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.FROST_WALKER, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.IMPALING) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.IMPALING, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_MOBS)) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.KNOCKBACK, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.LOYALTY) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.LOYALTY, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.LURE) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.LURE, eLevel); }
-                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT), eLevel); } }
-                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING), eLevel); } }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL), eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK), eLevel); }
-                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE), eLevel); } }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.RIPTIDE) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.RIPTIDE, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.SILK_TOUCH) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.SILK_TOUCH, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD), eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.SWEEPING_EDGE) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.THORNS) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.THORNS, eLevel); }
-                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DURABILITY)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DURABILITY), eLevel); }
-                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.SOUL_SPEED)) == 0) { success = true; iProduct.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.SOUL_SPEED), eLevel); } }
-                            if (!success && GetEnchLevel(iSource, Enchantment.MENDING) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.MENDING, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.WATER_WORKER), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ARTHROPODS), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_EXPLOSIONS), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.CHANNELING) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.CHANNELING, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FALL), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.FIRE_ASPECT) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.FIRE_ASPECT, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.DEPTH_STRIDER) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.DEPTH_STRIDER, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DIG_SPEED), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_FIRE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_FIRE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_BLOCKS), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.FROST_WALKER) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.FROST_WALKER, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.IMPALING) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.IMPALING, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_INFINITE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LOOT_BONUS_MOBS)) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.KNOCKBACK, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.LOYALTY) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.LOYALTY, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.LUCK), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.LURE) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.LURE, eLevel); }
+                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.MULTISHOT), eLevel); } }
+                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PIERCING), eLevel); } }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_DAMAGE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_PROJECTILE), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.PROTECTION_ENVIRONMENTAL), eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.ARROW_KNOCKBACK), eLevel); }
+                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.QUICK_CHARGE), eLevel); } }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.OXYGEN), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.RIPTIDE) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.RIPTIDE, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_ALL), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.SILK_TOUCH) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.SILK_TOUCH, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DAMAGE_UNDEAD), eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.SWEEPING_EDGE) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.SWEEPING_EDGE, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.THORNS) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.THORNS, eLevel); }
+                            if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DURABILITY)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.DURABILITY), eLevel); }
+                            if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14.0) { if (!success && GetEnchLevel(iSource, GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.SOUL_SPEED)) == 0) { success = true; iSource.addUnsafeEnchantment(GooP_MinecraftVersions.GetVersionEnchantment(GooPVersionEnchantments.SOUL_SPEED), eLevel); } }
+                            if (!success && GetEnchLevel(iSource, Enchantment.MENDING) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.MENDING, eLevel); }
                         }
                         //endregion
 
                         //region Ass Priority: Curses
                         if (!success){
-                            if (!success && GetEnchLevel(iSource, Enchantment.BINDING_CURSE) == 0 && (!isArmor)) { success = true; iProduct.addUnsafeEnchantment(Enchantment.BINDING_CURSE, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.VANISHING_CURSE) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, eLevel); }
-                            if (!success && GetEnchLevel(iSource, Enchantment.BINDING_CURSE) == 0) { success = true; iProduct.addUnsafeEnchantment(Enchantment.BINDING_CURSE, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.BINDING_CURSE) == 0 && (!isArmor)) { success = true; iSource.addUnsafeEnchantment(Enchantment.BINDING_CURSE, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.VANISHING_CURSE) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.VANISHING_CURSE, eLevel); }
+                            if (!success && GetEnchLevel(iSource, Enchantment.BINDING_CURSE) == 0) { success = true; iSource.addUnsafeEnchantment(Enchantment.BINDING_CURSE, eLevel); }
                         }
                         //endregion
                     }
                 }
 
                 // Result the Finale
-                return  iProduct;
+                return iSource;
             }
         }
 
@@ -1495,7 +1474,7 @@ public class OotilityCeption {
                 if (result != null) { if (result.getValue() == null) { result.setValue(0); } result.setValue(result.getValue() + finalValue); }
 
                 // Log
-                Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfuly set \u00a73" + GetItemName(iSource) + "\u00a77 enchantment \u00a73" + tEnchant.getName() + "\u00a77 level to \u00a73" + finalValue);
+                Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfuly set §3" + GetItemName(iSource) + "§7 enchantment §3" + tEnchant.getName() + "§7 level to §3" + finalValue);
 
                 // Result the Finale
                 return  iProduct;
@@ -1528,7 +1507,7 @@ public class OotilityCeption {
         for (char c : source.toCharArray()) { asCharArray.add(c); }
 
         // Appent
-        StringBuilder str = new StringBuilder("");
+        StringBuilder str = new StringBuilder();
 
         // Evaluate
         for (int c = 0; c < asCharArray.size(); c++) {
@@ -1546,7 +1525,7 @@ public class OotilityCeption {
                 if (isCode) {
 
                     // Append code
-                    str.append('\u00a7');
+                    str.append('§');
 
                 // Was not a code
                 } else {
@@ -1600,7 +1579,7 @@ public class OotilityCeption {
 
                             // First hex code parse attempt includes the very first term.
                             bIndex = 1;
-                            ret = new StringBuilder("");
+                            ret = new StringBuilder();
                         }
 
                     // If the first entry is not trying to even be a hex, then let the thing begin with thay
@@ -1701,7 +1680,7 @@ public class OotilityCeption {
                     } catch ( NumberFormatException ex ) {
 
                         // Say they messed it up
-                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { Gunging_Ootilities_Plugin.theOots.CPLog("\u00a7cHex Colors Conversion Failed: \u00a77Invalid HEX \u00a7e" + hex); }
+                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { Gunging_Ootilities_Plugin.theOots.CPLog("§cHex Colors Conversion Failed: §7Invalid HEX §e" + hex); }
 
                         // Return white alv
                         return ChatColor.WHITE.toString();
@@ -1714,7 +1693,7 @@ public class OotilityCeption {
             } else {
 
                 // Say they messed it up
-                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { Gunging_Ootilities_Plugin.theOots.CPLog("\u00a7cHex Colors Conversion Ignored: \u00a7c Hex Colors are only supported in MC 1.16+"); }
+                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { Gunging_Ootilities_Plugin.theOots.CPLog("§cHex Colors Conversion Ignored: §c Hex Colors are only supported in MC 1.16+"); }
 
                 // Return white alv
                 return ChatColor.WHITE.toString();
@@ -1731,7 +1710,7 @@ public class OotilityCeption {
     public static String IntermitentEncode(@NotNull String source, boolean supress_x) {
 
         // Well it parses, so time to parse as an actual HEX
-        StringBuilder spell = new StringBuilder("");
+        StringBuilder spell = new StringBuilder();
 
         // Add every hex code
         for (char c : source.toCharArray()) {
@@ -1769,7 +1748,7 @@ public class OotilityCeption {
     public static String IntermitentDecode(@NotNull String source, boolean unsupress_x) {
 
         // Not contained? i sleep
-        if (!source.contains("\u00a7")) { return source; }
+        if (!source.contains("§")) { return source; }
 
         if (unsupress_x) {
 
@@ -1782,16 +1761,16 @@ public class OotilityCeption {
         }
 
         // Well it parses, so time to parse as an actual HEX
-        StringBuilder spell = new StringBuilder("");
+        StringBuilder spell = new StringBuilder();
 
         // Add every hex code
-        for (String c : (source.replace("\u00a7\u00a7", "\u00a7ÑÑÑ")).split("\u00a7")) {
+        for (String c : (source.replace("§§", "§ÑÑÑ")).split("§")) {
 
             // is it actually a section sign lma0
             if (c.equals("ÑÑÑ")) {
 
                 // Append as color code
-                spell.append("\u00a7");
+                spell.append("§");
 
             } else {
 
@@ -1804,7 +1783,7 @@ public class OotilityCeption {
         return spell.toString();
     }
 
-    static final String encryptionPre = "\u00a77<\u00a73[ \u00a7e", encryptionPost = " \u00a73]\u00a77>";
+    static final String encryptionPre = "§7<§3[ §e", encryptionPost = " §3]§7>";
     public static ItemStack NameEncrypt(ItemStack iSource, String value) {
 
         // Rename to thay
@@ -1844,52 +1823,52 @@ public class OotilityCeption {
         return false;
     }
 
-    static final String namePlaceholderFrames = "\u00a7¤\u00a7g";
-    static final String namePlaceholderHide = "\u00a7¤\u00a7p";
-    public static final String nameVariableFrames = "\u00a7ø\u00a7g";
-    static final String nameVariableColorDelimiter = "\u00a7~\u00a7g";
+    static final String namePlaceholderFrames = "§¤§g";
+    static final String namePlaceholderHide = "§¤§p";
+    public static final String nameVariableFrames = "§ø§g";
+    static final String nameVariableColorDelimiter = "§~§g";
     static final HashMap<String, String> nvf_xSupression = new HashMap<>();
     public static void Fill_xSupression() {
 
-        nvf_xSupression.put("\u00a70", "\u00a7°\u00a7¬\u00a7j");
-        nvf_xSupression.put("\u00a71", "\u00a7°\u00a7¬\u00a7v");
-        nvf_xSupression.put("\u00a72", "\u00a7°\u00a7¬\u00a7¡");
-        nvf_xSupression.put("\u00a73", "\u00a7°\u00a7¬\u00a7z");
-        nvf_xSupression.put("\u00a74", "\u00a7°\u00a7¬\u00a7¿");
-        nvf_xSupression.put("\u00a75", "\u00a7°\u00a7¬\u00a7+");
-        nvf_xSupression.put("\u00a76", "\u00a7°\u00a7¬\u00a7-");
-        nvf_xSupression.put("\u00a77", "\u00a7°\u00a7¬\u00a7^");
-        nvf_xSupression.put("\u00a78", "\u00a7°\u00a7¬\u00a7¨");
-        nvf_xSupression.put("\u00a79", "\u00a7°\u00a7¬\u00a7$");
+        nvf_xSupression.put("§0", "§°§¬§j");
+        nvf_xSupression.put("§1", "§°§¬§v");
+        nvf_xSupression.put("§2", "§°§¬§¡");
+        nvf_xSupression.put("§3", "§°§¬§z");
+        nvf_xSupression.put("§4", "§°§¬§¿");
+        nvf_xSupression.put("§5", "§°§¬§+");
+        nvf_xSupression.put("§6", "§°§¬§-");
+        nvf_xSupression.put("§7", "§°§¬§^");
+        nvf_xSupression.put("§8", "§°§¬§¨");
+        nvf_xSupression.put("§9", "§°§¬§$");
 
-        nvf_xSupression.put("\u00a7a", "\u00a7°\u00a7¡\u00a7j");
-        nvf_xSupression.put("\u00a7b", "\u00a7°\u00a7¡\u00a7v");
-        nvf_xSupression.put("\u00a7c", "\u00a7°\u00a7¡\u00a7¡");
-        nvf_xSupression.put("\u00a7d", "\u00a7°\u00a7¡\u00a7z");
-        nvf_xSupression.put("\u00a7A", "\u00a7°\u00a7j\u00a7j");
-        nvf_xSupression.put("\u00a7B", "\u00a7°\u00a7j\u00a7v");
-        nvf_xSupression.put("\u00a7C", "\u00a7°\u00a7j\u00a7¡");
-        nvf_xSupression.put("\u00a7D", "\u00a7°\u00a7j\u00a7z");
+        nvf_xSupression.put("§a", "§°§¡§j");
+        nvf_xSupression.put("§b", "§°§¡§v");
+        nvf_xSupression.put("§c", "§°§¡§¡");
+        nvf_xSupression.put("§d", "§°§¡§z");
+        nvf_xSupression.put("§A", "§°§j§j");
+        nvf_xSupression.put("§B", "§°§j§v");
+        nvf_xSupression.put("§C", "§°§j§¡");
+        nvf_xSupression.put("§D", "§°§j§z");
 
-        nvf_xSupression.put("\u00a7e", "\u00a7°\u00a7¿\u00a7j");
-        nvf_xSupression.put("\u00a7f", "\u00a7°\u00a7¿\u00a7v");
-        nvf_xSupression.put("\u00a7k", "\u00a7°\u00a7¿\u00a7¡");
-        nvf_xSupression.put("\u00a7l", "\u00a7°\u00a7¿\u00a7z");
-        nvf_xSupression.put("\u00a7E", "\u00a7°\u00a7v\u00a7j");
-        nvf_xSupression.put("\u00a7F", "\u00a7°\u00a7v\u00a7v");
-        nvf_xSupression.put("\u00a7K", "\u00a7°\u00a7v\u00a7¡");
-        nvf_xSupression.put("\u00a7L", "\u00a7°\u00a7v\u00a7z");
+        nvf_xSupression.put("§e", "§°§¿§j");
+        nvf_xSupression.put("§f", "§°§¿§v");
+        nvf_xSupression.put("§k", "§°§¿§¡");
+        nvf_xSupression.put("§l", "§°§¿§z");
+        nvf_xSupression.put("§E", "§°§v§j");
+        nvf_xSupression.put("§F", "§°§v§v");
+        nvf_xSupression.put("§K", "§°§v§¡");
+        nvf_xSupression.put("§L", "§°§v§z");
 
-        nvf_xSupression.put("\u00a7m", "\u00a7°\u00a7$\u00a7j");
-        nvf_xSupression.put("\u00a7n", "\u00a7°\u00a7$\u00a7v");
-        nvf_xSupression.put("\u00a7o", "\u00a7°\u00a7$\u00a7¡");
-        nvf_xSupression.put("\u00a7r", "\u00a7°\u00a7$\u00a7z");
-        nvf_xSupression.put("\u00a7x", "\u00a7°\u00a7$\u00a7¿");
-        nvf_xSupression.put("\u00a7M", "\u00a7°\u00a7y\u00a7j");
-        nvf_xSupression.put("\u00a7N", "\u00a7°\u00a7y\u00a7v");
-        nvf_xSupression.put("\u00a7O", "\u00a7°\u00a7y\u00a7¡");
-        nvf_xSupression.put("\u00a7R", "\u00a7°\u00a7y\u00a7z");
-        nvf_xSupression.put("\u00a7X", "\u00a7°\u00a7y\u00a7¿");
+        nvf_xSupression.put("§m", "§°§$§j");
+        nvf_xSupression.put("§n", "§°§$§v");
+        nvf_xSupression.put("§o", "§°§$§¡");
+        nvf_xSupression.put("§r", "§°§$§z");
+        nvf_xSupression.put("§x", "§°§$§¿");
+        nvf_xSupression.put("§M", "§°§y§j");
+        nvf_xSupression.put("§N", "§°§y§v");
+        nvf_xSupression.put("§O", "§°§y§¡");
+        nvf_xSupression.put("§R", "§°§y§z");
+        nvf_xSupression.put("§X", "§°§y§¿");
     }
 
     /**
@@ -1951,20 +1930,20 @@ public class OotilityCeption {
 
         // Does it have colons bruh
         if (performOperation) {
-           //NEK//Log("\u00a7e>>>>>>>>> \u00a76Performing Naming Operaions:");
-           //NEK//Log("\u00a7e>>>> \u00a77Operation:\u00a73 " + nvOperation.asOperation);
-           //NEK//Log("\u00a7e>>>> \u00a77Source:\u00a73 " + iSource);
+           //NEK//Log("§e>>>>>>>>> §6Performing Naming Operaions:");
+           //NEK//Log("§e>>>> §7Operation:§3 " + nvOperation.asOperation);
+           //NEK//Log("§e>>>> §7Source:§3 " + iSource);
 
             // Build the string to build
             String iOperation = "";
 
             // If its just updating the placeholders, the operation is just the source ffs
             if (nvOperation.isReplaceholder()) {
-               //NEK//Log("\u00a7cPerforming as Placeholder");
+               //NEK//Log("§cPerforming as Placeholder");
 
                 // Nothing special
                 iOperation = DenameNameVariables(iSource);
-               //NEK//Log("\u00a7fOperation: \u00a73" + iOperation);
+               //NEK//Log("§fOperation: §3" + iOperation);
 
             } else {
 
@@ -1981,15 +1960,15 @@ public class OotilityCeption {
                 boolean kounterAppend = true;
                 boolean nameDefined = false;
 
-               //NEK//Log(" \u00a7e----------------- \u00a77Evaluating Source \u00a7e-----------------");
+               //NEK//Log(" §e----------------- §7Evaluating Source §e-----------------");
                 // Evaluate each ig
                 for (String str : kourse) {
-                   //NEK//Log("\u00a7e>>>\u00a77 " + str);
+                   //NEK//Log("§e>>>§7 " + str);
 
                     // Has it a code
                     NameVariable code = null;
                     if (!kounterAppend) {
-                       //NEK//Log("\u00a7b     +\u00a77 Could be Variable");
+                       //NEK//Log("§b     +§7 Could be Variable");
 
                         // Valid as a name varialbe?
                         code = GetNameVariable(str);
@@ -1997,19 +1976,19 @@ public class OotilityCeption {
 
                     // Did it exist?
                     if (code != null) {
-                       //NEK//Log("\u00a73     +\u00a77 Found Variable");
-                       //NEK//Log("\u00a7e     vari>\u00a77 " + code.getIdentifier());
-                       //NEK//Log("\u00a76     valu>\u00a77 " + code.getValue());
+                       //NEK//Log("§3     +§7 Found Variable");
+                       //NEK//Log("§e     vari>§7 " + code.getIdentifier());
+                       //NEK//Log("§6     valu>§7 " + code.getValue());
 
                         // Register varialbe if new
                         NameVariable oused = preRNV.get(code.getIdentifier());
                         if (oused == null) { preRNV.put(code.getIdentifier(), code);
                         if (code.getIdentifier().equals("name")) { nameDefined = true; } }
-                       //NEK//Log("\u00a7c     valf>\u00a77 " + preRNV.get(code.getIdentifier()).getValue());
+                       //NEK//Log("§c     valf>§7 " + preRNV.get(code.getIdentifier()).getValue());
 
                         // Add it regardless
                         preRNA.add(code);
-                       //NEK//Log("\u00a7c + " + code.getIdentifier() + "\u00a77." + code.getValue());
+                       //NEK//Log("§c + " + code.getIdentifier() + "§7." + code.getValue());
 
                         // Counter next colon append
                         kounterAppend = true;
@@ -2023,7 +2002,7 @@ public class OotilityCeption {
                             // Append as a simple string
                             if (str.length() > 0) {
                                 preRNA.add(new NameVariable(null, "@" + str));
-                               //NEK//Log("\u00a7c +\u00a77 @" + str);
+                               //NEK//Log("§c +§7 @" + str);
                             }
 
                         } else {
@@ -2034,7 +2013,7 @@ public class OotilityCeption {
                             // Append as a simple string
                             if (str.length() > 0) {
                                 preRNA.add(new NameVariable(null, str));
-                               //NEK//Log("\u00a7c +\u00a77 " + str);
+                               //NEK//Log("§c +§7 " + str);
                             }
                         }
                     }
@@ -2045,41 +2024,41 @@ public class OotilityCeption {
 
                 // Edit variables based on the nvOperation's contets
                 if (nvOperation.isRevariable()) {
-                   //NEK//Log("\u00a76It is a revar operation. Interpreting...");
+                   //NEK//Log("§6It is a revar operation. Interpreting...");
 
                     // Go through each registered varialbe
-                   //NEK//Log(" \u00a7e>~~~~~~ \u00a77Reading Operation Vars \u00a7e~~~~~~<");
+                   //NEK//Log(" §e>~~~~~~ §7Reading Operation Vars §e~~~~~~<");
                     for (NameVariable nv : nvOperation.getVariables()) {
-                       //NEK//Log("\u00a7e>>>\u00a77 " + nv);
+                       //NEK//Log("§e>>>§7 " + nv);
 
                         // Define name
                         if (nv.getIdentifier().equals("name")) {
 
                             // Is name
                             nameRequired = true;
-                           //NEK//Log("\u00a7b  ~ ~ It is the \u00a7nname\u00a7b ~ ~ ~");
+                           //NEK//Log("§b  ~ ~ It is the §nname§b ~ ~ ~");
                         }
 
                         // Add if contained
                         if (preRNV.containsKey(nv.getIdentifier())) {
-                           //NEK//Log("\u00a7b     ?\u00a77 Replaced Variable");
+                           //NEK//Log("§b     ?§7 Replaced Variable");
 
                             // Edit its preRNV
                             preRNV.put(nv.getIdentifier(), nv);
-                           //NEK//Log("\u00a7a     now>\u00a77 " + nv);
+                           //NEK//Log("§a     now>§7 " + nv);
 
                         // Its being set I gues
                         } else {
 
                             // Edit its preRNV
                             preRNV.put(nv.getIdentifier(), nv);
-                           //NEK//Log("\u00a7a     put>\u00a77 " + nv);
+                           //NEK//Log("§a     put>§7 " + nv);
                         }
                     }
 
                     // Find name
                     if (nameRequired && !nameDefined && nameAsReplace) {
-                       //NEK//Log("\u00a7b  ~ ~ Seeking \u00a7nname\u00a7b ~ ~ ~");
+                       //NEK//Log("§b  ~ ~ Seeking §nname§b ~ ~ ~");
 
                         // Scry the largest unvariabled text
                         int larg8st = -1, largestIndex = -1;
@@ -2110,7 +2089,7 @@ public class OotilityCeption {
 
                         // Name not found? That transforms all this into a replace name operation BRUH
                         if (largestIndex < 0) {
-                            //NEK//Log("\u00a7b  ~ ~ Transforming into a \u00a79Replace Operation\u00a7b ~ ~ ~");
+                            //NEK//Log("§b  ~ ~ Transforming into a §9Replace Operation§b ~ ~ ~");
 
                             // iOperation becomes the value of this
                             NameVariableOperation trueNVM = new NameVariableOperation(nvOperation.getVariable("name").getValue());
@@ -2123,17 +2102,17 @@ public class OotilityCeption {
 
                             // Thats the name now
                             preRNA.get(largestIndex).setIdentifier("name");
-                           //NEK//Log("\u00a73 ~ ~ Name Indexed At: \u00a77" + largestIndex);
-                           //NEK//Log("\u00a73       ~~> \u00a77" + preRNA.get(largestIndex));
+                           //NEK//Log("§3 ~ ~ Name Indexed At: §7" + largestIndex);
+                           //NEK//Log("§3       ~~> §7" + preRNA.get(largestIndex));
                         }
                     }
 
                     // If it is only changing the variables, this builds the same thing as source but replacing old variables
-                    StringBuilder iOBuilder = new StringBuilder("");
+                    StringBuilder iOBuilder = new StringBuilder();
 
-                   //NEK//Log(" \u00a76>~~~>>~ \u00a7fBuilding IOperation \u00a76~<<~~~<");
+                   //NEK//Log(" §6>~~~>>~ §fBuilding IOperation §6~<<~~~<");
                     for (NameVariable nv : preRNA) {
-                       //NEK//Log("\u00a7e>>>\u00a77 " + nv);
+                       //NEK//Log("§e>>>§7 " + nv);
 
                         // Was it an actual variable?
                         if (nv.isVariable()) {
@@ -2143,11 +2122,11 @@ public class OotilityCeption {
 
                                 // Append as variable
                                 iOBuilder.append("@").append(nv.getIdentifier()).append("=").append(preRNV.get(nv.getIdentifier()).getValue()).append("@");
-                               //NEK//Log("\u00a76   + \u00a77 @" + nv.getIdentifier() + "=" + preRNV.get(nv.getIdentifier()).getValue() + "@");
+                               //NEK//Log("§6   + §7 @" + nv.getIdentifier() + "=" + preRNV.get(nv.getIdentifier()).getValue() + "@");
 
                             } else {
 
-                               //NEK//Log("\u00a7cFATAL ERROR:\u00a77 This should really have a value - " + nv);
+                               //NEK//Log("§cFATAL ERROR:§7 This should really have a value - " + nv);
                             }
 
                         // Not a variable, not our business
@@ -2155,17 +2134,17 @@ public class OotilityCeption {
 
                             // Append whatever
                             iOBuilder.append(nv.getValue());
-                           //NEK//Log("\u00a76   + \u00a77 " + nv.getValue());
+                           //NEK//Log("§6   + §7 " + nv.getValue());
                         }
                     }
 
                     // Build string
                     iOperation = iOBuilder.toString();
-                    //NEK//Log("\u00a7e>>> IOperation:\u00a77   \"" + iOperation + "\"");
+                    //NEK//Log("§e>>> IOperation:§7   \"" + iOperation + "\"");
 
                 // If it is replace, however, it may be reordering and shit
                 } else if (nvOperation.isReplace()) {
-                   //NEK//Log("\u00a76It is a replace operation. Obtaining final order");
+                   //NEK//Log("§6It is a replace operation. Obtaining final order");
 
                     // Extract real order
                     ArrayList<NameVariable> realOrder = new ArrayList<>();
@@ -2176,52 +2155,52 @@ public class OotilityCeption {
                     String[] mourse = nvOperation.getReplace().split("@");
                     kounterAppend = true;
 
-                   //NEK//Log(" \u00a7a----------------- \u00a77Evaluating Replace \u00a7a-----------------");
+                   //NEK//Log(" §a----------------- §7Evaluating Replace §a-----------------");
                     // Evaluate each ig
                     for (String str : mourse) {
-                       //NEK//Log("\u00a7a>>>\u00a77 " + str);
+                       //NEK//Log("§a>>>§7 " + str);
 
                         // Has it a code
                         NameVariable code = null;
                         boolean addedAsSpec = false;
                         if (!kounterAppend) {
-                           //NEK//Log("\u00a7b     +\u00a77 Could be Variable");
+                           //NEK//Log("§b     +§7 Could be Variable");
 
                             // Valid as a name varialbe?
                             code = GetNameVariable(str);
 
                             // Null but has no spaces?
                             if (code == null && !str.contains(" ")) {
-                               //NEK//Log("\u00a7b     ?\u00a77 Undefined Variable");
+                               //NEK//Log("§b     ?§7 Undefined Variable");
 
                                 // The new one will take priority if defined
                                 if (repRNV.get(str) != null) {
-                                   //NEK//Log("\u00a73     ?\u00a77 Found Current Definition (\u00a78repRNV\u00a73)");
+                                   //NEK//Log("§3     ?§7 Found Current Definition (§8repRNV§3)");
 
                                     // Found value. Bake
                                     code = new NameVariable(str, repRNV.get(str).getValue());
 
                                 // If the new wasnt defined but was in original, use original
                                 } else  if (preRNV.get(str) != null) {
-                                   //NEK//Log("\u00a73     ?\u00a77 Found Source Definition (\u00a78preRNV\u00a73)");
+                                   //NEK//Log("§3     ?§7 Found Source Definition (§8preRNV§3)");
 
                                     // Found value. Bake
                                     code = new NameVariable(str, preRNV.get(str).getValue());
 
                                 // A code but not defined; hmmm
                                 } else {
-                                   //NEK//Log("\u00a7c     ?\u00a77 Found No Definition");
+                                   //NEK//Log("§c     ?§7 Found No Definition");
 
                                     // Add the whole source
                                     if (str.equals("fullname") || str.equals("otherx") || str.equals("other") || str.equals("name")) {
-                                       //NEK//Log("\u00a7a     vari>\u00a77 " + str);
+                                       //NEK//Log("§a     vari>§7 " + str);
 
                                         // Exists
                                         addedAsSpec = true;
 
                                         // Oh yea add all those Bs
                                         repRNA.add(new NameVariable(str, ""));
-                                       //NEK//Log("\u00a7c + " + str + "\u00a77.\u00a78[SPEC]");
+                                       //NEK//Log("§c + " + str + "§7.§8[SPEC]");
 
                                         // Counter next colon append
                                         kounterAppend = true;
@@ -2235,19 +2214,19 @@ public class OotilityCeption {
 
                             // Did it exist?
                             if (code != null) {
-                               //NEK//Log("\u00a73     +\u00a77 Found Variable");
-                               //NEK//Log("\u00a7a     vari>\u00a77 " + code.getIdentifier());
-                               //NEK//Log("\u00a72     valu>\u00a77 " + code.getValue());
+                               //NEK//Log("§3     +§7 Found Variable");
+                               //NEK//Log("§a     vari>§7 " + code.getIdentifier());
+                               //NEK//Log("§2     valu>§7 " + code.getValue());
 
                                 // Register varialbe if new
                                 NameVariable oused = repRNV.get(code.getIdentifier());
                                 if (oused == null) { repRNV.put(code.getIdentifier(), code); }
                                 if (code.getIdentifier().equals("name")) { nameDefined = true; }
-                               //NEK//Log("\u00a7c     valf>\u00a77 " + repRNV.get(code.getIdentifier()).getValue());
+                               //NEK//Log("§c     valf>§7 " + repRNV.get(code.getIdentifier()).getValue());
 
                                 // Add it regardless
                                 repRNA.add(code);
-                               //NEK//Log("\u00a7c + " + code.getIdentifier() + "\u00a77." + code.getValue());
+                               //NEK//Log("§c + " + code.getIdentifier() + "§7." + code.getValue());
 
                                 // Counter next colon append
                                 kounterAppend = true;
@@ -2261,7 +2240,7 @@ public class OotilityCeption {
                                     /*/ Append as a simple string
                                     if (str.length() > 0) {
                                         repRNA.add(new NameVariable(null, "@" + str));
-                                       /*NEK//Log("\u00a7c +\u00a77 @" + str);
+                                       /*NEK//Log("§c +§7 @" + str);
                                     }   //*/
 
                                 } else {
@@ -2272,38 +2251,38 @@ public class OotilityCeption {
                                     // Append as a simple string
                                     if (str.length() > 0) {
                                         repRNA.add(new NameVariable(null, str));
-                                       //NEK//Log("\u00a7c +\u00a77 " + str);
+                                       //NEK//Log("§c +§7 " + str);
                                     }
                                 }
                             }
                         }
                     }
 
-                   //NEK//Log(" \u00a7e>~~~~~~ \u00a77Filling Olden Vars \u00a7e~~~~~~<");
+                   //NEK//Log(" §e>~~~~~~ §7Filling Olden Vars §e~~~~~~<");
                     // Gather olden values
                     for (NameVariable nv : repRNA) {
-                       //NEK//Log("\u00a76>>>\u00a77 " + nv);
+                       //NEK//Log("§6>>>§7 " + nv);
 
                         // If it is a variable
                         if (nv.isVariable()) {
 
                             // If missing from repRNV
                             if (repRNV.get(nv.getIdentifier()) == null) {
-                               //NEK//Log("\u00a7c     - \u00a77 Missing (\u00a78repRNV\u00a77)");
+                               //NEK//Log("§c     - §7 Missing (§8repRNV§7)");
 
                                 // If contained in pre
                                 if (preRNV.containsKey(nv.getIdentifier())) {
-                                   //NEK//Log("\u00a7e     + \u00a77 Found (\u00a78preRNV\u00a77)");
+                                   //NEK//Log("§e     + §7 Found (§8preRNV§7)");
 
                                     // Add from preRNV
                                     repRNV.put(nv.getIdentifier(), preRNV.get(nv.getIdentifier()));
-                                   //NEK//Log("\u00a76        > " + preRNV.get(nv.getIdentifier()));
+                                   //NEK//Log("§6        > " + preRNV.get(nv.getIdentifier()));
                                 }
                             }
 
                             // Is it name?
                             if (nv.getIdentifier().equals("name")) {
-                                //DBG//Log("\u00a7b  ~ ~ It is the \u00a7nname\u00a7b ~ ~ ~");
+                                //DBG//Log("§b  ~ ~ It is the §nname§b ~ ~ ~");
 
                                 // Define name
                                 nameRequired = true;
@@ -2313,7 +2292,7 @@ public class OotilityCeption {
 
                     // Find name
                     if (nameRequired && !nameDefined) {
-                       //NEK//Log("\u00a7b  ~ ~ Seeking \u00a7nname\u00a7b ~ ~ ~");
+                       //NEK//Log("§b  ~ ~ Seeking §nname§b ~ ~ ~");
 
                         // Scry the largest unvariabled text
                         int larg8st = -1, largestIndex = -1;
@@ -2363,8 +2342,8 @@ public class OotilityCeption {
                             preRNA.get(largestIndex).setIdentifier("name");
                             preRNV.put("name", preRNA.get(largestIndex));
                             repRNV.put("name", preRNA.get(largestIndex));
-                           //NEK//Log("\u00a73 ~ ~ Name Indexed At: \u00a77" + largestIndex);
-                           //NEK//Log("\u00a73       ~~> \u00a77" + preRNA.get(largestIndex));
+                           //NEK//Log("§3 ~ ~ Name Indexed At: §7" + largestIndex);
+                           //NEK//Log("§3       ~~> §7" + preRNA.get(largestIndex));
                         }
                     }
 
@@ -2409,32 +2388,32 @@ public class OotilityCeption {
                     }
 
 
-                   //NEK//Log(" \u00a7a>~~~>>~ \u00a7fBuilding Real Order \u00a7a~<<~~~<");
+                   //NEK//Log(" §a>~~~>>~ §fBuilding Real Order §a~<<~~~<");
                     // Build the thing
                     for (NameVariable nv : repRNA) {
-                       //NEK//Log("\u00a7a>>>\u00a77 " + nv);
+                       //NEK//Log("§a>>>§7 " + nv);
 
                         // Add if not variable
                         if (!nv.isVariable()) {
-                           //NEK//Log("\u00a7c  ~>\u00a77 Not a Variable");
+                           //NEK//Log("§c  ~>§7 Not a Variable");
 
                             realOrder.add(nv);
-                           //NEK//Log("\u00a7c   ~+>\u00a77 " + nv);
+                           //NEK//Log("§c   ~+>§7 " + nv);
 
                         // It is a variable
                         } else {
 
                             // If it is full name
                             if (nv.getIdentifier().equals("fullname")) {
-                               //NEK//Log("\u00a7c  ~> \u00a7nFull Name");
+                               //NEK//Log("§c  ~> §nFull Name");
 
                                 // Add the whole damn source
                                 realOrder.addAll(preRNA);
-                                //NEK//for (NameVariable var2 : preRNA) { Log("\u00a7c   ~+>\u00a77 " + var2);  }
+                                //NEK//for (NameVariable var2 : preRNA) { Log("§c   ~+>§7 " + var2);  }
 
                             // If its those unused
                             } else if (nv.getIdentifier().equals("other")) {
-                               //NEK//Log("\u00a7c  ~> \u00a7nOther");
+                               //NEK//Log("§c  ~> §nOther");
 
                                 // Go through all the originals and add if they dont have alogExp count
                                 for (NameVariable preNV : preRNA) {
@@ -2447,11 +2426,11 @@ public class OotilityCeption {
 
                                             // Add thus
                                             realOrder.add(preNV);
-                                           //NEK//Log("\u00a7c   ~+>\u00a77 " + preNV);
+                                           //NEK//Log("§c   ~+>§7 " + preNV);
 
                                         } else {
 
-                                           //NEK//Log("\u00a74   ~-~\u00a77 " + preNV);
+                                           //NEK//Log("§4   ~-~§7 " + preNV);
                                         }
 
                                     // Add non variabels
@@ -2459,13 +2438,13 @@ public class OotilityCeption {
 
                                         // Just add
                                         realOrder.add(preNV);
-                                       //NEK//Log("\u00a7c   ~+>\u00a77 " + preNV);
+                                       //NEK//Log("§c   ~+>§7 " + preNV);
                                     }
                                 }
 
                             // Add those missing in the current than exist in the original
                             } else if (nv.getIdentifier().equals("otherx")) {
-                               //NEK//Log("\u00a7c  ~> \u00a7nOther X");
+                               //NEK//Log("§c  ~> §nOther X");
 
                                 HashMap<String, Integer> logLoc = new HashMap<>();
 
@@ -2489,12 +2468,12 @@ public class OotilityCeption {
                                         if (original == null) { original = 0; }
                                         int tobeadded = maximum - current;
                                         int tobeaddedLocal = original - localCurrent;
-                                       //NEK//Log("\u00a7e   ~ Maxim:\u00a7f " + maximum);
-                                       //NEK//Log("\u00a76   ~ Origi:\u00a7f " + original);
-                                       //NEK//Log("\u00a7b   ~ LCurr:\u00a7f " + localCurrent);
-                                       //NEK//Log("\u00a73   ~ GCurr:\u00a7f " + current);
-                                       //NEK//Log("\u00a7a   ~ LTBAd:\u00a7f " + tobeaddedLocal);
-                                       //NEK//Log("\u00a72   ~ GTBAd:\u00a7f " + tobeadded);
+                                       //NEK//Log("§e   ~ Maxim:§f " + maximum);
+                                       //NEK//Log("§6   ~ Origi:§f " + original);
+                                       //NEK//Log("§b   ~ LCurr:§f " + localCurrent);
+                                       //NEK//Log("§3   ~ GCurr:§f " + current);
+                                       //NEK//Log("§a   ~ LTBAd:§f " + tobeaddedLocal);
+                                       //NEK//Log("§2   ~ GTBAd:§f " + tobeadded);
 
                                         // If enough ahve been added, straight up add no more alv
                                         if (maximum < original) {
@@ -2507,22 +2486,22 @@ public class OotilityCeption {
 
                                                     // Add thus
                                                     realOrder.add(onv);
-                                                   //NEK//Log("\u00a7c   ~+>\u00a77 " + onv);
+                                                   //NEK//Log("§c   ~+>§7 " + onv);
                                                 } else {
 
-                                                   //NEK//Log("\u00a74   ~ Local tba exceeds original tba");
-                                                   //NEK//Log("\u00a74   ~-~\u00a77 " + onv);
+                                                   //NEK//Log("§4   ~ Local tba exceeds original tba");
+                                                   //NEK//Log("§4   ~-~§7 " + onv);
                                                 }
 
                                             } else {
 
-                                               //NEK//Log("\u00a74   ~ Local current exceeds original current");
-                                               //NEK//Log("\u00a74   ~-~\u00a77 " + onv);
+                                               //NEK//Log("§4   ~ Local current exceeds original current");
+                                               //NEK//Log("§4   ~-~§7 " + onv);
                                             }
 
                                         } else {
-                                           //NEK//Log("\u00a74   ~ Maximum exceeds Original");
-                                           //NEK//Log("\u00a74   ~-~\u00a77 " + onv);
+                                           //NEK//Log("§4   ~ Maximum exceeds Original");
+                                           //NEK//Log("§4   ~-~§7 " + onv);
                                         }
 
                                     // add non-variables unrestrictedly
@@ -2530,58 +2509,58 @@ public class OotilityCeption {
 
                                         // Just add
                                         realOrder.add(onv);
-                                       //NEK//Log("\u00a7c   ~+>\u00a77 " + onv);
+                                       //NEK//Log("§c   ~+>§7 " + onv);
                                     }
                                 }
 
                             // Not special
                             }  else {
-                               //NEK//Log("\u00a7c  ~>\u00a77 Simple Variable");
+                               //NEK//Log("§c  ~>§7 Simple Variable");
 
                                 // Add
                                 realOrder.add(nv);
-                               //NEK//Log("\u00a7c   ~+>\u00a77 " + nv);
+                               //NEK//Log("§c   ~+>§7 " + nv);
 
                                 // For each added in the original; count
                                 Integer current = logRep.get(nv.getIdentifier());
                                 if (current == null) { current = 0; } current++;
                                 logRep.put(nv.getIdentifier(), current);
-                               //NEK//Log("\u00a74   ~#>\u00a77 " + current);
+                               //NEK//Log("§4   ~#>§7 " + current);
                             }
 
                         }
                     }
 
-                   //NEK//Log(" \u00a7e>~~~>>~ \u00a77Refilling Olden Vars \u00a7e~<<~~~<");
+                   //NEK//Log(" §e>~~~>>~ §7Refilling Olden Vars §e~<<~~~<");
                     // Re-Gather olden values (i guess)
                     for (NameVariable nv : realOrder) {
-                       //NEK//Log("\u00a7e>>>\u00a77 " + nv);
+                       //NEK//Log("§e>>>§7 " + nv);
 
                         // If it is a variable
                         if (nv.isVariable()) {
 
                             // If missing from repRNV
                             if (repRNV.get(nv.getIdentifier()) == null) {
-                               //NEK//Log("\u00a7c     - \u00a77 Missing (\u00a78repRNV\u00a77)");
+                               //NEK//Log("§c     - §7 Missing (§8repRNV§7)");
 
                                 // If contained in pre
                                 if (preRNV.containsKey(nv.getIdentifier())) {
-                                   //NEK//Log("\u00a7e     + \u00a77 Found (\u00a78preRNV\u00a77)");
+                                   //NEK//Log("§e     + §7 Found (§8preRNV§7)");
 
                                     // Add from preRNV
                                     repRNV.put(nv.getIdentifier(), preRNV.get(nv.getIdentifier()));
-                                   //NEK//Log("\u00a76        > " + preRNV.get(nv.getIdentifier()));
+                                   //NEK//Log("§6        > " + preRNV.get(nv.getIdentifier()));
                                 }
                             }
                         }
                     }
 
                     // If it is only changing the variables, this builds the same thing as source but replacing old variables
-                    StringBuilder iOBuilder = new StringBuilder("");
+                    StringBuilder iOBuilder = new StringBuilder();
 
-                    //NEK//Log(" \u00a76>~~~>>~ \u00a7fBuilding IOperation \u00a76~<<~~~<");
+                    //NEK//Log(" §6>~~~>>~ §fBuilding IOperation §6~<<~~~<");
                     for (NameVariable nv : realOrder) {
-                        //NEK//Log("\u00a7e>>>\u00a77 " + nv);
+                        //NEK//Log("§e>>>§7 " + nv);
 
                         // Was it an actual variable?
                         if (nv.isVariable()) {
@@ -2589,20 +2568,20 @@ public class OotilityCeption {
                             // Append as variable
                             iOBuilder.append("@").append(nv.getIdentifier()).append("=").append(repRNV.get(nv.getIdentifier()).getValue()).append("@");
 
-                            //NEK//Log("\u00a76   + \u00a77 @" + nv.getIdentifier() + "=" + repRNV.get(nv.getIdentifier()).getValue() + "@");
+                            //NEK//Log("§6   + §7 @" + nv.getIdentifier() + "=" + repRNV.get(nv.getIdentifier()).getValue() + "@");
 
                             // Not a variable, not our business
                         } else {
 
                             // Append whatever
                             iOBuilder.append(nv.getValue());
-                            //NEK//Log("\u00a76   + \u00a77 " + nv.getValue());
+                            //NEK//Log("§6   + §7 " + nv.getValue());
                         }
                     }
 
                     // Build string
                     iOperation = iOBuilder.toString();
-                    //NEK//Log("\u00a7e>>> IOperation:\u00a77   \"" + iOperation + "\"");
+                    //NEK//Log("§e>>> IOperation:§7   \"" + iOperation + "\"");
                 }
             }
 
@@ -2614,7 +2593,7 @@ public class OotilityCeption {
 
             // Is it only the name :wazowskibruhmoment:
             if (kodes.length == 2 && iOperation.startsWith("@name=")) {
-                //NEK//Log("\u00a77 ~ Apparently Name Only ~ ");
+                //NEK//Log("§7 ~ Apparently Name Only ~ ");
 
                 // Get actual name
                 NameVariable iName = GetNameVariable(kodes[1]);
@@ -2625,7 +2604,7 @@ public class OotilityCeption {
                     // Transfurm
                     String iOName = iName.getValue().replace("<&at>", "@").replace("<&pc>", "%");
 
-                    //NEK//Log("\u00a76Name Only. \u00a77Result: " + iOName);
+                    //NEK//Log("§6Name Only. §7Result: " + iOName);
 
                     // Thats it
                     return ParseColour(iOName).replace("<~and>", "&");
@@ -2633,15 +2612,15 @@ public class OotilityCeption {
             }
 
             // Finished rebuilt
-            StringBuilder builder = new StringBuilder("");
-            StringBuilder colorOutputCompound = new StringBuilder("");
+            StringBuilder builder = new StringBuilder();
+            StringBuilder colorOutputCompound = new StringBuilder();
             boolean kounterAppend = true;
             String lastColorOutput = "";
 
-            //NEK//Log(" \u00a76>~~~>>~~~>>~~~> \u00a7fBuilding Name \u00a76<~~~<<~~~<<~~~<");
+            //NEK//Log(" §6>~~~>>~~~>>~~~> §fBuilding Name §6<~~~<<~~~<<~~~<");
             // Evaluate each ig
             for (String str : kodes) {
-                //NEK//Log("\u00a7e>>>\u00a77 " + str);
+                //NEK//Log("§e>>>§7 " + str);
 
                 // Has it a code
                 String code = null;
@@ -2747,7 +2726,7 @@ public class OotilityCeption {
         // Transfurm
         String iOperation = nvOperation.getReplace().replace("<&at>", "@").replace("<&pc>", "%").replace("<$at>", "@").replace("<$pc>", "%");
 
-       //NEK//Log("\u00a7cNo Rename Operation Required. \u00a77Result: " + iOperation);
+       //NEK//Log("§cNo Rename Operation Required. §7Result: " + iOperation);
         // Not vald
         return iOperation.replace("  ", " ");
     }
@@ -2836,36 +2815,36 @@ public class OotilityCeption {
 
         // Does it have colons bruh
         if (source.contains("%")) {
-            //NEK//Log(" \u00a7eHad Placeholders:\u00a77 " + source);
+            //NEK//Log(" §eHad Placeholders:§7 " + source);
 
             // Split
             String[] kodes = source.split("%");
 
             // Finished rebuilt
-            StringBuilder builder = new StringBuilder("");
-            StringBuilder asIntermitent = new StringBuilder("");
+            StringBuilder builder = new StringBuilder();
+            StringBuilder asIntermitent = new StringBuilder();
             boolean kounterAppend = true;
             boolean hidden = false;
             boolean asNumeric = false;
             String lastColorOutput = "";
 
             // Evaluate each ig
-            //NEK//Log(" \u00a76>~~~~~~ \u00a77Finding Placeholders \u00a76~~~~~~<");
+            //NEK//Log(" §6>~~~~~~ §7Finding Placeholders §6~~~~~~<");
             for (String str : kodes) {
-                //NEK//Log(" \u00a7e >>>\u00a77 " + str);
+                //NEK//Log(" §e >>>§7 " + str);
 
                 // Has it a code
                 String code = null;
                 if (!kounterAppend) {
-                    //NEK//Log("    \u00a7a+ \u00a77Could be placeholder");
+                    //NEK//Log("    §a+ §7Could be placeholder");
 
                     // Imagine if it still had the %s
                     String percents = "%" + str + "%";
 
                     // All right, lets see if this can call itself a placeholder
                     code = ParseConsoleCommand(percents, p, asBlock, asItem);
-                    //NEK//Log("   \u00a7a=> \u00a77Sent \u00a77" + percents);
-                    //NEK//Log("   \u00a72=> \u00a77Rcvd \u00a77" + code);
+                    //NEK//Log("   §a=> §7Sent §7" + percents);
+                    //NEK//Log("   §2=> §7Rcvd §7" + code);
 
                     // *Does it look the same?* Then it wasnt a placeholder = meh
                     if (percents.equals(code)) { code = null; }
@@ -2873,7 +2852,7 @@ public class OotilityCeption {
 
                 // Did it exist?
                 if (code != null) {
-                    //NEK//Log("    \u00a7e+ \u00a77Was Placeholder");
+                    //NEK//Log("    §e+ §7Was Placeholder");
 
                     // Was it numeric?
                     if (DoubleTryParse(code) && !hidden) {
@@ -2884,11 +2863,11 @@ public class OotilityCeption {
 
                         // Make range
                         QuickNumberRange qnr = new QuickNumberRange(Gunging_Ootilities_Plugin.nameRangeExclusionMin, Gunging_Ootilities_Plugin.nameRangeExclusionMax);
-                        //NEK//Log("    \u00a7a? \u00a77Value \u00a7b" + asDouble + "\u00a77, fits between? \u00a7f" + Gunging_Ootilities_Plugin.nameRangeExclusionMin + " \u00a77 & \u00a7f" + Gunging_Ootilities_Plugin.nameRangeExclusionMax);
+                        //NEK//Log("    §a? §7Value §b" + asDouble + "§7, fits between? §f" + Gunging_Ootilities_Plugin.nameRangeExclusionMin + " §7 & §f" + Gunging_Ootilities_Plugin.nameRangeExclusionMax);
 
                         // Within range? Hide this operation
                         if (qnr.InRange(asDouble)) { hidden = true; }
-                        //NEK//Log("    \u00a7c- \u00a77Hidden? \u00a7e" + hidden);
+                        //NEK//Log("    §c- §7Hidden? §e" + hidden);
 
                         // Make Readable
                         code = ReadableRounding(asDouble, Gunging_Ootilities_Plugin.placeholderReadableness);
@@ -2899,13 +2878,13 @@ public class OotilityCeption {
                         String encodedPlaceholder = namePlaceholderFrames + IntermitentEncode(str, true) + namePlaceholderFrames + lastColorOutput + nameVariableColorDelimiter;
 
                         builder.append(encodedPlaceholder).append(code).append(namePlaceholderFrames);
-                        //NEK//Log(" \u00a7c+\u00a77 " + encodedPlaceholder + code + namePlaceholderFrames);
+                        //NEK//Log(" §c+§7 " + encodedPlaceholder + code + namePlaceholderFrames);
                     }
 
                     // Append and further encode
                     String hiddenPlaceholder = namePlaceholderHide + IntermitentEncode(str, true) + namePlaceholderHide;
                     asIntermitent.append(hiddenPlaceholder);
-                    //NEK//Log(" \u00a79+\u00a77 " + hiddenPlaceholder);
+                    //NEK//Log(" §9+§7 " + hiddenPlaceholder);
 
                     // Counter next colon append
                     kounterAppend = true;
@@ -2919,21 +2898,21 @@ public class OotilityCeption {
                         // Return
                         if (!hidden) {
                             builder.append("%").append(str);
-                            //NEK//Log(" \u00a7c+\u00a77 %" + str);
+                            //NEK//Log(" §c+§7 %" + str);
                         }
-                        asIntermitent.append("\u00a7%").append(IntermitentEncode(str, true));
-                        //NEK//Log(" \u00a79+\u00a77 \u00a7%" + IntermitentEncode(str, true));
+                        asIntermitent.append("§%").append(IntermitentEncode(str, true));
+                        //NEK//Log(" §9+§7 §%" + IntermitentEncode(str, true));
 
                     } else {
 
                         // Ok last one was a code, no need to return colon
                         if (!hidden) {
                             builder.append(str);
-                            //NEK//Log(" \u00a7c+\u00a77" + str);
+                            //NEK//Log(" §c+§7" + str);
                         }
 
                         asIntermitent.append(IntermitentEncode(str, true));
-                        //NEK//Log(" \u00a79+\u00a77 " + IntermitentEncode(str, true));
+                        //NEK//Log(" §9+§7 " + IntermitentEncode(str, true));
 
                         // NExt one shall again
                         kounterAppend = false;
@@ -2945,11 +2924,11 @@ public class OotilityCeption {
             }
 
             // Solidify
-            String finished = null;
+            String finished;
             if (hidden) { finished = asIntermitent.toString(); } else { finished = builder.toString(); }
 
             // Extraneouschar
-            String xChar = "%"; if (hidden) { xChar = "\u00a7%"; }
+            String xChar = "%"; if (hidden) { xChar = "§%"; }
 
             // Does it have an extra colon?
             if (!source.startsWith("%") && finished.startsWith(xChar)) { finished = finished.substring(xChar.length()); }
@@ -2990,7 +2969,7 @@ public class OotilityCeption {
             }
 
             // Return thay
-            //NEK//Log("\u00a76Result >>\u00a77 " + finished);
+            //NEK//Log("§6Result >>§7 " + finished);
             return finished;
         }
 
@@ -3021,7 +3000,6 @@ public class OotilityCeption {
             if (atIDX >= 0) {
 
                 // Strip
-                String value = decoded.substring(lgth, atIDX);
             }
         }
 
@@ -3044,21 +3022,21 @@ public class OotilityCeption {
             String[] kodes = source.split(nameVariableFrames);
 
             // Finished rebuilt
-            StringBuilder builder = new StringBuilder("");
+            StringBuilder builder = new StringBuilder();
             boolean kounterAppend = true;
             boolean asValue = false;
 
 
-           //NEK//Log(" \u00a7b----------------- \u00a77Unparsing Name Vars \u00a7b-----------------");
+           //NEK//Log(" §b----------------- §7Unparsing Name Vars §b-----------------");
             // Evaluate each ig
             for (String str : kodes) {
                 // Unparse <&at>s
                 str = str.replace("@", "<&at>");
-               //NEK//Log("\u00a7b>>>\u00a77 " + str);
+               //NEK//Log("§b>>>§7 " + str);
 
                 // Is it a code?
                 if (!kounterAppend) {
-                   //NEK//Log("\u00a72     +\u00a77 Found Variable");
+                   //NEK//Log("§2     +§7 Found Variable");
 
                     // But is it the value :0
 
@@ -3067,7 +3045,7 @@ public class OotilityCeption {
 
                     // Append decoded
                     builder.append("@").append(asRawCode).append("=");
-                   //NEK//Log("\u00a7c +\u00a77 @" + asRawCode + "=");
+                   //NEK//Log("§c +§7 @" + asRawCode + "=");
 
                     // Counter next colon append
                     kounterAppend = true;
@@ -3080,7 +3058,7 @@ public class OotilityCeption {
 
                     // We expecting the value?
                     if (asValue) {
-                       //NEK//Log("\u00a72     +\u00a77 Found Value");
+                       //NEK//Log("§2     +§7 Found Value");
 
                         // Next one wont be :thinking:
                         asValue = false;
@@ -3089,14 +3067,14 @@ public class OotilityCeption {
 
                         // Just append :)
                         builder.append(readableValue).append("@");
-                       //NEK//Log("\u00a7c +\u00a77 " + readableValue + "@");
+                       //NEK//Log("§c +§7 " + readableValue + "@");
 
                     } else {
-                       //NEK//Log("\u00a73     +\u00a77 Found Generic");
+                       //NEK//Log("§3     +§7 Found Generic");
 
                         // Ok last one was a code, no need to return colon
                         builder.append(str);
-                       //NEK//Log("\u00a7c +\u00a77 " + str);
+                       //NEK//Log("§c +§7 " + str);
 
                         // NExt one shall again
                         kounterAppend = false;
@@ -3126,14 +3104,14 @@ public class OotilityCeption {
     @NotNull
     static String DenameNamePlaceholders(@NotNull String source) {
 
-       //NEK//Log("\u00a7b>>> Received to Deplace: " + source);
+       //NEK//Log("§b>>> Received to Deplace: " + source);
 
         // Crop first color codes
         int firstColorDelimiter = source.indexOf(nameVariableColorDelimiter);
         if (firstColorDelimiter >= 0) {
             source = source.substring(firstColorDelimiter + nameVariableColorDelimiter.length());
 
-           //NEK//Log("\u00a7b>>> Adapted Deplace: " + source);
+           //NEK//Log("§b>>> Adapted Deplace: " + source);
         }
 
         // Does it have colons bruh
@@ -3143,27 +3121,27 @@ public class OotilityCeption {
             String[] kodes = source.split(namePlaceholderFrames);
 
             // Finished rebuilt
-            StringBuilder builder = new StringBuilder("");
+            StringBuilder builder = new StringBuilder();
             boolean kounterAppend = true;
             boolean asValue = false;
 
-           //NEK//Log(" \u00a7d----------------- \u00a77Unparsing Name Vars \u00a7d-----------------");
+           //NEK//Log(" §d----------------- §7Unparsing Name Vars §d-----------------");
             // Evaluate each ig
             for (String str : kodes) {
                 // Unparse <&pc>s
                 str = str.replace("%", "<&pc>");
-               //NEK//Log("\u00a7d>>>\u00a77 " + str);
+               //NEK//Log("§d>>>§7 " + str);
 
                 // Did it exist?
                 if (!kounterAppend) {
-                   //NEK//Log("\u00a75     +\u00a77 Found Variable");
+                   //NEK//Log("§5     +§7 Found Variable");
 
                     // Remove Intermitent shit
                     String asRawPlaceholder = IntermitentDecode(str, true);
 
                     // Append decoded
                     builder.append("%").append(asRawPlaceholder).append("%");
-                   //NEK//Log("\u00a7c +\u00a77 %" + asRawPlaceholder + "%");
+                   //NEK//Log("§c +§7 %" + asRawPlaceholder + "%");
 
                     // Counter next colon append
                     kounterAppend = true;
@@ -3176,7 +3154,7 @@ public class OotilityCeption {
 
                     // We expecting the value?
                     if (asValue) {
-                       //NEK//Log("\u00a7c     -\u00a77 Ignored Value");
+                       //NEK//Log("§c     -§7 Ignored Value");
 
                         // Next one wont be :thinking:
                         asValue = false;
@@ -3184,11 +3162,11 @@ public class OotilityCeption {
                         // The value is not appended back, it is just deleted.
 
                     } else {
-                       //NEK//Log("\u00a75     +\u00a77 Found Generic");
+                       //NEK//Log("§5     +§7 Found Generic");
 
                         // Ok last one was a code, no need to return colon
                         builder.append(str);
-                       //NEK//Log("\u00a7c +\u00a77 " + str);
+                       //NEK//Log("§c +§7 " + str);
 
                         // NExt one shall again
                         kounterAppend = false;
@@ -3198,7 +3176,7 @@ public class OotilityCeption {
 
             // Solidify
             String finished = builder.toString();
-           //NEK//Log("\u00a7b>>>>>  \u00a77Result: " + finished);
+           //NEK//Log("§b>>>>>  §7Result: " + finished);
 
             // Does it have an extra colon?
             //finished = finished.substring(namePlaceholderFrames.length());
@@ -3214,7 +3192,7 @@ public class OotilityCeption {
             String[] kodes = source.split(namePlaceholderHide);
 
             // Finished rebuilt
-            StringBuilder builder = new StringBuilder("");
+            StringBuilder builder = new StringBuilder();
             boolean kounterAppend = true;
 
             // Evaluate each ig
@@ -3223,10 +3201,7 @@ public class OotilityCeption {
                 str = str.replace("%", "<&pc>");
 
                 // Has it a code
-                boolean asCode = false;
-                if (!kounterAppend) {
-                    asCode = true;
-                }
+                boolean asCode = !kounterAppend;
 
                 // Did it exist?
                 if (asCode) {
@@ -3289,14 +3264,14 @@ public class OotilityCeption {
         for (char c : source.toCharArray()) { asCharArray.add(c); }
 
         // Appent
-        StringBuilder str = new StringBuilder("");
+        StringBuilder str = new StringBuilder();
 
         int lateColorIndex = 0;
         // From the end, which is the latest color code
         for (int c = (asCharArray.size() - 1); c >= 0; c--) {
 
             // If the current is & and the next fits
-            boolean isAmpersand = asCharArray.get(c).equals('\u00a7');
+            boolean isAmpersand = asCharArray.get(c).equals('§');
 
             // Check
             if (isAmpersand && (c + 1 < asCharArray.size())) {
@@ -3342,7 +3317,7 @@ public class OotilityCeption {
                     } else {
 
                         // Append code
-                        str.append('\u00a7');
+                        str.append('§');
                         str.append(ch);
 
                         // Store index
@@ -3359,7 +3334,7 @@ public class OotilityCeption {
         for (int c = lateColorIndex; c < asCharArray.size(); c++) {
 
             // If the current is & and the next fits
-            boolean isAmpersand = asCharArray.get(c).equals('\u00a7');
+            boolean isAmpersand = asCharArray.get(c).equals('§');
 
             // Check
             if (isAmpersand && (c + 1 < asCharArray.size())) {
@@ -3374,7 +3349,7 @@ public class OotilityCeption {
                 if (isCode) {
 
                     // Append code
-                    str.append('\u00a7');
+                    str.append('§');
                     str.append(ch);
                 }
             }
@@ -3606,8 +3581,7 @@ public class OotilityCeption {
                         tLoreLine = RerenameNameVarialbes(parseAs, new NameVariableOperation(tLoreLine), null, null, iSource);
 
                         // Cool MMOItem adding shit
-                        ItemStack result = GooPMMOItems.MMOItemAddLoreLine(iSource, tLoreLine, index, logger);
-                        return result;
+                        return GooPMMOItems.MMOItemAddLoreLine(iSource, tLoreLine, index, logger);
 
                     // Just vanilla lol
                     } else {
@@ -3684,7 +3658,7 @@ public class OotilityCeption {
                 iSource.setItemMeta(iMeta);
 
                 // Log Success
-                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Sucessfully added lore line at index \u00a73" + tIndex + "\u00a77: " + ParseColour(tLoreLine));
+                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Sucessfully added lore line at index §3" + tIndex + "§7: " + ParseColour(tLoreLine));
 
                 // Reutrn thay
                 return  iSource;
@@ -3822,7 +3796,7 @@ public class OotilityCeption {
                         iSource.setItemMeta(iMeta);
 
                         // Log Success
-                        OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Sucessfully removed lore line at index \u00a73" + tIndex + "\u00a77: " + rememberance);
+                        OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Sucessfully removed lore line at index §3" + tIndex + "§7: " + rememberance);
 
                         // Reutrn thay
                         return  iSource;
@@ -4150,7 +4124,7 @@ public class OotilityCeption {
                 iSource.setItemMeta(iMeta);
 
                 // Finish
-                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified attribute of \u00a7f" + GetItemName(iSource));  }
+                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified attribute of §f" + GetItemName(iSource));  }
                 return iSource;
 
 
@@ -4225,7 +4199,7 @@ public class OotilityCeption {
         if (GooP_MinecraftVersions.GetMinecraftVersion() < 14.0) {
 
             // Log and cancel
-            Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Failed to edit Custom Model Data: \u00a7cMinecraft Version Must be at least 1.14");
+            Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Failed to edit Custom Model Data: §cMinecraft Version Must be at least 1.14");
             return null;
         }
 
@@ -4253,7 +4227,7 @@ public class OotilityCeption {
                 iSource.setItemMeta(iMeta);
 
                 // Finish
-                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified Custom Model Data of \u00a7f" + GetItemName(iSource));  }
+                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified Custom Model Data of §f" + GetItemName(iSource));  }
                 return iSource;
 
 
@@ -4310,7 +4284,7 @@ public class OotilityCeption {
                 iSource.setAmount(mData);
 
                 // Finish
-                Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified amount of \u00a7f" + sName + "\u00a77 to\u00a7a " + mData + "\u00a77. ");
+                Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified amount of §f" + sName + "§7 to§a " + mData + "§7. ");
                 return iSource;
 
 
@@ -4396,7 +4370,7 @@ public class OotilityCeption {
      */
     @Nullable
     public static ItemStack SetDurability(@Nullable ItemStack iSource, @Nullable Player mmoitemsDurabilityComp, @NotNull PlusMinusPercent operation, @Nullable RefSimulator<Double> result, boolean preventBreaking, boolean useMaxDura, @Nullable RefSimulator<String> logger) {
-        //DUR//OotilityCeption.Log("\u00a78OOTS\u00a73 DUR\u00a77 Received Use Max\u00a7a " + useMaxDura);
+        //DUR//OotilityCeption.Log("§8OOTS§3 DUR§7 Received Use Max§a " + useMaxDura);
         // Check that iSource exists
         if (iSource != null) {
 
@@ -4411,13 +4385,13 @@ public class OotilityCeption {
 
                     // Check if MMOItem
                     if (GooPMMOItems.IsMMOItem(iSource)) {
-                        //DUR//OotilityCeption.Log("\u00a78OOTS\u00a73 DUR\u00a77 To MMO \u00a7a " + useMaxDura);
+                        //DUR//OotilityCeption.Log("§8OOTS§3 DUR§7 To MMO §a " + useMaxDura);
                         // Cool MMOItem removing shit
                         return GooPMMOItems.MMOItemModifyDurability(iSource, mmoitemsDurabilityComp, operation, result, preventBreaking, useMaxDura, logger);
 
                         // Just vanilla lol
                     } else {
-                        //DUR//OotilityCeption.Log("\u00a78OOTS\u00a73 DUR\u00a77 MMO to Vanilla \u00a7a " + useMaxDura);
+                        //DUR//OotilityCeption.Log("§8OOTS§3 DUR§7 MMO to Vanilla §a " + useMaxDura);
 
                         // Do It Vanilla
                         return SetDurabilityVanilla(iSource, operation, result, preventBreaking, useMaxDura, logger);
@@ -4425,7 +4399,7 @@ public class OotilityCeption {
 
                     // Just vanilla lol
                 } else {
-                    //DUR//OotilityCeption.Log("\u00a78OOTS\u00a73 DUR\u00a77 To Vanilla \u00a7a " + useMaxDura);
+                    //DUR//OotilityCeption.Log("§8OOTS§3 DUR§7 To Vanilla §a " + useMaxDura);
 
                     // Do It Vanilla
                     return SetDurabilityVanilla(iSource, operation, result, preventBreaking, useMaxDura, logger);
@@ -4464,7 +4438,7 @@ public class OotilityCeption {
 
         ItemStack ret = iSource.clone();
         ret.setType(mat);
-        Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Transmutated " + GetItemName(iSource) + "\u00a77 into \u00a73" + mat.toString() + "\u00a77.");
+        Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Transmutated " + GetItemName(iSource) + "§7 into §3" + mat + "§7.");
 
         return ret;
     }
@@ -4491,7 +4465,7 @@ public class OotilityCeption {
 
             // Uh no
             if (targetPlayer == null) {
-                Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Could not evaluate slot \u00a73" + chosenSlot.getRangeToString() + "\u00a77 because there is no player. ");
+                Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Could not evaluate slot §3" + chosenSlot.getRangeToString() + "§7 because there is no player. ");
                 return null; }
 
             // Evaluate
@@ -4536,8 +4510,8 @@ public class OotilityCeption {
         ret.setAmount(amount);
 
         // Log
-        if (iSource != null) { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Transmutated \u00a7f" + original + "x" + GetItemName(iSource) + "\u00a77 into \u00a7f" + amount + "x" + GetItemName(iFinal) + "\u00a77. "); }
-        else { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Put \u00a7f" + amount + "x" + GetItemName(iFinal) + "\u00a77. "); }
+        if (iSource != null) { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Transmutated §f" + original + "x" + GetItemName(iSource) + "§7 into §f" + amount + "x" + GetItemName(iFinal) + "§7. "); }
+        else { Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Put §f" + amount + "x" + GetItemName(iFinal) + "§7. "); }
 
         return ret;
     }
@@ -4603,7 +4577,7 @@ public class OotilityCeption {
      */
     @Nullable
     public static ItemStack SetDurabilityVanilla(@Nullable ItemStack iSource, @NotNull PlusMinusPercent operation, @Nullable RefSimulator<Double> result, boolean preventBreaking, boolean useMaxDura, @Nullable RefSimulator<String> logger) {
-        //DUR//OotilityCeption.Log("\u00a78OOTS\u00a73 DUR\u00a77 Received \u00a7a " + useMaxDura);
+        //DUR//OotilityCeption.Log("§8OOTS§3 DUR§7 Received §a " + useMaxDura);
 
         // Check that iSource exists
         if (iSource != null) {
@@ -4635,8 +4609,8 @@ public class OotilityCeption {
                      *
                      * #4 Plus Percent ~ Adds to the current damage this percent of the max damage
                      */
-                    //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 ------ Vanilla ------ \u00a7f " + operation.toString() + "\u00a77 ~\u00a72 " + useMaxDura);
-                    //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 Current Damage:\u00a7e " + vanillaStyleDamage);
+                    //DUR//OotilityCeption.Log("§8DURA§b FV§7 ------ Vanilla ------ §f " + operation.toString() + "§7 ~§2 " + useMaxDura);
+                    //DUR//Log("§8DURA§b FV§7 Current Damage:§e " + vanillaStyleDamage);
                     if (useMaxDura) {
 
                         // Recreate plus minus percent
@@ -4644,46 +4618,46 @@ public class OotilityCeption {
 
                         // Not relative, just get percent from the max durability
                         toMax.setRelative(false);
-                        //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 Applying Max Operation:\u00a7e " + toMax.toString() + "\u00a77 to max durability\u00a79 " + iSource.getType().getMaxDurability());
+                        //DUR//Log("§8DURA§b FV§7 Applying Max Operation:§e " + toMax.toString() + "§7 to max durability§9 " + iSource.getType().getMaxDurability());
 
                         // Apply to that
                         double convertedMax = toMax.apply((double) iSource.getType().getMaxDurability());
 
-                        //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 Max Operation Result:\u00a7e " + convertedMax);
+                        //DUR//Log("§8DURA§b FV§7 Max Operation Result:§e " + convertedMax);
 
                         // Was it additive in the first place?
                         if (operation.getRelative()) {
 
                             // Add this percent of max durability to the current
                             finalValue = convertedMax + vanillaStyleDamage;
-                            //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 Adding result:\u00a7e " + finalValue);
+                            //DUR//Log("§8DURA§b FV§7 Adding result:§e " + finalValue);
 
                         // It was a set command
                         } else {
 
                             // The final value is this percent
                             finalValue = convertedMax;
-                            //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 Setting result:\u00a7e" + finalValue);
+                            //DUR//Log("§8DURA§b FV§7 Setting result:§e" + finalValue);
                         }
 
                     } else {
-                        //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 Applying Direct Operation:\u00a7e " + operation.toString());
+                        //DUR//Log("§8DURA§b FV§7 Applying Direct Operation:§e " + operation.toString());
 
                         // Yeah
                         finalValue = operation.apply((double) vanillaStyleDamage);
-                        //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 Result:\u00a7e " + finalValue);
+                        //DUR//Log("§8DURA§b FV§7 Result:§e " + finalValue);
                     }
 
                     // Restrict to 1, if it is preventing from breaking
                     if ((finalValue >= iSource.getType().getMaxDurability()) && preventBreaking) { finalValue = (iSource.getType().getMaxDurability() - 1.0D); } else if (finalValue > iSource.getType().getMaxDurability()) { finalValue = iSource.getType().getMaxDurability() + 1.0D; }
                     if (finalValue < 0) { finalValue = 0.0D; }
                     if (result != null) { result.setValue(finalValue);}
-                    //DUR//Log("\u00a78DURA\u00a7b FV\u00a77 True Result:\u00a76 " + finalValue);
+                    //DUR//Log("§8DURA§b FV§7 True Result:§6 " + finalValue);
 
                     // Did it break?
                     if (finalValue > iSource.getType().getMaxDurability()) {
 
-                        Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified durability of \u00a7f" + iName + "\u00a77, it broke though");
+                        Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified durability of §f" + iName + "§7, it broke though");
 
                         ItemStack broken = iSource.clone();
                         broken.setAmount(0);
@@ -4697,7 +4671,7 @@ public class OotilityCeption {
                     iSource.setItemMeta(iMeta);
 
                     // Finish
-                    Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified durability of \u00a7f" + iName);
+                    Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully modified durability of §f" + iName);
                     return iSource;
 
                 } else {
@@ -4960,18 +4934,10 @@ public class OotilityCeption {
         }
     }
     public static boolean BoolTryParse(String value) {
-        if (value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false")) {
-            return true;
-        } else {
-            return false;
-        }
+        return value.equalsIgnoreCase("true") || value.equalsIgnoreCase("false");
     }
     public static boolean BoolParse(String value) {
-        if (value.equalsIgnoreCase("true")) {
-            return true;
-        } else {
-            return false;
-        }
+        return value.equalsIgnoreCase("true");
     }
 
     /**
@@ -4991,7 +4957,9 @@ public class OotilityCeption {
         return null;
     }
     public static Integer Convert2Int(Boolean value) { if (If(value)) { return 1; } else { return  0; } }
-    public static boolean Convert2Bool(Integer value) { if (value == 1) { return true; } else { return  false; } }
+    public static boolean Convert2Bool(Integer value) {
+        return value == 1;
+    }
 
     /**
      * A modulus is defined when the modulus marker begins. Basically allows all freedom of color codes before a comma that you may not want in there if there is no other entry afterwards.
@@ -5184,7 +5152,9 @@ public class OotilityCeption {
 
         // Comma list op?
         ArrayList<String> editions = new ArrayList<>();
-        if (op.contains(",")) { for (String ed : op.split(",")) { editions.add(ed); } } else { editions.add(op); }
+        if (op.contains(",")) {
+            Collections.addAll(editions, op.split(","));
+        } else { editions.add(op); }
 
         // Replace list?
         if (!additive && !subtractive) { original.clear(); original.addAll(editions); return original; }
@@ -5216,7 +5186,7 @@ public class OotilityCeption {
         // Not exactly four HUH
         } else {
 
-            Log4Success(logger, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Error when parsing location string \u00a7e" + wXYZ + "\u00a77: \u00a7cNot in the expected format \u00a76World,X,Y,Z");
+            Log4Success(logger, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Error when parsing location string §e" + wXYZ + "§7: §cNot in the expected format §6World,X,Y,Z");
             return null;
         }
     }
@@ -5335,7 +5305,7 @@ public class OotilityCeption {
                             failure = true;
 
                             // Mention
-                            loggerRet += "\u00a77Could not parse numeric value '\u00a7e" + minimumCut + "\u00a77' for minimum distance";
+                            loggerRet += "§7Could not parse numeric value '§e" + minimumCut + "§7' for minimum distance";
                         }
                     }
 
@@ -5354,13 +5324,13 @@ public class OotilityCeption {
                             failure = true;
 
                             // Mention
-                            loggerRet += "\u00a77Could not parse numeric value '\u00a7e" + maximumCut + "\u00a77' for maximum distance";
+                            loggerRet += "§7Could not parse numeric value '§e" + maximumCut + "§7' for maximum distance";
                         }
                     }
                 }
 
                 // Just target location I guess?
-                targetBlock = ((Player)relativity).getTargetBlockExact(maxDist, FluidCollisionMode.NEVER);
+                targetBlock = relativity.getTargetBlockExact(maxDist, FluidCollisionMode.NEVER);
 
                 // Cancel if within min dist (and not null already lma0)
                 if (targetBlock != null) {
@@ -5391,7 +5361,7 @@ public class OotilityCeption {
                     failure = true;
 
                     // Mention
-                    loggerRet += "\u00a77Could not parse numeric value '\u00a7e" + modX + "\u00a77' for X co-ordinate shift";
+                    loggerRet += "§7Could not parse numeric value '§e" + modX + "§7' for X co-ordinate shift";
                 }
             }
             if ((teY || reY) && veY.length() > 1) {
@@ -5415,7 +5385,7 @@ public class OotilityCeption {
                     failure = true;
 
                     // Mention
-                    loggerRet += "\u00a77Could not parse numeric value '\u00a7e" + modY + "\u00a77' for Y co-ordinate shift";
+                    loggerRet += "§7Could not parse numeric value '§e" + modY + "§7' for Y co-ordinate shift";
                 }
             }
             if ((teZ || reZ) && veZ.length() > 1) {
@@ -5439,7 +5409,7 @@ public class OotilityCeption {
                     failure = true;
 
                     // Mention
-                    loggerRet += "\u00a77Could not parse numeric value '\u00a7e" + modZ + "\u00a77' for Z co-ordinate shift";
+                    loggerRet += "§7Could not parse numeric value '§e" + modZ + "§7' for Z co-ordinate shift";
                 }
             }
 
@@ -5458,7 +5428,7 @@ public class OotilityCeption {
                 failure = true;
 
                 // Mention
-                loggerRet += "\u00a77Could not find target block (within the min and max constraints specified).";
+                loggerRet += "§7Could not find target block (within the min and max constraints specified).";
             }
 
             if (reX) { sourceX = actualRelativity.getBlockX(); }
@@ -5478,7 +5448,7 @@ public class OotilityCeption {
                 failure = true;
 
                 // Mention
-                loggerRet += "\u00a77World \u00a73" + worldName + "\u00a77 doesnt exist! ";
+                loggerRet += "§7World §3" + worldName + "§7 doesnt exist! ";
             }
         }
 
@@ -5495,7 +5465,7 @@ public class OotilityCeption {
             failure = true;
 
             // Mention
-            loggerRet += "\u00a77Expected integer number for X co-ordinate instead of \u00a73" + veX + "\u00a77. ";
+            loggerRet += "§7Expected integer number for X co-ordinate instead of §3" + veX + "§7. ";
         }
 
         // IF the source is still null, parse normally
@@ -5511,7 +5481,7 @@ public class OotilityCeption {
             failure = true;
 
             // Mention
-            loggerRet += "\u00a77Expected integer number for Y co-ordinate instead of \u00a73" + veY + "\u00a77. ";
+            loggerRet += "§7Expected integer number for Y co-ordinate instead of §3" + veY + "§7. ";
         }
 
         // IF the source is still null, parse normally
@@ -5527,7 +5497,7 @@ public class OotilityCeption {
             failure = true;
 
             // Mention
-            loggerRet += "\u00a77Expected integer number for Z co-ordinate instead of \u00a73" + veZ + "\u00a77. ";
+            loggerRet += "§7Expected integer number for Z co-ordinate instead of §3" + veZ + "§7. ";
         }
 
         // If there was something o log
@@ -5549,7 +5519,7 @@ public class OotilityCeption {
 
     public static void GatherDefaultVanillaAttributes(Material fromType, Material tType, RefSimulator<String> tName, RefSimulator<Double> vDamage, RefSimulator<Double> vSpeed, RefSimulator<Double> vArmor, RefSimulator<Double> vArmorT, RefSimulator<Double> mKRes) {
 
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aFRTO\u00a77 From:\u00a7a " + fromType.toString() + "\u00a77, To:\u00a7e " + tType.toString());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aFRTO§7 From:§a " + fromType.toString() + "§7, To:§e " + tType.toString());
 
         RefSimulator<Double>
                 vDamageRef = new RefSimulator<>(0.0),
@@ -5561,11 +5531,11 @@ public class OotilityCeption {
 
         GatherDefaultVanillaAttributes(fromType, tNameRef, vDamageRef, vSpeedRef, vArmorRef, vArmorTRef, mKResRef);
 
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aFROM\u00a77 Damage:\u00a7a " + vDamageRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aFROM\u00a77 Speed:\u00a7a " + vSpeedRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aFROM\u00a77 Armor:\u00a7a " + vArmorRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aFROM\u00a77 Tough:\u00a7a " + vArmorTRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aFROM\u00a77 MKRes:\u00a7a " + mKResRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aFROM§7 Damage:§a " + vDamageRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aFROM§7 Speed:§a " + vSpeedRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aFROM§7 Armor:§a " + vArmorRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aFROM§7 Tough:§a " + vArmorTRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aFROM§7 MKRes:§a " + mKResRef.getValue());
 
         RefSimulator<Double>
                 EvDamageRef = new RefSimulator<>(0.0),
@@ -5577,11 +5547,11 @@ public class OotilityCeption {
 
         GatherDefaultVanillaAttributes(tType, EtNameRef, EvDamageRef, EvSpeedRef, EvArmorRef, EvArmorTRef, EmKResRef);
 
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aTO\u00a77 Damage:\u00a7a " + EvDamageRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aTO\u00a77 Speed:\u00a7a " + EvSpeedRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aTO\u00a77 Armor:\u00a7a " + EvArmorRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aTO\u00a77 Tough:\u00a7a " + EvArmorTRef.getValue());
-        //SMH//OotilityCeption.Log("\u00a78GatheringVanilla \u00a7aTO\u00a77 MKRes:\u00a7a " + EmKResRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aTO§7 Damage:§a " + EvDamageRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aTO§7 Speed:§a " + EvSpeedRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aTO§7 Armor:§a " + EvArmorRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aTO§7 Tough:§a " + EvArmorTRef.getValue());
+        //SMH//OotilityCeption.Log("§8GatheringVanilla §aTO§7 MKRes:§a " + EmKResRef.getValue());
 
         // Carry on
         tName.SetValue(EtNameRef.GetValue());
@@ -5976,7 +5946,7 @@ public class OotilityCeption {
 
     public static boolean IsChainedKey(@Nullable String str) {
 
-        return str == null ? false : ("oS:".equalsIgnoreCase(str) || "oS=".equals(str));
+        return str != null && ("oS:".equalsIgnoreCase(str) || "oS=".equals(str));
     }
 
     /**
@@ -6183,7 +6153,7 @@ public class OotilityCeption {
             String subcommand = args[1];
 
             // Get Location baked
-            String loc = "$" + flare.toString() + "$";
+            String loc = "$" + flare + "$";
 
             // Modify
             args[1] = loc + subcommand;
@@ -6273,7 +6243,7 @@ public class OotilityCeption {
         SendAndParseConsoleCommand(asChainResult, cmd, konsole, asEntity, asPlayer, asBlock, null);
     }
     public static void SendAndParseConsoleCommand(@Nullable Player asChainResult, @NotNull String cmd, @Nullable CommandSender konsole, @Nullable Entity asEntity, @Nullable Player asPlayer, @Nullable Block asBlock, @Nullable ItemStack asItem) {
-        SendAndParseConsoleCommand((OfflinePlayer) asChainResult, cmd, konsole, asEntity, (OfflinePlayer) asPlayer, asBlock, asItem);
+        SendAndParseConsoleCommand(asChainResult, cmd, konsole, asEntity, (OfflinePlayer) asPlayer, asBlock, asItem);
     }
     public static void SendAndParseConsoleCommand(@Nullable OfflinePlayer asChainResult, @NotNull String cmd, @Nullable CommandSender konsole, @Nullable Entity asEntity, @Nullable OfflinePlayer asPlayer, @Nullable Block asBlock, @Nullable ItemStack asItem) {
         // Parse
@@ -6374,11 +6344,7 @@ public class OotilityCeption {
         if (name.contains(";")) {
 
             // For each different
-            for (String str : name.split(";")) {
-
-                // Add to name
-                names.add(str);
-            }
+            Collections.addAll(names, name.split(";"));
 
         // Otherwise just include the whole thing
         } else {
@@ -6414,48 +6380,48 @@ public class OotilityCeption {
                 // Well check all of them i guess
                 ArrayList<Player> approvedPlayers = new ArrayList<>();
                 for (Player p : blayers) {
-                    //DBG//Log("Checking player \u00a73" + p.getName());
+                    //DBG//Log("Checking player §3" + p.getName());
 
                     // Failure
                     boolean failure = false;
 
                     // Start with distance o/
                     if (attemptedDistance != null) {
-                        //DBG//Log("\u00a72Attempting Distance");
+                        //DBG//Log("§2Attempting Distance");
 
                         // Check distance
                         if (relativity == null) {
-                            //DBG//Log("\u00a7cNo Relativity");
+                            //DBG//Log("§cNo Relativity");
 
                             // Complain
-                            Log4Success(logReturn, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not parse \u00a7edistance\u00a77 selector argument because no relative location was provided.");
+                            Log4Success(logReturn, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not parse §edistance§7 selector argument because no relative location was provided.");
                             break;
 
                         // Good, there is a check
                         } else {
-                            //DBG//Log("\u00a72Found Relativity");
+                            //DBG//Log("§2Found Relativity");
 
                             // In world?
                             if (p.getWorld().equals(relativity.getWorld())) {
-                                //DBG//Log("\u00a72Player in World");
+                                //DBG//Log("§2Player in World");
 
                                 // Get distance
                                 double dist = p.getLocation().distance(relativity);
 
                                 // Does it check? Fails if not in range
                                 failure = !attemptedDistance.InRange(dist);
-                                //DBG//Log("\u00a7aChecked Distance: \u00a7b" + dist + "\u00a77 resulted in \u00a7e" + !failure + "\u00a77 of being within range");
+                                //DBG//Log("§aChecked Distance: §b" + dist + "§7 resulted in §e" + !failure + "§7 of being within range");
 
                             // NOT IN WORLD REE
                             } else {
-                                //DBG//Log("\u00a7cPlayer Not in World");
+                                //DBG//Log("§cPlayer Not in World");
 
                                 // No hell no
                                 failure = true;
                             }
                         }
                     } else {
-                        //DBG//Log("\u00a76No Distance");
+                        //DBG//Log("§6No Distance");
                     }
 
                     // Hasnt failed huh
@@ -6515,7 +6481,7 @@ public class OotilityCeption {
 
                                 // Did you qualify?
                                 if (!failure) {
-                                    //DBG//Log("\u00a7aAdded");
+                                    //DBG//Log("§aAdded");
                                     approvedPlayers.add(p);  }
                             }
                         }
@@ -6531,7 +6497,7 @@ public class OotilityCeption {
                 Integer attemptedLimit = IntegerFromBracketsTab(nme, "limit");
                 boolean flipClosest = false;
                 if (attemptedLimit != null) {
-                    trueLimit = attemptedLimit; //LMT//Log("Limit found! \u00a7e" + trueLimit);
+                    trueLimit = attemptedLimit; //LMT//Log("Limit found! §e" + trueLimit);
 
                     // Is it negative-yo?
                     if (attemptedLimit  < 0) {
@@ -6549,7 +6515,7 @@ public class OotilityCeption {
                         if (relativity == null) {
 
                             // Log and Ignore
-                            Log4Success(logReturn, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not parse \u00a7e@p\u00a77 selector because no relative location was provided.");
+                            Log4Success(logReturn, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not parse §e@p§7 selector because no relative location was provided.");
                             blayers.clear();
 
                         } else {
@@ -6571,13 +6537,13 @@ public class OotilityCeption {
 
                                         // Add as ordeal
                                         worldPlayers.add(new OrderableListEntry<>(p, p.getLocation().distance(relativity)));
-                                        //LMT//Log("Added \u00a73" + p.getName() + "\u00a77 at distance \u00a7a" + p.getLocation().distance(relativity));
+                                        //LMT//Log("Added §3" + p.getName() + "§7 at distance §a" + p.getLocation().distance(relativity));
 
                                     } else {
 
                                         // Add as ordeal
                                         worldPlayers.add(new OrderableListEntry<>(p, -p.getLocation().distance(relativity)));
-                                        //LMT//Log("Added \u00a73" + p.getName() + "\u00a77 at distance \u00a7a" + -p.getLocation().distance(relativity));
+                                        //LMT//Log("Added §3" + p.getName() + "§7 at distance §a" + -p.getLocation().distance(relativity));
                                     }
                                 }
                             }
@@ -6593,7 +6559,7 @@ public class OotilityCeption {
 
                                 // Inklude
                                 blayers.add(worldPlayers.get(i).getStoredValue());
-                                //LMT//Log("\u00a7aKept \u00a73" + worldPlayers.get(i).getStoredValue().getName());
+                                //LMT//Log("§aKept §3" + worldPlayers.get(i).getStoredValue().getName());
                             }
                         }
                         break;
@@ -6615,11 +6581,11 @@ public class OotilityCeption {
 
                         // Choose the closest ones first
                         for (int i = GetRandomInt(0, initial.size() - 1); chosen < trueLimit; i = GetRandomInt(0, initial.size() - 1)) {
-                            //LMT//Log("Between \u00a7b0 \u00a77and \u00a7b" + (initial.size()-1) + "\u00a77, chose \u00a7a" + i);
+                            //LMT//Log("Between §b0 §7and §b" + (initial.size()-1) + "§7, chose §a" + i);
 
                             // Everyone has been chosen
                             if (initial.size() == 0) {
-                                //LMT//Log("\u00a7cNo players. Break");
+                                //LMT//Log("§cNo players. Break");
                                 // STAHP
                                 break;
 
@@ -6630,7 +6596,7 @@ public class OotilityCeption {
 
                                 // Add
                                 blayers.add(chosenOne);
-                                //LMT//Log("Found \u00a73" + chosenOne.getName() + "\u00a77. \u00a7aAdded");
+                                //LMT//Log("Found §3" + chosenOne.getName() + "§7. §aAdded");
 
                                 // Deleet
                                 initial.remove(i);
@@ -6640,7 +6606,7 @@ public class OotilityCeption {
 
                                 // Break
                                 if (initial.size() == 0) {
-                                    //LMT//Log("\u00a79Chose All. Break");
+                                    //LMT//Log("§9Chose All. Break");
                                     break; }
                             }
                         }
@@ -6648,7 +6614,7 @@ public class OotilityCeption {
                     default:
 
                         // Complain
-                        Log4Success(logReturn, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not parse selector \u00a7e@" + primeChar);
+                        Log4Success(logReturn, Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not parse selector §e@" + primeChar);
                         blayers.clear();
                     break;
                 }
@@ -6837,14 +6803,14 @@ public class OotilityCeption {
      */
     public static String ValueFromBracketsTab(String source, String tag) {
 
-        //PRSE//Log("Searching for \u00a7e" + tag + "= \u00a77 within \u00a79" + source);
+        //PRSE//Log("Searching for §e" + tag + "= §7 within §9" + source);
         int limitSt = source.indexOf(tag + "=");
         int trueLimit = -1;
         if (limitSt > 0) {
 
             // Crop the hell of it
             String limitCropB4 = source.substring(limitSt + tag.length() + 1);
-            //PRSE//Log("Cropped B4 As \u00a73" + limitCropB4);
+            //PRSE//Log("Cropped B4 As §3" + limitCropB4);
 
             // Find the end, may it be a , or a ]; Whichever comes first
             int limitCropEnd = -1;
@@ -6860,12 +6826,12 @@ public class OotilityCeption {
             int limitCropClose = limitCropB4.indexOf("]");
             if (limitCropComma > 0) { limitCropEnd = limitCropComma; }
             if (limitCropClose > 0) { if (limitCropEnd > 0) { if (limitCropClose < limitCropEnd) { limitCropEnd = limitCropClose; } } else { limitCropEnd = limitCropClose; } }
-            //PRSE//OotilityCeption. Log("Found end index at \u00a7b" + limitCropEnd);
+            //PRSE//OotilityCeption. Log("Found end index at §b" + limitCropEnd);
 
             // Found an end?
             if (limitCropEnd > 0) {
-                //PRSE//OotilityCeption. Log("Cropping Aft As \u00a7c" + limitCropB4.substring(limitCropEnd));
-                //PRSE//OotilityCeption. Log("Returning Value \u00a7e" + limitCropB4.substring(0, limitCropEnd));
+                //PRSE//OotilityCeption. Log("Cropping Aft As §c" + limitCropB4.substring(limitCropEnd));
+                //PRSE//OotilityCeption. Log("Returning Value §e" + limitCropB4.substring(0, limitCropEnd));
 
                 // Parse I guess
                 return limitCropB4.substring(0, limitCropEnd);
@@ -6912,7 +6878,7 @@ public class OotilityCeption {
                 // Make sure MMOItems is enabled
                 if (!Gunging_Ootilities_Plugin.foundMMOItems) {
                     // Announce
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + itemNBTcharKey + "\u00a77' is meant to use with the third party plugin \u00a7e\u00a7lMMOItems\u00a77. ");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + itemNBTcharKey + "§7' is meant to use with the third party plugin §e§lMMOItems§7. ");
 
                     // Failiure
                     return true;
@@ -6923,7 +6889,7 @@ public class OotilityCeption {
                     if (!GooPMMOItems.GetMMOItem_TypeNames().contains(dataPrime)) {
 
                         // Announce
-                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The MMOItem Type '\u00a73" + dataPrime + "\u00a77' is not loaded. ");
+                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The MMOItem Type '§3" + dataPrime + "§7' is not loaded. ");
 
                         // Failiure
                         return true;
@@ -6934,7 +6900,7 @@ public class OotilityCeption {
 
 
                         // Announce
-                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The MMOItem Type '\u00a73" + dataPrime + "\u00a77' has no item of ID '\u00a7c" + dataDime + "\u00a77'. ");
+                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The MMOItem Type '§3" + dataPrime + "§7' has no item of ID '§c" + dataDime + "§7'. ");
 
                         // Failiure
                         return true;
@@ -6949,7 +6915,7 @@ public class OotilityCeption {
                 // Make sure MMOItems is enabled
                 if (!Gunging_Ootilities_Plugin.foundMythicMobs) {
                     // Announce
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + itemNBTcharKey + "\u00a77' is meant to use with the third party plugin \u00a7e\u00a7lMythicMobs\u00a77. ");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + itemNBTcharKey + "§7' is meant to use with the third party plugin §e§lMythicMobs§7. ");
 
                     // Failiure
                     return true;
@@ -6960,7 +6926,7 @@ public class OotilityCeption {
                     if (!dataDime.contains("*")  && !GooPMythicMobs.GetMythicItemTypes().contains(dataPrime)) {
 
                         // Announce
-                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The MythicMobs Item '\u00a73" + dataPrime + "\u00a77' is not loaded. ");
+                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The MythicMobs Item '§3" + dataPrime + "§7' is not loaded. ");
 
                         // Failiure
                         return true;
@@ -6975,7 +6941,7 @@ public class OotilityCeption {
                 // ENch exists?
                 if (!GungingOotilitiesTab.enchantmentsTab.contains(dataPrime)) {
                     // Mention his stupidity
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Enchantment '\u00a73" + dataPrime + "\u00a77' doesnt exist.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Enchantment '§3" + dataPrime + "§7' doesnt exist.");
 
                     // Failure
                     return true;
@@ -6984,7 +6950,7 @@ public class OotilityCeption {
                 // Did this man use correct integer sintax
                 if (!IntTryParse(dataDime)) {
                     // Mention his stupidity
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Enchantment Level '\u00a73" + dataDime + "\u00a77' is not an integer number.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Enchantment Level '§3" + dataDime + "§7' is not an integer number.");
 
                     // Failure
                     return true;
@@ -7007,7 +6973,7 @@ public class OotilityCeption {
                         // Not recognized
                     } catch (IllegalArgumentException ex) {
                         // Log it
-                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Material \u00a7c" + dataPrime + "\u00a77 doesnt exist.");
+                        Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Material §c" + dataPrime + "§7 doesnt exist.");
 
                         // Thats ass material type
                         return true;
@@ -7018,7 +6984,7 @@ public class OotilityCeption {
             case "i":
                 if (GooPIngredient.Get(dataPrime) == null) {
                     // Log it
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not find GooP Ingredient '\u00a7c" + dataPrime + "\u00a77'.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Could not find GooP Ingredient '§c" + dataPrime + "§7'.");
 
                     // Thats not a loaded ingredient
                     return true;
@@ -7026,7 +6992,7 @@ public class OotilityCeption {
                 break;
             default:
                 // Thats not a keyword for nbt matching!
-                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + itemNBTcharKey + "\u00a77' is not a supported nbt test key!");
+                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + itemNBTcharKey + "§7' is not a supported nbt test key!");
 
                 // Failure
                 return true;
@@ -7037,7 +7003,7 @@ public class OotilityCeption {
             if (!IntTryParse(dataAmount)) {
 
                 // Thats ass amount
-                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected integer number for AMOUNT instead of '\u00a73" + dataAmount + "\u00a77'");
+                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected integer number for AMOUNT instead of '§3" + dataAmount + "§7'");
 
                 // Failure
                 return true;
@@ -7170,7 +7136,7 @@ public class OotilityCeption {
                 // Make sure MMOItems is enabled
                 if (!Gunging_Ootilities_Plugin.foundMMOItems) {
                     // Announce
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + itemNBTcharKey + "\u00a77' is meant to use with the third party plugin \u00a7e\u00a7lMythicMobs\u00a77.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + itemNBTcharKey + "§7' is meant to use with the third party plugin §e§lMythicMobs§7.");
 
                     // Failiure
                     return null;
@@ -7192,7 +7158,7 @@ public class OotilityCeption {
                 // Make sure MMOItems is enabled
                 if (!Gunging_Ootilities_Plugin.foundMythicMobs) {
                     // Announce
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + itemNBTcharKey + "\u00a77' is meant to use with the third party plugin \u00a7e\u00a7lMMOItems\u00a77.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + itemNBTcharKey + "§7' is meant to use with the third party plugin §e§lMMOItems§7.");
 
                     // Failiure
                     return null;
@@ -7212,7 +7178,7 @@ public class OotilityCeption {
                 }
             case "e":
                 // Ench exists?
-                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + itemNBTcharKey + "\u00a77' is not meant to used to generate items!");
+                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + itemNBTcharKey + "§7' is not meant to used to generate items!");
 
                 // Nothing
                 return null;
@@ -7234,14 +7200,14 @@ public class OotilityCeption {
                 // Not recognized
                 } catch (IllegalArgumentException ex) {
                     // Log it
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Material \u00a7c" + dataPrime + "\u00a77 doesnt exist.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Material §c" + dataPrime + "§7 doesnt exist.");
 
                     // Thats ass material type
                     return null;
                 }
             default:
                 // Thats not a keyword for nbt matching!
-                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + itemNBTcharKey + "\u00a77' is not a supported nbt test key!");
+                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + itemNBTcharKey + "§7' is not a supported nbt test key!");
 
                 // Failure
                 return null;
@@ -7257,7 +7223,7 @@ public class OotilityCeption {
                 // Make sure MMOItems is enabled
                 if (!Gunging_Ootilities_Plugin.foundMythicMobs) {
                     // Announce
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + entityNBTcharKey + "\u00a77' is meant to use with the third party plugin \u00a7e\u00a7lMythicMobs\u00a77.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + entityNBTcharKey + "§7' is meant to use with the third party plugin §e§lMythicMobs§7.");
 
                     // Failiure
                     return true;
@@ -7272,7 +7238,7 @@ public class OotilityCeption {
                     // Not recognized
                 } catch (IllegalArgumentException ex) {
                     // Log it
-                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Entity Type \u00a7c" + dataPrime + "\u00a77 doesnt exist.");
+                    Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Entity Type §c" + dataPrime + "§7 doesnt exist.");
 
                     // Thats ass material type
                     return true;
@@ -7281,7 +7247,7 @@ public class OotilityCeption {
                 break;
             default:
                 // Thats not a keyword for nbt matching!
-                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '\u00a73" + entityNBTcharKey + "\u00a77' is not a supported entity test key!");
+                Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "The key '§3" + entityNBTcharKey + "§7' is not a supported entity test key!");
 
                 // Failure
                 return true;
@@ -7314,7 +7280,7 @@ public class OotilityCeption {
      */
     @Contract("null,_->null;_,null->null")
     @Nullable public static ItemStack getItemFromPlayerInventory(@Nullable Player player, @Nullable Integer slot) {
-        //SLT//OotilityCeption.Log("\u00a78OOC\u00a73 IPI\u00a77 Retrieving \u00a73#" + slot + "\u00a77 from\u00a7e " + (player == null ? "null" : player.getName()));
+        //SLT//OotilityCeption.Log("§8OOC§3 IPI§7 Retrieving §3#" + slot + "§7 from§e " + (player == null ? "null" : player.getName()));
 
         // Ah yes
         if (player == null || slot == null) { return null; }
@@ -7434,7 +7400,9 @@ public class OotilityCeption {
 
         // Identify each separate slot
         ArrayList<String> slots = new ArrayList<>();
-        if (arg.contains(",")) { for (String str : arg.split(",")) { slots.add(str); } } else { slots.add(arg); }
+        if (arg.contains(",")) {
+            Collections.addAll(slots, arg.split(","));
+        } else { slots.add(arg); }
 
         // Those who made no sense
         StringBuilder invalids = new StringBuilder();
@@ -7443,7 +7411,7 @@ public class OotilityCeption {
          * Evaluate each of them, then elaborate
          */
         for (String slot : slots) {
-            //SLOT//OotilityCeption.Log("\u00a77Parsing Slot \u00a7f" + slot + "\u00a77 as player\u00a7f " + (elaborator == null ? "\u00a7cnull" : elaborator.getName()));
+            //SLOT//OotilityCeption.Log("§7Parsing Slot §f" + slot + "§7 as player§f " + (elaborator == null ? "§cnull" : elaborator.getName()));
 
             // Does it parse?
             ItemStackSlot itemStackSlot = OotilityCeption.getInventorySlot(slot);
@@ -7456,30 +7424,30 @@ public class OotilityCeption {
 
                 // Get all within encoded
                 ArrayList<? extends ItemStackSlot> elaborated = itemStackSlot.elaborate();
-                //SLOT//OotilityCeption.Log("\u00a78\u00a7oElaborated\u00a79 " + elaborated.size());
+                //SLOT//OotilityCeption.Log("§8§oElaborated§9 " + elaborated.size());
 
                 // Unelaboratable
                 if (elaborated.size() == 0) {
 
                     // Include in invalids
-                    invalids.append("\u00a77, \u00a7b").append(slot);
+                    invalids.append("§7, §b").append(slot);
                 }
 
                 // Thats the one
                 ret.addAll(elaborated);
 
             } else {
-                //SLOT//OotilityCeption.Log("\u00a78\u00a7oInvalid");
+                //SLOT//OotilityCeption.Log("§8§oInvalid");
 
                 // Include in invalids
-                invalids.append("\u00a77, \u00a73").append(slot);
+                invalids.append("§7, §3").append(slot);
             }
         }
 
         if (invalids.length() > 3) {
 
             // You see, it makes no sense vro
-            Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "\u00a77Invalid Slots Encountered: " + (invalids.toString()).substring(3));
+            Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "§7Invalid Slots Encountered: " + (invalids).substring(3));
 
         } else if (logger != null) { logger.setValue(null); }
 
@@ -7504,19 +7472,19 @@ public class OotilityCeption {
          */
         int targetShulker = arg.indexOf(".");
         if (targetShulker > 0) {
-            //SLOT//Log("\u00a78Slot \u00a76Shulk\u00a77 Parsing shulker \u00a7e" + arg);
+            //SLOT//Log("§8Slot §6Shulk§7 Parsing shulker §e" + arg);
 
             // Obtain parent slot
             String parentArg = arg.substring(0, targetShulker);
             ItemStackSlot parent = getInventorySlot(parentArg);
-            //SLOT//Log("\u00a78Slot \u00a76Shulk\u00a77 Parsing its parent \u00a76" + parentArg + "\u00a77:\u00a7a " + (parent == null ? "\u00a7cnull" : parent.toString()));
+            //SLOT//Log("§8Slot §6Shulk§7 Parsing its parent §6" + parentArg + "§7:§a " + (parent == null ? "§cnull" : parent.toString()));
 
             // Failure?
             if (parent == null) { return null; }
 
             // Whats the actual range here
             if (!getSlotRange(arg, slot, range, false)) { return null; }
-            //SLOT//Log("\u00a78Slot \u00a76Shulk\u00a7a Identified slot range");
+            //SLOT//Log("§8Slot §6Shulk§a Identified slot range");
 
             /*
              * Shulker box constraints: The values must be between zero and 27
@@ -7547,7 +7515,7 @@ public class OotilityCeption {
             if (range.getValue() != null && range.getValue() < 0) { range.setValue(0); }
             if (range.getValue() != null && range.getValue() > 26) { range.setValue(26); }
 
-            //SLOT//Log("\u00a78Slot \u00a7aEnderchest\u00a77 Identified enderchest, slot \u00a7e" + slot.getValue());
+            //SLOT//Log("§8Slot §aEnderchest§7 Identified enderchest, slot §e" + slot.getValue());
 
             // Enderchestslot it is
             return new ISSEnderchest(slot.getValue(), range.getValue());
@@ -7574,32 +7542,32 @@ public class OotilityCeption {
             if (range.getValue() != null && range.getValue() < 0) { range.setValue(0); }
             if (range.getValue() != null && range.getValue() > 53) { range.setValue(53); }
 
-            //SLOT//Log("\u00a78Slot \u00a7aObserved\u00a77 Identified observed container, slot \u00a7e" + slot.getValue());
+            //SLOT//Log("§8Slot §aObserved§7 Identified observed container, slot §e" + slot.getValue());
 
             // Enderchestslot it is
             return new ISSObservedContainer(slot.getValue(), range.getValue(), alias);
 
         // Not an observed container, is it personal container?
         } else if (arg.startsWith("|")) {
-            //SLOT//Log("\u00a78Slot \u00a7ePersonal\u00a77 Identifiying container...");
+            //SLOT//Log("§8Slot §ePersonal§7 Identifiying container...");
 
             // Get String
             int barEnd = arg.indexOf("|", 2);
             if (barEnd < 1) {
-                //SLOT//Log("\u00a78Slot \u00a7ePersonal\u00a7c Missing Container End");
+                //SLOT//Log("§8Slot §ePersonal§c Missing Container End");
                 return null; }
 
             // Find that personal Container
             String personalName = arg.substring(1, barEnd);
             GOOPCPersonal personal = GCL_Personal.getByInternalName(personalName);
             if (personal == null) {
-                //SLOT//Log("\u00a78Slot \u00a7ePersonal\u00a7c Not Loaded \u00a7e" + personalName);
+                //SLOT//Log("§8Slot §ePersonal§c Not Loaded §e" + personalName);
                 return null; }
-            //SLOT//Log("\u00a78Slot \u00a7ePersonal\u00a7c Container \u00a76" + personal.getTemplate().getInternalName());
+            //SLOT//Log("§8Slot §ePersonal§c Container §6" + personal.getTemplate().getInternalName());
 
             // If it could not get the correct slots from the specified range
             if (!getSlotRange(arg.substring(barEnd + 1), slot, range, true)) {
-                //SLOT//Log("\u00a78Slot \u00a7ePersonal\u00a7c No range");
+                //SLOT//Log("§8Slot §ePersonal§c No range");
                 return null; }
 
             /*
@@ -7610,7 +7578,7 @@ public class OotilityCeption {
             String alias = null;
             if (aliasBegin > 0 && aliasEnd > aliasBegin) {
                 alias = arg.substring(aliasBegin + 1, aliasEnd);
-                //SLOT//Log("\u00a78Slot \u00a7ePersonal\u00a77 Alias \u00a7a" + alias);
+                //SLOT//Log("§8Slot §ePersonal§7 Alias §a" + alias);
             }
 
             /*
@@ -7625,7 +7593,7 @@ public class OotilityCeption {
             if (range.getValue() != null && range.getValue() < 0) { range.setValue(0); }
             if (range.getValue() != null && range.getValue() >= personal.getTemplate().getTotalSlotCount()) {
                 range.setValue(personal.getTemplate().getTotalSlotCount() - 1); }
-            //SLOT//Log("\u00a78Slot \u00a7ePersonal\u00a77 Slot \u00a7b" + slot.getValue() + "\u00a77, Range \u00a73" + range.getValue());
+            //SLOT//Log("§8Slot §ePersonal§7 Slot §b" + slot.getValue() + "§7, Range §3" + range.getValue());
 
             // Enderchestslot it is
             return new ISSPersonalContainer(slot.getValue(), range.getValue(), personal, alias);
@@ -7686,7 +7654,7 @@ public class OotilityCeption {
                         if (range.getValue() > 53) { range.setValue(53); }
                     }
 
-                    //SLOT//Log("\u00a78Slot \u00a73Inventory\u00a77 Identified inventory, slot \u00a7e" + slot.getValue());
+                    //SLOT//Log("§8Slot §3Inventory§7 Identified inventory, slot §e" + slot.getValue());
 
                     // Inventory slot it is
                     return new ISSInventory(slot.getValue(), range.getValue());
@@ -7716,14 +7684,14 @@ public class OotilityCeption {
 
         // Solid, does it have a range?
         if (arg.contains("-")) {
-            //SLOT//Log("\u00a78Slot \u00a73Range \u00a77identified...");
+            //SLOT//Log("§8Slot §3Range §7identified...");
 
             // Split
             String[] dashSplit = arg.split("-");
 
             // Sintax Error
             if (dashSplit.length != 2) {
-                //SLOT//Log("\u00a78Slot \u00a73Range\u00a7c Invalid Range \u00a78(No two split gen)");
+                //SLOT//Log("§8Slot §3Range§c Invalid Range §8(No two split gen)");
                 return false; }
 
             Integer slotDef = getKeywordSlot(dashSplit[0]);
@@ -7731,12 +7699,12 @@ public class OotilityCeption {
 
             // Syntax Error
             if (slotDef == null) {
-                //SLOT//Log("\u00a78Slot \u00a73Range\u00a7c Unparsable low bound \u00a76" + dashSplit[0]);
+                //SLOT//Log("§8Slot §3Range§c Unparsable low bound §6" + dashSplit[0]);
                 return false; }
 
             // Syntax Error
             if (rangeDef == null) {
-                //SLOT//Log("\u00a78Slot \u00a73Range\u00a7c Unparsable high bound \u00a76" + dashSplit[1]);
+                //SLOT//Log("§8Slot §3Range§c Unparsable high bound §6" + dashSplit[1]);
                 return false; }
 
             // Flip so that the lesser is always before
@@ -7749,7 +7717,7 @@ public class OotilityCeption {
             slot.setValue(slotDef);
             range.setValue(rangeDef);
 
-            //SLOT//Log("\u00a78Slot \u00a73Range\u00a77 Generated as \u00a7e" + slotDef + " trhu " + rangeDef);
+            //SLOT//Log("§8Slot §3Range§7 Generated as §e" + slotDef + " trhu " + rangeDef);
             return true;
 
         // It must be a number in itself
@@ -7760,7 +7728,7 @@ public class OotilityCeption {
 
         // Syntax Error
         if (slotDef == null) {
-            //SLOT//Log("\u00a78Slot \u00a73Range\u00a7c Unparsable low bound \u00a76" + arg);
+            //SLOT//Log("§8Slot §3Range§c Unparsable low bound §6" + arg);
             return false; }
 
         // Success
@@ -8113,14 +8081,14 @@ public class OotilityCeption {
             // Is air? If so, cancel the chain and return this
             if (cancelOnAir) { if(OotilityCeption.IsAir(bkk.getType())) {
 
-                //DBG//oots.ECP Log("Block Counter - \u00a7b\u00a7oAir", "#" + i + ": \u00a73" + bkk.getType());
+                //DBG//oots.ECP Log("Block Counter - §b§oAir", "#" + i + ": §3" + bkk.getType());
                 return affected;
             } }
 
             // Is any of the blacklisted blocks this one? If so, return the array without it. It will be considered with its own range.
             for (Block blck : blacklist) { if (LocationEquals(bkk.getLocation(), blck.getLocation())) {
 
-                //DBG//oots.ECP Log("Block Counter - \u00a7b\u00a7oBlacklist", "#" + i + ": \u00a73" + bkk.getType());
+                //DBG//oots.ECP Log("Block Counter - §b§oBlacklist", "#" + i + ": §3" + bkk.getType());
                 return affected;
             } }
 

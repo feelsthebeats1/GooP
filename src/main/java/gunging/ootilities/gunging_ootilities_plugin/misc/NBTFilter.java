@@ -43,7 +43,7 @@ public class NBTFilter {
     @Override
     public String toString() {
         String am = "";
-        if (amount != null) { am = " " + amount.toString(); }
+        if (amount != null) { am = " " + amount; }
 
         return filterKey + " " + dataPrime + " " + dataDime + am;
     }

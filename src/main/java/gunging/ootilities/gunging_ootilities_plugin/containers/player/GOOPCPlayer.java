@@ -388,24 +388,6 @@ public class GOOPCPlayer extends GOOPCDeployed {
             switch (i) {
 
                 // Barrier slots
-                default:
-                    // Modify the 'default Item'
-                    display = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
-
-                    // Sets to the correct CustomModelData
-                    if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14) {
-
-                        // Set Custom Model Data
-                        ItemMeta meta = display.getItemMeta();
-                        meta.setCustomModelData(GOOPCTemplate.EDGE_FORMATIONS_CMD_START + ContainerSlotEdges.MAINLAND.ordinal());
-                        display.setItemMeta(meta);
-                    }
-
-                    // Encrypt it again I guess
-                    display = OotilityCeption.NameEncrypt(display, GOOPCTemplate.EDGE_ENCRYPTION_CODE);
-                    break;
-
-                // Hint slots
                 case (EDITION_SLOT_HEAD - 1): showcase = true; display = OotilityCeption.RenameItem(new ItemStack(Material.CHAINMAIL_HELMET), "\u00a77▣ \u00a7eHead Armor slot: ", null); break;
                 case (EDITION_SLOT_CHEST - 1): showcase = true; display = OotilityCeption.RenameItem(new ItemStack(Material.CHAINMAIL_CHESTPLATE), "\u00a77▣ \u00a7eChest Armor slot: ", null); break;
                 case (EDITION_SLOT_LEGS - 1): showcase = true; display = OotilityCeption.RenameItem(new ItemStack(Material.CHAINMAIL_LEGGINGS), "\u00a77▣ \u00a7eLegs Armor slot: ", null); break;
@@ -427,6 +409,24 @@ public class GOOPCPlayer extends GOOPCDeployed {
 
                     // Air item
                     display = new ItemStack(Material.AIR); break;
+                default:
+                    // Modify the 'default Item'
+                    display = new ItemStack(Material.GRAY_STAINED_GLASS_PANE);
+
+                    // Sets to the correct CustomModelData
+                    if (GooP_MinecraftVersions.GetMinecraftVersion() >= 14) {
+
+                        // Set Custom Model Data
+                        ItemMeta meta = display.getItemMeta();
+                        meta.setCustomModelData(GOOPCTemplate.EDGE_FORMATIONS_CMD_START + ContainerSlotEdges.MAINLAND.ordinal());
+                        display.setItemMeta(meta);
+                    }
+
+                    // Encrypt it again I guess
+                    display = OotilityCeption.NameEncrypt(display, GOOPCTemplate.EDGE_ENCRYPTION_CODE);
+                    break;
+
+                // Hint slots
             }
 
             if (showcase && display != null && display.hasItemMeta()) {

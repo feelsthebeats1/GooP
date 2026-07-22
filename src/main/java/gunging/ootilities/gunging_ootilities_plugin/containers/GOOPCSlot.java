@@ -182,7 +182,7 @@ public class GOOPCSlot implements Cloneable {
          * Restrictions
          */
         if (getRestrictions().size() > 0) { viewLore.add("");
-            viewLore.add(OotilityCeption.ParseColour("\u00a77Restriction Behaviour: \u00a73" + getRestrictedBehaviour().toString()));
+            viewLore.add(OotilityCeption.ParseColour("\u00a77Restriction Behaviour: \u00a73" + getRestrictedBehaviour()));
 
             for (SlotRestriction sr : getRestrictions()) { viewLore = sr.appendLore(viewLore); }
         }
@@ -1044,7 +1044,7 @@ public class GOOPCSlot implements Cloneable {
         serialized.append(slot.getSlotNumber()).append("||");
 
         // Set TYpe
-        serialized.append(slot.getSlotType().toString()).append("||");
+        serialized.append(slot.getSlotType()).append("||");
 
         // Remember Item
         boolean asMI = false;
@@ -1150,7 +1150,7 @@ public class GOOPCSlot implements Cloneable {
         if (slot.getRestrictedBehaviour() != RestrictedBehaviour.TAKE) {
 
             //Store it
-            serialized.append("RCB").append(slot.getRestrictedBehaviour().toString()).append("||");
+            serialized.append("RCB").append(slot.getRestrictedBehaviour()).append("||");
         }
 
         // Equipment
@@ -1236,7 +1236,7 @@ public class GOOPCSlot implements Cloneable {
             if (flagsEncode.length() > 0) {
 
                 //Store it
-                serialized.append("HFG").append(flagsEncode.toString()).append("||");
+                serialized.append("HFG").append(flagsEncode).append("||");
             }
         }
 
@@ -1266,7 +1266,7 @@ public class GOOPCSlot implements Cloneable {
                 bakedIndex.append(nIndex);
 
                 //Store it with its level
-                serialized.append("LRE").append(bakedIndex.toString()).append(iLore.get(nIndex)).append("||");
+                serialized.append("LRE").append(bakedIndex).append(iLore.get(nIndex)).append("||");
             }
         }
 

@@ -91,40 +91,39 @@ public class OnThrowAura extends Aura implements ITargetedEntitySkill {
         }
 
         public void auraStart() {
-            this.registerAuraComponent((Terminable)
-                    Events.subscribe(ProjectileLaunchEvent.class).filter((event) -> {
+            this.registerAuraComponent(Events.subscribe(ProjectileLaunchEvent.class).filter((event) -> {
 
-                        //SOM//OotilityCeption.Log("\u00a7cStep 3 \u00a77Subscribe Run: " + getName(event.getEntity()) + "\u00a77 vs " + getName(this.entity.get()) + "\u00a78 ~\u00a7e " + event.getEntity().getUniqueId().equals(this.entity.get().getUniqueId()));
+                //SOM//OotilityCeption.Log("\u00a7cStep 3 \u00a77Subscribe Run: " + getName(event.getEntity()) + "\u00a77 vs " + getName(this.entity.get()) + "\u00a78 ~\u00a7e " + event.getEntity().getUniqueId().equals(this.entity.get().getUniqueId()));
 
-                        // Cancel if Arrow - That is handled with onShootAura
-                        if (event.getEntity().getType() == EntityType.ARROW || event.getEntity().getType() == EntityType.SPECTRAL_ARROW) { return false; }
+                // Cancel if Arrow - That is handled with onShootAura
+                if (event.getEntity().getType() == EntityType.ARROW || event.getEntity().getType() == EntityType.SPECTRAL_ARROW) { return false; }
 
-                        if (!(event.getEntity().getShooter() instanceof Entity)) { return false; }
+                if (!(event.getEntity().getShooter() instanceof Entity)) { return false; }
 
-                        // Must match the shooter of the projectile
-                        return ((Entity) event.getEntity().getShooter()).getUniqueId().equals(this.entity.get().getUniqueId());
+                // Must match the shooter of the projectile
+                return ((Entity) event.getEntity().getShooter()).getUniqueId().equals(this.entity.get().getUniqueId());
 
-                    }).handler((event) -> {
+            }).handler((event) -> {
 
-                        // Clone metadata
-                        SkillMetadata meta = this.skillMetadata.deepClone();
+                // Clone metadata
+                SkillMetadata meta = this.skillMetadata.deepClone();
 
-                        // Target obviously the projectile
-                        AbstractEntity projectile = BukkitAdapter.adapt(event.getEntity());
-                        meta.setTrigger(projectile);
+                // Target obviously the projectile
+                AbstractEntity projectile = BukkitAdapter.adapt(event.getEntity());
+                meta.setTrigger(projectile);
 
-                        // Refresh
-                        if (metaskill == null) { metaskill = GooPMythicMobs.GetSkill(skillName.get(meta, meta.getCaster().getEntity()));}
+                // Refresh
+                if (metaskill == null) { metaskill = GooPMythicMobs.GetSkill(skillName.get(meta, meta.getCaster().getEntity()));}
 
-                        //SOM//OotilityCeption.Log("\u00a7cStep 4 \u00a77Aura Run:\u00a7d " + logSkillData(meta) + "\u00a7b " + metaskill.getInternalName());
-                        if (this.executeAuraSkill(Optional.ofNullable(metaskill), meta)) {
+                //SOM//OotilityCeption.Log("\u00a7cStep 4 \u00a77Aura Run:\u00a7d " + logSkillData(meta) + "\u00a7b " + metaskill.getInternalName());
+                if (this.executeAuraSkill(Optional.ofNullable(metaskill), meta)) {
 
-                            this.consumeCharge();
+                    this.consumeCharge();
 
-                            if (cancelEvent) { event.setCancelled(true); }
-                        }
+                    if (cancelEvent) { event.setCancelled(true); }
+                }
 
-                    }));
+            }));
             this.executeAuraSkill(OnThrowAura.this.onStartSkill, this.skillMetadata);
         }
     }

@@ -149,7 +149,7 @@ public class GCSR_Permission extends SlotRestriction {
         StringBuilder sb = new StringBuilder();
         for (String clas : permissions) { OotilityCeption.ListIntoBuilder(sb, clas, " \u00a77or\u00a7b "); }
 
-        item.add(OotilityCeption.ParseColour("\u00a73>\u00a77 Permissions:\u00a7b " + sb.toString()));
+        item.add(OotilityCeption.ParseColour("\u00a73>\u00a77 Permissions:\u00a7b " + sb));
 
         // Return thay
         return item;

@@ -90,7 +90,7 @@ public class GOOPCPhysical extends GOOPCDeployed {
         if (ret != null) { return ret; }
 
         // This should never actually happen
-        Gunging_Ootilities_Plugin.theOots.CPLog("Could not register inventory for \u00a73" + OotilityCeption.BlockLocation2String(location) + "\u00a77 in\u00a7e " + getTemplate().getInternalName());
+        Gunging_Ootilities_Plugin.theOots.CPLog("Could not register inventory for §3" + OotilityCeption.BlockLocation2String(location) + "§7 in§e " + getTemplate().getInternalName());
         ret = new GPCContent(this, location, -1, GPCProtection.UNREGISTERED, null);
         return ret;
     }
@@ -624,7 +624,7 @@ public class GOOPCPhysical extends GOOPCDeployed {
         if (GCL_Physical.isPhysicalContainerCore(location)) {
 
             // Set
-            OotilityCeption.Log4Success(logger, true, "\u00a7cThere already is a container in that block.");
+            OotilityCeption.Log4Success(logger, true, "§cThere already is a container in that block.");
 
             // Snooze
             return;
@@ -664,7 +664,7 @@ public class GOOPCPhysical extends GOOPCDeployed {
 
         // Make sure it is registered
         registerInventoryFor(location);
-        //Gunging_Ootilities_Plugin.theOots.C Log("Set Item " + OotilityCeption.GetItemName(item) + "\u00a77 at slot \u00a7e" + slot + "\u00a7 in inventory of " + owner.toString());
+        //Gunging_Ootilities_Plugin.theOots.C Log("Set Item " + OotilityCeption.GetItemName(item) + "§7 at slot §e" + slot + "§ in inventory of " + owner.toString());
 
         // Find the Personal Container Inventory (if existing)
         PhysicalContainerInventory opened = getOpenedInstance(location);
@@ -832,7 +832,7 @@ public class GOOPCPhysical extends GOOPCDeployed {
         // Make sure it is registered
         registerInventoryFor(location);
 
-        //Gunging_Ootilities_Plugin.theOots.C Log("Set Item " + OotilityCeption.GetItemName(item) + "\u00a77 at slot \u00a7e" + slot + "\u00a7 in inventory of " + owner.toString());
+        //Gunging_Ootilities_Plugin.theOots.C Log("Set Item " + OotilityCeption.GetItemName(item) + "§7 at slot §e" + slot + "§ in inventory of " + owner.toString());
 
         // Make sure it is not null
         ItemStack carbonCopy = new ItemStack(Material.AIR);
@@ -868,7 +868,7 @@ public class GOOPCPhysical extends GOOPCDeployed {
 
         // Make sure it is registered
         registerInventoryFor(location);
-        //Gunging_Ootilities_Plugin.theOots.C Log("Set Item " + OotilityCeption.GetItemName(item) + "\u00a77 at slot \u00a7e" + slot + "\u00a7 in inventory of " + owner.toString());
+        //Gunging_Ootilities_Plugin.theOots.C Log("Set Item " + OotilityCeption.GetItemName(item) + "§7 at slot §e" + slot + "§ in inventory of " + owner.toString());
 
         // Make sure it is not null
         ItemStack carbonCopy = new ItemStack(Material.AIR);

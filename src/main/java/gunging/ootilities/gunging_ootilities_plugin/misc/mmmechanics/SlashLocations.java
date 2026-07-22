@@ -56,11 +56,10 @@ public class SlashLocations<T> extends TCPEffect {
 
         double trueYOffset = 0; Object funnyYOffset = null;
         try { Field fd = getClass().getField("yOffset"); fd.setAccessible(true); funnyYOffset = fd.get(this); } catch (NoSuchFieldException|IllegalAccessException ignored) {}
-        if (funnyYOffset instanceof PlaceholderFloat) {
+        if (funnyYOffset instanceof PlaceholderFloat asPH) {
 
             // Execute
-            PlaceholderFloat asPH = (PlaceholderFloat) funnyYOffset;
-            trueYOffset = (double) asPH.get(data);
+            trueYOffset = asPH.get(data);
 
         } else if (funnyYOffset != null) {
 

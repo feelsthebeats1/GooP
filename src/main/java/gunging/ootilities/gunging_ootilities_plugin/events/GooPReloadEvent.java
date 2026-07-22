@@ -23,5 +23,5 @@ public class GooPReloadEvent extends Event {
     /**
      * Yes
      */
-    public GooPReloadEvent() {};
+    public GooPReloadEvent() {}
 }

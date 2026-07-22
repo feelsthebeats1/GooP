@@ -114,10 +114,9 @@ public class UCMPortalCreateAura extends Aura implements ITargetedEntitySkill {
 
                                     // Find the true entity
                                     if (event.getClickedBlock() == null) { return false; }
-                                    if (!(event.getClickedBlock().getBlockData() instanceof EndPortalFrame)) { return false; }
+                                    if (!(event.getClickedBlock().getBlockData() instanceof EndPortalFrame frame)) { return false; }
                                     if (OotilityCeption.IsAirNullAllowed(event.getItem())) { return false; }
                                     if (event.getItem().getType() != Material.ENDER_EYE) { return false; }
-                                    EndPortalFrame frame = (EndPortalFrame) event.getClickedBlock().getBlockData();
 
                                     //EVN//OotilityCeption.Log("\u00a78UCM\u00a73 PCA\u00a77 Block\u00a7e " + (event.getClickedBlock() == null ? "\u00a7cnull" : event.getClickedBlock().getType().toString()));
                                     //EVN//OotilityCeption.Log("\u00a78UCM\u00a73 PCA\u00a77 Class\u00a7e " + (event.getClickedBlock() == null ? "\u00a7cnull" : event.getClickedBlock().getClass().getSimpleName()));
@@ -185,7 +184,7 @@ public class UCMPortalCreateAura extends Aura implements ITargetedEntitySkill {
 
                                     if (trueDamager == null) { return false; }
 
-                                    return trueDamager.getUniqueId().equals(((AbstractEntity)this.entity.get()).getUniqueId());
+                                    return trueDamager.getUniqueId().equals(this.entity.get().getUniqueId());
 
                                 }).handler((event) -> {
 

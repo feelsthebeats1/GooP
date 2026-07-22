@@ -57,14 +57,13 @@ public class ListenedEntity extends BukkitRunnable {
     public void Enable() {
         if (sources.containsKey(listenedEntity)) {
 
-            return;
         } else {
 
             sources.put(listenedEntity, this);
             observedEntities.add(this);
 
             if (!running) {
-                BukkitTask task = new ListenedEntity().runTaskTimer(Gunging_Ootilities_Plugin.theMain.getPlugin(), 4, 2);
+                BukkitTask task = new ListenedEntity().runTaskTimer(Gunging_Ootilities_Plugin.getPlugin(), 4, 2);
             }
         }
     }

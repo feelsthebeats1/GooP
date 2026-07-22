@@ -87,7 +87,7 @@ public class UCMRecipeUnlock extends SkillMechanic implements ITargetedEntitySki
                 Recipe recipe = recipes.next();
 
                 // Only keyed recipes are supported
-                if (!(recipe instanceof Keyed)) {
+                if (!(recipe instanceof Keyed keyed)) {
                     //DBG//OotilityCeption.Log("\u00a78UCM\u00a7c RCU\u00a77 Keyless Recipe:\u00a7e " + OotilityCeption.GetItemName(recipe.getResult(), true));
                     continue; }
 
@@ -95,7 +95,6 @@ public class UCMRecipeUnlock extends SkillMechanic implements ITargetedEntitySki
                 ItemStack result = recipe.getResult();
 
                 // All right
-                Keyed keyed = (Keyed) recipe;
                 // Yeah
                 String keyString = keyed.getKey().getKey();
                 String nameString = keyed.getKey().getNamespace();
@@ -135,7 +134,7 @@ public class UCMRecipeUnlock extends SkillMechanic implements ITargetedEntitySki
         Entity kaster = abstractEntity.getBukkitEntity();
 
         // Only player
-        if (!(kaster instanceof Player)) { return SkillResult.INVALID_TARGET; }
+        if (!(kaster instanceof Player player)) { return SkillResult.INVALID_TARGET; }
 
         // Go go go
         String nkKey = key.get(skillMetadata);
@@ -143,7 +142,6 @@ public class UCMRecipeUnlock extends SkillMechanic implements ITargetedEntitySki
         NamespacedKey nk = new NamespacedKey(nkName, nkKey);
 
         // Cast
-        Player player = (Player) kaster;
 
         (new BukkitRunnable() {
             @Override

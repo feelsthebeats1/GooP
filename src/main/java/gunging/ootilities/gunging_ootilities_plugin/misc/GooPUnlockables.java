@@ -348,7 +348,7 @@ public class GooPUnlockables {
             //DBG//OotilityCeption.Log("\u00a77Saved goal \u00a73" + uck.getGoalname() + "\u00a77 for \u00a7e" + uck.getAssociatee() + "\u00a77 as \u00a7b" + res);
 
             // Set Location in File
-            ofgStorage.set(uck.getGoalname() + "." + uck.getAssociatee().toString(), res);
+            ofgStorage.set(uck.getGoalname() + "." + uck.getAssociatee(), res);
 
             // Save
             Gunging_Ootilities_Plugin.theMain.SaveFile(ofgPair);

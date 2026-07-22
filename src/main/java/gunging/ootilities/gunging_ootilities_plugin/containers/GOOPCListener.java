@@ -101,8 +101,7 @@ public class GOOPCListener implements Listener {
     @EventHandler(priority = EventPriority.LOWEST)
     public void OnRPGInventorySlotsClear(PrepareItemCraftEvent event) {
         if (event.getView().getType() != InventoryType.CRAFTING) { return; }
-        if (!(event.getView().getPlayer() instanceof Player)) { return; }
-        Player player = (Player) event.getView().getPlayer();
+        if (!(event.getView().getPlayer() instanceof Player player)) { return; }
 
         //EVN//OotilityCeption.Log("\u00a78CLICK\u00a7a EV\u00a77 Prepare Crafting Event --------------");
         //EVN//OotilityCeption.Log("\u00a78CLICK\u00a7a EV\u00a77 Size: \u00a7b" + event.getInventory().getSize());
@@ -869,7 +868,7 @@ public class GOOPCListener implements Listener {
                         actualUUID = UUID.randomUUID();
 
                         // Save
-                        ItemStack res = GooPMMOItems.SetStringStatData(event.getItem(), GooPMMOItems.CONTAINER, container + " " + actualUUID.toString());
+                        ItemStack res = GooPMMOItems.SetStringStatData(event.getItem(), GooPMMOItems.CONTAINER, container + " " + actualUUID);
 
                         // Success?
                         if (res != null) {

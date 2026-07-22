@@ -43,18 +43,18 @@ public class CIHCollectToCursor extends ContainersClickHandler {
 
         // Preview mode? No more actions.
         if (GOOPCManager.isUsage_Preview(event.getView())) {
-            //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a7e -\u00a77 Preview Mode");
+            //CLI//OotilityCeption.Log("§8CIH §eCTC§e -§7 Preview Mode");
             return null;
         }
 
         // Easy reference
         ItemStack collectionItem = GOOPCManager.cloneItem(event.getCursor());
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Current?\u00a73 " + OotilityCeption.GetItemName(event.getCurrentItem(), true));
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Cursor?\u00a73 " + OotilityCeption.GetItemName(event.getCursor(), true));
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Current?§3 " + OotilityCeption.GetItemName(event.getCurrentItem(), true));
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Cursor?§3 " + OotilityCeption.GetItemName(event.getCursor(), true));
 
         // Is it the default item? You can't take that
         if (OotilityCeption.IsAirNullAllowed(collectionItem)) {
-            //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a7c -\u00a77 Aborting Operation ~ target item is AIR");
+            //CLI//OotilityCeption.Log("§8CIH §eCTC§c -§7 Aborting Operation ~ target item is AIR");
             return null;
         }
 
@@ -63,9 +63,9 @@ public class CIHCollectToCursor extends ContainersClickHandler {
         boolean affectsRPGInven = specs.affectsRPGInventory(affectsBottom(event));
         boolean affectsContainer = specs.affectsContainer(affectsTop(event));
 
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Event Slot \u00a7b#" + event.getSlot() + " \u00a78(Raw\u00a79 #" + event.getRawSlot() + "\u00a78)\u00a77, Used:\u00a79 " + specs.getClickedSlot());
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Affects Container?\u00a73 " + affectsContainer);
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Affects RPGInvent?\u00a73 " + affectsRPGInven);
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Event Slot §b#" + event.getSlot() + " §8(Raw§9 #" + event.getRawSlot() + "§8)§7, Used:§9 " + specs.getClickedSlot());
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Affects Container?§3 " + affectsContainer);
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Affects RPGInvent?§3 " + affectsRPGInven);
 
         // Should not happen
         if ((!affectsRPGInven && !affectsContainer) || (event.getClickedInventory() == null)) { return null; }
@@ -79,14 +79,14 @@ public class CIHCollectToCursor extends ContainersClickHandler {
         //region Choose which slots qualify for collecting items to cursor
         // The target slots are all those for the player inventory
         if (rpg != null) {
-            //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e Adding the slots of the RPG Template. ");
+            //CLI//OotilityCeption.Log("§8CIH§a EV§e Adding the slots of the RPG Template. ");
 
             // Reference base inventory slots (no armor or such)
             for (int i = 0; i < 36; i++) {
 
                 // Skip the one source slot
                 if (specs.isClickedBottomInventory()) { if (i == specs.getClickedSlot()) {
-                    //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Skipping used slot\u00a76 #" + specs.getClickedSlot());
+                    //CLI//OotilityCeption.Log("§8CIH§a EV§7 Skipping used slot§6 #" + specs.getClickedSlot());
                     continue; } }
 
                 // Slot target the bottom RPG inventory
@@ -95,14 +95,14 @@ public class CIHCollectToCursor extends ContainersClickHandler {
 
         // Target vanilla inventory
         } else {
-            //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e Adding the slots of the vanilla player inventory. ");
+            //CLI//OotilityCeption.Log("§8CIH§a EV§e Adding the slots of the vanilla player inventory. ");
 
             // Reference base inventory slots (no armor or such) in the normal left to right order
             for (int i = 0; i < 36; i++) {
 
                 // Skip the one source slot
                 if (specs.isClickedBottomInventory()) { if (i == specs.getClickedSlot()) {
-                    //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Skipping used slot\u00a76 #" + specs.getClickedSlot());
+                    //CLI//OotilityCeption.Log("§8CIH§a EV§7 Skipping used slot§6 #" + specs.getClickedSlot());
                     continue; } }
 
                 // Slot target the bottom vanilla inventory
@@ -114,14 +114,14 @@ public class CIHCollectToCursor extends ContainersClickHandler {
         if (event.getView().getType() != InventoryType.CRAFTING) {
             
             if (observed != null) {
-                //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e Adding the slots of the top GooPContainer ");
+                //CLI//OotilityCeption.Log("§8CIH§a EV§e Adding the slots of the top GooPContainer ");
 
                 // All the slots in that template being seen
                 for (int i = 0; i < observed.getTemplate().getTotalSlotCount(); i++) {
 
                     // Skip the one source slot
                     if (specs.isClickedTopInventory()) { if (i == specs.getClickedSlot()) {
-                        //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Skipping used slot\u00a76 #" + specs.getClickedSlot());
+                        //CLI//OotilityCeption.Log("§8CIH§a EV§7 Skipping used slot§6 #" + specs.getClickedSlot());
                         continue; } }
 
                     // Slot target the bottom vanilla inventory
@@ -130,7 +130,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
 
             } else {
 
-                //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a7e Adding the slots of the top non-container inventory ");
+                //CLI//OotilityCeption.Log("§8CIH§a EV§e Adding the slots of the top non-container inventory ");
 
                 // Examine top inventory for stacking success
                 for (int i = 0; i < event.getView().getTopInventory().getSize(); i++) {
@@ -140,7 +140,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
 
                     // Skip the one source slot
                     if (specs.isClickedTopInventory()) { if (i == specs.getClickedSlot()) {
-                        //CLI//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Skipping used slot\u00a76 #" + specs.getClickedSlot());
+                        //CLI//OotilityCeption.Log("§8CIH§a EV§7 Skipping used slot§6 #" + specs.getClickedSlot());
                         continue; } }
 
                     // Slot target the bottom vanilla inventory
@@ -153,7 +153,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
         // Time to collect-to-cursor as much as possible
         int currentCount = collectionItem.getAmount();
         int maxAmount = collectionItem.getMaxStackSize();
-        //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 Collecting to fill\u00a73 " + currentCount + "\u00a77 up to\u00a79 " + maxAmount);
+        //CLI//OotilityCeption.Log("§8CIH §eCTC§7 Collecting to fill§3 " + currentCount + "§7 up to§9 " + maxAmount);
 
         // Collect (skipping full stacks, then taking from full stacks)
         currentCount = collect(result, targetSlots, player, collectionItem, currentCount, maxAmount, true);
@@ -172,7 +172,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
         
         // Go through each interacting slot and attempt to collect items to cursor
         for (CIInteractingSlot interSlot : targetSlots) {
-            //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 Trying slot\u00a73 " + interSlot.toString());
+            //CLI//OotilityCeption.Log("§8CIH §eCTC§7 Trying slot§3 " + interSlot.toString());
 
             // If you have picked it all up, finish.
             if (currentCounter >= maxAmount) { break; }
@@ -183,10 +183,10 @@ public class CIHCollectToCursor extends ContainersClickHandler {
             // In this case, the event is allowed to proceed, if the target item is identical to the one being collected
             if (OotilityCeption.IsAirNullAllowed(observedInterim) || !observedInterim.isSimilar(collectionItem) || (observedInterim.getAmount() == maxAmount && skipFullStacks)) {
 
-                //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 This slot does not have similar item. Skip. ");
+                //CLI//OotilityCeption.Log("§8CIH §eCTC§7 This slot does not have similar item. Skip. ");
                 continue; }
 
-            //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 Found " + OotilityCeption.GetItemName(observedInterim, true));
+            //CLI//OotilityCeption.Log("§8CIH §eCTC§7 Found " + OotilityCeption.GetItemName(observedInterim, true));
 
             // Restrict containers interaction slots
             if (interSlot instanceof CIContainerInteracting) {
@@ -207,7 +207,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
                      */
                     if (interFail.getValue() != CIInteractingFailReason.RESTRICTIONS_UNMET || !slotInterim.isForStorage() || slotInterim.getRestrictedBehaviour() != RestrictedBehaviour.TAKE) {
 
-                        //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 Cannot take item " + OotilityCeption.GetItemName(interSlot.getCurrentItem()) +  " from here:\u00a7c " + interFail.getValue().toString());
+                        //CLI//OotilityCeption.Log("§8CIH §eCTC§7 Cannot take item " + OotilityCeption.GetItemName(interSlot.getCurrentItem()) +  " from here:§c " + interFail.getValue().toString());
                         continue;
                     }
                 }
@@ -218,7 +218,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
 
             // Now it takes to collect a few items
             int maxCollections = maxAmount - currentCounter;
-            //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 Can collect up to " + maxCollections);
+            //CLI//OotilityCeption.Log("§8CIH §eCTC§7 Can collect up to " + maxCollections);
             int pickedUp;
 
             // If can collect it all
@@ -228,7 +228,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
                 pickedUp = observedInterim.getAmount();
                 currentCounter += pickedUp;
                 interSlot.setItem(null);
-                //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 Collected \u00a7aall\u00a77 items in this slot\u00a7e -\u00a76 " + pickedUp + "\u00a78 (Current Count\u00a73" + currentCount + "\u00a78)");
+                //CLI//OotilityCeption.Log("§8CIH §eCTC§7 Collected §aall§7 items in this slot§e -§6 " + pickedUp + "§8 (Current Count§3" + currentCount + "§8)");
 
                 // Can only pick up some
             } else {
@@ -237,7 +237,7 @@ public class CIHCollectToCursor extends ContainersClickHandler {
                 pickedUp = maxCollections;
                 currentCounter += pickedUp;
                 interSlot.setItem(OotilityCeption.asQuantity(observedInterim, observedInterim.getAmount() - pickedUp));
-                //CLI//OotilityCeption.Log("\u00a78CIH \u00a7eCTC\u00a77 Collected \u00a7bsome\u00a77 items from this slot:\u00a76 " + pickedUp + "\u00a78 (Current Count\u00a73" + currentCount + "\u00a78)");
+                //CLI//OotilityCeption.Log("§8CIH §eCTC§7 Collected §bsome§7 items from this slot:§6 " + pickedUp + "§8 (Current Count§3" + currentCount + "§8)");
             }
         }
         

@@ -24,7 +24,7 @@ public class TagTargeter extends IEntitySelector {
     public TagTargeter(SkillExecutor manager, MythicLineConfig mlc) {
         super(manager, mlc);
 
-        PlaceholderString sreQ = mlc.getPlaceholderString(new String[]{"tags", "tag", "t"}, (String)null);
+        PlaceholderString sreQ = mlc.getPlaceholderString(new String[]{"tags", "tag", "t"}, null);
 
         //MM//OotilityCeption.Log("\u00a7b> > > > > > > > > > Loading \u00a7dGooPTag");
         // F

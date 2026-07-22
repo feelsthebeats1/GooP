@@ -14,7 +14,7 @@ public class MMPHSlot extends MMPlaceholder {
         if (arg == null) { return "{arg}"; }
 
         // Was it <goop.slot.provided> ?
-        if (arg.toLowerCase().equals("provided")) {
+        if (arg.equalsIgnoreCase("provided")) {
 
             // Get provided
             String providedSlot = GungingOotilities.getProvidedSlot(metadata.getCaster().getEntity().getUniqueId(), false);
@@ -23,7 +23,7 @@ public class MMPHSlot extends MMPlaceholder {
             if (providedSlot != null) { return providedSlot; } else { return "{ent}"; }
 
             // The slot is invalid (only <goop.slot.provided> is supported for now)
-        } else if (arg.toLowerCase().equals("provided.full")) {
+        } else if (arg.equalsIgnoreCase("provided.full")) {
 
             // Get provided
             String providedSlot = GungingOotilities.getProvidedSlot(metadata.getCaster().getEntity().getUniqueId(), true);

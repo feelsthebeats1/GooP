@@ -18,10 +18,9 @@ public class VexChargingCondition extends CustomMMCondition implements IEntityCo
     public boolean check(AbstractEntity abstractEntity) {
 
         // Invalid target
-        if (!(abstractEntity.getBukkitEntity() instanceof Vex)) { return false; }
+        if (!(abstractEntity.getBukkitEntity() instanceof Vex vex)) { return false; }
 
         // Cast
-        Vex vex = (Vex) abstractEntity.getBukkitEntity();
 
         // Return if the value matches
         return neg(vex.isCharging() == expected);

@@ -55,20 +55,19 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.UNKNOWN_SLOT); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Unknown Slot");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Unknown Slot");
             return false;
         }
 
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 " + interactingSlot.getView().getType().toString() + " Inventory Slot \u00a7b#" + interactingSlot.getSlotNumber());
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 " + interactingSlot.getView().getType().toString() + " Inventory Slot §b#" + interactingSlot.getSlotNumber());
 
         // That's all the restrictions given to normal slots
-        if (!(interactingSlot instanceof CIContainerInteracting)) { return true; }
-        CIContainerInteracting containerSlot = (CIContainerInteracting) interactingSlot;
+        if (!(interactingSlot instanceof CIContainerInteracting containerSlot)) { return true; }
 
         // Identify slot
         GOOPCSlot slot = containerSlot.getContainerSlot();
 
-        //EVN//OotilityCeption.Log("\u00a78CIH\u00a7a EV\u00a77 Template Slot \u00a7b#" + slot.getSlotNumber());
+        //EVN//OotilityCeption.Log("§8CIH§a EV§7 Template Slot §b#" + slot.getSlotNumber());
 
         // If the player is picking up an edge, the event is cancelled as usual
         if (slot.isForEdge()) {
@@ -76,7 +75,7 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.EDGE_ITEM); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Edge Cancellation");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Edge Cancellation");
             return false;
         }
 
@@ -91,7 +90,7 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.RESTRICTIONS_UNMET); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Restrictions Unmet");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Restrictions Unmet");
             return false;
         }
 
@@ -101,7 +100,7 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.DISPLAY_ITEM); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Display Item");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Display Item");
             return false;
         }
 
@@ -117,13 +116,13 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
                 // Fail reason
                 if (fail != null) { fail.setValue(CIInteractingFailReason.DEFAULT_ITEM); }
 
-                //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Cannot Drop Default (Tags?\u00a79 " + tagsDefault + "\u00a77) (Edited Layer? " + (containerSlot.getObserved() == null ? "\u00a7cnull obs" : OotilityCeption.GetItemName(containerSlot.getObserved().getLayerEdited().get(slot.getSlotNumber()))) + "\u00a77)");
+                //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Cannot Drop Default (Tags?§9 " + tagsDefault + "§7) (Edited Layer? " + (containerSlot.getObserved() == null ? "§cnull obs" : OotilityCeption.GetItemName(containerSlot.getObserved().getLayerEdited().get(slot.getSlotNumber()))) + "§7)");
                 return false; }
 
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.RESULT_SLOT_TYPE); }
 
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Result Slot");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Result Slot");
             return false; }
 
         // Not for storage? I don't know what you are.
@@ -132,7 +131,7 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.UNKNOWN_SLOT_TYPE); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a74 !\u00a77 Unknown Storage Type");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§4 !§7 Unknown Storage Type");
             return false; }
 
         // Cannot save container bags within container bags :sorrow:
@@ -141,7 +140,7 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.CONTAINERCEPTION); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Containerception");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Containerception");
             return false;
         }
 
@@ -151,7 +150,7 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.COUNTER_OVERFLOW); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Counter Written Book");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Counter Written Book");
             return false;
         }
 
@@ -161,7 +160,7 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.CANNOT_STORE); }
 
-            //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a74 !\u00a77 Cannot store this item");
+            //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§4 !§7 Cannot store this item");
             return false; }
 
         // Is it the default item? You can't take that
@@ -170,11 +169,11 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
             // Fail reason
             if (fail != null) { fail.setValue(CIInteractingFailReason.DEFAULT_ITEM); }
 
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 Cannot Drop Default (Tags?\u00a79 " + tagsDefault + "\u00a77) (Storage Layer? " + (containerSlot.getObserved() == null ? "\u00a7cnull obs" : OotilityCeption.GetItemName(containerSlot.getObserved().getLayerStorage().get(slot.getSlotNumber()))) + "\u00a77)");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 Cannot Drop Default (Tags?§9 " + tagsDefault + "§7) (Storage Layer? " + (containerSlot.getObserved() == null ? "§cnull obs" : OotilityCeption.GetItemName(containerSlot.getObserved().getLayerStorage().get(slot.getSlotNumber()))) + "§7)");
             return false; }
 
         // Allow
-        //CLI//OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7a !\u00a77 Success");
+        //CLI//OotilityCeption.Log("§8CONTAINERS §eDAS§a !§7 Success");
         return true;
     }
 
@@ -224,16 +223,16 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
      */
     @Contract("!null,null,_,_,_,_->null;!null,!null,_,_,_,_->!null;null,_,_,_,_,_->!null")
     @Nullable public static CIInteractingSlot knownTarget(@Nullable GOOPCDeployed deployed, @Nullable GOOPCSlot knownSlot, int eventSlot, @NotNull Inventory clickedInventory, @NotNull InventoryView view, @Nullable ContainerInventory observed) {
-        //KT//OotilityCeption.Log("\u00a78CCH\u00a72 KT\u00a77 Deployed\u00a73 " + (deployed == null ?  "\u00a7cnull" : deployed.getTemplate().getInternalName()));
-        //KT//OotilityCeption.Log("\u00a78CCH\u00a72 KT\u00a77 Tmp Slot\u00a73 " + (knownSlot == null ? "\u00a7cnull" : "#" + knownSlot.getSlotNumber()));
-        //KT//OotilityCeption.Log("\u00a78CCH\u00a72 KT\u00a77 Observed\u00a73 " + (observed == null ? "\u00a7cnull" : observed.getInstanceID()));
+        //KT//OotilityCeption.Log("§8CCH§2 KT§7 Deployed§3 " + (deployed == null ?  "§cnull" : deployed.getTemplate().getInternalName()));
+        //KT//OotilityCeption.Log("§8CCH§2 KT§7 Tmp Slot§3 " + (knownSlot == null ? "§cnull" : "#" + knownSlot.getSlotNumber()));
+        //KT//OotilityCeption.Log("§8CCH§2 KT§7 Observed§3 " + (observed == null ? "§cnull" : observed.getInstanceID()));
 
         // Invalid index
         //if (eventSlot < 0 || eventSlot >= clickedInventory.getSize()) { return null; }
 
         // No container no service
         if (deployed == null) {
-            //KT//OotilityCeption.Log("\u00a78CCH\u00a72 KT\u00a7a //\u00a77 No deployed, not container. ");
+            //KT//OotilityCeption.Log("§8CCH§2 KT§a //§7 No deployed, not container. ");
 
             // Just that
             return new CIInteractingSlot(eventSlot, clickedInventory, view);
@@ -242,14 +241,14 @@ public abstract class ContainersClickHandler extends ContainersInteractionHandle
         } else {
 
             if (knownSlot != null) {
-                //KT//OotilityCeption.Log("\u00a78CCH\u00a72 KT\u00a7a //\u00a77 Known slot, container. ");
+                //KT//OotilityCeption.Log("§8CCH§2 KT§a //§7 Known slot, container. ");
 
                 // Build slot
                 return new CIContainerInteracting(eventSlot, clickedInventory, view, deployed.getTemplate(), knownSlot, observed);
             }
 
             // Invalid slot
-            //KT//OotilityCeption.Log("\u00a78CCH\u00a72 KT\u00a7c //\u00a77 Invalid Slot");
+            //KT//OotilityCeption.Log("§8CCH§2 KT§c //§7 Invalid Slot");
             return null;
         }
     }

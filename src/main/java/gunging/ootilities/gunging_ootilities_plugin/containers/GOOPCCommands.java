@@ -812,10 +812,9 @@ public class GOOPCCommands implements CommandExecutor {
                                 // Find
                                 ContainerInventory cInventory = null;
 
-                                if (template.getDeployed() instanceof GOOPCPersonal) {
+                                if (template.getDeployed() instanceof GOOPCPersonal personal) {
 
                                     // Will open target player's version. Get the corresponding Personal Container
-                                    GOOPCPersonal personal = (GOOPCPersonal) template.getDeployed();
 
                                     // Open it
                                     personal.openForPlayer(opener, ownerUUID, reason);
@@ -823,10 +822,9 @@ public class GOOPCCommands implements CommandExecutor {
                                     // Find
                                     cInventory = personal.getObservedBy(opener.getUniqueId());
 
-                                } else if (template.getDeployed() instanceof GOOPCStation) {
+                                } else if (template.getDeployed() instanceof GOOPCStation station) {
 
                                     // Will open target player's version. Get the corresponding Personal Container
-                                    GOOPCStation station = (GOOPCStation) template.getDeployed();
 
                                     // Open it
                                     station.openForPlayer(opener, offlineOwner.getPlayer(), -1, reason);
@@ -1062,7 +1060,7 @@ public class GOOPCCommands implements CommandExecutor {
 
                             // Is container loaded?
                             GOOPCTemplate template = GCL_Templates.getByInternalName(args[2]);
-                            boolean isGeneralAccessMode = args[2].toUpperCase().equals("OPEN_ONLY");
+                            boolean isGeneralAccessMode = args[2].equalsIgnoreCase("OPEN_ONLY");
                             if (!isGeneralAccessMode) {
 
                                 // If its not using the 'open_only' keyword. Load it to be created
@@ -1585,19 +1583,19 @@ public class GOOPCCommands implements CommandExecutor {
                                         // Get target slot
                                         boolean scryInstead = false, onCloseInstead = false, onOpenInstead = false;
                                         ArrayList<ItemStackSlot> targetSlots = OotilityCeption.getInventorySlots(args[4], null, null);
-                                        if (args[4].toLowerCase().equals("slots")) {
+                                        if (args[4].equalsIgnoreCase("slots")) {
 
                                             // Scry time
                                             scryInstead = true;
 
                                             // Commands when closing the container
-                                        } else if (args[4].toLowerCase().equals("onclose")) {
+                                        } else if (args[4].equalsIgnoreCase("onclose")) {
 
                                             // Cloase time
                                             onCloseInstead = true;
 
                                             // Commands when opening the container
-                                        } else if (args[4].toLowerCase().equals("onopen")) {
+                                        } else if (args[4].equalsIgnoreCase("onopen")) {
 
                                             // Cloase time
                                             onOpenInstead = true;
@@ -1618,8 +1616,8 @@ public class GOOPCCommands implements CommandExecutor {
 
                                             if (args[5].length() > 0) {
 
-                                                onTake = args[5].toLowerCase().equals("ontake");
-                                                onStore = args[5].toLowerCase().equals("onstore");
+                                                onTake = args[5].equalsIgnoreCase("ontake");
+                                                onStore = args[5].equalsIgnoreCase("onstore");
                                                 onClick = !onTake && !onStore;
 
                                                 // Skip that keyword
@@ -2642,8 +2640,8 @@ public class GOOPCCommands implements CommandExecutor {
                                         ApplicableMask oaMask = null;
                                         if (args.length > 5) {
 
-                                            forType = args[5].toLowerCase().equals("type");
-                                            forID = args[5].toLowerCase().equals("id");
+                                            forType = args[5].equalsIgnoreCase("type");
+                                            forID = args[5].equalsIgnoreCase("id");
 
                                             // Failure if neither
                                             if (!forID && !forType) {
@@ -2928,13 +2926,6 @@ public class GOOPCCommands implements CommandExecutor {
                                         boolean ofBehaviour = false, ofList = false, ofQNR = false;
                                         String kind = args[5].toLowerCase().replace(" ", "_").replace("-", "_");
                                         switch (kind) {
-                                            default:
-                                                // Fail
-                                                failure = true;
-
-                                                // Notify
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected a kind of restriction, be it \u00a7bbehaviour\u00a77, \u00a7blevel\u00a77, \u00a7bclass\u00a77, \u00a7bpermission\u00a77, or \u00a7bunlockable\u00a77 instead of \u00a7e" + kind));
-                                                break;
                                             case "behaviour":
                                                 ofBehaviour = true;
                                                 break;
@@ -2945,6 +2936,13 @@ public class GOOPCCommands implements CommandExecutor {
                                             case "permission":
                                             case "unlockable":
                                                 ofList = true;
+                                                break;
+                                            default:
+                                                // Fail
+                                                failure = true;
+
+                                                // Notify
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected a kind of restriction, be it \u00a7bbehaviour\u00a77, \u00a7blevel\u00a77, \u00a7bclass\u00a77, \u00a7bpermission\u00a77, or \u00a7bunlockable\u00a77 instead of \u00a7e" + kind));
                                                 break;
                                         }
 
@@ -3226,8 +3224,6 @@ public class GOOPCCommands implements CommandExecutor {
         GPCProtection protection = null;
         // If it is a containers protection thing
         switch (command.getName().toLowerCase()) {
-            default: break;
-            //region G. Remove || Private || Public
             case "gremove":
                 if (protection == null) { protection = GPCProtection.UNREGISTERED; }
             case "gprivate":
@@ -3239,10 +3235,9 @@ public class GOOPCCommands implements CommandExecutor {
                 //      -       args[n]
 
                 // Gather Player
-                if (sender instanceof Player) {
+                if (sender instanceof Player owner) {
 
                     // If not specified, it must be the sender
-                    Player owner = (Player) sender;
 
                     // Just target location I guess?
                     Block block = ((Player)sender).getTargetBlockExact(30, FluidCollisionMode.NEVER);
@@ -3326,10 +3321,9 @@ public class GOOPCCommands implements CommandExecutor {
                 //      -           0           args[n]
 
                 // Gather Player
-                if (sender instanceof Player) {
+                if (sender instanceof Player caller) {
 
                     // If not specified, it must be the sender
-                    Player caller = (Player) sender;
 
                     // Is they using it as /help?
                     if (args.length != 1) {
@@ -3485,10 +3479,9 @@ public class GOOPCCommands implements CommandExecutor {
                 //    -         0           args[n]
 
                 // Gather Player
-                if (sender instanceof Player) {
+                if (sender instanceof Player caller) {
 
                     // If not specified, it must be the sender
-                    Player caller = (Player) sender;
 
                     /*
                      * Kinds of container information that could be gotten
@@ -3683,6 +3676,9 @@ public class GOOPCCommands implements CommandExecutor {
                 }
                 break;
             //endregion
+            default:
+                break;
+            //region G. Remove || Private || Public
         }
 
         return false;

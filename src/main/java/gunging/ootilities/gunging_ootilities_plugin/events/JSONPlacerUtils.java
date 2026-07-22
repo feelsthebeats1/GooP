@@ -109,15 +109,9 @@ public class JSONPlacerUtils implements Listener {
                                     if (!OotilityCeption.IsAirNullAllowed(sord)) {
 
                                         // If not sword
-                                        if (!OotilityCeption.IsSword(sord.getType())) {
-
-                                            // Break
-                                            breakingPoint = true;
-                                        } else {
-
-                                            // Cancel Breakk
-                                            breakingPoint = false;
-                                        }
+                                        // Break
+                                        // Cancel Breakk
+                                        breakingPoint = !OotilityCeption.IsSword(sord.getType());
 
                                         // Its the fist
                                     } else {
@@ -542,8 +536,7 @@ public class JSONPlacerUtils implements Listener {
         // MMOItems method overrides
         if (!Gunging_Ootilities_Plugin.anvilRenameEnabled) { return; }
         if (!(event.getInventory() instanceof AnvilInventory)) { return; }
-        if (!(event.getWhoClicked() instanceof Player)) { return; }
-        Player player = (Player) event.getWhoClicked();
+        if (!(event.getWhoClicked() instanceof Player player)) { return; }
 
         // Get thay
         ItemStack iResult = event.getCurrentItem();
@@ -651,12 +644,10 @@ public class JSONPlacerUtils implements Listener {
 
         // MMOItems method overrides
         if (!Gunging_Ootilities_Plugin.anvilRenameEnabled) { return; }
-        if (!(event.getInventory() instanceof AnvilInventory)) { return; }
-        if (!(event.getView().getPlayer() instanceof Player)) { return; }
-        Player player = (Player) event.getView().getPlayer();
+        if (!(event.getInventory() instanceof AnvilInventory inv)) { return; }
+        if (!(event.getView().getPlayer() instanceof Player player)) { return; }
 
         // Get as Anvil Inventor
-        AnvilInventory inv = (AnvilInventory) event.getInventory();
 
         // Must hab item
         ItemStack iSource = inv.getItem(0);

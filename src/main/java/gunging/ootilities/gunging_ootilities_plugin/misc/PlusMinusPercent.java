@@ -141,7 +141,7 @@ public class PlusMinusPercent implements Cloneable {
 
     @Override
     public String toString() {
-        StringBuilder str = new StringBuilder("");
+        StringBuilder str = new StringBuilder();
 
         // Relative?
         if (getRelative()) {

@@ -44,6 +44,6 @@ public class ListenedEntityEvent extends EntityEvent {
 
     @Override
     public Entity getEntity() {
-        return (Entity) lstndEntity.getEntity();
+        return lstndEntity.getEntity();
     }
 }

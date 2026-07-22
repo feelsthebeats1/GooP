@@ -7,7 +7,6 @@ import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCTemplate;
 import gunging.ootilities.gunging_ootilities_plugin.containers.inventory.ContainerInventory;
 import gunging.ootilities.gunging_ootilities_plugin.containers.loader.GCL_Player;
 import gunging.ootilities.gunging_ootilities_plugin.containers.player.GOOPCPlayer;
-import gunging.ootilities.gunging_ootilities_plugin.misc.goop.slot.ISLInventory;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.InventoryView;
@@ -41,22 +40,21 @@ public class CIContainerInteracting extends CIInteractingSlot {
 
     @Override
     public void setItem(@Nullable ItemStack item) {
-        //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cSET\u00a77 Storing " + OotilityCeption.GetItemName(item, true));
+        //CLI// OotilityCeption.Log("§8CIICS §cSET§7 Storing " + OotilityCeption.GetItemName(item, true));
 
         /*
          * Put the item where it belongs, and update cursor
          */
         if (getTemplate().isPlayer()) {
-            //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cSET\u00a77 As RPG");
+            //CLI// OotilityCeption.Log("§8CIICS §cSET§7 As RPG");
 
-            if (!(getInventory().getHolder() instanceof Player)) {
+            if (!(getInventory().getHolder() instanceof Player player)) {
 
-                Gunging_Ootilities_Plugin.theOots.CLog("\u00a7cInvalid Inventory Set Holder\u00a7e CIInteractingContainerSlot");
+                Gunging_Ootilities_Plugin.theOots.CLog("§cInvalid Inventory Set Holder§e CIInteractingContainerSlot");
                 return;
             }
 
             // Identify
-            Player player = (Player) getInventory().getHolder();
             ItemStack displayingItem = item;
 
             // Defaulted
@@ -65,16 +63,16 @@ public class CIContainerInteracting extends CIInteractingSlot {
                 GOOPCSlot c = r.getTemplate().getSlotAt(getContainerSlot().getSlotNumber());
                 if (c != null) {
                     displayingItem = c.getContent();
-                    //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cSET\u00a77 Defaulted to " + OotilityCeption.GetItemName(displayingItem, true));
+                    //CLI// OotilityCeption.Log("§8CIICS §cSET§7 Defaulted to " + OotilityCeption.GetItemName(displayingItem, true));
                 } }
 
-            //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cSET\u00a77 Storing " + OotilityCeption.GetItemName(displayingItem, true));
+            //CLI// OotilityCeption.Log("§8CIICS §cSET§7 Storing " + OotilityCeption.GetItemName(displayingItem, true));
 
             // Set item in inventory
             OotilityCeption.setItemFromPlayerInventory(player, getContainerSlot().getSlotNumber(), displayingItem);
 
         } else if (observed != null) {
-            //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cSET\u00a77 At observed");
+            //CLI// OotilityCeption.Log("§8CIICS §cSET§7 At observed");
 
             // Set to air, the item just got dropped
             observed.setAndSaveStorageItem(getContainerSlot().getSlotNumber(), item);
@@ -82,7 +80,7 @@ public class CIContainerInteracting extends CIInteractingSlot {
         // Wut
         } else {
 
-            Gunging_Ootilities_Plugin.theOots.CLog("\u00a7cInvalid Containers Set Interaction\u00a7e CIInteractingContainerSlot");
+            Gunging_Ootilities_Plugin.theOots.CLog("§cInvalid Containers Set Interaction§e CIInteractingContainerSlot");
         }
     }
 
@@ -98,28 +96,27 @@ public class CIContainerInteracting extends CIInteractingSlot {
 
     @Override
     public @Nullable ItemStack getCurrentItem() {
-        //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cGET\u00a77 Getting Current Item at #" + getSlotNumber());
+        //CLI// OotilityCeption.Log("§8CIICS §cGET§7 Getting Current Item at #" + getSlotNumber());
 
         /*
          * Put the item where it belongs, and update cursor
          */
         if (getTemplate().isPlayer()) {
-            //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cGET\u00a77 As RPG");
+            //CLI// OotilityCeption.Log("§8CIICS §cGET§7 As RPG");
 
-            if (!(getInventory().getHolder() instanceof Player)) {
+            if (!(getInventory().getHolder() instanceof Player player)) {
 
-                Gunging_Ootilities_Plugin.theOots.CLog("\u00a7cInvalid Inventory Get Holder\u00a7e CIInteractingContainerSlot");
+                Gunging_Ootilities_Plugin.theOots.CLog("§cInvalid Inventory Get Holder§e CIInteractingContainerSlot");
                 return null;
             }
 
             // Identify
-            Player player = (Player) getInventory().getHolder();
 
             // Set item in inventory
             return OotilityCeption.getItemFromPlayerInventory(player, getContainerSlot().getSlotNumber());
 
         } else if (observed != null) {
-            //CLI// OotilityCeption.Log("\u00a78CIICS \u00a7cGET\u00a77 At observed");
+            //CLI// OotilityCeption.Log("§8CIICS §cGET§7 At observed");
 
             // Set to air, the item just got dropped
             return observed.getLayerStorage().get(getContainerSlot().getSlotNumber());
@@ -127,7 +124,7 @@ public class CIContainerInteracting extends CIInteractingSlot {
         // Wut
         } else {
 
-            Gunging_Ootilities_Plugin.theOots.CLog("\u00a7cInvalid Containers Get Interaction\u00a7e CIInteractingContainerSlot");
+            Gunging_Ootilities_Plugin.theOots.CLog("§cInvalid Containers Get Interaction§e CIInteractingContainerSlot");
             return null;
         }
     }

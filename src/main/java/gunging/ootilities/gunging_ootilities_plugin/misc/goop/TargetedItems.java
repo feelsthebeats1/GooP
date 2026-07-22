@@ -216,7 +216,7 @@ public class TargetedItems {
                         } else {
 
                             // Mention
-                            includedStrBuilder.append("Set entity\u00a73 ").append(ent.getType().toString()).append("\u00a77's score \u00a7e").append(objective.getName()).append("\u00a77 to \u00a7b").append(OotilityCeption.GetEntryScore(objective, ent.getUniqueId().toString())).append("\u00a77. ");
+                            includedStrBuilder.append("Set entity\u00a73 ").append(ent.getType()).append("\u00a77's score \u00a7e").append(objective.getName()).append("\u00a77 to \u00a7b").append(OotilityCeption.GetEntryScore(objective, ent.getUniqueId().toString())).append("\u00a77. ");
                         }
                     }
                 }

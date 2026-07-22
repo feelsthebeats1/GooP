@@ -914,10 +914,9 @@ public class CSStructure {
 
 
         // A player, then
-        } else if (vEntity instanceof Player) {
+        } else if (vEntity instanceof Player pyr) {
 
             // Get Snealomg
-            Player pyr = (Player) vEntity;
 
             //Sneaking
             if (pyr.isSneaking()) {

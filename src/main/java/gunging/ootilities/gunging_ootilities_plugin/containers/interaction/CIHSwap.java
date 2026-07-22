@@ -9,7 +9,6 @@ import gunging.ootilities.gunging_ootilities_plugin.misc.RefSimulator;
 import org.bukkit.entity.Player;
 import org.bukkit.event.inventory.InventoryAction;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.event.inventory.InventoryType;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
@@ -40,7 +39,7 @@ public class CIHSwap extends ContainersClickHandler {
 
         // Preview mode? No more actions.
         if (GOOPCManager.isUsage_Preview(event.getView())) {
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e -\u00a77 Preview Mode");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§e -§7 Preview Mode");
             return null; }
 
         // What is the meaning of this?
@@ -75,10 +74,10 @@ public class CIHSwap extends ContainersClickHandler {
             // No more business if there is no Commands On Click
             if (!slot.hasCommandsOnClick()) {
 
-                //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7c -\u00a77 No Commands On Click");
+                //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§c -§7 No Commands On Click");
                 return null; }
 
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eDAS\u00a7e *\u00a77 Running On-Click Commands");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §eDAS§e *§7 Running On-Click Commands");
 
             // All the commands on click are included, and that's it.
             return new ContainersInteractionResult(interactingSlot, CIRClickType.CLICK);
@@ -92,7 +91,7 @@ public class CIHSwap extends ContainersClickHandler {
             /*
              * Allow taking of the item, MythicLib will handle the rest.
              */
-            //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7ePCK\u00a73 +\u00a77 Delegating Handling to MythicLib");
+            //CLI// OotilityCeption.Log("§8CONTAINERS §ePCK§3 +§7 Delegating Handling to MythicLib");
             event.setCancelled(false);
             return null;
         }
@@ -128,8 +127,8 @@ public class CIHSwap extends ContainersClickHandler {
         event.setCursor(finalPickup);
         interactingSlot.setItem(finalStored);
 
-        //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eSWP\u00a7a +\u00a77 Storing " + OotilityCeption.GetItemName(finalStored));
-        //CLI// OotilityCeption.Log("\u00a78CONTAINERS \u00a7eSWP\u00a7a +\u00a77 Picking Up " + OotilityCeption.GetItemName(finalPickup));
+        //CLI// OotilityCeption.Log("§8CONTAINERS §eSWP§a +§7 Storing " + OotilityCeption.GetItemName(finalStored));
+        //CLI// OotilityCeption.Log("§8CONTAINERS §eSWP§a +§7 Picking Up " + OotilityCeption.GetItemName(finalPickup));
 
         // Finally
         return result;

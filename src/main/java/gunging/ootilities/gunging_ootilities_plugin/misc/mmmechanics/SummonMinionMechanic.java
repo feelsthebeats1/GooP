@@ -117,7 +117,7 @@ public class SummonMinionMechanic extends SkillMechanic implements ITargetedLoca
                             message = message.replace("%minion_name%", mmName);
 
                             message = OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(message, summonner, (Player) summonner, null, null));
-                            ((Player) summonner).sendMessage(message); }
+                            summonner.sendMessage(message); }
                     }
 
                     //MM//OotilityCeption. Log("\u00a7c >>\u00a77 Cap Broken");

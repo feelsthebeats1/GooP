@@ -173,7 +173,7 @@ public class SummonerClassUtils extends BukkitRunnable implements Listener {
     public void OnPlayerDeath(PlayerDeathEvent event) {
 
         // Cancel event
-        if (event instanceof Cancellable) { if (((Cancellable) event).isCancelled()) { return; } }
+        if (event instanceof Cancellable) { if (event.isCancelled()) { return; } }
 
         // Kill their minions
         RemoveAllMinionsOf(event.getEntity().getUniqueId());
@@ -240,10 +240,9 @@ public class SummonerClassUtils extends BukkitRunnable implements Listener {
                 trueDamager = (Entity) arrow.getShooter();
             }
         }
-        if (event.getDamager() instanceof Firework) {
+        if (event.getDamager() instanceof Firework arrow) {
 
             // If shooter is not null
-            Firework arrow = (Firework) event.getDamager();
             if (XBow_Rockets.fireworkSources.containsKey(arrow.getUniqueId())) {
 
                 // Real damager is the one who fired this

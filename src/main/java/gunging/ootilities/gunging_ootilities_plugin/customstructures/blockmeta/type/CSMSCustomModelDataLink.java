@@ -45,6 +45,6 @@ public abstract class CSMSCustomModelDataLink extends CSMetaSource<CSMCustomMode
     public @NotNull String toString(@NotNull CSMCustomModelDataLink serializable) {
 
         // Um yeah just that
-        return serializable.getLink().getParentMaterial().toString() + " " + serializable.getLink().getCustomModelData() + " " + serializable.getFacing().toString();
+        return serializable.getLink().getParentMaterial().toString() + " " + serializable.getLink().getCustomModelData() + " " + serializable.getFacing();
     }
 }

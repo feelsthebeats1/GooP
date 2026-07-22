@@ -39,7 +39,7 @@ public class CIHEvenDrag extends ContainersDragHandler {
      * @return Correct raw slot for use with {@link InventoryView#getBottomInventory()} or {@link InventoryView#getTopInventory()}
      */
     public int rawToPlayerInventoryRaw(int raw, int topSize) {
-        //CLI// OotilityCeption.Log("\u00a78CIH \u00a7cI\u00a77 Adjusting \u00a73" + raw + "\u00a77 among\u00a7b " + topSize);
+        //CLI// OotilityCeption.Log("§8CIH §cI§7 Adjusting §3" + raw + "§7 among§b " + topSize);
 
         // No adjustment
         if (raw < topSize) { return raw; }
@@ -63,24 +63,24 @@ public class CIHEvenDrag extends ContainersDragHandler {
 
         // Preview mode? No more actions.
         if (GOOPCManager.isUsage_Preview(event.getView())) {
-            //CLI//OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a7e -\u00a77 Preview Mode");
+            //CLI//OotilityCeption.Log("§8CIH §8EVD§e -§7 Preview Mode");
 
             // Cancel again if any slot is in the container ~ preview mode prevents this
             for (int i : event.getRawSlots()) { if (i < event.getView().getTopInventory().getSize()) { return null; } }
         }
 
         // Explore contents of top
-        //CLX// OotilityCeption.Log("\u00a78CIH \u00a7e ----------------------------------------------");
-        //CLX//for (int i = 0; i < event.getView().getTopInventory().getSize(); i++) { OotilityCeption.Log("\u00a78CIH\u00a7d TOP#" + i + "\u00a77 Found " + OotilityCeption.GetItemName(event.getView().getTopInventory().getItem(i), true)); }
-        //CLX//for (int i = 0; i < event.getView().getBottomInventory().getSize(); i++) { OotilityCeption.Log("\u00a78CIH\u00a76 BOT#" + i + "\u00a7e#R" + (i + event.getView().getTopInventory().getSize()) + "\u00a77 Found " + OotilityCeption.GetItemName(event.getView().getBottomInventory().getItem(i), true)); }
-        //CLX//for (int i : event.getRawSlots()) { OotilityCeption.Log("\u00a78CIH\u00a79 RAW#" + rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize()) + "\u00a77 Found " + OotilityCeption.GetItemName((rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize()) >= event.getView().getTopInventory().getSize()) ? event.getView().getBottomInventory().getItem(rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize()) - event.getView().getTopInventory().getSize()) : event.getView().getTopInventory().getItem(rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize())), true)); }
-        //CLX//for (Map.Entry<Integer, ItemStack> newItm : event.getNewItems().entrySet()) { OotilityCeption.Log("\u00a78CIH\u00a7c NEW#R" + rawToPlayerInventoryRaw(newItm.getKey(), event.getView().getTopInventory().getSize()) + "\u00a77 Found " + OotilityCeption.GetItemName(newItm.getValue(), true)); }
-        //CLX// OotilityCeption.Log("\u00a78CIH \u00a7e ----------------------------------------------");
+        //CLX// OotilityCeption.Log("§8CIH §e ----------------------------------------------");
+        //CLX//for (int i = 0; i < event.getView().getTopInventory().getSize(); i++) { OotilityCeption.Log("§8CIH§d TOP#" + i + "§7 Found " + OotilityCeption.GetItemName(event.getView().getTopInventory().getItem(i), true)); }
+        //CLX//for (int i = 0; i < event.getView().getBottomInventory().getSize(); i++) { OotilityCeption.Log("§8CIH§6 BOT#" + i + "§e#R" + (i + event.getView().getTopInventory().getSize()) + "§7 Found " + OotilityCeption.GetItemName(event.getView().getBottomInventory().getItem(i), true)); }
+        //CLX//for (int i : event.getRawSlots()) { OotilityCeption.Log("§8CIH§9 RAW#" + rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize()) + "§7 Found " + OotilityCeption.GetItemName((rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize()) >= event.getView().getTopInventory().getSize()) ? event.getView().getBottomInventory().getItem(rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize()) - event.getView().getTopInventory().getSize()) : event.getView().getTopInventory().getItem(rawToPlayerInventoryRaw(i, event.getView().getTopInventory().getSize())), true)); }
+        //CLX//for (Map.Entry<Integer, ItemStack> newItm : event.getNewItems().entrySet()) { OotilityCeption.Log("§8CIH§c NEW#R" + rawToPlayerInventoryRaw(newItm.getKey(), event.getView().getTopInventory().getSize()) + "§7 Found " + OotilityCeption.GetItemName(newItm.getValue(), true)); }
+        //CLX// OotilityCeption.Log("§8CIH §e ----------------------------------------------");
 
         ItemStack finalCursor = event.getCursor();
         ItemStack originalCursor = event.getOldCursor().clone();
-        //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a73 -->\u00a77 Start Cursor:\u00a7f " + OotilityCeption.GetItemName(originalCursor, true));
-        //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a73 -->\u00a77 Final Cursor:\u00a7f " + OotilityCeption.GetItemName(finalCursor, true));
+        //CLI// OotilityCeption.Log("§8CIH §8EVD§3 -->§7 Start Cursor:§f " + OotilityCeption.GetItemName(originalCursor, true));
+        //CLI// OotilityCeption.Log("§8CIH §8EVD§3 -->§7 Final Cursor:§f " + OotilityCeption.GetItemName(finalCursor, true));
 
         // Please let us use zero as final then
         if (finalCursor == null) { finalCursor = OotilityCeption.asQuantity(originalCursor, 0); }
@@ -100,7 +100,7 @@ public class CIHEvenDrag extends ContainersDragHandler {
             // Find item
             ItemStack newItem = event.getNewItems().get(uglyContinuousRawSlot);
             if (newItem == null) {
-                //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a77 Continuous Slot #" + uglyContinuousRawSlot + "\u00a7c null new item ~ skipped. ");
+                //CLI// OotilityCeption.Log("§8CIH §8EVD§7 Continuous Slot #" + uglyContinuousRawSlot + "§c null new item ~ skipped. ");
                 continue; }
 
             int trueSlot;
@@ -111,29 +111,29 @@ public class CIHEvenDrag extends ContainersDragHandler {
 
                 // Crafting inventory counts as bottom inventory always
                 inBottomInventory = true;
-                int trueRawSlot = -1;
+                int trueRawSlot;
 
                 // Which slot is it
-                switch (uglyContinuousRawSlot) {
+                trueSlot = switch (uglyContinuousRawSlot) {
 
                     // Offhand
-                    case 45: trueSlot = -106; break;
+                    case 45 -> -106;
 
                     // Armor Slots
-                    case 8: trueSlot = 100; break;
-                    case 7: trueSlot = 101; break;
-                    case 6: trueSlot = 102; break;
-                    case 5: trueSlot = 103; break;
+                    case 8 -> 100;
+                    case 7 -> 101;
+                    case 6 -> 102;
+                    case 5 -> 103;
 
                     // Crafting Slots
-                    case 4: trueSlot = 83; break;
-                    case 3: trueSlot = 82; break;
-                    case 2: trueSlot = 81; break;
-                    case 1: trueSlot = 80; break;
-                    case 0: trueSlot = 84; break;
+                    case 4 -> 83;
+                    case 3 -> 82;
+                    case 2 -> 81;
+                    case 1 -> 80;
+                    case 0 -> 84;
 
                     // Bulk inventory slots
-                    default:
+                    default -> {
 
                         /*
                          * The armor slots insert four slots before the actual inventory comes in,
@@ -147,11 +147,11 @@ public class CIHEvenDrag extends ContainersDragHandler {
                         trueRawSlot = rawToPlayerInventoryRaw(uglyContinuousRawSlot - 4, event.getView().getTopInventory().getSize());
 
                         // Subtract crafting inventory size
-                        trueSlot = trueRawSlot - event.getView().getTopInventory().getSize();
-                        break;
-                }
+                        yield trueRawSlot - event.getView().getTopInventory().getSize();
+                    }
+                };
 
-                //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a73 ----------------------- Drag Raw #" + uglyContinuousRawSlot + "\u00a72 True Slot " + trueSlot + "\u00a7c True Raw" + trueRawSlot + " \u00a73:\u00a77 Crafting View");
+                //CLI// OotilityCeption.Log("§8CIH §8EVD§3 ----------------------- Drag Raw #" + uglyContinuousRawSlot + "§2 True Slot " + trueSlot + "§c True Raw" + trueRawSlot + " §3:§7 Crafting View");
             } else {
 
                 /*
@@ -167,7 +167,7 @@ public class CIHEvenDrag extends ContainersDragHandler {
                 inBottomInventory = (trueRawSlot >= event.getView().getTopInventory().getSize());
                 trueSlot = inBottomInventory ? trueRawSlot - event.getView().getTopInventory().getSize() : trueRawSlot;
 
-                //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a73 ----------------------- Drag Raw #" + uglyContinuousRawSlot + "\u00a72 True Slot " + trueSlot + "\u00a7c True Raw" + trueRawSlot + " \u00a73:\u00a77 Non-Crafting View");
+                //CLI// OotilityCeption.Log("§8CIH §8EVD§3 ----------------------- Drag Raw #" + uglyContinuousRawSlot + "§2 True Slot " + trueSlot + "§c True Raw" + trueRawSlot + " §3:§7 Non-Crafting View");
             }
 
             /*
@@ -194,19 +194,19 @@ public class CIHEvenDrag extends ContainersDragHandler {
             if (interactingSlot == null) {
 
                 // That's not good
-                Gunging_Ootilities_Plugin.theOots.CLog("\u00a77Null slot\u00a7c #" + trueSlot + "\u00a77 for container \u00a7c" + (inBottomInventory ? rpg.getTemplate().getInternalName() : deployed.getTemplate().getInternalName()) + "\u00a77, please rebuild its layout with \u00a7e/goop containers config contents\u00a77. ");
+                Gunging_Ootilities_Plugin.theOots.CLog("§7Null slot§c #" + trueSlot + "§7 for container §c" + (inBottomInventory ? rpg.getTemplate().getInternalName() : deployed.getTemplate().getInternalName()) + "§7, please rebuild its layout with §e/goop containers config contents§7. ");
                 continue; }
 
             // Find current
             ItemStack currentItem = interactingSlot.getCurrentItem();
             if (OotilityCeption.IsAirNullAllowed(currentItem)) { currentItem = OotilityCeption.asQuantity(newItem, 0);}
 
-            //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a73 -->\u00a77 Current Slot Item:\u00a7f " + OotilityCeption.GetItemName(currentItem, true));
-            //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a73 -->\u00a77 New Slot Item:\u00a7f " + OotilityCeption.GetItemName(newItem, true));
+            //CLI// OotilityCeption.Log("§8CIH §8EVD§3 -->§7 Current Slot Item:§f " + OotilityCeption.GetItemName(currentItem, true));
+            //CLI// OotilityCeption.Log("§8CIH §8EVD§3 -->§7 New Slot Item:§f " + OotilityCeption.GetItemName(newItem, true));
 
             // If they don't stack, skip this slot
             if (!originalCursor.isSimilar(currentItem)) {
-                //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a77 The item in there is not similar,\u00a7c skipped: " + OotilityCeption.GetItemName(currentItem, true));
+                //CLI// OotilityCeption.Log("§8CIH §8EVD§7 The item in there is not similar,§c skipped: " + OotilityCeption.GetItemName(currentItem, true));
                 continue; }
 
             // Identifying
@@ -233,7 +233,7 @@ public class CIHEvenDrag extends ContainersDragHandler {
 
             // Set item, was able to interact
             interactingSlot.setItem(newItem);
-            //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a7a +\u00a77 Storing in #" + uglyContinuousRawSlot + ": " + OotilityCeption.GetItemName(newItem, true));
+            //CLI// OotilityCeption.Log("§8CIH §8EVD§a +§7 Storing in #" + uglyContinuousRawSlot + ": " + OotilityCeption.GetItemName(newItem, true));
 
             // Null? That's good enough
             if (usedSlot == null) { continue; }
@@ -245,7 +245,7 @@ public class CIHEvenDrag extends ContainersDragHandler {
         }
 
         // Finally
-        //CLI// OotilityCeption.Log("\u00a78CIH \u00a78EVD\u00a7a +\u00a77 Cursor Final " + OotilityCeption.GetItemName(finalCursor, true));
+        //CLI// OotilityCeption.Log("§8CIH §8EVD§a +§7 Cursor Final " + OotilityCeption.GetItemName(finalCursor, true));
         result.setCursorUpdate(finalCursor);
         return result;
     }

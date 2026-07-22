@@ -361,13 +361,13 @@ public class CSManager implements Listener {
                             case PRESSUREPLATE_ANIMALS:
                             case PRESSUREPLATE_MONSTERS:
                                 // Any Trigger Parameters Defined?
-                                if (csConfig.contains(tName + "." + trig.toString())) {
+                                if (csConfig.contains(tName + "." + trig)) {
 
                                     // Clear params
                                     params.clear();
 
                                     // Add the correctly-parsing ones
-                                    for (String trigParam : csConfig.getStringList(tName + "." + trig.toString())) {
+                                    for (String trigParam : csConfig.getStringList(tName + "." + trig)) {
 
                                         // Split into args
                                         String[] nbtSplit = trigParam.split(" ");
@@ -383,7 +383,7 @@ public class CSManager implements Listener {
 
                                                 // Otherwise say what happened
                                             } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig.toString() + "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (" + logger.GetValue() + "\u00a77)");
+                                                oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig + "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (" + logger.GetValue() + "\u00a77)");
                                                 oots.CPLog("These are the valid entity key and name combinations:");
                                                 oots.CPLog("\u00a73--> \u00a7e v <vanilla entity type>\u00a7: Matches for a vanilla entity. \u00a73v SKELETON");
                                                 if (Gunging_Ootilities_Plugin.foundMythicMobs) {
@@ -395,7 +395,7 @@ public class CSManager implements Listener {
                                         } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
                                             // Log it
-                                            oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig.toString() +  "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (Not in the format \u00a7e<entity key> <entity name>\u00a77)");
+                                            oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig +  "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (Not in the format \u00a7e<entity key> <entity name>\u00a77)");
                                             oots.CPLog("These are the valid entity key and name combinations:");
                                             oots.CPLog("\u00a73--> \u00a7e v <vanilla entity type>\u00a7: Matches for a vanilla entity. \u00a73v SKELETON");
                                             if (Gunging_Ootilities_Plugin.foundMythicMobs) {
@@ -418,13 +418,13 @@ public class CSManager implements Listener {
                             case SNEAK_INTERACT:
                             case INTERACT:
                                 // Any Trigger Parameters Defined?
-                                if (csConfig.contains(tName + "." + trig.toString())) {
+                                if (csConfig.contains(tName + "." + trig)) {
 
                                     // Clear
                                     params.clear();
 
                                     // Add the correctly-parsing ones
-                                    for (String trigParam : csConfig.getStringList(tName + "." + trig.toString())) {
+                                    for (String trigParam : csConfig.getStringList(tName + "." + trig)) {
 
                                         // Split into args
                                         String[] nbtSplit = trigParam.split(" ");
@@ -446,7 +446,7 @@ public class CSManager implements Listener {
                                                 // Otherwise say what happened
                                             } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
-                                                oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig.toString() + "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (" + logger.GetValue() + "\u00a77)");
+                                                oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig + "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (" + logger.GetValue() + "\u00a77)");
                                                 oots.CPLog("These are the valid nbt key and name combinations:");
                                                 oots.CPLog("\u00a73--> \u00a7e v <vanilla item name> 0\u00a7: Matches for a vanilla item. \u00a73v NETHER_STAR 0");
                                                 oots.CPLog("\u00a73--> \u00a7e e <enchantment name> <enchantment level>\u00a7: Matches for a specific Enchantment-Level combination. \u00a73m sharpness 4");
@@ -461,7 +461,7 @@ public class CSManager implements Listener {
                                         } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
                                             // Log it
-                                            oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig.toString() + "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (Not in the format \u00a7e<nbt key> <primary nbt data> <secondary nbt data>\u00a77)");
+                                            oots.CPLog("Warning issued when loading custom structure \u00a73" + tName + "\u00a77: Invalid \u00a7e" + trig + "\u00a77 trigger parameter \u00a73" + trigParam + "\u00a77 (Not in the format \u00a7e<nbt key> <primary nbt data> <secondary nbt data>\u00a77)");
                                             oots.CPLog("These are the valid nbt key and data combinations:");
                                             oots.CPLog("\u00a73--> \u00a7e v <vanilla item name> 0\u00a7: Matches for a vanilla item. \u00a73v NETHER_STAR 0");
                                             oots.CPLog("\u00a73--> \u00a7e e <enchantment name> <enchantment level>\u00a7: Matches for a specific Enchantment-Level combination. \u00a73m sharpness 4");
@@ -1234,8 +1234,7 @@ public class CSManager implements Listener {
             BlockData bloccData = blockItself.getBlockData();
 
             // Well uuuuh
-            if (bloccData instanceof Powerable) {
-                Powerable bloccPower = (Powerable) bloccData;
+            if (bloccData instanceof Powerable bloccPower) {
 
                 if (!bloccPower.isPowered()) {
                     //DBG//OotilityCeption.Log(" \u00a7c- \u00a77Removed");

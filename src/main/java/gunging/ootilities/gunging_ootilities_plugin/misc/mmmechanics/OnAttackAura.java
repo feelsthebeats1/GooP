@@ -51,8 +51,8 @@ public class OnAttackAura extends Aura implements ITargetedEntitySkill {
         metaskill = GooPMythicMobs.GetSkill(skillName.get());
         this.cancelDamage = mlc.getBoolean(new String[]{"cancelevent", "ce", "canceldamage", "cd"}, false);
         this.traceSource = mlc.getBoolean(new String[]{"tracesource", "ts"}, true);
-        String damageAdd = mlc.getString(new String[]{"damageadd", "add", "a"}, (String)null);
-        String damageMult = mlc.getString(new String[]{"damagemultiplier", "multiplier", "m"}, (String)null);
+        String damageAdd = mlc.getString(new String[]{"damageadd", "add", "a"}, null);
+        String damageMult = mlc.getString(new String[]{"damagemultiplier", "multiplier", "m"}, null);
         if (damageAdd != null || damageMult != null) {
             this.modDamage = true;
         }
@@ -141,10 +141,9 @@ public class OnAttackAura extends Aura implements ITargetedEntitySkill {
                                         trueDamager = (Entity) arrow.getShooter();
                                     }
                                 }
-                                if (event.getDamager() instanceof Firework) {
+                                if (event.getDamager() instanceof Firework arrow) {
 
                                     // If shooter is not null
-                                    Firework arrow = (Firework) event.getDamager();
                                     if (XBow_Rockets.fireworkSources.containsKey(arrow.getUniqueId())) {
 
                                         // Real damager is the one who fired this
@@ -153,7 +152,7 @@ public class OnAttackAura extends Aura implements ITargetedEntitySkill {
                                 }
                             }
 
-                            return trueDamager.getUniqueId().equals(((AbstractEntity)this.entity.get()).getUniqueId());
+                            return trueDamager.getUniqueId().equals(this.entity.get().getUniqueId());
 
                             }).filter((event) -> {
                                 Optional<Object> md = BukkitAdapter.adapt(event.getDamager()).getMetadata("doing-skill-damage");

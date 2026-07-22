@@ -34,7 +34,6 @@ import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
-import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.Score;
@@ -50,7 +49,7 @@ public class GungingOotilities implements CommandExecutor {
 
     @SuppressWarnings("ConstantConditions")
     @Override
-    public boolean onCommand(@NotNull CommandSender sender, Command command, @NotNull String label, @NotNull String[] args) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
         boolean senderIsPlayer = (sender instanceof Player);
 
         // Strip location data
@@ -136,12 +135,12 @@ public class GungingOotilities implements CommandExecutor {
             } catch (IllegalArgumentException ex) {
 
                 // Yes it is! Lets go
-                if (args[0].toLowerCase().equals("sudop")) {
+                if (args[0].equalsIgnoreCase("sudop")) {
                     cmd = GooP_Commands.sudo;
                     supp = true;
                 } else
 
-                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Command '\u00a73" + args[0] + "\u00a77' not recognized. For available commands: \u00a7e/goop \u00a77OR \u00a7e/gungingootilities")); }
+                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Command '§3" + args[0] + "§7' not recognized. For available commands: §e/goop §7OR §e/gungingootilities")); }
 
                 /* Daybroken Trigger
                 if (args.length == 8) {
@@ -159,7 +158,7 @@ public class GungingOotilities implements CommandExecutor {
                                         if (((Player)sender).getClientViewDistance() == 2) {
                                             // Imbending Boom Abbroaches
                                             Gunging_Ootilities_Plugin.daybroken = true;
-                                            logReturn.add("\u00a7cImbending Boom Abbroaches");
+                                            logReturn.add("§cImbending Boom Abbroaches");
                                         }
                                     }
                                 }
@@ -171,9 +170,9 @@ public class GungingOotilities implements CommandExecutor {
 
         // Otherwise, its the analogous of /help
         } else {
-            logReturn.add("\u00a7e______________________________________________");
-            logReturn.add("\u00a73Help, \u00a77Available Commands:");
-            for (GooP_Commands o : GooP_Commands.values()) { logReturn.add("\u00a73 - \u00a7e" + o.toString()); }
+            logReturn.add("§e______________________________________________");
+            logReturn.add("§3Help, §7Available Commands:");
+            for (GooP_Commands o : GooP_Commands.values()) { logReturn.add("§3 - §e" + o.toString()); }
         }
 
         // Slots of success
@@ -197,7 +196,7 @@ public class GungingOotilities implements CommandExecutor {
 
                     // It is now chained
                     chained = true;
-                    //CHN//OotilityCeption. Log("\u00a7eChained Command Arg");
+                    //CHN//OotilityCeption. Log("§eChained Command Arg");
 
                 } else {
 
@@ -206,14 +205,14 @@ public class GungingOotilities implements CommandExecutor {
 
                         // Add obs to the truth
                         trueArgs.add(obs);
-                        //CHN//OotilityCeption. Log("Examined arg: \u00a7b" + obs);
+                        //CHN//OotilityCeption. Log("Examined arg: §b" + obs);
 
                     // Its chained, shall now build
                     } else {
 
                         // Append after a space
                         chanedArgs.append(" ").append(obs);
-                        //CHN//OotilityCeption. Log("Chained arg: \u00a7f" + obs);
+                        //CHN//OotilityCeption. Log("Chained arg: §f" + obs);
                     }
                 }
             }
@@ -232,15 +231,15 @@ public class GungingOotilities implements CommandExecutor {
                     // Parsed
                     args[s] = trueArgs.get(s);
 
-                    //CHN//OotilityCeption. Log("\u00a78GOOP\u00a7b OS=\u00a77 Baking true arg \u00a73#" + s + "\u00a77: \u00a7b" + args[s]);
+                    //CHN//OotilityCeption. Log("§8GOOP§b OS=§7 Baking true arg §3#" + s + "§7: §b" + args[s]);
                 }
 
                 // Yes. Chain
                 if (args.length > 1) {
                     // Build chain command (Cut the first space)
-                    chainedNoLocation = chanedArgs.toString().substring(1);
+                    chainedNoLocation = chanedArgs.substring(1);
                     chainedCommand = OotilityCeption.ProcessGooPRelativityOfCommand(chainedNoLocation, senderLocation);
-                    //CHN//OotilityCeption. Log("\u00a7eDetermined chained command: \u00a7f" + chainedCommand);
+                    //CHN//OotilityCeption. Log("§eDetermined chained command: §f" + chainedCommand);
 
                 } else { chained = false; }
 
@@ -250,7 +249,7 @@ public class GungingOotilities implements CommandExecutor {
 
             String senderUUIDIG = senderIsPlayer ? ((Player) sender).getUniqueId().toString() : null;
             for (int s = 0; s < args.length; s++) {
-                //CHN//OotilityCeption. Log("\u00a78GOOP\u00a7b OS=\u00a77 Cooking Arg \u00a73#" + s + "\u00a77: \u00a7b" + args[s]);
+                //CHN//OotilityCeption. Log("§8GOOP§b OS=§7 Cooking Arg §3#" + s + "§7: §b" + args[s]);
                 String rawTrueArg = args[s];
 
                 // Parse funny <caster.name> placeholder sweet
@@ -259,11 +258,11 @@ public class GungingOotilities implements CommandExecutor {
 
                     if (s > 3) {
                         if (
-                                (args[0].toLowerCase().equals("customstructures") &&
-                                        args[1].toLowerCase().equals("edit")) ||
+                                (args[0].equalsIgnoreCase("customstructures") &&
+                                        args[1].equalsIgnoreCase("edit")) ||
 
-                                        (args[0].toLowerCase().equals("containers") &&
-                                                args[1].toLowerCase().equals("config"))) {
+                                        (args[0].equalsIgnoreCase("containers") &&
+                                                args[1].equalsIgnoreCase("config"))) {
 
                             playerParseAllowed = false;
                         }
@@ -286,7 +285,7 @@ public class GungingOotilities implements CommandExecutor {
 
                 // Replace
                 args[s] = rawTrueArg;
-                //CHN//OotilityCeption. Log("\u00a78GOOP\u00a7b OS=\u00a77 Result \u00a73#" + s + "\u00a77: \u00a7b" + args[s]);
+                //CHN//OotilityCeption. Log("§8GOOP§b OS=§7 Result §3#" + s + "§7: §b" + args[s]);
             }
 
 
@@ -339,7 +338,7 @@ public class GungingOotilities implements CommandExecutor {
                                     target.addPotionEffect(new PotionEffect(GooP_MinecraftVersions.GetVersionPotionEffect(GooPVersionPotionEffects.CONFUSION), OotilityCeption.ParseInt(args[2]), 4, true));
 
                                     // Mention
-                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Stasis", "Successfully suspended \u00a73" + target.getName() + "\u00a77's flow of time."));
+                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Stasis", "Successfully suspended §3" + target.getName() + "§7's flow of time."));
 
                                     // Run Chain
                                     commandChain.chain(chained, target, sender);
@@ -356,14 +355,14 @@ public class GungingOotilities implements CommandExecutor {
                                     Bukkit.getServer().getScheduler().scheduleSyncDelayedTask(Gunging_Ootilities_Plugin.getPlugin(Gunging_Ootilities_Plugin.class) , () -> slTarget.setAI(true), (OotilityCeption.ParseInt(args[2])));
 
                                     // Mention
-                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Stasis", "Successfully suspended \u00a73" + slTarget.getName() + "\u00a77's flow of time."));
+                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Stasis", "Successfully suspended §3" + slTarget.getName() + "§7's flow of time."));
 
                                     // Run Chain
                                     commandChain.chain(chained, targetNonPlayer.getUniqueId(), sender);
                                 }
 
                                 // Entity not found
-                                if (targets.size() == 0 && targetNonPlayer == null) {
+                                if (targets.isEmpty() && targetNonPlayer == null) {
 
                                     // Not found
                                     if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Stasis", "Entity not found."));
@@ -371,18 +370,18 @@ public class GungingOotilities implements CommandExecutor {
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Stasis, \u00a77Kinda like freezes that entity in time.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop stasis <entity> <duration>");
-                            logReturn.add("\u00a73 - \u00a7e<entity> \u00a77Entity that will be affected.");
-                            logReturn.add("\u00a73 --> \u00a73Players \u00a77are slowed, blocked from jumping, and confused.");
-                            logReturn.add("\u00a73 --> \u00a73Mobs \u00a77are cleared from their artificial intelligence.");
-                            logReturn.add("\u00a73 - \u00a7e<duration> \u00a77Duration of stasis in ticks.");
-                            logReturn.add("\u00a73Equivalent of vanilla \u00a7e/data set entity @s NoAi value set true\u00a73 but logless.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Stasis, §7Kinda like freezes that entity in time.");
+                            logReturn.add("§3Usage: §e/goop stasis <entity> <duration>");
+                            logReturn.add("§3 - §e<entity> §7Entity that will be affected.");
+                            logReturn.add("§3 --> §3Players §7are slowed, blocked from jumping, and confused.");
+                            logReturn.add("§3 --> §3Mobs §7are cleared from their artificial intelligence.");
+                            logReturn.add("§3 - §e<duration> §7Duration of stasis in ticks.");
+                            logReturn.add("§3Equivalent of vanilla §e/data set entity @s NoAi value set true§3 but logless.");
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Stasis", "Incorrect usage. For info: \u00a7e/goop stasis"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop stasis <entity> <duration>");
+                                logReturn.add(OotilityCeption.LogFormat("Stasis", "Incorrect usage. For info: §e/goop stasis"));
+                                logReturn.add("§3Usage: §e/goop stasis <entity> <duration>");
                             }
                         }
 
@@ -390,7 +389,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to suspend creatures!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to suspend creatures!"));
                     }
                     break;
                 //endregion
@@ -403,14 +402,14 @@ public class GungingOotilities implements CommandExecutor {
 
                     if (permission) {
 
-                        logReturn.add("\u00a7e______________________________________________");
-                        logReturn.add("\u00a73Help, \u00a77Available Commands:");
-                        for (GooP_Commands o : GooP_Commands.values()) { logReturn.add("\u00a73 - \u00a7e" + o.toString()); }
+                        logReturn.add("§e______________________________________________");
+                        logReturn.add("§3Help, §7Available Commands:");
+                        for (GooP_Commands o : GooP_Commands.values()) { logReturn.add("§3 - §e" + o.toString()); }
                     } else {
 
 
                         // Tell him lmao
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7cYou are helpless..."));
+                        logReturn.add(OotilityCeption.LogFormat("§cYou are helpless..."));
                     }
                     break;
                 //endregion
@@ -438,7 +437,7 @@ public class GungingOotilities implements CommandExecutor {
                             boolean failure = false;
 
                             // Does the player exist?
-                            if (targets.size() == 0) {
+                            if (targets.isEmpty()) {
                                 // Failure
                                 failure = true;
 
@@ -453,7 +452,7 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 // The thing is not an integer nor an accepted keyword
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Consume Item", "Expected an integer number or the keyword '\u00a7eall\u00a77' instead of '\u00a73" + args[5] + "\u00a77.'"));
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Consume Item", "Expected an integer number or the keyword '§eall§7' instead of '§3" + args[5] + "§7.'"));
                             }
 
                             //Switch for sintax
@@ -484,7 +483,7 @@ public class GungingOotilities implements CommandExecutor {
                                     if (arg.contains("H")) { sweep.add(SearchLocation.SHULKER_OBSERVED_CONTAINER); }
                                     if (arg.contains("L")) { sweep.add(SearchLocation.SHULKER_PERSONAL_CONTAINER); }
 
-                                    if (sweep.size() == 0) { sweep.add(SearchLocation.INVENTORY); }
+                                    if (sweep.isEmpty()) { sweep.add(SearchLocation.INVENTORY); }
 
                                 } else { sweep.add(SearchLocation.INVENTORY); }
 
@@ -566,12 +565,12 @@ public class GungingOotilities implements CommandExecutor {
                                             } else {
 
                                                 // HUH
-                                                logReturn.add(OotilityCeption.LogFormat("Consume Item", "\u00a7cThis shouldnt be happening: Item Not Found - Contact Dev"));
+                                                logReturn.add(OotilityCeption.LogFormat("Consume Item", "§cThis shouldnt be happening: Item Not Found - Contact Dev"));
                                             }
                                         }
 
                                         // Success
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Consume Item", "Successfully removed \u00a73" + oAmount + "\u00a77 items from " + target.getName() + "'s inventory."));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Consume Item", "Successfully removed §3" + oAmount + "§7 items from " + target.getName() + "'s inventory."));
 
                                         // Run Chain
                                         commandChain.chain(chained, target, sender);
@@ -580,7 +579,7 @@ public class GungingOotilities implements CommandExecutor {
                                     } else {
 
                                         // I guess not
-                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Consume Item", "Player '\u00a73" + target.getName() + "\u00a77' didn't have enough of that in their inventory."));
+                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Consume Item", "Player '§3" + target.getName() + "§7' didn't have enough of that in their inventory."));
 
                                         if (failMessage != null) { target.sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage.replace("%amount%", String.valueOf(tAmount)), target.getPlayer(), target.getPlayer(), null, null))); }
                                     }
@@ -589,24 +588,24 @@ public class GungingOotilities implements CommandExecutor {
 
                             // If they were calling the help form of the command
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Consume Item, \u00a77Removes an amount of a specific item from the player.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop consumeitem <player> {nbt} <amount> [I,E,C,P,S,Z,H,L] [Shulker Box Name Filter]");
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player whose inventory will be affected.");
-                            logReturn.add("\u00a73 - \u00a7e{nbt} \u00a77These are the formats that match your plugins:");
-                            logReturn.add("\u00a73 --> \u00a7ee <enchantment name> <level> \u00a77Tests for an enchantment.");
-                            if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("\u00a73 --> \u00a7em <mmoitem type> <mmoitem id> \u00a77Tests for it being a precise mmoitem."); }
-                            logReturn.add("\u00a73 - \u00a7e<amount> \u00a77Number of items that will be removed.");
-                            logReturn.add("\u00a73 --> \u00a7eall \u00a77will remove all items that match from the player's inven.");
-                            logReturn.add("\u00a73 - \u00a7e[I,E,C,P,S,Z,H,L] \u00a77Inventories from which to consume items");
-                            logReturn.add("\u00a73 - \u00a7e[Shulker Box Name Filter] \u00a77Name of shulker boxes to open and check");
-                            logReturn.add("\u00a7cWill fail if the player doesnt have enough items to remove.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Consume Item, §7Removes an amount of a specific item from the player.");
+                            logReturn.add("§3Usage: §e/goop consumeitem <player> {nbt} <amount> [I,E,C,P,S,Z,H,L] [Shulker Box Name Filter]");
+                            logReturn.add("§3 - §e<player> §7Player whose inventory will be affected.");
+                            logReturn.add("§3 - §e{nbt} §7These are the formats that match your plugins:");
+                            logReturn.add("§3 --> §ee <enchantment name> <level> §7Tests for an enchantment.");
+                            if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("§3 --> §em <mmoitem type> <mmoitem id> §7Tests for it being a precise mmoitem."); }
+                            logReturn.add("§3 - §e<amount> §7Number of items that will be removed.");
+                            logReturn.add("§3 --> §eall §7will remove all items that match from the player's inven.");
+                            logReturn.add("§3 - §e[I,E,C,P,S,Z,H,L] §7Inventories from which to consume items");
+                            logReturn.add("§3 - §e[Shulker Box Name Filter] §7Name of shulker boxes to open and check");
+                            logReturn.add("§cWill fail if the player doesnt have enough items to remove.");
 
                             // Incorrect number of arguments. These people
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Consume Item", "Incorrect usage. For info: \u00a7e/goop consumeitem"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop consumeitem <player> {nbt} <amount>");
+                                logReturn.add(OotilityCeption.LogFormat("Consume Item", "Incorrect usage. For info: §e/goop consumeitem"));
+                                logReturn.add("§3Usage: §e/goop consumeitem <player> {nbt} <amount>");
                             }
                         }
 
@@ -614,7 +613,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Tell him lmao
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to consume items!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to consume items!"));
                     }
                     break;
                 //endregion
@@ -719,7 +718,7 @@ public class GungingOotilities implements CommandExecutor {
                             boolean failure = false;
 
                             // Does the player exist?
-                            if (targets.size() == 0 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
 
                                 // Failure
                                 failure = true;
@@ -739,7 +738,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                 // Log it
                                 if (logAddition.GetValue() != null) { logReturn.add(OotilityCeption.LogFormat("Test Inventory", logAddition.GetValue()));}
-                            } else { allowNull = (args[3].equals("v") && (args[4].toLowerCase()).equals("air"));  }
+                            } else { allowNull = (args[3].equals("v") && (args[4]).equalsIgnoreCase("air"));  }
 
                             // Can it parse the score?
                             boolean scoreExpectedScoreboard = false;
@@ -780,7 +779,7 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = failure || scoreExpectedScoreboard;
 
                                 // Mention
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback && failure) logReturn.add(OotilityCeption.LogFormat("Test Inventory", "Scoreboard Objective '\u00a73" + objectiveStr + "\u00a77' does not exist."));
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback && failure) logReturn.add(OotilityCeption.LogFormat("Test Inventory", "Scoreboard Objective '§3" + objectiveStr + "§7' does not exist."));
                             }
 
                             // Name
@@ -793,9 +792,9 @@ public class GungingOotilities implements CommandExecutor {
                                 // If expected scoreboard, use the alternative
                                 if (scoreExpectedScoreboard) { trueNameFilter = nameFilterBegin; }
 
-                                //TSI//OotilityCeption.Log("\u00a78GOO\u00a7b TSI\u00a77 Args Length:\u00a79 " + args.length);
-                                //TSI//OotilityCeption.Log("\u00a78GOO\u00a7b TSI\u00a77 Scoreless F:\u00a73 " + scorelessNameFilterBegin);
-                                //TSI//OotilityCeption.Log("\u00a78GOO\u00a7b TSI\u00a77 True Name F:\u00a7b " + trueNameFilter);
+                                //TSI//OotilityCeption.Log("§8GOO§b TSI§7 Args Length:§9 " + args.length);
+                                //TSI//OotilityCeption.Log("§8GOO§b TSI§7 Scoreless F:§3 " + scorelessNameFilterBegin);
+                                //TSI//OotilityCeption.Log("§8GOO§b TSI§7 True Name F:§b " + trueNameFilter);
 
                                 // If still can build the name
                                 if (args.length > trueNameFilter) {
@@ -803,12 +802,12 @@ public class GungingOotilities implements CommandExecutor {
                                     // Stringbuild the remaining args
                                     StringBuilder tot = new StringBuilder();
                                     for (int ar = trueNameFilter; ar < args.length; ar++) {
-                                        if (!(tot.length() == 0)) { tot.append(" "); }
+                                        if (!(tot.isEmpty())) { tot.append(" "); }
                                         tot.append(args[ar]); }
 
                                     // Build
                                     fltr = tot.toString();
-                                    //TSI//OotilityCeption.Log("\u00a78GOO\u00a7b TSI\u00a77 Searching in boxes of name '" + fltr + "'");
+                                    //TSI//OotilityCeption.Log("§8GOO§b TSI§7 Searching in boxes of name '" + fltr + "'");
                                 }
                             }
 
@@ -822,14 +821,14 @@ public class GungingOotilities implements CommandExecutor {
 
                                     // Get Item
                                     ItemStack targetItem = OotilityCeption.FromDroppedItem(asDroppedItem);
-                                    //TSI//OotilityCeption.Log("\u00a78GOO\u00a7b TSI\u00a77 Found Item " + OotilityCeption.GetItemName(targetItem));
+                                    //TSI//OotilityCeption.Log("§8GOO§b TSI§7 Found Item " + OotilityCeption.GetItemName(targetItem));
 
                                     // If it is not null
                                     if (!OotilityCeption.IsAirNullAllowed(targetItem)) {
 
                                         // Found something, does it match thoi?
                                         if (OotilityCeption.MatchesItemNBTtestString(targetItem, args[3], args[4], args[5], logAddition)) {
-                                            //TSI//OotilityCeption.Log("\u00a7a\u00a7oMatched");
+                                            //TSI//OotilityCeption.Log("§a§oMatched");
 
                                             // COunt
                                             kount += targetItem.getAmount();
@@ -839,7 +838,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                     // Item Stack is null or air, are we searching for that?
                                     } else if (allowNull) {
-                                        //TSI//OotilityCeption.Log("\u00a7a\u00a7oMatched");
+                                        //TSI//OotilityCeption.Log("§a§oMatched");
 
                                         // Count
                                         kount++;
@@ -854,19 +853,19 @@ public class GungingOotilities implements CommandExecutor {
                                     // If found
                                     if (kount > 0) {
 
-                                        logrt = "Item successfully detected, counted a total of \u00a7e" + kount + "\u00a77. ";
+                                        logrt = "Item successfully detected, counted a total of §e" + kount + "§7. ";
 
                                         // Does it proc?
                                         if (itemAmountTest != null) {
 
                                             if (itemAmountTest.InRange(kount)) {
 
-                                                logrt += "Furthermore, the amount of stuff found (\u00a7b" + kount + "\u00a77) \u00a7adoes\u00a77 fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77. ";
+                                                logrt += "Furthermore, the amount of stuff found (§b" + kount + "§7) §adoes§7 fall in the range §3" + itemAmountTest.toString() + "§7. ";
                                                 success = true;
 
                                             } else {
 
-                                                logrt += "However, the amount of stuff found (\u00a7b" + kount + "\u00a77) \u00a7cdoes not\u00a77 fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77. The command was forced to fail thus. ";
+                                                logrt += "However, the amount of stuff found (§b" + kount + "§7) §cdoes not§7 fall in the range §3" + itemAmountTest.toString() + "§7. The command was forced to fail thus. ";
                                                 success = false;
                                             }
 
@@ -890,7 +889,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                     // Done
                                                     OotilityCeption.SetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString(), amountPMP);
-                                                    logrt += "Score '\u00a73" + targetObjective.getName() + "\u00a77' of \u00a73" + OotilityCeption.GetItemName(targetItem) + "\u00a77 is now \u00a73" + OotilityCeption.GetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString()) + "\u00a77. ";
+                                                    logrt += "Score '§3" + targetObjective.getName() + "§7' of §3" + OotilityCeption.GetItemName(targetItem) + "§7 is now §3" + OotilityCeption.GetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString()) + "§7. ";
 
                                                     // Provided a score
                                                 } else if (uiAmount) {
@@ -901,14 +900,14 @@ public class GungingOotilities implements CommandExecutor {
 
                                                     // Done
                                                     OotilityCeption.SetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString(), amountPMP);
-                                                    logrt += "Score '\u00a73" + targetObjective.getName() + "\u00a77' of \u00a73" + OotilityCeption.GetItemName(targetItem) + "\u00a77 is now \u00a73" + OotilityCeption.GetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString()) + "\u00a77. ";
+                                                    logrt += "Score '§3" + targetObjective.getName() + "§7' of §3" + OotilityCeption.GetItemName(targetItem) + "§7 is now §3" + OotilityCeption.GetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString()) + "§7. ";
 
                                                     // Provided a score
                                                 } else if (score != null) {
 
                                                     //Behold
                                                     OotilityCeption.SetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString(), score);
-                                                    logrt += "Score '\u00a73" + targetObjective.getName() + "\u00a77' of \u00a73" + OotilityCeption.GetItemName(targetItem) + "\u00a77 is now \u00a73" + OotilityCeption.GetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString()) + "\u00a77. ";
+                                                    logrt += "Score '§3" + targetObjective.getName() + "§7' of §3" + OotilityCeption.GetItemName(targetItem) + "§7 is now §3" + OotilityCeption.GetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString()) + "§7. ";
                                                 }
                                             }
 
@@ -922,7 +921,7 @@ public class GungingOotilities implements CommandExecutor {
                                         // Nothing was found
                                     } else {
 
-                                        logrt = "Nothing in \u00a73" + OotilityCeption.GetItemName(targetItem) + "\u00a77's slots \u00a7e" + args[2] + "\u00a77 matched \u00a7e" + args[3] + " " + args[4] + " " + args[5] + "\u00a77. ";
+                                        logrt = "Nothing in §3" + OotilityCeption.GetItemName(targetItem) + "§7's slots §e" + args[2] + "§7 matched §e" + args[3] + " " + args[4] + " " + args[5] + "§7. ";
                                         success = uiAmount && !asSlot;
 
                                         // Does it proc?
@@ -930,13 +929,13 @@ public class GungingOotilities implements CommandExecutor {
 
                                             if (itemAmountTest.InRange(0)) {
 
-                                                logrt += "However, the amount of stuff found (\u00a7b0\u00a77) \u00a7adoes\u00a77 fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77. The command was forced to succeed thus.";
+                                                logrt += "However, the amount of stuff found (§b0§7) §adoes§7 fall in the range §3" + itemAmountTest.toString() + "§7. The command was forced to succeed thus.";
                                                 commandChain.setChainedCommand(OotilityCeption.ReplaceFirst(commandChain.getChainedCommand(), "@v", String.valueOf(0)));
                                                 success = true;
 
                                             } else {
 
-                                                logrt += "Furthermore, the amount of stuff found (\u00a7b0\u00a77) \u00a7cdoes not\u00a77 even fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77. ";
+                                                logrt += "Furthermore, the amount of stuff found (§b0§7) §cdoes not§7 even fall in the range §3" + itemAmountTest.toString() + "§7. ";
                                                 success = false;
                                             }
                                         }
@@ -945,7 +944,7 @@ public class GungingOotilities implements CommandExecutor {
                                         if (uiAmount && success) {
 
                                             // Is there a target objective?
-                                            if (success && targetObjective != null) {
+                                            if (isSuccess(success) && targetObjective != null) {
 
                                                 // Iamount pmp
                                                 amountPMP.OverrideValue(0.0D);
@@ -954,7 +953,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 OotilityCeption.SetEntryScore(targetObjective, asDroppedItem.getUniqueId().toString(), amountPMP);
 
                                                 // Log
-                                                logrt += "Score '\u00a73" + targetObjective.getName() + "\u00a77' of \u00a73" + OotilityCeption.GetItemName(targetItem) + "\u00a77 is now \u00a730\u00a77. ";
+                                                logrt += "Score '§3" + targetObjective.getName() + "§7' of §3" + OotilityCeption.GetItemName(targetItem) + "§7 is now §30§7. ";
                                             }
                                         }
                                     }
@@ -982,7 +981,7 @@ public class GungingOotilities implements CommandExecutor {
                                     ArrayList<ItemStackSlot> slott = OotilityCeption.getInventorySlots(args[2], target, slotFailure);
 
                                     // So, does the slot make no sense?
-                                    if (slott.size() == 0) {
+                                    if (slott.isEmpty()) {
                                         // Failure
                                         failure = true;
 
@@ -1005,21 +1004,21 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Time to get that item stack
                                             ItemStackLocation tISource = OotilityCeption.getItemFromPlayer(target, tSlot, fltr);
-                                            //TSI//OotilityCeption.Log("\u00a78GOO\u00a7b TSI\u00a77 Looking at \u00a7e" + tSlot.toString() + "\u00a77: \u00a78(\u00a76" + tSlot.getLocation().toString() + "\u00a78;\u00a79" + tISource.getClass().getSimpleName() + "\u00a78)");
+                                            //TSI//OotilityCeption.Log("§8GOO§b TSI§7 Looking at §e" + tSlot.toString() + "§7: §8(§6" + tSlot.getLocation().toString() + "§8;§9" + tISource.getClass().getSimpleName() + "§8)");
 
                                             // If slot made sense
                                             if (tISource != null) {
 
                                                 // Get Item
                                                 ItemStack targetItem = tISource.getItem();
-                                                //TSI//OotilityCeption.Log("\u00a78GOO\u00a7b TSI\u00a77 Found Item " + OotilityCeption.GetItemName(targetItem));
+                                                //TSI//OotilityCeption.Log("§8GOO§b TSI§7 Found Item " + OotilityCeption.GetItemName(targetItem));
 
                                                 // If it is not null
                                                 if (!OotilityCeption.IsAirNullAllowed(targetItem)) {
 
                                                     // Found something, does it match thoi?
                                                     if (OotilityCeption.MatchesItemNBTtestString(targetItem, args[3], args[4], args[5], logAddition)) {
-                                                        //TSI//OotilityCeption.Log("\u00a7a\u00a7oMatched");
+                                                        //TSI//OotilityCeption.Log("§a§oMatched");
 
                                                         // COunt
                                                         kount += targetItem.getAmount();
@@ -1028,14 +1027,14 @@ public class GungingOotilities implements CommandExecutor {
 
                                                         // Is this the whole damn thing? No? Then break it
                                                         if ((asSlot || !uiAmount) && !toCompletion) {
-                                                            //TSI//OotilityCeption.Log("\u00a7b\u00a7oCompletion Reached, breaking. ");
+                                                            //TSI//OotilityCeption.Log("§b§oCompletion Reached, breaking. ");
                                                             break; }
 
                                                     }
 
                                                 // Item Stack is null or air, are we searching for that?
                                                 } else if (allowNull) {
-                                                    //TSI//OotilityCeption.Log("\u00a7a\u00a7oMatched");
+                                                    //TSI//OotilityCeption.Log("§a§oMatched");
 
                                                     // Count
                                                     kount++;
@@ -1044,7 +1043,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     // Is this the whole damn thing? No? Then break it
                                                     slotS = tSlot.getSlot();
                                                     if ((asSlot || !uiAmount) && !toCompletion) {
-                                                        //TSI//OotilityCeption.Log("\u00a7b\u00a7oCompletion Reached, breaking. ");
+                                                        //TSI//OotilityCeption.Log("§b§oCompletion Reached, breaking. ");
                                                         break; }
 
                                                 }
@@ -1052,7 +1051,7 @@ public class GungingOotilities implements CommandExecutor {
                                             // Null Item Stack Location? I guess thats air?
                                             } else if (allowNull) {
 
-                                                //TSI//OotilityCeption.Log("\u00a7a\u00a7oMatched");
+                                                //TSI//OotilityCeption.Log("§a§oMatched");
 
                                                 // Count
                                                 kount++;
@@ -1061,7 +1060,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                 // Is this the whole damn thing? No? Then break it
                                                 if ((asSlot || !uiAmount) && !toCompletion) {
-                                                    //TSI//OotilityCeption.Log("\u00a7b\u00a7oCompletion Reached, breaking. ");
+                                                    //TSI//OotilityCeption.Log("§b§oCompletion Reached, breaking. ");
                                                     break; }
                                             }
                                         }
@@ -1072,19 +1071,19 @@ public class GungingOotilities implements CommandExecutor {
                                         // If found
                                         if (kount > 0) {
 
-                                            logrt = "Item \u00a7e" + args[3] + " " + args[4] + " " + args[5] + "\u00a77 successfully detected in \u00a73" + target.getName()  + "\u00a77's slots \u00a7b" + args[2] +  "\u00a77, counted a total of \u00a7e" + kount + "\u00a77. ";
+                                            logrt = "Item §e" + args[3] + " " + args[4] + " " + args[5] + "§7 successfully detected in §3" + target.getName()  + "§7's slots §b" + args[2] +  "§7, counted a total of §e" + kount + "§7. ";
 
                                             // Does it proc?
                                             if (itemAmountTest != null) {
 
                                                 if (itemAmountTest.InRange(kount)) {
 
-                                                    logrt += "Furthermore, the amount of stuff found (\u00a7b" + kount + "\u00a77) \u00a7adoes\u00a77 fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77.";
+                                                    logrt += "Furthermore, the amount of stuff found (§b" + kount + "§7) §adoes§7 fall in the range §3" + itemAmountTest.toString() + "§7.";
                                                     success = true;
 
                                                 } else {
 
-                                                    logrt += "However, the amount of stuff found (\u00a7b" + kount + "\u00a77) \u00a7cdoes not\u00a77 fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77. The command was forced to fail thus. ";
+                                                    logrt += "However, the amount of stuff found (§b" + kount + "§7) §cdoes not§7 fall in the range §3" + itemAmountTest.toString() + "§7. The command was forced to fail thus. ";
                                                     success = false;
                                                 }
 
@@ -1108,7 +1107,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                         // Done
                                                         OotilityCeption.SetPlayerScore(targetObjective, target, amountPMP);
-                                                        logrt += "Their score '\u00a73" + targetObjective.getName() + "\u00a77 is now \u00a73" + OotilityCeption.GetPlayerScore(targetObjective, target) + "\u00a77. ";
+                                                        logrt += "Their score '§3" + targetObjective.getName() + "§7 is now §3" + OotilityCeption.GetPlayerScore(targetObjective, target) + "§7. ";
 
                                                     // Provided a score
                                                     } else if (uiAmount) {
@@ -1119,14 +1118,14 @@ public class GungingOotilities implements CommandExecutor {
 
                                                         // Done
                                                         OotilityCeption.SetPlayerScore(targetObjective, target, amountPMP);
-                                                        logrt += "Their score '\u00a73" + targetObjective.getName() + "\u00a77 is now \u00a73" + OotilityCeption.GetPlayerScore(targetObjective, target) + "\u00a77. ";
+                                                        logrt += "Their score '§3" + targetObjective.getName() + "§7 is now §3" + OotilityCeption.GetPlayerScore(targetObjective, target) + "§7. ";
 
                                                     // Provided a score
                                                     } else if (score != null) {
 
                                                         //Behold
                                                         OotilityCeption.SetPlayerScore(targetObjective, target, score);
-                                                        logrt += "Their score '\u00a73" + targetObjective.getName() + "\u00a77 is now \u00a73" + OotilityCeption.GetPlayerScore(targetObjective, target) + "\u00a77. ";
+                                                        logrt += "Their score '§3" + targetObjective.getName() + "§7 is now §3" + OotilityCeption.GetPlayerScore(targetObjective, target) + "§7. ";
                                                     }
                                                 }
 
@@ -1140,7 +1139,7 @@ public class GungingOotilities implements CommandExecutor {
                                         // Nothing was found
                                         } else {
 
-                                            logrt = "Nothing in \u00a73" + target.getName() + "\u00a77's slots \u00a7b" + args[2] + "\u00a77 matched \u00a7e" + args[3] + " " + args[4] + " " + args[5] + "\u00a77. ";
+                                            logrt = "Nothing in §3" + target.getName() + "§7's slots §b" + args[2] + "§7 matched §e" + args[3] + " " + args[4] + " " + args[5] + "§7. ";
                                             success = uiAmount && !asSlot;
 
                                             // Does it proc?
@@ -1148,13 +1147,13 @@ public class GungingOotilities implements CommandExecutor {
 
                                                 if (itemAmountTest.InRange(0)) {
 
-                                                    logrt += "However, the amount of stuff found (\u00a7b0\u00a77) \u00a7adoes\u00a77 fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77. The command was forced to succeed thus.";
+                                                    logrt += "However, the amount of stuff found (§b0§7) §adoes§7 fall in the range §3" + itemAmountTest.toString() + "§7. The command was forced to succeed thus.";
                                                     commandChain.setChainedCommand(OotilityCeption.ReplaceFirst(commandChain.getChainedCommand(), "@v", "0"));
                                                     success = true;
 
                                                 } else {
 
-                                                    logrt += "Furthermore, the amount of stuff found (\u00a7b0\u00a77) \u00a7cdoes not\u00a77 even fall in the range \u00a73" + itemAmountTest.toString() + "\u00a77. ";
+                                                    logrt += "Furthermore, the amount of stuff found (§b0§7) §cdoes not§7 even fall in the range §3" + itemAmountTest.toString() + "§7. ";
                                                     success = false;
                                                 }
                                             }
@@ -1172,7 +1171,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     OotilityCeption.SetPlayerScore(targetObjective, target, amountPMP);
 
                                                     // Log
-                                                    logrt += "Score '\u00a73" + targetObjective.getName() + "\u00a77' of \u00a73" + target.getName() + "\u00a77 is now \u00a730\u00a77. ";
+                                                    logrt += "Score '§3" + targetObjective.getName() + "§7' of §3" + target.getName() + "§7 is now §30§7. ";
                                                 }
                                             }
                                         }
@@ -1197,29 +1196,29 @@ public class GungingOotilities implements CommandExecutor {
 
                         // If they were calling the help form of the command
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Test Inventory, \u00a77Makes sure the player has an item in his inven.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop testinventory <player> <slot> {nbt} [amount] [objective] [score] [comp] [shulker...]");
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player target of the command.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slots in players inventory.");
-                            logReturn.add("\u00a73 - \u00a7e{nbt} \u00a77These are the formats that match your plugins:");
-                            logReturn.add("\u00a73 --> \u00a7ee <enchantment name> <level> \u00a77Tests for an enchantment.");
-                            logReturn.add("\u00a73 --> \u00a7ev <material> * \u00a77Tests for a vanilla item.");
-                            if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("\u00a73 --> \u00a7em <mmoitem type> <mmoitem id> \u00a77Tests for it being a precise mmoitem."); }
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Test Inventory, §7Makes sure the player has an item in his inven.");
+                            logReturn.add("§3Usage: §e/goop testinventory <player> <slot> {nbt} [amount] [objective] [score] [comp] [shulker...]");
+                            logReturn.add("§3 - §e<player> §7Player target of the command.");
+                            logReturn.add("§3 - §e<slot> §7Slots in players inventory.");
+                            logReturn.add("§3 - §e{nbt} §7These are the formats that match your plugins:");
+                            logReturn.add("§3 --> §ee <enchantment name> <level> §7Tests for an enchantment.");
+                            logReturn.add("§3 --> §ev <material> * §7Tests for a vanilla item.");
+                            if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("§3 --> §em <mmoitem type> <mmoitem id> §7Tests for it being a precise mmoitem."); }
 
-                            logReturn.add("\u00a73 - \u00a7e[amount] \u00a77Range of amount by which this command succeeds.");
-                            logReturn.add("\u00a73 - \u00a7e[scoreboard] \u00a77Scoreboard objective name that will be modified IF the item matches perfectly.");
-                            logReturn.add("\u00a73 - \u00a7e[value] \u00a77Score value that will be given to the player.");
-                            logReturn.add("\u00a73 --> \u00a7eamount \u00a77keyword will set the score to the amount of that item the player has.");
-                            logReturn.add("\u00a73 - \u00a7e[comp] \u00a77To count the items in all the slots.");
-                            logReturn.add("\u00a73 - \u00a7e[shulker....] \u00a77Name of shulker boxes to inspect (All if missing).");
-                            logReturn.add("\u00a73 --> \u00a77Will only affect Shulker Box Slots.");
+                            logReturn.add("§3 - §e[amount] §7Range of amount by which this command succeeds.");
+                            logReturn.add("§3 - §e[scoreboard] §7Scoreboard objective name that will be modified IF the item matches perfectly.");
+                            logReturn.add("§3 - §e[value] §7Score value that will be given to the player.");
+                            logReturn.add("§3 --> §eamount §7keyword will set the score to the amount of that item the player has.");
+                            logReturn.add("§3 - §e[comp] §7To count the items in all the slots.");
+                            logReturn.add("§3 - §e[shulker....] §7Name of shulker boxes to inspect (All if missing).");
+                            logReturn.add("§3 --> §7Will only affect Shulker Box Slots.");
 
                         // Incorrect number of argumenst. These beople
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Test Inventory", "Incorrect usage. For info: \u00a7e/goop testinventory"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop testinventory <player> <slot> {nbt} <scoreboard> <value>");
+                                logReturn.add(OotilityCeption.LogFormat("Test Inventory", "Incorrect usage. For info: §e/goop testinventory"));
+                                logReturn.add("§3Usage: §e/goop testinventory <player> <slot> {nbt} <scoreboard> <value>");
                             }
                         }
 
@@ -1227,7 +1226,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Tell him lmao
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to check inventories!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to check inventories!"));
                     }
                     break;
                 //endregion
@@ -1256,7 +1255,6 @@ public class GungingOotilities implements CommandExecutor {
 
                                 // Split Logga
                                 Player chosenDev = null;
-                                Integer intarg = 0;
 
                                 // If has hyphen
                                 if (args[1].contains("-")) {
@@ -1284,44 +1282,44 @@ public class GungingOotilities implements CommandExecutor {
                                 switch (args[1].toLowerCase()){
                                     case "sf":
                                     case "sendfeedback":
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73sendSuccessFeedback\u00a77 updated to \u00a7b" + val));
-                                        if (!Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73sendSuccessFeedback\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3sendSuccessFeedback§7 updated to §b" + val));
+                                        if (!Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3sendSuccessFeedback§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.sendGooPSuccessFeedback = val;
                                         if (Gunging_Ootilities_Plugin.saveGamerulesConfig) Gunging_Ootilities_Plugin.theMain.UpdateConfigBool("SendSuccessFeedback", val);
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73sendFailFeedback\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3sendFailFeedback§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.sendGooPFailFeedback = val;
                                         if (Gunging_Ootilities_Plugin.saveGamerulesConfig) Gunging_Ootilities_Plugin.theMain.UpdateConfigBool("SendFailFeedback", val);
                                         break;
                                     case "ssf":
                                     case "sendsuccessfeedback":
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73sendSuccessFeedback\u00a77 updated to \u00a7b" + val));
-                                        if (!Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73sendSuccessFeedback\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3sendSuccessFeedback§7 updated to §b" + val));
+                                        if (!Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3sendSuccessFeedback§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.sendGooPSuccessFeedback = val;
                                         if (Gunging_Ootilities_Plugin.saveGamerulesConfig) Gunging_Ootilities_Plugin.theMain.UpdateConfigBool("SendSuccessFeedback", val);
                                         break;
                                     case "sff":
                                     case "sendfailfeedback":
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73sendFailFeedback\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3sendFailFeedback§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.sendGooPFailFeedback = val;
                                         if (Gunging_Ootilities_Plugin.saveGamerulesConfig) Gunging_Ootilities_Plugin.theMain.UpdateConfigBool("SendFailFeedback", val);
                                         break;
                                     case "blockerrorfeedback":
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73blockErrorFeedback\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3blockErrorFeedback§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.blockImportantErrorFeedback = val;
                                         if (Gunging_Ootilities_Plugin.saveGamerulesConfig) Gunging_Ootilities_Plugin.theMain.UpdateConfigBool("BlockErrorFeedback", val);
                                         break;
                                     case "griefbreaksbedrock":
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a7bgriefBreaksBedrock\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §bgriefBreaksBedrock§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.griefBreaksBedrock = val;
                                         if (Gunging_Ootilities_Plugin.saveGamerulesConfig) Gunging_Ootilities_Plugin.theMain.UpdateConfigBool("GriefBedrockCommand", val);
                                         break;
                                     case "anvilrename":
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a7banvilRename\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §banvilRename§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.anvilRenameEnabled = val;
                                         if (Gunging_Ootilities_Plugin.saveGamerulesConfig) Gunging_Ootilities_Plugin.theMain.UpdateConfigBool("AnvilRename", val);
                                         break;
                                     case "savegamerulechanges":
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule \u00a73saveGameruleChanges\u00a77 updated to \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "Gamerule §3saveGameruleChanges§7 updated to §b" + val));
                                         Gunging_Ootilities_Plugin.saveGamerulesConfig = val;
 
                                         // Always updated, regardless of itself
@@ -1329,7 +1327,7 @@ public class GungingOotilities implements CommandExecutor {
                                         break;
                                     case "dev":
                                         // No rememberance, thus no save regard
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "\u00a7eToggled Developer Logging to: \u00a7b" + val));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "§eToggled Developer Logging to: §b" + val));
                                         Gunging_Ootilities_Plugin.devLogging = val;
 
                                         // Update Player
@@ -1337,7 +1335,7 @@ public class GungingOotilities implements CommandExecutor {
                                         break;
                                     default:
                                         // I have no memory of that shit
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "'\u00a73" + args[1] + "\u00a77' is not a valid gamerule! do \u00a7e/goop gamerule\u00a77 for the list of gamerules."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "'§3" + args[1] + "§7' is not a valid gamerule! do §e/goop gamerule§7 for the list of gamerules."));
                                         break;
                                 }
 
@@ -1347,34 +1345,34 @@ public class GungingOotilities implements CommandExecutor {
                             } else {
 
                                 // Vro thats not a bool
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "The accepted values are \u00a7btrue \u00a77and \u00a7bfalse\u00a77. '\u00a73" + args[2] + "\u00a77' is neither of them"));
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Gamerule", "The accepted values are §btrue §7and §bfalse§7. '§3" + args[2] + "§7' is neither of them"));
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73GooP Gamerule, \u00a77Some 'Gamerules' that affect this plugin.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop gamerule <rule> <value>");
-                            logReturn.add("\u00a73 - \u00a7e<rule> \u00a77Rule name. These are them:");
-                            logReturn.add("\u00a73" + Gunging_Ootilities_Plugin.sendGooPSuccessFeedback + "\u00a7e: \u00a7bsendSuccessFeedback \u00a77Messages when a command succeeds.");
-                            logReturn.add("\u00a73" + Gunging_Ootilities_Plugin.sendGooPFailFeedback + "\u00a7e: \u00a7bsendFailFeedback \u00a77Messages when a command fails.");
-                            logReturn.add("\u00a73" + Gunging_Ootilities_Plugin.blockImportantErrorFeedback + "\u00a7e: \u00a7bblockErrorFeedback \u00a77Toggles error messages.");
-                            logReturn.add("\u00a73" + Gunging_Ootilities_Plugin.saveGamerulesConfig + "\u00a7e: \u00a7bsaveGameruleChanges \u00a77Update the \u00a7econfig.yml\u00a77 whenever a gamerule changes?");
-                            logReturn.add("\u00a73" + Gunging_Ootilities_Plugin.griefBreaksBedrock + "\u00a7e: \u00a7bgriefBreaksBedrock \u00a77Should \u00a7e/goop grief\u00a77 break unbreakable blocks? (Bedrock, End Portal Frames...) \u00a78They wont drop as items as there is no pickaxe power that makes them do so in vanilla.");
-                            logReturn.add("\u00a73" + Gunging_Ootilities_Plugin.anvilRenameEnabled + "\u00a7e: \u00a7banvilRename \u00a77Should GooP take over anvil renaming (may be incompatible with anvil renaming plguins)");
-                            logReturn.add("\u00a73 - \u00a7e<value> \u00a77Value of the rule.");
-                            logReturn.add("\u00a73You would usually use these for debugging mostly.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3GooP Gamerule, §7Some 'Gamerules' that affect this plugin.");
+                            logReturn.add("§3Usage: §e/goop gamerule <rule> <value>");
+                            logReturn.add("§3 - §e<rule> §7Rule name. These are them:");
+                            logReturn.add("§3" + Gunging_Ootilities_Plugin.sendGooPSuccessFeedback + "§e: §bsendSuccessFeedback §7Messages when a command succeeds.");
+                            logReturn.add("§3" + Gunging_Ootilities_Plugin.sendGooPFailFeedback + "§e: §bsendFailFeedback §7Messages when a command fails.");
+                            logReturn.add("§3" + Gunging_Ootilities_Plugin.blockImportantErrorFeedback + "§e: §bblockErrorFeedback §7Toggles error messages.");
+                            logReturn.add("§3" + Gunging_Ootilities_Plugin.saveGamerulesConfig + "§e: §bsaveGameruleChanges §7Update the §econfig.yml§7 whenever a gamerule changes?");
+                            logReturn.add("§3" + Gunging_Ootilities_Plugin.griefBreaksBedrock + "§e: §bgriefBreaksBedrock §7Should §e/goop grief§7 break unbreakable blocks? (Bedrock, End Portal Frames...) §8They wont drop as items as there is no pickaxe power that makes them do so in vanilla.");
+                            logReturn.add("§3" + Gunging_Ootilities_Plugin.anvilRenameEnabled + "§e: §banvilRename §7Should GooP take over anvil renaming (may be incompatible with anvil renaming plguins)");
+                            logReturn.add("§3 - §e<value> §7Value of the rule.");
+                            logReturn.add("§3You would usually use these for debugging mostly.");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Gamerule", "Incorrect usage. For info: \u00a7e/goop gamerule"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop gamerule <rule> <value>");
+                                logReturn.add(OotilityCeption.LogFormat("Gamerule", "Incorrect usage. For info: §e/goop gamerule"));
+                                logReturn.add("§3Usage: §e/goop gamerule <rule> <value>");
                             }
                         }
 
                     // No perms
                     } else {
                         // Tell him lmao
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to change gamerules!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to change gamerules!"));
                     }
                     break;
                 //endregion
@@ -1392,18 +1390,15 @@ public class GungingOotilities implements CommandExecutor {
                         if (logReturnUrn.getValue() != null) {
 
                             // For
-                            for (String ret : logReturnUrn.getValue()) {
-
-                                // Add
-                                logReturn.add(ret);
-                            }
+                            // Add
+                            logReturn.addAll(logReturnUrn.getValue());
                         }
 
                     // MMOItems not installed. Returning
                     } else {
 
                         // Tell him lmao
-                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("\u00a77These commands are to be used with the third party plugin \u00a7e\u00a7lMMOItems \u00a77which you dont have installed."));
+                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("§7These commands are to be used with the third party plugin §e§lMMOItems §7which you dont have installed."));
                     }
                     break;
                 //endregion
@@ -1442,7 +1437,7 @@ public class GungingOotilities implements CommandExecutor {
                                         OptiFineGlint tGlint = OptiFineGlint.IsGlintLoaded(args[2], logAddition);
 
                                         // Does the player exist?
-                                        if (targets.size() < 1) {
+                                        if (targets.isEmpty()) {
                                             // Failure
                                             failure = true;
 
@@ -1470,7 +1465,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 ArrayList<ItemStackSlot> slott = OotilityCeption.getInventorySlots(args[4], target, slotFailure);
 
                                                 // So, does the slot make no sense?
-                                                if (slott.size() == 0) {
+                                                if (slott.isEmpty()) {
                                                     // Failure
                                                     failure = true;
                                                 }
@@ -1503,7 +1498,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     executor.process();
 
                                                     // Was there any log messages output?
-                                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Enchant", executor.getIncludedStrBuilder().toString())); }
+                                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Enchant", executor.getIncludedStrBuilder().toString())); }
                                                 }
                                             }
                                         }
@@ -1513,8 +1508,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Enchant", "Incorrect usage. For info: \u00a7e/goop optifine"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop optifine glintEnchant <glint name> <player> <slot>");
+                                            logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Enchant", "Incorrect usage. For info: §e/goop optifine"));
+                                            logReturn.add("§3Usage: §e/goop optifine glintEnchant <glint name> <player> <slot>");
                                         }
                                     }
                                     break;
@@ -1536,7 +1531,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // log
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Define", "Enchantment '\u00a73" + args[3] + "\u00a77' doesnt exist. Remember to use vanilla names.")); }
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Define", "Enchantment '§3" + args[3] + "§7' doesnt exist. Remember to use vanilla names.")); }
                                         }
 
                                         // Enchantment Level Parses?
@@ -1559,7 +1554,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Log
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Define", "Expected integer number or \u00a7enone\u00a77 keyword instead of '\u00a73" + args[4] + "\u00a77'.")); }
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Define", "Expected integer number or §enone§7 keyword instead of '§3" + args[4] + "§7'.")); }
                                         }
 
                                         // Bice sintax
@@ -1593,8 +1588,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Define", "Incorrect usage. For info: \u00a7e/goop optifine"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop optifine glintDefine <glint name> <enchantment> <enchantment level> [lore line]");
+                                            logReturn.add(OotilityCeption.LogFormat("OptiFine - Glint Define", "Incorrect usage. For info: §e/goop optifine"));
+                                            logReturn.add("§3Usage: §e/goop optifine glintDefine <glint name> <enchantment> <enchantment level> [lore line]");
                                         }
                                     }
                                     break;
@@ -1663,7 +1658,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     alterior.Save();
 
                                                     // Notify
-                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Toggle JSON", "Successfuly \u00a7cunregistered \u00a73" + iSource.getType() + "\u00a77-\u00a73" + iSource.getItemMeta().getCustomModelData() + "\u00a77 from being a JSON Furniture.")); }
+                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Toggle JSON", "Successfuly §cunregistered §3" + iSource.getType() + "§7-§3" + iSource.getItemMeta().getCustomModelData() + "§7 from being a JSON Furniture.")); }
 
                                                 } else {
 
@@ -1690,7 +1685,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     alterior.Save();
 
                                                     // Notify
-                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Toggle JSON", "Successfuly \u00a7aregistered \u00a73" + iSource.getType() + "\u00a77-\u00a73" + iSource.getItemMeta().getCustomModelData() + "\u00a77 as a JSON Furniture.")); }
+                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("OptiFine - Toggle JSON", "Successfuly §aregistered §3" + iSource.getType() + "§7-§3" + iSource.getItemMeta().getCustomModelData() + "§7 as a JSON Furniture.")); }
                                                 }
                                             }
 
@@ -1709,44 +1704,44 @@ public class GungingOotilities implements CommandExecutor {
                                 //endregion
                                 default:
                                     // I have no memory of that shit
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("OptiFine", "'\u00a73" + args[1] + "\u00a77' is not a valid OptiFine action! do \u00a7e/goop optifine\u00a77 for the list of actions."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("OptiFine", "'§3" + args[1] + "§7' is not a valid OptiFine action! do §e/goop optifine§7 for the list of actions."));
                                     break;
                             }
 
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73GooP-OptiFine, \u00a77Stuff to use with OptiFine's CEM and CIT.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop optifine {action}");
-                            logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                            logReturn.add("\u00a73 --> \u00a7eglintEnchant <player> <slot> <glint name>");
-                            logReturn.add("\u00a73      * \u00a77Enchants, as cosmetically as possible,");
-                            logReturn.add("\u00a73        \u00a77adding lore if defined, the item the");
-                            logReturn.add("\u00a73        \u00a77target player has in the specified slot.");
-                            logReturn.add("\u00a73 --> \u00a7eglintDefine <glint name> <ench> <ench level> [lore line]");
-                            logReturn.add("\u00a73      * \u00a77Defines a CIT custom glint, that uses");
-                            logReturn.add("\u00a73        \u00a77target enchantment at target level, as");
-                            logReturn.add("\u00a73        \u00a77well as a lore line to accompany it.");
-                            logReturn.add("\u00a73 --> \u00a7etoggleJSON");
-                            logReturn.add("\u00a73      * \u00a77Allows to place your item as a block in");
-                            logReturn.add("\u00a73        \u00a77the world (in the head of an armor stand)");
-                            logReturn.add("\u00a73        \u00a77as if it were a vanilla block.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Target slot in player's inventory.");
-                            logReturn.add("\u00a73 --> \u00a77Possible slots: \u00a7bhead\u00a73, \u00a7bchest\u00a73, \u00a7blegs\u00a73, \u00a7bfeet\u00a73, \u00a7bmainhand\u00a73, \u00a7boffhand\u00a73, and any number \u00a7b0\u00a73-\u00a7b35\u00a73.");
-                            logReturn.add("\u00a73 - \u00a7e<ench level> \u00a77Level of enchantment the .properties file matches.");
-                            logReturn.add("\u00a73 --> \u00a77Theoretically, any integer number between \u00a7b-32768 \u00a77and \u00a7b32767\u00a77; or, the \u00a7bnone\u00a77 keyword.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3GooP-OptiFine, §7Stuff to use with OptiFine's CEM and CIT.");
+                            logReturn.add("§3Usage: §e/goop optifine {action}");
+                            logReturn.add("§3 - §e{action} §7What actions to perform:");
+                            logReturn.add("§3 --> §eglintEnchant <player> <slot> <glint name>");
+                            logReturn.add("§3      * §7Enchants, as cosmetically as possible,");
+                            logReturn.add("§3        §7adding lore if defined, the item the");
+                            logReturn.add("§3        §7target player has in the specified slot.");
+                            logReturn.add("§3 --> §eglintDefine <glint name> <ench> <ench level> [lore line]");
+                            logReturn.add("§3      * §7Defines a CIT custom glint, that uses");
+                            logReturn.add("§3        §7target enchantment at target level, as");
+                            logReturn.add("§3        §7well as a lore line to accompany it.");
+                            logReturn.add("§3 --> §etoggleJSON");
+                            logReturn.add("§3      * §7Allows to place your item as a block in");
+                            logReturn.add("§3        §7the world (in the head of an armor stand)");
+                            logReturn.add("§3        §7as if it were a vanilla block.");
+                            logReturn.add("§3 - §e<slot> §7Target slot in player's inventory.");
+                            logReturn.add("§3 --> §7Possible slots: §bhead§3, §bchest§3, §blegs§3, §bfeet§3, §bmainhand§3, §boffhand§3, and any number §b0§3-§b35§3.");
+                            logReturn.add("§3 - §e<ench level> §7Level of enchantment the .properties file matches.");
+                            logReturn.add("§3 --> §7Theoretically, any integer number between §b-32768 §7and §b32767§7; or, the §bnone§7 keyword.");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("OptiFine", "Incorrect usage. For info: \u00a7e/goop optifine"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop optifine {action}");
+                                logReturn.add(OotilityCeption.LogFormat("OptiFine", "Incorrect usage. For info: §e/goop optifine"));
+                                logReturn.add("§3Usage: §e/goop optifine {action}");
                             }
                         }
 
                         // No perms
                     } else {
                         // Tell him lmao
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to mess with textures!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to mess with textures!"));
                     }
                     break;
                 //endregion
@@ -1769,13 +1764,13 @@ public class GungingOotilities implements CommandExecutor {
                         Gunging_Ootilities_Plugin.theMain.Reload(false);
 
                         // Will always announce reloads. Regardless of log gamerules.
-                        logReturn.add(OotilityCeption.LogFormat("Reload", "Reloaded all \u00a7e.yml\u00a77 files."));
+                        logReturn.add(OotilityCeption.LogFormat("Reload", "Reloaded all §e.yml§7 files."));
 
                     // No perms
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to reload the configs!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to reload the configs!"));
                     }
                     break;
                     //endregion
@@ -1787,34 +1782,28 @@ public class GungingOotilities implements CommandExecutor {
 
                     // To extract log return
                     // Delegate onto NBT
-                    onCommand_GooPNBT(sender, command, label, args, senderLocation, chained, commandChain, logReturnUrn, failMessage);
+                    onCommand_GooPNBT(sender, args, senderLocation, chained, commandChain, logReturnUrn, failMessage);
 
                     // Extract
                     if (logReturnUrn.getValue() != null) {
 
                         // For
-                        for (String ret : logReturnUrn.getValue()) {
-
-                            // Add
-                            logReturn.add(ret);
-                        }
+                        // Add
+                        logReturn.addAll(logReturnUrn.getValue());
                     }
                     break;
                 //endregion
                 //region unlocc
                 case unlockables:
                     // Delegate onto
-                    onCommand_GooPUnlock(sender, command, label, args, senderLocation, chained, commandChain, logReturnUrn, failMessage);
+                    onCommand_GooPUnlock(sender, args, senderLocation, chained, commandChain, logReturnUrn, failMessage);
 
                     // Extract
                     if (logReturnUrn.getValue() != null) {
 
                         // For
-                        for (String ret : logReturnUrn.getValue()) {
-
-                            // Add
-                            logReturn.add(ret);
-                        }
+                        // Add
+                        logReturn.addAll(logReturnUrn.getValue());
                     }
                     break;
                 //endregion
@@ -1863,7 +1852,7 @@ public class GungingOotilities implements CommandExecutor {
                                                         failure = true;
 
                                                         // Log
-                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Structure \u00a73" + args[4] + "\u00a77 not loaded."));
+                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Structure §3" + args[4] + "§7 not loaded."));
 
                                                     } else {
 
@@ -1888,7 +1877,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Log
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Value \u00a73" + args[5] + "\u00a77 is not a number! "));
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Value §3" + args[5] + "§7 is not a number! "));
                                                                 }
 
                                                                 // Bice sintax
@@ -1911,8 +1900,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: \u00a7e/goop customstructures edit options"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit options vaultCost <structure name> <cost>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: §e/goop customstructures edit options"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit options vaultCost <structure name> <cost>");
                                                                 }
                                                             }
                                                             break;
@@ -1934,7 +1923,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Log
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Value \u00a73" + args[5] + "\u00a77 must be either \u00a7btrue\u00a77 or \u00a7bfalse\u00a77. "));
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Value §3" + args[5] + "§7 must be either §btrue§7 or §bfalse§7. "));
                                                                 }
 
                                                                 // Bice sintax
@@ -1958,8 +1947,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: \u00a7e/goop customstructures edit options"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit options omni <structure name> <omni?>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: §e/goop customstructures edit options"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit options omni <structure name> <omni?>");
                                                                 }
                                                             }
                                                             break;
@@ -1991,7 +1980,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                         failure = true;
 
                                                                         // Log
-                                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "World \u00a73" + worldName + "\u00a77 does not exist. "));
+                                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "World §3" + worldName + "§7 does not exist. "));
                                                                     }
                                                                 }
 
@@ -2001,13 +1990,13 @@ public class GungingOotilities implements CommandExecutor {
                                                                     // Just displaying the world blacklist
                                                                     if (worldName == null) {
 
-                                                                        logReturn.add("\u00a7e______________________________________________");
-                                                                        logReturn.add("\u00a77World Blacklist of Structure \u00a73" + args[4] + "\u00a77:");
+                                                                        logReturn.add("§e______________________________________________");
+                                                                        logReturn.add("§7World Blacklist of Structure §3" + args[4] + "§7:");
 
-                                                                        if (csRef.getWorldsBlacklist().size() == 0) {
-                                                                            logReturn.add("\u00a73> \u00a77No Worlds Blacklisted \u00a73<");
+                                                                        if (csRef.getWorldsBlacklist().isEmpty()) {
+                                                                            logReturn.add("§3> §7No Worlds Blacklisted §3<");
 
-                                                                        } else { for (String wrld : csRef.getWorldsBlacklist()) {  logReturn.add("\u00a7c - \u00a77" + wrld); } }
+                                                                        } else { for (String wrld : csRef.getWorldsBlacklist()) {  logReturn.add("§c - §7" + wrld); } }
 
                                                                     } else {
 
@@ -2026,7 +2015,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                             if (logAddition.GetValue() != null) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", logAddition.GetValue()));}
 
                                                                         } else {
-                                                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Nothing happened,\u00a73 " + worldName + (removing ? "\u00a77 was not in the blacklist. " : "\u00a77 was already blacklisted. ")));
+                                                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Nothing happened,§3 " + worldName + (removing ? "§7 was not in the blacklist. " : "§7 was already blacklisted. ")));
                                                                         }
                                                                     }
                                                                 }
@@ -2035,8 +2024,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: \u00a7e/goop customstructures edit options"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit options blacklist <structure name> [-][world]");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: §e/goop customstructures edit options"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit options blacklist <structure name> [-][world]");
                                                                 }
                                                             }
                                                             break;
@@ -2068,7 +2057,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                         failure = true;
 
                                                                         // Log
-                                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "World \u00a73" + worldName + "\u00a77 does not exist. "));
+                                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "World §3" + worldName + "§7 does not exist. "));
                                                                     }
                                                                 }
 
@@ -2078,13 +2067,13 @@ public class GungingOotilities implements CommandExecutor {
                                                                     // Just displaying the world blacklist
                                                                     if (worldName == null) {
 
-                                                                        logReturn.add("\u00a7e______________________________________________");
-                                                                        logReturn.add("\u00a77World Whitelist of Structure \u00a73" + args[4] + "\u00a77:");
+                                                                        logReturn.add("§e______________________________________________");
+                                                                        logReturn.add("§7World Whitelist of Structure §3" + args[4] + "§7:");
 
-                                                                        if (csRef.getWorldsBlacklist().size() == 0) {
-                                                                            logReturn.add("\u00a73> \u00a77No Worlds Whitelisted \u00a73<");
+                                                                        if (csRef.getWorldsBlacklist().isEmpty()) {
+                                                                            logReturn.add("§3> §7No Worlds Whitelisted §3<");
 
-                                                                        } else { for (String wrld : csRef.getWorldsBlacklist()) {  logReturn.add("\u00a7c - \u00a77" + wrld); } }
+                                                                        } else { for (String wrld : csRef.getWorldsBlacklist()) {  logReturn.add("§c - §7" + wrld); } }
 
                                                                     } else {
 
@@ -2103,7 +2092,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                             if (logAddition.GetValue() != null) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", logAddition.GetValue()));}
 
                                                                         } else {
-                                                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Nothing happened,\u00a73 " + worldName + (removing ? "\u00a77 was not in the whitelist. " : "\u00a77 was already whitelisted. ")));
+                                                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Nothing happened,§3 " + worldName + (removing ? "§7 was not in the whitelist. " : "§7 was already whitelisted. ")));
                                                                         }
                                                                     }
                                                                 }
@@ -2112,46 +2101,46 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: \u00a7e/goop customstructures edit options"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit options whitelist <structure name> [-][world]");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "Incorrect usage. For info: §e/goop customstructures edit options"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit options whitelist <structure name> [-][world]");
                                                                 }
                                                             }
                                                             break;
                                                         //endregion
                                                         default:
                                                             // I have no memory of that shit
-                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "'\u00a73" + args[2] + "\u00a77' is not a valid Custom Structures Edit Options action! do \u00a7e/goop customstructures edit options\u00a77 for the list of actions."));
+                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Options", "'§3" + args[2] + "§7' is not a valid Custom Structures Edit Options action! do §e/goop customstructures edit options§7 for the list of actions."));
                                                             break;
                                                     }
 
                                                     // Incorrect number of args
                                                 } else if (args.length == 3) {
 
-                                                    logReturn.add("\u00a7e______________________________________________");
-                                                    logReturn.add("\u00a73Custom Structures - \u00a7bEdit Options, \u00a77Various options of the structure");
-                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit options {action}");
-                                                    logReturn.add("\u00a73 - \u00a7e{action} \u00a77What action to perform:");
+                                                    logReturn.add("§e______________________________________________");
+                                                    logReturn.add("§3Custom Structures - §bEdit Options, §7Various options of the structure");
+                                                    logReturn.add("§3Usage: §e/goop customstructures edit options {action}");
+                                                    logReturn.add("§3 - §e{action} §7What action to perform:");
                                                     if (Gunging_Ootilities_Plugin.foundVault) {
-                                                        logReturn.add("\u00a73 --> \u00a7evaultCost <structure name> <cost>");
-                                                        logReturn.add("\u00a73      * \u00a77Currency cost of using the structure");  }
-                                                    logReturn.add("\u00a73 --> \u00a7eomniInteractive <structure name> <omni?>");
-                                                    logReturn.add("\u00a73      * \u00a77Usually structures activate only by interacting with");
-                                                    logReturn.add("\u00a73        \u00a77the structure core, but setting this to \u00a7btrue\u00a77 will");
-                                                    logReturn.add("\u00a73        \u00a77allow any block of the structure to activate it.");
-                                                    logReturn.add("\u00a73        \u00a7cIt is an exponential calculation, use at own risk.");
-                                                    logReturn.add("\u00a73 --> \u00a7eworldWhitelist <structure name> [-][world]");
-                                                    logReturn.add("\u00a73      * \u00a77Structure only triggers in this world.");
-                                                    logReturn.add("\u00a73      * \u00a77Use the \u00a7b-\u00a77 prefix to remove.");
-                                                    logReturn.add("\u00a73 --> \u00a7eworldBlacklist <structure name> [-][world]");
-                                                    logReturn.add("\u00a73      * \u00a77Structure never triggers in this world.");
-                                                    logReturn.add("\u00a73      * \u00a77Use the \u00a7b-\u00a77 prefix to remove.");
+                                                        logReturn.add("§3 --> §evaultCost <structure name> <cost>");
+                                                        logReturn.add("§3      * §7Currency cost of using the structure");  }
+                                                    logReturn.add("§3 --> §eomniInteractive <structure name> <omni?>");
+                                                    logReturn.add("§3      * §7Usually structures activate only by interacting with");
+                                                    logReturn.add("§3        §7the structure core, but setting this to §btrue§7 will");
+                                                    logReturn.add("§3        §7allow any block of the structure to activate it.");
+                                                    logReturn.add("§3        §cIt is an exponential calculation, use at own risk.");
+                                                    logReturn.add("§3 --> §eworldWhitelist <structure name> [-][world]");
+                                                    logReturn.add("§3      * §7Structure only triggers in this world.");
+                                                    logReturn.add("§3      * §7Use the §b-§7 prefix to remove.");
+                                                    logReturn.add("§3 --> §eworldBlacklist <structure name> [-][world]");
+                                                    logReturn.add("§3      * §7Structure never triggers in this world.");
+                                                    logReturn.add("§3      * §7Use the §b-§7 prefix to remove.");
 
                                                 } else {
 
                                                     // Notify
                                                     if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: \u00a7e/goop customstructures edit actions"));
-                                                        logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit actions {action}");
+                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: §e/goop customstructures edit actions"));
+                                                        logReturn.add("§3Usage: §e/goop customstructures edit actions {action}");
                                                     }
                                                 }
                                                 break;
@@ -2172,7 +2161,7 @@ public class GungingOotilities implements CommandExecutor {
                                                         failure = true;
 
                                                         // Log
-                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Structure \u00a73" + args[4] + "\u00a77 not loaded."));
+                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Structure §3" + args[4] + "§7 not loaded."));
 
                                                     } else {
 
@@ -2192,17 +2181,17 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Bice sintax
                                                                 if (!failure) {
-                                                                    logReturn.add("\u00a7e______________________________________________");
-                                                                    logReturn.add("\u00a77Actions of structure \u00a73" + args[4] + "\u00a77:");
+                                                                    logReturn.add("§e______________________________________________");
+                                                                    logReturn.add("§7Actions of structure §3" + args[4] + "§7:");
 
                                                                     if (csRef.getStructureActions() == null) {
-                                                                        logReturn.add("\u00a73> \u00a77No Actions Defined \u00a73<");
+                                                                        logReturn.add("§3> §7No Actions Defined §3<");
 
-                                                                    } else if (csRef.getStructureActions().size() == 0) {
-                                                                        logReturn.add("\u00a73> \u00a77No Actions Defined \u00a73<");
+                                                                    } else if (csRef.getStructureActions().isEmpty()) {
+                                                                        logReturn.add("§3> §7No Actions Defined §3<");
 
                                                                     } else {
-                                                                        for (int i = 0; i < csRef.getStructureActions().size(); i++ ) {  logReturn.add("\u00a73" + i + "\u00a7e - \u00a77" + csRef.getStructureActions().get(i)); }
+                                                                        for (int i = 0; i < csRef.getStructureActions().size(); i++ ) {  logReturn.add("§3" + i + "§e - §7" + csRef.getStructureActions().get(i)); }
                                                                     }
                                                                 }
 
@@ -2210,8 +2199,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: \u00a7e/goop customstructures edit actions"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit actions list <structure name>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: §e/goop customstructures edit actions"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit actions list <structure name>");
                                                                 }
                                                             }
                                                             break;
@@ -2279,8 +2268,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: \u00a7e/goop customstructures edit actions"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit actions remove <structure name> <index>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: §e/goop customstructures edit actions"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit actions remove <structure name> <index>");
                                                                 }
                                                             }
                                                             break;
@@ -2351,8 +2340,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: \u00a7e/goop customstructures edit actions"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit actions edit <structure name> <index> <command>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: §e/goop customstructures edit actions"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit actions edit <structure name> <index> <command>");
                                                                 }
                                                             }
                                                             break;
@@ -2398,40 +2387,40 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: \u00a7e/goop customstructures edit actions"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit actions edit <structure name> <index> <command>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: §e/goop customstructures edit actions"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit actions edit <structure name> <index> <command>");
                                                                 }
                                                             }
                                                             break;
                                                         //endregion
                                                         default:
                                                             // I have no memory of that shit
-                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "'\u00a73" + args[2] + "\u00a77' is not a valid Custom Structures Edit Actions action! do \u00a7e/goop customstructures edit actions\u00a77 for the list of actions."));
+                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "'§3" + args[2] + "§7' is not a valid Custom Structures Edit Actions action! do §e/goop customstructures edit actions§7 for the list of actions."));
                                                             break;
                                                     }
 
                                                     // Incorrect number of args
                                                 } else if (args.length == 3) {
 
-                                                    logReturn.add("\u00a7e______________________________________________");
-                                                    logReturn.add("\u00a73Custom Structures - \u00a7bEdit Actions, \u00a77What commands will the structure run when used?.");
-                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit actions {action}");
-                                                    logReturn.add("\u00a73 - \u00a7e{action} \u00a77What action to perform:");
-                                                    logReturn.add("\u00a73 --> \u00a7elist <structure name>");
-                                                    logReturn.add("\u00a73      * \u00a77Shows what commands are executed by a structure.");
-                                                    logReturn.add("\u00a73 --> \u00a7eadd <structure name> <command...>");
-                                                    logReturn.add("\u00a73      * \u00a77Adds commands to be executed by a structure.");
-                                                    logReturn.add("\u00a73 --> \u00a7eremove <structure name> <index>");
-                                                    logReturn.add("\u00a73      * \u00a77Removes commands from being executed by a structure.");
-                                                    logReturn.add("\u00a73 --> \u00a7eedit <structure name> <index> <command...>");
-                                                    logReturn.add("\u00a73      * \u00a77Edits the commands that are executed by a structure.");
+                                                    logReturn.add("§e______________________________________________");
+                                                    logReturn.add("§3Custom Structures - §bEdit Actions, §7What commands will the structure run when used?.");
+                                                    logReturn.add("§3Usage: §e/goop customstructures edit actions {action}");
+                                                    logReturn.add("§3 - §e{action} §7What action to perform:");
+                                                    logReturn.add("§3 --> §elist <structure name>");
+                                                    logReturn.add("§3      * §7Shows what commands are executed by a structure.");
+                                                    logReturn.add("§3 --> §eadd <structure name> <command...>");
+                                                    logReturn.add("§3      * §7Adds commands to be executed by a structure.");
+                                                    logReturn.add("§3 --> §eremove <structure name> <index>");
+                                                    logReturn.add("§3      * §7Removes commands from being executed by a structure.");
+                                                    logReturn.add("§3 --> §eedit <structure name> <index> <command...>");
+                                                    logReturn.add("§3      * §7Edits the commands that are executed by a structure.");
 
                                                 } else {
 
                                                     // Notify
                                                     if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: \u00a7e/goop customstructures edit actions"));
-                                                        logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit actions {action}");
+                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Actions", "Incorrect usage. For info: §e/goop customstructures edit actions"));
+                                                        logReturn.add("§3Usage: §e/goop customstructures edit actions {action}");
                                                     }
                                                 }
                                                 break;
@@ -2462,57 +2451,57 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Mention
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Triggers","There isnt any loaded structure of name \u00a73" + args[4] + "\u00a77!.")); }
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Triggers","There isnt any loaded structure of name §3" + args[4] + "§7!.")); }
                                                                 }
 
                                                                 // Bice sintax
                                                                 if (!failure) {
-                                                                    logReturn.add("\u00a77Triggers of structure \u00a73" + args[4] + "\u00a77:");
+                                                                    logReturn.add("§7Triggers of structure §3" + args[4] + "§7:");
 
                                                                     ArrayList<CSTrigger> triggList = CSManager.csLoadedStructures.get(args[4]).getStructureTriggers();
 
                                                                     if (triggList == null) {
-                                                                        logReturn.add("\u00a73> \u00a77No Triggers Defined \u00a73<");
+                                                                        logReturn.add("§3> §7No Triggers Defined §3<");
 
-                                                                    } else if (triggList.size() == 0) {
-                                                                        logReturn.add("\u00a73> \u00a77No Triggers In Structure \u00a73<");
+                                                                    } else if (triggList.isEmpty()) {
+                                                                        logReturn.add("§3> §7No Triggers In Structure §3<");
 
                                                                     } else {
 
-                                                                        for (CSTrigger trig : triggList) { logReturn.add("\u00a7e - \u00a77" + trig); }
+                                                                        for (CSTrigger trig : triggList) { logReturn.add("§e - §7" + trig); }
                                                                     }
                                                                 }
 
                                                             // Incorrect number of args
                                                             } else if (args.length == 4) {
 
-                                                                logReturn.add("\u00a73Possible structure Triggers:");
-                                                                logReturn.add("\u00a7e--------- \u00a77Always Available:");
-                                                                logReturn.add("\u00a7e > \u00a73INTERACT");
-                                                                logReturn.add("\u00a73   \u00a77When a player right-clicks the core.");
-                                                                logReturn.add("\u00a7e > \u00a73PUNCH");
-                                                                logReturn.add("\u00a73   \u00a77When a player left-clicks the core.");
-                                                                logReturn.add("\u00a7e > \u00a73COMPLETE");
-                                                                logReturn.add("\u00a73   \u00a77When a player places the core block last");
-                                                                logReturn.add("\u00a7e > \u00a73BREAK");
-                                                                logReturn.add("\u00a73   \u00a77When a player breaks the core block first");
+                                                                logReturn.add("§3Possible structure Triggers:");
+                                                                logReturn.add("§e--------- §7Always Available:");
+                                                                logReturn.add("§e > §3INTERACT");
+                                                                logReturn.add("§3   §7When a player right-clicks the core.");
+                                                                logReturn.add("§e > §3PUNCH");
+                                                                logReturn.add("§3   §7When a player left-clicks the core.");
+                                                                logReturn.add("§e > §3COMPLETE");
+                                                                logReturn.add("§3   §7When a player places the core block last");
+                                                                logReturn.add("§e > §3BREAK");
+                                                                logReturn.add("§3   §7When a player breaks the core block first");
                                                                 logReturn.add("");
-                                                                logReturn.add("\u00a7e--------- \u00a77When the core block is a pressure plate:");
-                                                                logReturn.add("\u00a7e > \u00a73PRESSUREPLATE_PLAYERS");
-                                                                logReturn.add("\u00a73   \u00a77When an player steps on the core block");
-                                                                logReturn.add("\u00a7e > \u00a73PRESSUREPLATE_MONSTERS");
-                                                                logReturn.add("\u00a73   \u00a77When a monster steps on the core block");
-                                                                logReturn.add("\u00a7e > \u00a73PRESSUREPLATE_ANIMALS");
-                                                                logReturn.add("\u00a73   \u00a77When an animal steps on the core block");
-                                                                logReturn.add("\u00a7e > \u00a73PRESSUREPLATE_ITEMS");
-                                                                logReturn.add("\u00a73   \u00a77When an item is dropped on to the core block");
+                                                                logReturn.add("§e--------- §7When the core block is a pressure plate:");
+                                                                logReturn.add("§e > §3PRESSUREPLATE_PLAYERS");
+                                                                logReturn.add("§3   §7When an player steps on the core block");
+                                                                logReturn.add("§e > §3PRESSUREPLATE_MONSTERS");
+                                                                logReturn.add("§3   §7When a monster steps on the core block");
+                                                                logReturn.add("§e > §3PRESSUREPLATE_ANIMALS");
+                                                                logReturn.add("§3   §7When an animal steps on the core block");
+                                                                logReturn.add("§e > §3PRESSUREPLATE_ITEMS");
+                                                                logReturn.add("§3   §7When an item is dropped on to the core block");
 
                                                             } else {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Triggers", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers list [structure name]");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Triggers", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit triggers list [structure name]");
                                                                 }
                                                             }
                                                             break;
@@ -2533,7 +2522,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Mention
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers","There isnt any loaded structure of name \u00a73" + args[4] + "\u00a77!.")); }
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers","There isnt any loaded structure of name §3" + args[4] + "§7!.")); }
                                                                 }
 
                                                                 // Is it an actual trigger
@@ -2549,7 +2538,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Note
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers","There isnt any trigger of name \u00a7e" + args[5] + "\u00a77!.")); }
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers","There isnt any trigger of name §e" + args[5] + "§7!.")); }
                                                                 }
 
                                                                 // Bice sintax
@@ -2562,7 +2551,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     if (!eval.contains(trig)) {
 
                                                                         // Note that it was already present
-                                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers","Structure of name \u00a73" + args[4] + " \u00a77didnt have the \u00a7e" + args[5] + "\u00a77 trigger.")); }
+                                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers","Structure of name §3" + args[4] + " §7didnt have the §e" + args[5] + "§7 trigger.")); }
 
                                                                     // Remove it
                                                                     } else {
@@ -2586,8 +2575,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers remove <structure name> <trigger name>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Triggers", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit triggers remove <structure name> <trigger name>");
                                                                 }
                                                             }
                                                             break;
@@ -2608,7 +2597,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Mention
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers","There isnt any loaded structure of name \u00a73" + args[4] + "\u00a77!.")); }
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers","There isnt any loaded structure of name §3" + args[4] + "§7!.")); }
                                                                 }
 
                                                                 // Is it an actual trigger
@@ -2624,7 +2613,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Note
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers","There isnt any trigger of name \u00a7e" + args[5] + "\u00a77!.")); }
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers","There isnt any trigger of name §e" + args[5] + "§7!.")); }
                                                                 }
 
                                                                 // Bice sintax
@@ -2637,7 +2626,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     if (eval.contains(trig)) {
 
                                                                         // Note that it was already present
-                                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers","Structure of name \u00a73" + args[4] + "\u00a77 already has trigger \u00a7e" + args[5] + "\u00a77.")); }
+                                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers","Structure of name §3" + args[4] + "§7 already has trigger §e" + args[5] + "§7.")); }
 
                                                                         // Add it
                                                                     } else {
@@ -2662,8 +2651,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers add <structure name> <trigger name>");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Triggers", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit triggers add <structure name> <trigger name>");
                                                                 }
                                                             }
                                                             break;
@@ -2685,7 +2674,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Mention
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters","There isnt any loaded structure of name \u00a73" + args[5] + "\u00a77!.")); }
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters","There isnt any loaded structure of name §3" + args[5] + "§7!.")); }
                                                                 } else {
 
                                                                     // Retrieve
@@ -2705,7 +2694,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                     failure = true;
 
                                                                     // Note
-                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters","There isnt any trigger of name \u00a7e" + args[6] + "\u00a77!.")); }
+                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters","There isnt any trigger of name §e" + args[6] + "§7!.")); }
                                                                 }
 
                                                                 switch (args[4].toLowerCase()) {
@@ -2722,51 +2711,51 @@ public class GungingOotilities implements CommandExecutor {
                                                                             if (!failure) {
 
                                                                                 // Some wild info on the parameters
-                                                                                logReturn.add("\u00a7e______________________________________________");
-                                                                                logReturn.add("\u00a77Parameters of the Trigger \u00a73" + trigr + "\u00a77:");
+                                                                                logReturn.add("§e______________________________________________");
+                                                                                logReturn.add("§7Parameters of the Trigger §3" + trigr + "§7:");
                                                                                 ArrayList<String> ret = new ArrayList<>();
                                                                                 switch (trigr) {
                                                                                     case BREAK:
                                                                                     case COMPLETE:
                                                                                     case SNEAK_COMPLETE:
                                                                                     case SNEAK_BREAK:
-                                                                                        logReturn.add("\u00a77This trigger doesnt support parameters!");
+                                                                                        logReturn.add("§7This trigger doesnt support parameters!");
                                                                                         break;
                                                                                     case INTERACT:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.INTERACT);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe item the player is holding must match these when they interact");
+                                                                                        logReturn.add("§b§oThe item the player is holding must match these when they interact");
                                                                                         break;
                                                                                     case SNEAK_INTERACT:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.SNEAK_INTERACT);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe item the player is holding must match these when they interact (while sneaking).");
+                                                                                        logReturn.add("§b§oThe item the player is holding must match these when they interact (while sneaking).");
                                                                                         break;
                                                                                     case PUNCH:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.PUNCH);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe item the player is holding must match these when they punch");
+                                                                                        logReturn.add("§b§oThe item the player is holding must match these when they punch");
                                                                                         break;
                                                                                     case SNEAK_PUNCH:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.SNEAK_PUNCH);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe item the player is holding must match these when they punch (while sneaking)");
+                                                                                        logReturn.add("§b§oThe item the player is holding must match these when they punch (while sneaking)");
                                                                                         break;
                                                                                     case PRESSUREPLATE_PLAYERS:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.PRESSUREPLATE_PLAYERS);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe item the player is holding must match these when they step on the plate");
+                                                                                        logReturn.add("§b§oThe item the player is holding must match these when they step on the plate");
                                                                                         break;
                                                                                     case SNEAK_PRESSUREPLATE_PLAYERS:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.SNEAK_PRESSUREPLATE_PLAYERS);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe item the player is holding must match these when they step on the plate (while sneaking)");
+                                                                                        logReturn.add("§b§oThe item the player is holding must match these when they step on the plate (while sneaking)");
                                                                                         break;
                                                                                     case PRESSUREPLATE_ITEMS:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.PRESSUREPLATE_ITEMS);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe item dropped on the pressure plate must match these.");
+                                                                                        logReturn.add("§b§oThe item dropped on the pressure plate must match these.");
                                                                                         break;
                                                                                     case PRESSUREPLATE_MONSTERS:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.PRESSUREPLATE_MONSTERS);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe monsters that step on the pressure plate must match these.");
+                                                                                        logReturn.add("§b§oThe monsters that step on the pressure plate must match these.");
                                                                                         break;
                                                                                     case PRESSUREPLATE_ANIMALS:
                                                                                         ret = csTarget.getTriggerParameters().get(CSTrigger.PRESSUREPLATE_ANIMALS);
-                                                                                        logReturn.add("\u00a7b\u00a7oThe animals that step on the pressure plate must match these.");
+                                                                                        logReturn.add("§b§oThe animals that step on the pressure plate must match these.");
                                                                                         break;
                                                                                 }
 
@@ -2776,16 +2765,16 @@ public class GungingOotilities implements CommandExecutor {
                                                                                     failure = true;
 
                                                                                     // Note
-                                                                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Trigger Parameters", "Structure \u00a73" + args[5] + "\u00a77 doesnt have that trigger!"));
+                                                                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Trigger Parameters", "Structure §3" + args[5] + "§7 doesnt have that trigger!"));
                                                                                 }
 
                                                                                 // Bice sintax
                                                                                 if (!failure) {
                                                                                     if (ret != null) {
-                                                                                        for (int i = 0; i < ret.size(); i++) { logReturn.add("\u00a73" + i + "\u00a7e - \u00a77" + ret.get(i)); }
+                                                                                        for (int i = 0; i < ret.size(); i++) { logReturn.add("§3" + i + "§e - §7" + ret.get(i)); }
 
                                                                                     } else {
-                                                                                        logReturn.add("\u00a73> \u00a77No Parameters \u00a73<");
+                                                                                        logReturn.add("§3> §7No Parameters §3<");
                                                                                     }
                                                                                 }
 
@@ -2794,8 +2783,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                             // Notify
                                                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Trigger Parameters", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                                logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers parameters list <structure name> <trigger name>");
+                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - List Trigger Parameters", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                                logReturn.add("§3Usage: §e/goop customstructures edit triggers parameters list <structure name> <trigger name>");
                                                                             }
                                                                         }
                                                                         break;
@@ -2840,8 +2829,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                             // Bice sintax
                                                                             if (!failure) {
-
-                                                                                ArrayList<String> ret = new ArrayList<>();
+                                                                                ArrayList<String> ret;
                                                                                 RefSimulator<String> logAddition = new RefSimulator<>("");
 
                                                                                 switch (trigr) {
@@ -2871,7 +2859,7 @@ public class GungingOotilities implements CommandExecutor {
                                                                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Trigger Parameters", "Index out of range!"));
                                                                                     }
                                                                                 } else {
-                                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Trigger Parameters", "Structure has no parameters to remove for trigger \u00a7e" + trigr));
+                                                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Trigger Parameters", "Structure has no parameters to remove for trigger §e" + trigr));
                                                                                 }
                                                                             }
 
@@ -2879,8 +2867,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                             // Notify
                                                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Trigger Parameters", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                                logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers parameters remove <structure name> <trigger name> <parameter index>");
+                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - Remove Trigger Parameters", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                                logReturn.add("§3Usage: §e/goop customstructures edit triggers parameters remove <structure name> <trigger name> <parameter index>");
                                                                             }
                                                                         }
                                                                         break;
@@ -2975,7 +2963,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                                         }  else {
 
-                                                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters", "Item NBT Filters require 3 arguments. You've provided two: \u00a7e" + args[8] + " " + args[9]));
+                                                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters", "Item NBT Filters require 3 arguments. You've provided two: §e" + args[8] + " " + args[9]));
                                                                                         }
 
                                                                                         break;
@@ -3010,8 +2998,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                             // Notify
                                                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                                logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers parameters edit <structure name> <trigger name> <parameter index> <parameter args>");
+                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Trigger Parameters", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                                logReturn.add("§3Usage: §e/goop customstructures edit triggers parameters edit <structure name> <trigger name> <parameter index> <parameter args>");
                                                                             }
                                                                         }
                                                                         break;
@@ -3125,15 +3113,15 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                             // Notify
                                                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Trigger Parameters", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                                logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers parameters add <structure name> <trigger name> <parameter args>");
+                                                                                logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Trigger Parameters", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                                logReturn.add("§3Usage: §e/goop customstructures edit triggers parameters add <structure name> <trigger name> <parameter args>");
                                                                             }
                                                                         }
                                                                         break;
                                                                     //endregion
                                                                     default:
                                                                         // I have no memory of that shit
-                                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Trigger Parameters", "'\u00a73" + args[4] + "\u00a77' is not a valid Custom Structures Edit Trigger-parameters Action! do \u00a7e/goop customstructures edit triggers\u00a77 for the list of actions."));
+                                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Add Trigger Parameters", "'§3" + args[4] + "§7' is not a valid Custom Structures Edit Trigger-parameters Action! do §e/goop customstructures edit triggers§7 for the list of actions."));
                                                                         break;
                                                                 }
 
@@ -3142,48 +3130,48 @@ public class GungingOotilities implements CommandExecutor {
 
                                                                 // Notify
                                                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Triggers", "Incorrect usage. For info: \u00a7e/goop customstructures edit triggers"));
-                                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers parameter <sub action key> <structure name> <trigger name> {sub action}");
+                                                                    logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Triggers", "Incorrect usage. For info: §e/goop customstructures edit triggers"));
+                                                                    logReturn.add("§3Usage: §e/goop customstructures edit triggers parameter <sub action key> <structure name> <trigger name> {sub action}");
                                                                 }
                                                             }
                                                             break;
                                                         //endregion
                                                         default:
                                                             // I have no memory of that shit
-                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Triggers", "'\u00a73" + args[3] + "\u00a77' is not a valid Custom Structures Edit Triggers Action! do \u00a7e/goop customstructures edit triggers\u00a77 for the list of actions."));
+                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Triggers", "'§3" + args[3] + "§7' is not a valid Custom Structures Edit Triggers Action! do §e/goop customstructures edit triggers§7 for the list of actions."));
                                                             break;
                                                     }
 
                                                 // Incorrect number of args
                                                 } else if (args.length == 3) {
 
-                                                    logReturn.add("\u00a7e______________________________________________");
-                                                    logReturn.add("\u00a73Custom Structures - \u00a7bEdit, \u00a77Edits a loaded structure.");
-                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit triggers {action}");
-                                                    logReturn.add("\u00a73 - \u00a7e{action} \u00a77What action to perform:");
-                                                    logReturn.add("\u00a73 --> \u00a7elist");
-                                                    logReturn.add("\u00a73      * \u00a77Lists the triggers of structures.");
-                                                    logReturn.add("\u00a73 --> \u00a7elist <structure name>");
-                                                    logReturn.add("\u00a73      * \u00a77Lists the triggers of a loaded structure.");
-                                                    logReturn.add("\u00a73 --> \u00a7eadd <structure name> <trigger name>");
-                                                    logReturn.add("\u00a73      * \u00a77Adds a trigger to a structure.");
-                                                    logReturn.add("\u00a73 --> \u00a7eremove <structure name> <trigger name>");
-                                                    logReturn.add("\u00a73      * \u00a77Removes a trigger from a structure.");
-                                                    logReturn.add("\u00a73 --> \u00a7eparameter list <structure name> <trigger name>");
-                                                    logReturn.add("\u00a73      * \u00a77Lists the trigger parameters of a loaded structure");
-                                                    logReturn.add("\u00a73 --> \u00a7eparameter add <structure name> <trigger name> <parameter args>");
-                                                    logReturn.add("\u00a73      * \u00a77Adds a trigger parameter to a loaded structure");
-                                                    logReturn.add("\u00a73 --> \u00a7eparameter remove <structure name> <trigger name> <parameter index>");
-                                                    logReturn.add("\u00a73      * \u00a77Removes a trigger parameter from a loaded structure");
-                                                    logReturn.add("\u00a73 --> \u00a7eparameter edit <structure name> <trigger name> <parameter index> <new parameter args>");
-                                                    logReturn.add("\u00a73      * \u00a77Edits a trigger parameter of a loaded structure");
+                                                    logReturn.add("§e______________________________________________");
+                                                    logReturn.add("§3Custom Structures - §bEdit, §7Edits a loaded structure.");
+                                                    logReturn.add("§3Usage: §e/goop customstructures edit triggers {action}");
+                                                    logReturn.add("§3 - §e{action} §7What action to perform:");
+                                                    logReturn.add("§3 --> §elist");
+                                                    logReturn.add("§3      * §7Lists the triggers of structures.");
+                                                    logReturn.add("§3 --> §elist <structure name>");
+                                                    logReturn.add("§3      * §7Lists the triggers of a loaded structure.");
+                                                    logReturn.add("§3 --> §eadd <structure name> <trigger name>");
+                                                    logReturn.add("§3      * §7Adds a trigger to a structure.");
+                                                    logReturn.add("§3 --> §eremove <structure name> <trigger name>");
+                                                    logReturn.add("§3      * §7Removes a trigger from a structure.");
+                                                    logReturn.add("§3 --> §eparameter list <structure name> <trigger name>");
+                                                    logReturn.add("§3      * §7Lists the trigger parameters of a loaded structure");
+                                                    logReturn.add("§3 --> §eparameter add <structure name> <trigger name> <parameter args>");
+                                                    logReturn.add("§3      * §7Adds a trigger parameter to a loaded structure");
+                                                    logReturn.add("§3 --> §eparameter remove <structure name> <trigger name> <parameter index>");
+                                                    logReturn.add("§3      * §7Removes a trigger parameter from a loaded structure");
+                                                    logReturn.add("§3 --> §eparameter edit <structure name> <trigger name> <parameter index> <new parameter args>");
+                                                    logReturn.add("§3      * §7Edits a trigger parameter of a loaded structure");
 
                                                 } else {
 
                                                     // Notify
                                                     if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit", "Incorrect usage. For info: \u00a7e/goop customstructures edit"));
-                                                        logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit {action}");
+                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit", "Incorrect usage. For info: §e/goop customstructures edit"));
+                                                        logReturn.add("§3Usage: §e/goop customstructures edit {action}");
                                                     }
                                                 }
                                                 break;
@@ -3249,12 +3237,12 @@ public class GungingOotilities implements CommandExecutor {
                                                         failure = true;
 
                                                         // Mention
-                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Composition","There isnt any loaded structure of name \u00a73" + args[3] + "\u00a77!.")); }
+                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Composition","There isnt any loaded structure of name §3" + args[3] + "§7!.")); }
                                                     }
 
                                                     // Size Parses?
                                                     Integer size = null; boolean asSelection = false;
-                                                    if (args[4].toLowerCase().equals("selection")) {
+                                                    if (args[4].equalsIgnoreCase("selection")) {
                                                         asSelection = true;
                                                     } else if (!OotilityCeption.IntTryParse(args[4])) {
 
@@ -3262,7 +3250,7 @@ public class GungingOotilities implements CommandExecutor {
                                                         failure = true;
 
                                                         // Mention
-                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Composition", "Expected integer number for cuboid radius instead of \u00a73" + args[4])); }
+                                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Composition", "Expected integer number for cuboid radius instead of §3" + args[4])); }
                                                     } else { size = OotilityCeption.ParseInt(args[4]); }
 
                                                     // Through Selection huh?
@@ -3333,7 +3321,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     if (!failure) {
 
                                                         // Obtain composition
-                                                        ArrayList<CSBlock> comp = null;
+                                                        ArrayList<CSBlock> comp;
                                                         if (asSelection) {
 
                                                             // Get From Selecton
@@ -3357,24 +3345,24 @@ public class GungingOotilities implements CommandExecutor {
                                                 // Incorrect number of args
                                                 } else if (args.length == 3) {
 
-                                                    logReturn.add("\u00a7e______________________________________________");
-                                                    logReturn.add("\u00a73Custom Structures - \u00a7bEdit Composition, \u00a77Edits the YML of a structure from something in the world.");
-                                                    logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit composition <structure name> <cuboid radius> [w x y z]");
-                                                    logReturn.add("\u00a73 - \u00a7e<structure name> \u00a77Name of loaded structure");
-                                                    logReturn.add("\u00a73 - \u00a7e<cuboid radius> \u00a77Blocks around the 'core' to account for.");
-                                                    logReturn.add("\u00a7e ---> \u00a77Air and Barrier blocks will be ignored (match any block)");
-                                                    logReturn.add("\u00a7e ---> \u00a77Structure Void blocks will be saved as Air (match air)");
-                                                    logReturn.add("\u00a73 - \u00a7e[w] \u00a77World");
-                                                    logReturn.add("\u00a73 - \u00a7e[x y z] \u00a77Coords");
-                                                    logReturn.add("\u00a78/goop customstructures edit composition Stove 1 world 420 69 30");
-                                                    logReturn.add("\u00a73If coords are not specified, the 'core' will be the block you're looking at.");
+                                                    logReturn.add("§e______________________________________________");
+                                                    logReturn.add("§3Custom Structures - §bEdit Composition, §7Edits the YML of a structure from something in the world.");
+                                                    logReturn.add("§3Usage: §e/goop customstructures edit composition <structure name> <cuboid radius> [w x y z]");
+                                                    logReturn.add("§3 - §e<structure name> §7Name of loaded structure");
+                                                    logReturn.add("§3 - §e<cuboid radius> §7Blocks around the 'core' to account for.");
+                                                    logReturn.add("§e ---> §7Air and Barrier blocks will be ignored (match any block)");
+                                                    logReturn.add("§e ---> §7Structure Void blocks will be saved as Air (match air)");
+                                                    logReturn.add("§3 - §e[w] §7World");
+                                                    logReturn.add("§3 - §e[x y z] §7Coords");
+                                                    logReturn.add("§8/goop customstructures edit composition Stove 1 world 420 69 30");
+                                                    logReturn.add("§3If coords are not specified, the 'core' will be the block you're looking at.");
 
                                                 } else {
 
                                                     // Notify
                                                     if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Composition", "Incorrect usage. For info: \u00a7e/goop customstructures edit composition"));
-                                                        logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit composition <structure name> <cuboid radius> [w x y z]");
+                                                        logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit Composition", "Incorrect usage. For info: §e/goop customstructures edit composition"));
+                                                        logReturn.add("§3Usage: §e/goop customstructures edit composition <structure name> <cuboid radius> [w x y z]");
                                                     }
                                                 }
                                                 break;
@@ -3382,34 +3370,34 @@ public class GungingOotilities implements CommandExecutor {
 
                                             default:
                                                 // I have no memory of that shit
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit", "'\u00a73" + args[2] + "\u00a77' is not a valid Custom Structures Edit Action! do \u00a7e/goop customstructures edit\u00a77 for the list of actions."));
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit", "'§3" + args[2] + "§7' is not a valid Custom Structures Edit Action! do §e/goop customstructures edit§7 for the list of actions."));
                                                 break;
                                         }
 
                                     // Incorrect number of args
                                     } else if (args.length == 2) {
 
-                                        logReturn.add("\u00a7e______________________________________________");
-                                        logReturn.add("\u00a73Custom Structures - \u00a7bEdit, \u00a77Edits a loaded structure.");
-                                        logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit {action}");
-                                        logReturn.add("\u00a73 - \u00a7e{action} \u00a77What action to perform:");
-                                        logReturn.add("\u00a73 --> \u00a7ecomposition <structure name> <cuboid radius> [world x y z]");
-                                        logReturn.add("\u00a73      * \u00a77Edits what blocks compose a structure.");
-                                        logReturn.add("\u00a73      * \u00a73Barriers and Air wont be saved (will match any block)");
-                                        logReturn.add("\u00a73      * \u00a73Structure Void will be saved as AIR (will match air)");
-                                        logReturn.add("\u00a73 --> \u00a7etriggers {action}");
-                                        logReturn.add("\u00a73      * \u00a77Stuff regarding what makes the structure activate.");
-                                        logReturn.add("\u00a73 --> \u00a7eactions {action}");
-                                        logReturn.add("\u00a73      * \u00a77Manage what commands to run when the structure activates.");
-                                        logReturn.add("\u00a73 --> \u00a7eoption {action}");
-                                        logReturn.add("\u00a73      * \u00a77Tweaks for the functioning of the custom structure.");
+                                        logReturn.add("§e______________________________________________");
+                                        logReturn.add("§3Custom Structures - §bEdit, §7Edits a loaded structure.");
+                                        logReturn.add("§3Usage: §e/goop customstructures edit {action}");
+                                        logReturn.add("§3 - §e{action} §7What action to perform:");
+                                        logReturn.add("§3 --> §ecomposition <structure name> <cuboid radius> [world x y z]");
+                                        logReturn.add("§3      * §7Edits what blocks compose a structure.");
+                                        logReturn.add("§3      * §3Barriers and Air wont be saved (will match any block)");
+                                        logReturn.add("§3      * §3Structure Void will be saved as AIR (will match air)");
+                                        logReturn.add("§3 --> §etriggers {action}");
+                                        logReturn.add("§3      * §7Stuff regarding what makes the structure activate.");
+                                        logReturn.add("§3 --> §eactions {action}");
+                                        logReturn.add("§3      * §7Manage what commands to run when the structure activates.");
+                                        logReturn.add("§3 --> §eoption {action}");
+                                        logReturn.add("§3      * §7Tweaks for the functioning of the custom structure.");
 
                                     } else {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit", "Incorrect usage. For info: \u00a7e/goop customstructures edit"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop customstructures edit {action}");
+                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Edit", "Incorrect usage. For info: §e/goop customstructures edit"));
+                                            logReturn.add("§3Usage: §e/goop customstructures edit {action}");
                                         }
                                     }
                                     break;
@@ -3423,18 +3411,18 @@ public class GungingOotilities implements CommandExecutor {
                                     // Correct number of args?
                                     if (args.length == 2) {
 
-                                        logReturn.add("\u00a7e______________________________________________");
-                                        if (CSManager.loadedStructures.size() == 0) {
-                                            logReturn.add("\u00a73Custom Structures - \u00a7bList, \u00a77Lists all loaded structures, there arent any right now though.");
+                                        logReturn.add("§e______________________________________________");
+                                        if (CSManager.loadedStructures.isEmpty()) {
+                                            logReturn.add("§3Custom Structures - §bList, §7Lists all loaded structures, there arent any right now though.");
                                         } else {
-                                            logReturn.add("\u00a73Custom Structures - \u00a7bList, \u00a77All loaded structures:");
-                                            for (CSStructure struct : CSManager.loadedStructures) { logReturn.add("\u00a73 - \u00a77" + struct.getStructureName()); }
+                                            logReturn.add("§3Custom Structures - §bList, §7All loaded structures:");
+                                            for (CSStructure struct : CSManager.loadedStructures) { logReturn.add("§3 - §7" + struct.getStructureName()); }
                                         }
 
                                     } else {
 
                                         // Notify
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - List", "Incorrect usage. \u00a7e/goop customstructures list")); }
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - List", "Incorrect usage. §e/goop customstructures list")); }
                                     }
                                     break;
                                 //endregion
@@ -3499,12 +3487,12 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Mention
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Import","There already is a loaded structure of name \u00a73" + args[2] + "\u00a77!. Instead, try \u00a7e/goop customstructures edit composition " + args[2] + " " + args[3]));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Import","There already is a loaded structure of name §3" + args[2] + "§7!. Instead, try §e/goop customstructures edit composition " + args[2] + " " + args[3]));
                                         }
 
                                         // Size Parses?
                                         Integer size = null; boolean asSelection = false;
-                                        if (args[3].toLowerCase().equals("selection")) {
+                                        if (args[3].equalsIgnoreCase("selection")) {
                                             asSelection = true;
                                         } else if (!OotilityCeption.IntTryParse(args[3])) {
 
@@ -3512,7 +3500,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Mention
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Import", "Expected integer number for cuboid radius instead of '\u00a73" + args[3] + "\u00a77'"));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Import", "Expected integer number for cuboid radius instead of '§3" + args[3] + "§7'"));
 
                                         } else { size = OotilityCeption.ParseInt(args[3]); }
 
@@ -3584,7 +3572,7 @@ public class GungingOotilities implements CommandExecutor {
                                         if (!failure) {
 
                                             // Obtain composition
-                                            ArrayList<CSBlock> comp = null;
+                                            ArrayList<CSBlock> comp;
                                             if (asSelection) {
 
                                                 // Get From Selecton
@@ -3609,24 +3597,24 @@ public class GungingOotilities implements CommandExecutor {
                                         // Incorrect number of args
                                     } else if (args.length == 2) {
 
-                                        logReturn.add("\u00a7e______________________________________________");
-                                        logReturn.add("\u00a73Custom Structures - \u00a7bImport, \u00a77Writes a YML structure from something in the world.");
-                                        logReturn.add("\u00a73Usage: \u00a7e/goop customstructures import <structure name> <cuboid radius> [w x y z]");
-                                        logReturn.add("\u00a73 - \u00a7e<structure name> \u00a77Name of the new structure");
-                                        logReturn.add("\u00a73 - \u00a7e<cuboid radius> \u00a77Blocks around the 'core' to account for.");
-                                        logReturn.add("\u00a7e ---> \u00a77Air and Barrier blocks will be ignored (match any block)");
-                                        logReturn.add("\u00a7e ---> \u00a77Structure Void blocks will be saved as Air (match air)");
-                                        logReturn.add("\u00a73 - \u00a7e[w] \u00a77World");
-                                        logReturn.add("\u00a73 - \u00a7e[x y z] \u00a77Coords");
-                                        logReturn.add("\u00a78/goop customstructures import Stove 1 world 420 69 30");
-                                        logReturn.add("\u00a73If coords are not specified, the 'core' will be the block you're looking at.");
+                                        logReturn.add("§e______________________________________________");
+                                        logReturn.add("§3Custom Structures - §bImport, §7Writes a YML structure from something in the world.");
+                                        logReturn.add("§3Usage: §e/goop customstructures import <structure name> <cuboid radius> [w x y z]");
+                                        logReturn.add("§3 - §e<structure name> §7Name of the new structure");
+                                        logReturn.add("§3 - §e<cuboid radius> §7Blocks around the 'core' to account for.");
+                                        logReturn.add("§e ---> §7Air and Barrier blocks will be ignored (match any block)");
+                                        logReturn.add("§e ---> §7Structure Void blocks will be saved as Air (match air)");
+                                        logReturn.add("§3 - §e[w] §7World");
+                                        logReturn.add("§3 - §e[x y z] §7Coords");
+                                        logReturn.add("§8/goop customstructures import Stove 1 world 420 69 30");
+                                        logReturn.add("§3If coords are not specified, the 'core' will be the block you're looking at.");
 
                                     } else {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Import", "Incorrect usage. For info: \u00a7e/goop customstructures import"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop customstructures import <structure name> <cuboid radius> [w x y z]");
+                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Import", "Incorrect usage. For info: §e/goop customstructures import"));
+                                            logReturn.add("§3Usage: §e/goop customstructures import <structure name> <cuboid radius> [w x y z]");
                                         }
                                     }
                                     break;
@@ -3692,7 +3680,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Mention
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build","No loaded structure of such name \u00a73" + args[2]));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build","No loaded structure of such name §3" + args[2]));
                                         }
 
                                         // Parse location?
@@ -3729,7 +3717,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 failure = true;
 
                                                 // Mention
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build","Unknown facing direction \u00a73" + args[7]));
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build","Unknown facing direction §3" + args[7]));
                                             }
                                         }
 
@@ -3740,27 +3728,27 @@ public class GungingOotilities implements CommandExecutor {
                                             CSManager.csLoadedStructures.get(args[2]).generateAt(null, targetLocation, o,false, false, false);
 
                                             // Mention success
-                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build","Successfuly Generated Structure \u00a73" + args[2] + "\u00a77 at \u00a7e " + OotilityCeption.BlockLocation2String(targetLocation))); }
+                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build","Successfuly Generated Structure §3" + args[2] + "§7 at §e " + OotilityCeption.BlockLocation2String(targetLocation))); }
                                         }
 
                                         // Incorrect number of args
                                     } else if (args.length == 2) {
 
-                                        logReturn.add("\u00a7e______________________________________________");
-                                        logReturn.add("\u00a73Custom Structures - \u00a7bBuild, \u00a77Place loaded structure in the world.");
-                                        logReturn.add("\u00a73Usage: \u00a7e/goop customstructures build <structure name> [w x y z] [facing]");
-                                        logReturn.add("\u00a73 - \u00a7e<structure name> \u00a77Name of the loaded structure");
-                                        logReturn.add("\u00a73 - \u00a7e[w] \u00a77World");
-                                        logReturn.add("\u00a73 - \u00a7e[x y z] \u00a77Coords");
-                                        logReturn.add("\u00a73 - \u00a7e[facing] \u00a77Facing direction, by default south.");
-                                        logReturn.add("\u00a78/goop customstructures build Stove world 420 69 30");
+                                        logReturn.add("§e______________________________________________");
+                                        logReturn.add("§3Custom Structures - §bBuild, §7Place loaded structure in the world.");
+                                        logReturn.add("§3Usage: §e/goop customstructures build <structure name> [w x y z] [facing]");
+                                        logReturn.add("§3 - §e<structure name> §7Name of the loaded structure");
+                                        logReturn.add("§3 - §e[w] §7World");
+                                        logReturn.add("§3 - §e[x y z] §7Coords");
+                                        logReturn.add("§3 - §e[facing] §7Facing direction, by default south.");
+                                        logReturn.add("§8/goop customstructures build Stove world 420 69 30");
 
                                     } else {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build", "Incorrect usage. For info: \u00a7e/goop customstructures build"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop customstructures build <structure name> [w x y z]");
+                                            logReturn.add(OotilityCeption.LogFormat("Custom Structures - Build", "Incorrect usage. For info: §e/goop customstructures build"));
+                                            logReturn.add("§3Usage: §e/goop customstructures build <structure name> [w x y z]");
                                         }
                                     }
                                     break;
@@ -3768,40 +3756,40 @@ public class GungingOotilities implements CommandExecutor {
 
                                 default:
                                     // I have no memory of that shit
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures", "'\u00a73" + args[1] + "\u00a77' is not a valid Custom Structures action! do \u00a7e/goop customstructures\u00a77 for the list of actions."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Custom Structures", "'§3" + args[1] + "§7' is not a valid Custom Structures action! do §e/goop customstructures§7 for the list of actions."));
                                     break;
                             }
 
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Custom Structures, \u00a77Make player-buildable stuff come to life!");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop customstructures {action}");
-                            logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                            logReturn.add("\u00a73 --> \u00a7eimport <structure name> <cuboid radius> [world x y z]");
-                            logReturn.add("\u00a73      * \u00a77Creates a new structure from the blocks you are looking at.");
-                            logReturn.add("\u00a73        \u00a77You must edit it further for it to actually work.");
-                            logReturn.add("\u00a73      * \u00a73Barriers and Air wont be saved (will match any block)");
-                            logReturn.add("\u00a73      * \u00a73Structure Void will be saved as AIR (will match air)");
-                            logReturn.add("\u00a73 --> \u00a7eedit {action}");
-                            logReturn.add("\u00a73      * \u00a77Edit structures realtime in-game.");
-                            logReturn.add("\u00a73 --> \u00a7ebuild <structure name> [world x y z]");
-                            logReturn.add("\u00a73      * \u00a77Places such structure in the world,");
-                            logReturn.add("\u00a73        \u00a77Centered on the block you are looking at.");
-                            logReturn.add("\u00a73 --> \u00a7elist");
-                            logReturn.add("\u00a73      * \u00a77List all loaded structures.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Custom Structures, §7Make player-buildable stuff come to life!");
+                            logReturn.add("§3Usage: §e/goop customstructures {action}");
+                            logReturn.add("§3 - §e{action} §7What actions to perform:");
+                            logReturn.add("§3 --> §eimport <structure name> <cuboid radius> [world x y z]");
+                            logReturn.add("§3      * §7Creates a new structure from the blocks you are looking at.");
+                            logReturn.add("§3        §7You must edit it further for it to actually work.");
+                            logReturn.add("§3      * §3Barriers and Air wont be saved (will match any block)");
+                            logReturn.add("§3      * §3Structure Void will be saved as AIR (will match air)");
+                            logReturn.add("§3 --> §eedit {action}");
+                            logReturn.add("§3      * §7Edit structures realtime in-game.");
+                            logReturn.add("§3 --> §ebuild <structure name> [world x y z]");
+                            logReturn.add("§3      * §7Places such structure in the world,");
+                            logReturn.add("§3        §7Centered on the block you are looking at.");
+                            logReturn.add("§3 --> §elist");
+                            logReturn.add("§3      * §7List all loaded structures.");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("NBT", "Incorrect usage. For info: \u00a7e/goop nbt"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop nbt {action}");
+                                logReturn.add(OotilityCeption.LogFormat("NBT", "Incorrect usage. For info: §e/goop nbt"));
+                                logReturn.add("§3Usage: §e/goop nbt {action}");
                             }
                         }
 
                         // No perms
                     } else {
                         // Tell him lmao
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to configure custom structures!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to configure custom structures!"));
                     }
                     break;
                 //endregion
@@ -3846,10 +3834,10 @@ public class GungingOotilities implements CommandExecutor {
                                                 ArrayList<Player> pTargets = OotilityCeption.GetPlayers(senderLocation, cstName, null);
                                                 Entity tEntity = OotilityCeption.getEntityByUniqueId(cstName);
                                                 if (tEntity != null && !(tEntity instanceof Player)) { casters.add(tEntity); }
-                                                for (Player target : pTargets) { casters.add(target); }
+                                                casters.addAll(pTargets);
 
                                                 // Still Null?
-                                                if (casters.size() < 1) {
+                                                if (casters.isEmpty()) {
 
                                                     // No entity was found
                                                     failure = true;
@@ -3885,7 +3873,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     qnr = QuickNumberRange.FromString(varRange);
                                                     if (qnr == null) {
                                                         failure = true;
-                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Invalid number range\u00a7e " + varRange + "\u00a77. "));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Invalid number range§e " + varRange + "§7. "));
                                                     }
                                                 } }
 
@@ -3898,13 +3886,13 @@ public class GungingOotilities implements CommandExecutor {
 
                                                     // Compare and succeed
                                                     if ((qnr == null && !varIsSetFalse) || (val == null && varIsSetFalse) || (val != null && qnr.InRange(val))) {
-                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Global variable\u00a7e " + varName + "\u00a77 is \u00a7b" + val + "\u00a77, \u00a7aSucceeded\u00a77. "));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Global variable§e " + varName + "§7 is §b" + val + "§7, §aSucceeded§7. "));
 
                                                         commandChain.setChainedCommand(OotilityCeption.ReplaceFirst(commandChain.getChainedCommand(), "@v", String.valueOf(val)));
 
                                                         commandChain.chain(chained, (Player) null, sender);
                                                     } else {
-                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Global variable\u00a7e " + varName + "\u00a77 is \u00a7b" + val + "\u00a77, \u00a7cFail\u00a77. "));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Global variable§e " + varName + "§7 is §b" + val + "§7, §cFail§7. "));
                                                     }
 
                                                 } else {
@@ -3918,7 +3906,7 @@ public class GungingOotilities implements CommandExecutor {
                                                         if ((qnr == null && !varIsSetFalse) || (val == null && varIsSetFalse) || (val != null && qnr.InRange(val))) {
 
                                                             // Log Output
-                                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Variable\u00a7e " + varName + "\u00a77 of\u00a73 " + kaster.getName() + "\u00a77 is \u00a7b" + val + "\u00a77, \u00a7aSucceeded\u00a77. "));
+                                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Variable§e " + varName + "§7 of§3 " + kaster.getName() + "§7 is §b" + val + "§7, §aSucceeded§7. "));
 
                                                             // Proc Chain
                                                             Player chainProc = null;
@@ -3932,30 +3920,30 @@ public class GungingOotilities implements CommandExecutor {
                                                         } else {
 
                                                             // Log Output
-                                                            if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Variable\u00a7e " + varName + "\u00a77 of\u00a73 " + kaster.getName() + "\u00a77 is \u00a7b" + val + "\u00a77, \u00a7cFail\u00a77. "));
+                                                            if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Variable§e " + varName + "§7 of§3 " + kaster.getName() + "§7 is §b" + val + "§7, §cFail§7. "));
                                                         }
                                                     }
                                                 }
                                             }
 
                                         } else if (args.length == 2) {
-                                            logReturn.add("\u00a7e______________________________________________");
-                                            logReturn.add("\u00a73Var, \u00a77Checks the MythicMobs variable of an entity");
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs var <entity> <variable> <operation> [range]");
-                                            logReturn.add("\u00a73 - \u00a7e<entity> \u00a77UUID of the entity, or player name");
-                                            logReturn.add("\u00a73 --> \u00a7bglobal \u00a77keyword to check for global vars");
-                                            logReturn.add("\u00a73 - \u00a7e<variable> \u00a77Variable name");
-                                            logReturn.add("\u00a73 - \u00a7e<operation> \u00a77Operation to perform on this variable");
-                                            logReturn.add("\u00a73 --> \u00a7bread \u00a77keyword to make no changes");
-                                            logReturn.add("\u00a73 --> \u00a7bunset \u00a77keyword to unset the variable");
-                                            logReturn.add("\u00a73 - \u00a7e[range] \u00a77Range of values for the command to succeed");
-                                            logReturn.add("\u00a73 --> \u00a7bnull \u00a77detects unset variables");
+                                            logReturn.add("§e______________________________________________");
+                                            logReturn.add("§3Var, §7Checks the MythicMobs variable of an entity");
+                                            logReturn.add("§3Usage: §e/goop mythicmobs var <entity> <variable> <operation> [range]");
+                                            logReturn.add("§3 - §e<entity> §7UUID of the entity, or player name");
+                                            logReturn.add("§3 --> §bglobal §7keyword to check for global vars");
+                                            logReturn.add("§3 - §e<variable> §7Variable name");
+                                            logReturn.add("§3 - §e<operation> §7Operation to perform on this variable");
+                                            logReturn.add("§3 --> §bread §7keyword to make no changes");
+                                            logReturn.add("§3 --> §bunset §7keyword to unset the variable");
+                                            logReturn.add("§3 - §e[range] §7Range of values for the command to succeed");
+                                            logReturn.add("§3 --> §bnull §7detects unset variables");
 
                                         } else {
 
                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Incorrect usage. For info: \u00a7e/goop mythicmobs var"));
-                                                logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs var <entity> <variable> <operation> [range]");
+                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Var", "Incorrect usage. For info: §e/goop mythicmobs var"));
+                                                logReturn.add("§3Usage: §e/goop mythicmobs var <entity> <variable> <operation> [range]");
                                             }
                                         }
 
@@ -3977,7 +3965,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 failure = true;
 
                                                 // Note
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Run Skill As", "There is no Mythic Skill of name \u00a73" + args[2]));
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Run Skill As", "There is no Mythic Skill of name §3" + args[2]));
                                             }
 
                                             // Try to find entity
@@ -3985,10 +3973,10 @@ public class GungingOotilities implements CommandExecutor {
                                             ArrayList<Player> pTargets = OotilityCeption.GetPlayers(senderLocation, args[3], null);
                                             Entity tEntity = OotilityCeption.getEntityByUniqueId(args[3]);
                                             if (tEntity != null && !(tEntity instanceof Player)) { casters.add(tEntity); }
-                                            for (Player target : pTargets) { casters.add(target); }
+                                            casters.addAll(pTargets);
 
                                             // Still Null?
-                                            if (casters.size() < 1) {
+                                            if (casters.isEmpty()) {
 
                                                 // No entity was found
                                                 failure = true;
@@ -4067,7 +4055,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     GooPMythicMobs.ExecuteMythicSkillAs(args[2], kaster, tTriEntity, tTarEntity, vars);
 
                                                     // Log Output
-                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Run Skill As", "Forced \u00a7f" + kaster.getName() + "\u00a77 to run Mythic Skill \u00a7e" + args[2]));
+                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Run Skill As", "Forced §f" + kaster.getName() + "§7 to run Mythic Skill §e" + args[2]));
 
 
                                                     // Proc Chain
@@ -4080,26 +4068,26 @@ public class GungingOotilities implements CommandExecutor {
                                             }
 
                                         } else if (args.length == 2) {
-                                            logReturn.add("\u00a7e______________________________________________");
-                                            logReturn.add("\u00a73Run Skill As, \u00a77Sudoskills an entity.");
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop runSkillAs <skill name> <entity> [@<target.uuid>] [~<trigger.uuid>] [v[NAME]=[VALUE];[NAME2]=[VALUE2]]");
-                                            logReturn.add("\u00a73 - \u00a7e<skill name> \u00a77Internal name of the Mythic Skill");
-                                            logReturn.add("\u00a73 - \u00a7e<entity> \u00a77UUID of the entity to sudoskill");
-                                            logReturn.add("\u00a73 --> \u00a77May be a player name to sudoskill players.");
-                                            logReturn.add("\u00a73 - \u00a7e[@<target.uuid>] \u00a77UUID of an entity to set as skill target.");
-                                            logReturn.add("\u00a73 - \u00a7e[~<trigger.uuid>] \u00a77UUID of an entity to set as skill trigger.");
-                                            logReturn.add("\u00a73 - \u00a7e[v[NAME]=[VALUE];[NAME2]=[VALUE2]] \u00a77Dynamic vars \u00a7b<goop.dynamic.[NAME]>");
-                                            logReturn.add("\u00a73Examples:");
-                                            logReturn.add("\u00a77 /goop runSkillAs RadiantDiscThrow gunging @atuosto");
-                                            logReturn.add("\u00a78 -> Caster is player 'gunging', target is player 'atuosto'");
-                                            logReturn.add("\u00a77 /goop runSkillAs Poison gunging ~cocopad @libraryaddict");
-                                            logReturn.add("\u00a78 -> Caster is player 'gunging', target is player 'libraryaddict', trigger will be player 'cocopad'");
+                                            logReturn.add("§e______________________________________________");
+                                            logReturn.add("§3Run Skill As, §7Sudoskills an entity.");
+                                            logReturn.add("§3Usage: §e/goop runSkillAs <skill name> <entity> [@<target.uuid>] [~<trigger.uuid>] [v[NAME]=[VALUE];[NAME2]=[VALUE2]]");
+                                            logReturn.add("§3 - §e<skill name> §7Internal name of the Mythic Skill");
+                                            logReturn.add("§3 - §e<entity> §7UUID of the entity to sudoskill");
+                                            logReturn.add("§3 --> §7May be a player name to sudoskill players.");
+                                            logReturn.add("§3 - §e[@<target.uuid>] §7UUID of an entity to set as skill target.");
+                                            logReturn.add("§3 - §e[~<trigger.uuid>] §7UUID of an entity to set as skill trigger.");
+                                            logReturn.add("§3 - §e[v[NAME]=[VALUE];[NAME2]=[VALUE2]] §7Dynamic vars §b<goop.dynamic.[NAME]>");
+                                            logReturn.add("§3Examples:");
+                                            logReturn.add("§7 /goop runSkillAs RadiantDiscThrow gunging @atuosto");
+                                            logReturn.add("§8 -> Caster is player 'gunging', target is player 'atuosto'");
+                                            logReturn.add("§7 /goop runSkillAs Poison gunging ~cocopad @libraryaddict");
+                                            logReturn.add("§8 -> Caster is player 'gunging', target is player 'libraryaddict', trigger will be player 'cocopad'");
 
                                         } else {
 
                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Run Skill As", "Incorrect usage. For info: \u00a7e/goop mythicmobs runSkillAs"));
-                                                logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs runskillas <skill name> <(uuid)/(player name)>");
+                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Run Skill As", "Incorrect usage. For info: §e/goop mythicmobs runSkillAs"));
+                                                logReturn.add("§3Usage: §e/goop mythicmobs runskillas <skill name> <(uuid)/(player name)>");
                                             }
                                         }
 
@@ -4127,7 +4115,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 failure = true;
 
                                                 // Note
-                                                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Could not find owner \u00a73" + args[2]));
+                                                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Could not find owner §3" + args[2]));
                                             }
                                             if (mMinion == null) {
 
@@ -4135,7 +4123,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 failure = true;
 
                                                 // Note
-                                                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Could not find minion \u00a73" + args[3]));
+                                                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Could not find minion §3" + args[3]));
 
                                             // Is it already an entity?
                                             } else if (SummonerClassMinion.isMinion(mMinion)) {
@@ -4144,7 +4132,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 failure = true;
 
                                                 // Note
-                                                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "That \u00a7e" + mMinion.getName() + "\u00a77 is already a minion."));
+                                                if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "That §e" + mMinion.getName() + "§7 is already a minion."));
 
                                             } else if (mMinion instanceof Player) {
 
@@ -4171,7 +4159,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Note
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Expected numeric value instead of \u00a73" + args[4]));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Expected numeric value instead of §3" + args[4]));
                                                 }
                                             }
 
@@ -4186,7 +4174,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Note
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "There is no Mythic Skill of name \u00a73" + args[5]));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "There is no Mythic Skill of name §3" + args[5]));
 
                                                 // Skill does exist, nice.
                                                 } else {
@@ -4206,7 +4194,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Note
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Expected boolean value instead of \u00a73" + args[6]));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Expected boolean value instead of §3" + args[6]));
 
                                                     // Skill does exist, nice.
                                                 } else {
@@ -4231,7 +4219,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 newMinion.Enable();
 
                                                 // Note
-                                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Registered minion \u00a7e" + mMinion.getName() + "\u00a77 under the command of \u00a73" + mOwner.getName()));
+                                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Registered minion §e" + mMinion.getName() + "§7 under the command of §3" + mOwner.getName()));
 
                                                 // Proc Chain
                                                 Player chainProc = null;
@@ -4242,26 +4230,26 @@ public class GungingOotilities implements CommandExecutor {
                                             }
 
                                         } else if (args.length == 2) {
-                                            logReturn.add("\u00a7e______________________________________________");
-                                            logReturn.add("\u00a73Minion, \u00a77Classifies an entity as someone's minion.");
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop minion <owner uuid> <minion uuid> [leashrange] [skill] [pvpBlock]");
-                                            logReturn.add("\u00a73 - \u00a7e<owner uuid> \u00a77UUID of the entity, or player name, who will own the minion.");
-                                            logReturn.add("\u00a73 - \u00a7e<minion uuid> \u00a77UUID of the entity that will be the minion.");
-                                            logReturn.add("\u00a73 - \u00a7e[leashrange] \u00a77Will teleport minion to owner if they are too far.");
-                                            logReturn.add("\u00a73 --> \u00a77Default is set to \u00a7b20\u00a77, measured in blocks.");
-                                            logReturn.add("\u00a73 - \u00a7e[skill] \u00a77Mythic Skill to run when minion dies due to this command.");
-                                            logReturn.add("\u00a73 --> \u00a7d@Self \u00a77The minion.");
-                                            logReturn.add("\u00a73 --> \u00a7e@Trigger \u00a77The owner");
-                                            logReturn.add("\u00a73 --> \u00a7a@Origin \u00a77Owner's death location.");
-                                            logReturn.add("\u00a73 - \u00a7e[pvpBlock] \u00a77Prevent players from dealing damage to this minion?");
-                                            logReturn.add("\u00a78Minions will die when their owner dies or leaves the server.");
-                                            logReturn.add("\u00a78If they run a mythic skill, you must kill them through it; They will run that instead of dying.");
+                                            logReturn.add("§e______________________________________________");
+                                            logReturn.add("§3Minion, §7Classifies an entity as someone's minion.");
+                                            logReturn.add("§3Usage: §e/goop minion <owner uuid> <minion uuid> [leashrange] [skill] [pvpBlock]");
+                                            logReturn.add("§3 - §e<owner uuid> §7UUID of the entity, or player name, who will own the minion.");
+                                            logReturn.add("§3 - §e<minion uuid> §7UUID of the entity that will be the minion.");
+                                            logReturn.add("§3 - §e[leashrange] §7Will teleport minion to owner if they are too far.");
+                                            logReturn.add("§3 --> §7Default is set to §b20§7, measured in blocks.");
+                                            logReturn.add("§3 - §e[skill] §7Mythic Skill to run when minion dies due to this command.");
+                                            logReturn.add("§3 --> §d@Self §7The minion.");
+                                            logReturn.add("§3 --> §e@Trigger §7The owner");
+                                            logReturn.add("§3 --> §a@Origin §7Owner's death location.");
+                                            logReturn.add("§3 - §e[pvpBlock] §7Prevent players from dealing damage to this minion?");
+                                            logReturn.add("§8Minions will die when their owner dies or leaves the server.");
+                                            logReturn.add("§8If they run a mythic skill, you must kill them through it; They will run that instead of dying.");
 
                                         } else {
 
                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Incorrect usage. For info: \u00a7e/goop mythicmobs minion"));
-                                                logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs minion <owner uuid/name> <minion uuid> [leashrange] [skill]");
+                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Minion", "Incorrect usage. For info: §e/goop mythicmobs minion"));
+                                                logReturn.add("§3Usage: §e/goop mythicmobs minion <owner uuid/name> <minion uuid> [leashrange] [skill]");
                                             }
                                         }
                                         break;
@@ -4286,8 +4274,8 @@ public class GungingOotilities implements CommandExecutor {
                                                     Entity sEntity = OotilityCeption.getEntityByUniqueId(str);
                                                     if (sEntity != null && !(sEntity instanceof Player)) { sources.add(sEntity); } } }
 
-                                            for (Player target : pSources) { sources.add(target); }
-                                            if (sources.size() < 1) {
+                                            sources.addAll(pSources);
+                                            if (sources.isEmpty()) {
                                                 // Fail
                                                 failure = true;
 
@@ -4301,8 +4289,8 @@ public class GungingOotilities implements CommandExecutor {
                                             Entity rEntity = OotilityCeption.getEntityByUniqueId(args[3]);
                                             Entity receiver = null;
                                             if (rEntity != null && !(rEntity instanceof Player)) { receivers.add(rEntity); }
-                                            for (Player target : pReceivers) { receivers.add(target); }
-                                            if (receivers.size() < 1) {
+                                            receivers.addAll(pReceivers);
+                                            if (receivers.isEmpty()) {
                                                 // Fail
                                                 failure = true;
 
@@ -4337,7 +4325,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Bruh
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected numeric value like \u00a7b0.4\u00a77 or \u00a7b40%\u00a77 (two versions to write the same thing) instead of \u00a7e" + tP));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected numeric value like §b0.4§7 or §b40%§7 (two versions to write the same thing) instead of §e" + tP));
                                                 }
                                             }
                                             if (args.length >= 6) {
@@ -4358,7 +4346,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Bruh
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected numeric value like \u00a7b0.8\u00a77 or \u00a7b80%\u00a77 (two versions to write the same thing) instead of \u00a7e" + tP));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected numeric value like §b0.8§7 or §b80%§7 (two versions to write the same thing) instead of §e" + tP));
                                                 }
                                             }
                                             boolean silent = false;
@@ -4375,7 +4363,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Bruh
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 instead of \u00a7e" + args[6]));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected §btrue§7 or §bfalse§7 instead of §e" + args[6]));
                                                 }
                                             }
 
@@ -4392,7 +4380,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                     // Kreate
                                                     otf = OptimizedTimeFormat.Current();
-                                                    Integer mag = OotilityCeption.ParseInt(magnitude);
+                                                    int mag = OotilityCeption.ParseInt(magnitude);
                                                     if (mag < 0) { mag = -mag; }
 
                                                     // Units?
@@ -4417,7 +4405,7 @@ public class GungingOotilities implements CommandExecutor {
                                                             // Fail
                                                             failure = true;
 
-                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Time units '" + units + "\u00a77' not recognized. Must use \u00a7bs m h d \u00a77or\u00a7b y \u00a77(Second, Minute, Hour, Day, Year)"));
+                                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Time units '" + units + "§7' not recognized. Must use §bs m h d §7or§b y §7(Second, Minute, Hour, Day, Year)"));
 
                                                             break;
                                                     }
@@ -4427,13 +4415,13 @@ public class GungingOotilities implements CommandExecutor {
                                                     // Fail
                                                     failure = true;
 
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected an integer for time value instead of \u00a73" + magnitude));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Expected an integer for time value instead of §3" + magnitude));
                                                 }
                                             }
 
                                             // Bryce Sintax
                                             if (!failure) {
-                                                //DTL//OotilityCeption.Log("\u00a78DTL\u00a73 CMD\u00a77 Receiver (" + receiver.getName() + " | " + receiver.getCustomName() + ")\u00a7b " + receiver.getUniqueId().toString());
+                                                //DTL//OotilityCeption.Log("§8DTL§3 CMD§7 Receiver (" + receiver.getName() + " | " + receiver.getCustomName() + ")§b " + receiver.getUniqueId().toString());
 
                                                 // Receiver identified as receiver
                                                 GooPUnlockables uck = GooPUnlockables.From(receiver.getUniqueId(), EntityLinkedEntity.transferLinkReceiver);
@@ -4450,11 +4438,11 @@ public class GungingOotilities implements CommandExecutor {
                                                 ArrayList<EntityLinkedEntity> linkedEntities = new ArrayList<>();
                                                 for (Entity target : sources) {
                                                     if (target == null) { continue; }
-                                                    //DTL//OotilityCeption.Log("\u00a78DTL\u00a73 CMD\u00a77 Source (" + target.getName() + " | " + target.getCustomName() + ")\u00a7b " + target.getUniqueId().toString());
+                                                    //DTL//OotilityCeption.Log("§8DTL§3 CMD§7 Source (" + target.getName() + " | " + target.getCustomName() + ")§b " + target.getUniqueId().toString());
 
                                                     // Not the reciever is it
                                                     if (target.getUniqueId().equals(receiver.getUniqueId())) {
-                                                        //DTL//OotilityCeption.Log("\u00a78DTL\u00a73 CMD\u00a7c Cancelled:\u00a76 Source equals Receiver");
+                                                        //DTL//OotilityCeption.Log("§8DTL§3 CMD§c Cancelled:§6 Source equals Receiver");
                                                         continue; }
 
                                                     // The target is not a receiver is they
@@ -4464,7 +4452,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                     // If unlocked, this is a receiver
                                                     if (uuck.IsUnlocked()) {
-                                                        //DTL//OotilityCeption.Log("\u00a78DTL\u00a73 CMD\u00a7c Cancelled:\u00a76 Source is a Receiver");
+                                                        //DTL//OotilityCeption.Log("§8DTL§3 CMD§c Cancelled:§6 Source is a Receiver");
                                                         continue; }
 
                                                     // Build end unlockable
@@ -4477,7 +4465,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     linkedEntities.add(new DamageTransferLink(target, ObjectiveLinks.DamageTransferLink, linkUCK, receiver, uck, preventPercent, transferPercent, silent)); }
 
                                                 // Activate receiver
-                                                if (linkedEntities.size() > 0) {
+                                                if (!linkedEntities.isEmpty()) {
 
                                                     // FOreach
                                                     for (EntityLinkedEntity source : linkedEntities) {
@@ -4486,7 +4474,7 @@ public class GungingOotilities implements CommandExecutor {
                                                         ScoreboardLinks.linkNoDupe(source);
 
                                                         // Log Output
-                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Now trasnfering \u00a7e" + (transferPercent * 100D) + "%\u00a77 of damage dealt from \u00a73" + source.getEntity().getName() + "\u00a77 to \u00a73" + receiver.getName())); }
+                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Now trasnfering §e" + (transferPercent * 100D) + "%§7 of damage dealt from §3" + source.getEntity().getName() + "§7 to §3" + receiver.getName())); }
 
                                                         Player target = null;
                                                         if (source.getEntity() instanceof Player) { target = (Player) source.getEntity(); }
@@ -4497,22 +4485,22 @@ public class GungingOotilities implements CommandExecutor {
                                                 }
                                             }
                                         } else if (args.length == 2) {
-                                            logReturn.add("\u00a7e______________________________________________");
-                                            logReturn.add("\u00a73Damage Taken Link, \u00a77Transfers damage from one entity to another.");
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs damagetakenlink <source uuid> <receiver uuid> [transfer percent] [prevent percent] [loud] [duration]");
-                                            logReturn.add("\u00a73 - \u00a7e<source uuid> \u00a77Entities that are directly receiving the damage (\u00a78; separated list\u00a77) ");
-                                            logReturn.add("\u00a73 - \u00a7e<reciver uuid> \u00a77Entity to which the damage will be transfered");
-                                            logReturn.add("\u00a73 - \u00a7e[transfer percent] \u00a77Fraction of the damage that will be transferred (Default: \u00a7b1\u00a77=\u00a7b100%\u00a77)");
-                                            logReturn.add("\u00a73 - \u00a7e[prevent percent] \u00a77Lessening of the damage taken by the source (Default: \u00a7b1\u00a77=\u00a7b100%\u00a77)");
-                                            logReturn.add("\u00a73 - \u00a7e[loud] \u00a77Should the damage transfer fire the entity damage event (kinda advanced)?");
-                                            logReturn.add("\u00a73 - \u00a7e[duration] \u00a77Time that the link will last (Inlcude units, \u00a7bs m h d\u00a77, forever if unspecified)");
-                                            logReturn.add("\u00a78Wears out when the time runs out, when the receiver dies, or when the server reboots.");
+                                            logReturn.add("§e______________________________________________");
+                                            logReturn.add("§3Damage Taken Link, §7Transfers damage from one entity to another.");
+                                            logReturn.add("§3Usage: §e/goop mythicmobs damagetakenlink <source uuid> <receiver uuid> [transfer percent] [prevent percent] [loud] [duration]");
+                                            logReturn.add("§3 - §e<source uuid> §7Entities that are directly receiving the damage (§8; separated list§7) ");
+                                            logReturn.add("§3 - §e<reciver uuid> §7Entity to which the damage will be transfered");
+                                            logReturn.add("§3 - §e[transfer percent] §7Fraction of the damage that will be transferred (Default: §b1§7=§b100%§7)");
+                                            logReturn.add("§3 - §e[prevent percent] §7Lessening of the damage taken by the source (Default: §b1§7=§b100%§7)");
+                                            logReturn.add("§3 - §e[loud] §7Should the damage transfer fire the entity damage event (kinda advanced)?");
+                                            logReturn.add("§3 - §e[duration] §7Time that the link will last (Inlcude units, §bs m h d§7, forever if unspecified)");
+                                            logReturn.add("§8Wears out when the time runs out, when the receiver dies, or when the server reboots.");
 
                                         } else {
 
                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Incorrect usage. For info: \u00a7e/goop mythicmobs damageTakenLink"));
-                                                logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs damagetakenlink <source uuid> <receiver uuid> [transfer percent] [prevent percent] [loud] [duration]");
+                                                logReturn.add(OotilityCeption.LogFormat("MythicMobs - Damage Taken Link", "Incorrect usage. For info: §e/goop mythicmobs damageTakenLink"));
+                                                logReturn.add("§3Usage: §e/goop mythicmobs damagetakenlink <source uuid> <receiver uuid> [transfer percent] [prevent percent] [loud] [duration]");
                                             }
                                         }
 
@@ -4520,40 +4508,40 @@ public class GungingOotilities implements CommandExecutor {
                                         //endregion
                                     default:
                                         // I have no memory of that shit
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs", "'\u00a73" + args[1] + "\u00a77' is not a valid MythicMobs action! do \u00a7e/goop mythicmobs\u00a77 for the list of actions."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MythicMobs", "'§3" + args[1] + "§7' is not a valid MythicMobs action! do §e/goop mythicmobs§7 for the list of actions."));
                                         break;
                                 }
 
                             } else if (args.length == 1) {
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73GooP-MythicMobs, \u00a77Related to the third party plugin.");
-                                logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs {action}");
-                                logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                                logReturn.add("\u00a73 --> \u00a7erunSkillAs <skill name> <entity uuid> [@<target.uuid>] [~<trigger.uuid>] [v[NAME]=[VALUE];[NAME2]=[VALUE2]]");
-                                logReturn.add("\u00a73      * \u00a77Sudoskills the entity to run a mythicmobs skill.");
-                                logReturn.add("\u00a73      * \u00a73Can be a player name instead of entity uuid.");
-                                logReturn.add("\u00a73 --> \u00a7eminion <owner uuid> <entity uuid> [leashrange] [skill]");
-                                logReturn.add("\u00a73      * \u00a77If the owner dies or logs out, the minion dies.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3GooP-MythicMobs, §7Related to the third party plugin.");
+                                logReturn.add("§3Usage: §e/goop mythicmobs {action}");
+                                logReturn.add("§3 - §e{action} §7What actions to perform:");
+                                logReturn.add("§3 --> §erunSkillAs <skill name> <entity uuid> [@<target.uuid>] [~<trigger.uuid>] [v[NAME]=[VALUE];[NAME2]=[VALUE2]]");
+                                logReturn.add("§3      * §7Sudoskills the entity to run a mythicmobs skill.");
+                                logReturn.add("§3      * §3Can be a player name instead of entity uuid.");
+                                logReturn.add("§3 --> §eminion <owner uuid> <entity uuid> [leashrange] [skill]");
+                                logReturn.add("§3      * §7If the owner dies or logs out, the minion dies.");
 
 
                             } else {
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                    logReturn.add(OotilityCeption.LogFormat("MythicMobs", "Incorrect usage. For info: \u00a7e/goop mythicmobs"));
-                                    logReturn.add("\u00a73Usage: \u00a7e/goop mythicmobs {action}");
+                                    logReturn.add(OotilityCeption.LogFormat("MythicMobs", "Incorrect usage. For info: §e/goop mythicmobs"));
+                                    logReturn.add("§3Usage: §e/goop mythicmobs {action}");
                                 }
                             }
 
                             // No perms
                         } else {
                             // Tell him lmao
-                            logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to use mythicmobs-related commands!"));
+                            logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to use mythicmobs-related commands!"));
                         }
 
                         // MMOItems not installed. Returning
                     } else {
 
                         // Tell him lmao
-                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("\u00a77These commands are to be used with the third party plugin \u00a7e\u00a7lMythicMobs \u00a77which you dont have installed."));
+                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("§7These commands are to be used with the third party plugin §e§lMythicMobs §7which you dont have installed."));
                     }
                     break;
                 //endregion
@@ -4599,7 +4587,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Mention
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Scoreboard Objective '\u00a73" + args[2] + "\u00a77' does not exist."));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Scoreboard Objective '§3" + args[2] + "§7' does not exist."));
                                         }
 
                                         // Does the scoreboard objective exist?
@@ -4614,7 +4602,7 @@ public class GungingOotilities implements CommandExecutor {
                                             // Fail
                                             failure = true;
 
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Output objective name '\u00a73" + args[3] + "\u00a77' must not be longer than 16 characters."));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Output objective name '§3" + args[3] + "§7' must not be longer than 16 characters."));
                                         }
 
                                         ArrayList<EntityType> et = null;
@@ -4677,7 +4665,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     // Fail
                                                     failure = true;
 
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Expected integer number or EntityType instead of '\u00a73" + args[5] + "\u00a77'"));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Expected integer number or EntityType instead of '§3" + args[5] + "§7'"));
                                                 }
                                             }
                                         }
@@ -4691,7 +4679,7 @@ public class GungingOotilities implements CommandExecutor {
                                             // Fail
                                             failure = true;
 
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Expected integer number for \u00a7e\u00a7on\u00a77 instead of '\u00a73" + args[4] + "\u00a77'"));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Expected integer number for §e§on§7 instead of '§3" + args[4] + "§7'"));
                                         }
 
                                         // Bice sintax
@@ -4750,8 +4738,8 @@ public class GungingOotilities implements CommandExecutor {
                                                 scoreboardParticipants = OotilityCeption.SortEntriesOf(sourceObjective, playersOnline, playersOnline.size());
                                             }
 
-                                            //SCR//OotilityCeption.Log("\u00a7e-\u00a7b-\u00a73-\u00a77 Resultant entries \u00a7b" + scoreboardParticipants.size());
-                                            //SCR//try { for (String str : io.lumine.mythic.lib.api.util.ui.SilentNumbers.transcribeList(scoreboardParticipants, (s) -> (s == null ? "null" : ((OrderedScoreboardEntry) s).getEntry() + ", \u00a77Score\u00a7b " + ((OrderedScoreboardEntry) s).getScore() + "\u00a77, Value \u00a7e" + ((OrderedScoreboardEntry) s).getValue()))) { OotilityCeption.Log("\u00a7e:\u00a73:\u00a77 " + str); } } catch (IllegalArgumentException ignored) {}
+                                            //SCR//OotilityCeption.Log("§e-§b-§3-§7 Resultant entries §b" + scoreboardParticipants.size());
+                                            //SCR//try { for (String str : io.lumine.mythic.lib.api.util.ui.SilentNumbers.transcribeList(scoreboardParticipants, (s) -> (s == null ? "null" : ((OrderedScoreboardEntry) s).getEntry() + ", §7Score§b " + ((OrderedScoreboardEntry) s).getScore() + "§7, Value §e" + ((OrderedScoreboardEntry) s).getValue()))) { OotilityCeption.Log("§e:§3:§7 " + str); } } catch (IllegalArgumentException ignored) {}
 
                                             // Refresh the target
                                             if (tExists) { targetObjective.unregister(); }
@@ -4763,7 +4751,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Get the top n yes
                                             int p = 1; Integer lastScore = null; int emergencyEscaper = 0;
-                                            for (int i = (scoreboardParticipants.size() - 1); (i >= 0) && (n > 0); i--) { emergencyEscaper++; if (emergencyEscaper > 200) { Gunging_Ootilities_Plugin.theOots.CPLog("\u00a7cFatal Loop Error\u00a77 (I guess), Escaped at 200th iteration, seems an infinite loop."); break; }
+                                            for (int i = (scoreboardParticipants.size() - 1); (i >= 0) && (n > 0); i--) { emergencyEscaper++; if (emergencyEscaper > 200) { Gunging_Ootilities_Plugin.theOots.CPLog("§cFatal Loop Error§7 (I guess), Escaped at 200th iteration, seems an infinite loop."); break; }
 
                                                 // N decrease
                                                 n--;
@@ -4776,7 +4764,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                     // Get Entry
                                                     String ntry = obs.getEntry();
-                                                    //SCR//OotilityCeption.Log("\u00a7e>\u00a7b>\u00a73>\u00a77 " + obs.getEntry() + "\u00a7b " + obs.getScore() + " \u00a7e" + obs.getValue());
+                                                    //SCR//OotilityCeption.Log("§e>§b>§3>§7 " + obs.getEntry() + "§b " + obs.getScore() + " §e" + obs.getValue());
 
                                                     // Valid?
                                                     if (ntry != null) {
@@ -4805,16 +4793,16 @@ public class GungingOotilities implements CommandExecutor {
 
                                                             // Log as Feedback
                                                             if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) {
-                                                                logReturn.add("  \u00a7e#" + p + " \u00a77" + ntry + " \u00a78(\u00a73" + OotilityCeption.GetEntryScore(sourceObjective, ntry) + "\u00a78)"); }
+                                                                logReturn.add("  §e#" + p + " §7" + ntry + " §8(§3" + OotilityCeption.GetEntryScore(sourceObjective, ntry) + "§8)"); }
 
                                                             // P increase
                                                             p++;
                                                         }
-                                                        //SCR// else { OotilityCeption.Log("\u00a7c>\u00a73>\u00a77 Entry too Long"); }
+                                                        //SCR// else { OotilityCeption.Log("§c>§3>§7 Entry too Long"); }
                                                     }
-                                                    //SCR// else { OotilityCeption.Log("\u00a7c>\u00a73>\u00a77 Null Entry"); }
+                                                    //SCR// else { OotilityCeption.Log("§c>§3>§7 Null Entry"); }
                                                 }
-                                                //SCR// else { OotilityCeption.Log("\u00a7c>\u00a73>\u00a77 Null Ordered Scoreboard Entry"); }
+                                                //SCR// else { OotilityCeption.Log("§c>§3>§7 Null Ordered Scoreboard Entry"); }
                                             }
 
                                             // Run Chain
@@ -4826,8 +4814,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Incorrect usage. For info: \u00a7e/goop scoreboard"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop scoreboard top <objective source> <objective target> <n> [maxswp]");
+                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Top N", "Incorrect usage. For info: §e/goop scoreboard"));
+                                            logReturn.add("§3Usage: §e/goop scoreboard top <objective source> <objective target> <n> [maxswp]");
                                         }
                                     }
                                     break;
@@ -4851,7 +4839,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Mention
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Scoreboard Objective '\u00a73" + args[2] + "\u00a77' does not exist."));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Scoreboard Objective '§3" + args[2] + "§7' does not exist."));
                                         }
 
                                         // Does the scoreboard objective exist?
@@ -4866,7 +4854,7 @@ public class GungingOotilities implements CommandExecutor {
                                             // Fail
                                             failure = true;
 
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Output objective name '\u00a73" + args[3] + "\u00a77' must not be longer than 16 characters."));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Output objective name '§3" + args[3] + "§7' must not be longer than 16 characters."));
                                         }
 
                                         ArrayList<EntityType> et = null;
@@ -4929,7 +4917,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     // Fail
                                                     failure = true;
 
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Expected integer number or EntityType instead of '\u00a73" + args[5] + "\u00a77'"));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Expected integer number or EntityType instead of '§3" + args[5] + "§7'"));
                                                 }
                                             }
                                         }
@@ -4943,7 +4931,7 @@ public class GungingOotilities implements CommandExecutor {
                                             // Fail
                                             failure = true;
 
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Expected integer number for \u00a7e\u00a7on\u00a77 instead of '\u00a73" + args[4] + "\u00a77'"));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Expected integer number for §e§on§7 instead of '§3" + args[4] + "§7'"));
                                         }
 
                                         // Bice sintax
@@ -5008,7 +4996,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Get the top n yes
                                             int p = 1; Integer lastScore = null; int emergencyEscaper = 0;
-                                            for (int i = 0; (i < scoreboardParticipants.size()) && (n > 0); i++) { emergencyEscaper++; if (emergencyEscaper > 200) { Gunging_Ootilities_Plugin.theOots.CPLog("\u00a7cFatal Loop Error\u00a77 (I guess), Escaped at 200th iteration, seems an endless loop."); break; }
+                                            for (int i = 0; (i < scoreboardParticipants.size()) && (n > 0); i++) { emergencyEscaper++; if (emergencyEscaper > 200) { Gunging_Ootilities_Plugin.theOots.CPLog("§cFatal Loop Error§7 (I guess), Escaped at 200th iteration, seems an endless loop."); break; }
 
                                                 // N decrease
                                                 n--;
@@ -5064,8 +5052,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Incorrect usage. For info: \u00a7e/goop scoreboard"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop scoreboard last <objective source> <objective target> <n> [maxswp]");
+                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Last N", "Incorrect usage. For info: §e/goop scoreboard"));
+                                            logReturn.add("§3Usage: §e/goop scoreboard last <objective source> <objective target> <n> [maxswp]");
                                         }
                                     }
                                     break;
@@ -5094,7 +5082,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Mention
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Objective '\u00a73" + args[3] + "\u00a77' does not exist."));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Objective '§3" + args[3] + "§7' does not exist."));
                                         }
 
                                         // Does the scoreboard objective exist?
@@ -5104,7 +5092,7 @@ public class GungingOotilities implements CommandExecutor {
                                             failure = true;
 
                                             // Mention
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Invalid range '\u00a73" + args[4] + "\u00a77', expected a numeric range like \u00a7e0..10"));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Invalid range '§3" + args[4] + "§7', expected a numeric range like §e0..10"));
 
                                         }
 
@@ -5112,7 +5100,7 @@ public class GungingOotilities implements CommandExecutor {
                                         if (!failure) {
 
                                             // As each player
-                                            if (players.size() > 0) {
+                                            if (!players.isEmpty()) {
 
                                                 // For every player
                                                 for (Player target : players) {
@@ -5125,7 +5113,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                         // Log as Feedback
                                                         if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) {
-                                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range","Player '\u00a73" + target.getName() + "\u00a77's score for " + sourceObjective.getName() + " was \u00a7b'" + score + "\u00a77' which is \u00a7ain desired range " + args[4] + "\u00a77.")); }
+                                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range","Player '§3" + target.getName() + "§7's score for " + sourceObjective.getName() + " was §b'" + score + "§7' which is §ain desired range " + args[4] + "§7.")); }
 
                                                         // Run Chain
                                                         commandChain.chain(chained, target, sender);
@@ -5136,7 +5124,7 @@ public class GungingOotilities implements CommandExecutor {
                                                         if (failMessage != null) { target.sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage, target.getPlayer(), target.getPlayer(), null, null))); }
 
                                                         // Mention
-                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Player '\u00a73" + target.getName() + "\u00a77's score for " + sourceObjective.getName() + " was \u00a7b'" + score + "\u00a77' which is \u00a7c not in desired range " + args[4] + "\u00a77."));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Player '§3" + target.getName() + "§7's score for " + sourceObjective.getName() + " was §b'" + score + "§7' which is §c not in desired range " + args[4] + "§7."));
                                                     }
                                                 }
 
@@ -5151,7 +5139,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                     // Log as Feedback
                                                     if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) {
-                                                        logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range","Entry '\u00a73" + args[2] + "\u00a77' of objective " + sourceObjective.getName() + " had a score of \u00a7b'" + score + "\u00a77' which is \u00a7ain desired range " + args[4] + "\u00a77.")); }
+                                                        logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range","Entry '§3" + args[2] + "§7' of objective " + sourceObjective.getName() + " had a score of §b'" + score + "§7' which is §ain desired range " + args[4] + "§7.")); }
 
                                                     // Run Chain
                                                     commandChain.chain(chained, (Player) null, sender);
@@ -5159,7 +5147,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 } else {
 
                                                     // Mention
-                                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Entry '\u00a73" + args[2] + "\u00a77' of objective " + sourceObjective.getName() + " had a score of \u00a7b'" + score + "\u00a77' which is \u00a7c not in desired range " + args[4] + "\u00a77."));
+                                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Entry '§3" + args[2] + "§7' of objective " + sourceObjective.getName() + " had a score of §b'" + score + "§7' which is §c not in desired range " + args[4] + "§7."));
                                                 }
                                             }
                                         }
@@ -5169,8 +5157,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // Notify
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Incorrect usage. For info: \u00a7e/goop scoreboard"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop scoreboard range <entry> <objective> <range>");
+                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Range", "Incorrect usage. For info: §e/goop scoreboard"));
+                                            logReturn.add("§3Usage: §e/goop scoreboard range <entry> <objective> <range>");
                                         }
                                     }
                                     break;
@@ -5189,8 +5177,8 @@ public class GungingOotilities implements CommandExecutor {
                                         ArrayList<Player> pTargets = OotilityCeption.GetPlayers(senderLocation, args[2], null);
                                         Entity tEntity = OotilityCeption.getEntityByUniqueId(args[2]);
                                         if (tEntity != null && !(tEntity instanceof Player)) { targets.add(tEntity); }
-                                        for (Player target : pTargets) { targets.add(target); }
-                                        if (targets.size()< 1) {
+                                        targets.addAll(pTargets);
+                                        if (targets.isEmpty()) {
                                             // Fail
                                             failure = true;
 
@@ -5210,7 +5198,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                 // Fail
                                                 failure = true;
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Expected \u00a7etrue \u00a77or \u00a7efalse \u00a77instead of \u00a73" + args[4]));
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Expected §etrue §7or §efalse §7instead of §3" + args[4]));
 
                                             }
                                         }
@@ -5223,7 +5211,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                                 // Fail
                                                 failure = true;
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Expected \u00a7etrue \u00a77or \u00a7efalse \u00a77instead of \u00a73" + args[5]));
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Expected §etrue §7or §efalse §7instead of §3" + args[5]));
 
                                             }
                                         }
@@ -5242,7 +5230,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 ScoreboardLinks.linkNoDupe(new ObjectiveLinkedEntity(targ, ObjectiveLinks.DamageTakenLink, null, targetObjective, pOnly));
 
                                                 // Log Output
-                                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Now tracking damage dealt to \u00a7f" + targ.getName() + "\u00a77 into objective \u00a7e" + args[3]));
+                                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Now tracking damage dealt to §f" + targ.getName() + "§7 into objective §e" + args[3]));
 
                                                 Player target = null;
                                                 if (targ instanceof Player) { target = (Player) targ; }
@@ -5252,19 +5240,19 @@ public class GungingOotilities implements CommandExecutor {
                                             }
                                         }
                                     } else if (args.length == 2) {
-                                        logReturn.add("\u00a7e______________________________________________");
-                                        logReturn.add("\u00a73Damage Taken Link, \u00a77Stores damage taken in a scoreboard.");
-                                        logReturn.add("\u00a73Usage: \u00a7e/goop scoreboard damageTakenLink <entity uuid> <objective> [players only] [dont delete]");
-                                        logReturn.add("\u00a73 - \u00a7e<entity uuid> \u00a77Which entity to link");
-                                        logReturn.add("\u00a73 - \u00a7e<objective> \u00a77Name of scoreboard where damage will be stored");
-                                        logReturn.add("\u00a73 - \u00a7e[players only] \u00a77Should ignore damage sources from non-players?");
-                                        logReturn.add("\u00a73 - \u00a7e[dont delete] \u00a77Wheter to reset the score when this command is run.");
+                                        logReturn.add("§e______________________________________________");
+                                        logReturn.add("§3Damage Taken Link, §7Stores damage taken in a scoreboard.");
+                                        logReturn.add("§3Usage: §e/goop scoreboard damageTakenLink <entity uuid> <objective> [players only] [dont delete]");
+                                        logReturn.add("§3 - §e<entity uuid> §7Which entity to link");
+                                        logReturn.add("§3 - §e<objective> §7Name of scoreboard where damage will be stored");
+                                        logReturn.add("§3 - §e[players only] §7Should ignore damage sources from non-players?");
+                                        logReturn.add("§3 - §e[dont delete] §7Wheter to reset the score when this command is run.");
 
                                     } else {
 
                                         if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Incorrect usage. For info: \u00a7e/goop scoreboard damageTakenLink"));
-                                            logReturn.add("\u00a73Usage: \u00a7e/goop scoreboard damageTakenLink <entity uuid> <objective> [players only]");
+                                            logReturn.add(OotilityCeption.LogFormat("Scoreboard - Damage Taken Link", "Incorrect usage. For info: §e/goop scoreboard damageTakenLink"));
+                                            logReturn.add("§3Usage: §e/goop scoreboard damageTakenLink <entity uuid> <objective> [players only]");
                                         }
                                     }
 
@@ -5272,39 +5260,39 @@ public class GungingOotilities implements CommandExecutor {
                                 //endregion
                                 default:
                                     // I have no memory of that shit
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard", "'\u00a73" + args[1] + "\u00a77' is not a valid Scoreboard action! do \u00a7e/goop scoreboard\u00a77 for the list of actions."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Scoreboard", "'§3" + args[1] + "§7' is not a valid Scoreboard action! do §e/goop scoreboard§7 for the list of actions."));
                                     break;
                             }
 
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Scoreboard Operations, \u00a77Literally why arent these vanilla omg.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop scoreboard {action}");
-                            logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                            logReturn.add("\u00a73 --> \u00a7etop <objective source> <objective target> <n> [maxswp]");
-                            logReturn.add("\u00a73      * \u00a77Get the top n players from the source objective");
-                            logReturn.add("\u00a73 --> \u00a7elast <objective source> <objective target> <n> [maxswp]");
-                            logReturn.add("\u00a73      * \u00a77Get the last n players from the source objective");
-                            logReturn.add("\u00a73 --> \u00a7erange <entry or players> <objective> <range>");
-                            logReturn.add("\u00a73      * \u00a77Check that such entry is in such range.");
-                            logReturn.add("\u00a73 --> \u00a7edamagetakenlink <uuid> <objective> [players only] [dont delete]");
-                            logReturn.add("\u00a73      * \u00a77Keeps track of how much damage is dealt to an entity.");
-                            logReturn.add("\u00a73        \u00a77and who is dealing the damage.");
-                            logReturn.add("\u00a73      * \u00a77It will reset the \u00a7eobjective \u00a77unless \u00a7edont delete\u00a7");
-                            logReturn.add("\u00a73      * \u00a77is set to \u00a7efalse\u00a77. Will create new if missing.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Scoreboard Operations, §7Literally why arent these vanilla omg.");
+                            logReturn.add("§3Usage: §e/goop scoreboard {action}");
+                            logReturn.add("§3 - §e{action} §7What actions to perform:");
+                            logReturn.add("§3 --> §etop <objective source> <objective target> <n> [maxswp]");
+                            logReturn.add("§3      * §7Get the top n players from the source objective");
+                            logReturn.add("§3 --> §elast <objective source> <objective target> <n> [maxswp]");
+                            logReturn.add("§3      * §7Get the last n players from the source objective");
+                            logReturn.add("§3 --> §erange <entry or players> <objective> <range>");
+                            logReturn.add("§3      * §7Check that such entry is in such range.");
+                            logReturn.add("§3 --> §edamagetakenlink <uuid> <objective> [players only] [dont delete]");
+                            logReturn.add("§3      * §7Keeps track of how much damage is dealt to an entity.");
+                            logReturn.add("§3        §7and who is dealing the damage.");
+                            logReturn.add("§3      * §7It will reset the §eobjective §7unless §edont delete§");
+                            logReturn.add("§3      * §7is set to §efalse§7. Will create new if missing.");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Scoreboard", "Incorrect usage. For info: \u00a7e/goop scoreboard"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop scoreboard {action}");
+                                logReturn.add(OotilityCeption.LogFormat("Scoreboard", "Incorrect usage. For info: §e/goop scoreboard"));
+                                logReturn.add("§3Usage: §e/goop scoreboard {action}");
                             }
                         }
 
                     // No perms
                     } else {
                         // Tell him lmao
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to perform scoreboard operations!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to perform scoreboard operations!"));
                     }
                     break;
                     //endregion
@@ -5322,11 +5310,8 @@ public class GungingOotilities implements CommandExecutor {
                     if (logReturnUrn.getValue() != null) {
 
                         // For
-                        for (String ret : logReturnUrn.getValue()) {
-
-                            // Add
-                            logReturn.add(ret);
-                        }
+                        // Add
+                        logReturn.addAll(logReturnUrn.getValue());
                     }
                     break;
                 //endregion
@@ -5356,19 +5341,21 @@ public class GungingOotilities implements CommandExecutor {
 
                                 // Cannot be legacy letters bruh
                                 ArrayList<String> griefs = new ArrayList<>();
-                                if (args[1].contains(",")) { for(String argGrief : args[1].split(",")) { griefs.add(argGrief); } } else { griefs.add(args[1]); }
+                                if (args[1].contains(",")) {
+                                    Collections.addAll(griefs, args[1].split(","));
+                                } else { griefs.add(args[1]); }
 
                                 for (String griefMat : griefs) {
                                     Material m = OotilityCeption.getMaterial(griefMat);
                                     if (m != null) { matMask.add(m); } else {
 
                                         // Notify the error
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Grief", "Unknown block material '\u00a7e" + griefMat + "\u00a77' "));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Grief", "Unknown block material '§e" + griefMat + "§7' "));
                                     }
                                 }
 
                                 // Legacy letters fail condition
-                                if (matMask.size() == 0) {
+                                if (matMask.isEmpty()) {
 
                                     // Failure
                                     failure = true;
@@ -5389,13 +5376,13 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Notify the error
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Grief", "You must specify if mining blocks (\u00a7bb\u00a77), liquids (\u00a7bl\u00a77), or both (\u00a7bbl\u00a77)!"));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Grief", "You must specify if mining blocks (§bb§7), liquids (§bl§7), or both (§bbl§7)!"));
                                 }
                             }
 
                             // Gets that player boi
                             ArrayList<Player> targets = OotilityCeption.GetPlayers(senderLocation, args[2], null);
-                            if (targets.size() < 1) {
+                            if (targets.isEmpty()) {
                                 // Failure
                                 failure = true;
 
@@ -5424,7 +5411,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Notify the error
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Grief", "Expected \u00a7btrue \u00a77or \u00a7bfalse \u00a77instead of \u00a73" + args[8]));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Grief", "Expected §btrue §7or §bfalse §7instead of §3" + args[8]));
                                 }
                             }
 
@@ -5559,33 +5546,19 @@ public class GungingOotilities implements CommandExecutor {
                                     }
 
                                     // If any
-                                    if (bkks.size() > 0) {
+                                    if (!bkks.isEmpty()) {
 
                                         // Compute tool
-                                        ItemStack t0l;
-                                        switch (pickPower) {
-                                            default:
-                                                t0l = new ItemStack(Material.STONE);
-                                                break;
-                                            case -1:
-                                                t0l = new ItemStack(Material.AIR);
-                                                break;
-                                            case 1:
-                                                t0l = new ItemStack(Material.WOODEN_PICKAXE);
-                                                break;
-                                            case 2:
-                                                t0l = new ItemStack(Material.STONE_PICKAXE);
-                                                break;
-                                            case 3:
-                                                t0l = new ItemStack(Material.IRON_PICKAXE);
-                                                break;
-                                            case 4:
-                                                t0l = new ItemStack(Material.DIAMOND_PICKAXE);
-                                                break;
-                                            case 5:
-                                                t0l = new ItemStack(GooP_MinecraftVersions.GetVersionMaterial(GooPVersionMaterials.NETHERITE_PICKAXE, Material.DIAMOND_PICKAXE));
-                                                break;
-                                        }
+                                        ItemStack t0l = switch (pickPower) {
+                                            case -1 -> new ItemStack(Material.AIR);
+                                            case 1 -> new ItemStack(Material.WOODEN_PICKAXE);
+                                            case 2 -> new ItemStack(Material.STONE_PICKAXE);
+                                            case 3 -> new ItemStack(Material.IRON_PICKAXE);
+                                            case 4 -> new ItemStack(Material.DIAMOND_PICKAXE);
+                                            case 5 ->
+                                                    new ItemStack(GooP_MinecraftVersions.GetVersionMaterial(GooPVersionMaterials.NETHERITE_PICKAXE, Material.DIAMOND_PICKAXE));
+                                            default -> new ItemStack(Material.STONE);
+                                        };
 
                                         // GOd damn run event
                                         GooPGriefEvent evG = new GooPGriefEvent(target, bkks, t0l, rebootKey);
@@ -5593,7 +5566,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // Notify the success
                                         if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback)
-                                            logReturn.add(OotilityCeption.LogFormat("Grief", "Forced player \u00a73" + target.getName() + "\u00a77 to mine/dry \u00a7e" + bkks.size() + "\u00a77 blocks."));
+                                            logReturn.add(OotilityCeption.LogFormat("Grief", "Forced player §3" + target.getName() + "§7 to mine/dry §e" + bkks.size() + "§7 blocks."));
 
                                         // Run Chain
                                         commandChain.chain(chained, target, sender);
@@ -5604,37 +5577,37 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // lol found no
                                         if (Gunging_Ootilities_Plugin.sendGooPFailFeedback)
-                                            logReturn.add(OotilityCeption.LogFormat("Grief", "No blocks were found as to force player \u00a73" + target.getName() + "\u00a77 to mine/dry them."));
+                                            logReturn.add(OotilityCeption.LogFormat("Grief", "No blocks were found as to force player §3" + target.getName() + "§7 to mine/dry them."));
                                     }
                                 }
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Grief, \u00a77Simulates a player breaking blocks manually.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop grief <b|l> <player> <w x y z> <radius> [asCuboid] [pickaxe power] [bedrock break] [reboot key]");
-                            logReturn.add("\u00a73 - \u00a7e<b|l> \u00a77Remove blocks and/or liquids?");
-                            logReturn.add("\u00a73 --> \u00a73b \u00a77Only blocks");
-                            logReturn.add("\u00a73 --> \u00a73l \u00a77Only liquids");
-                            logReturn.add("\u00a73 --> \u00a73bl \u00a77Both");
-                            logReturn.add("\u00a73 --> \u00a77Or the comma separated list of blocks to destroy. ");
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Break the blocks as whom.");
-                            logReturn.add("\u00a73 - \u00a7e<w x y z> \u00a77Epicenter of the breaking");
-                            logReturn.add("\u00a73 - \u00a7e<radius> \u00a77Size of grief.");
-                            logReturn.add("\u00a73 - \u00a7e[asCuboid] \u00a77Instead of a sphere, carve as a cube.");
-                            logReturn.add("\u00a73 - \u00a7e[pickaxe power] \u00a77Tier of the pickaxe supposedly used.");
-                            logReturn.add("\u00a73 --> \u00a730 \u00a77Fist");
-                            logReturn.add("\u00a73 --> \u00a731 \u00a77Wooden/Gold");
-                            logReturn.add("\u00a73 --> \u00a732 \u00a77Stone");
-                            logReturn.add("\u00a73 --> \u00a733 \u00a77Iron");
-                            logReturn.add("\u00a73 --> \u00a734 \u00a77Diamond \u00a78(default)");
-                            logReturn.add("\u00a73 --> \u00a735 \u00a77Netherite");
-                            logReturn.add("\u00a73 - \u00a7e[bedrock break] \u00a77If the '\u00a73Grief Breaks Bedrock\u00a77' gamerule is disabled, this command won't break vanilla-unbreakable blocks (bedrock, end portal frames...) unless this is set to \u00a7btrue\u00a77.");
-                            logReturn.add("\u00a73 - \u00a7e[reboot key] \u00a77This will repair the blocks next time goop reloads. ");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Grief, §7Simulates a player breaking blocks manually.");
+                            logReturn.add("§3Usage: §e/goop grief <b|l> <player> <w x y z> <radius> [asCuboid] [pickaxe power] [bedrock break] [reboot key]");
+                            logReturn.add("§3 - §e<b|l> §7Remove blocks and/or liquids?");
+                            logReturn.add("§3 --> §3b §7Only blocks");
+                            logReturn.add("§3 --> §3l §7Only liquids");
+                            logReturn.add("§3 --> §3bl §7Both");
+                            logReturn.add("§3 --> §7Or the comma separated list of blocks to destroy. ");
+                            logReturn.add("§3 - §e<player> §7Break the blocks as whom.");
+                            logReturn.add("§3 - §e<w x y z> §7Epicenter of the breaking");
+                            logReturn.add("§3 - §e<radius> §7Size of grief.");
+                            logReturn.add("§3 - §e[asCuboid] §7Instead of a sphere, carve as a cube.");
+                            logReturn.add("§3 - §e[pickaxe power] §7Tier of the pickaxe supposedly used.");
+                            logReturn.add("§3 --> §30 §7Fist");
+                            logReturn.add("§3 --> §31 §7Wooden/Gold");
+                            logReturn.add("§3 --> §32 §7Stone");
+                            logReturn.add("§3 --> §33 §7Iron");
+                            logReturn.add("§3 --> §34 §7Diamond §8(default)");
+                            logReturn.add("§3 --> §35 §7Netherite");
+                            logReturn.add("§3 - §e[bedrock break] §7If the '§3Grief Breaks Bedrock§7' gamerule is disabled, this command won't break vanilla-unbreakable blocks (bedrock, end portal frames...) unless this is set to §btrue§7.");
+                            logReturn.add("§3 - §e[reboot key] §7This will repair the blocks next time goop reloads. ");
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Grief", "Incorrect usage. For info: \u00a7e/goop grief"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop grief <b|l> <player> <w x y z> <radius> [asCuboid] [pickaxePower] [bedrock break] [reboot key]");
+                                logReturn.add(OotilityCeption.LogFormat("Grief", "Incorrect usage. For info: §e/goop grief"));
+                                logReturn.add("§3Usage: §e/goop grief <b|l> <player> <w x y z> <radius> [asCuboid] [pickaxePower] [bedrock break] [reboot key]");
                             }
                         }
 
@@ -5642,7 +5615,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to power-grief the terrain!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to power-grief the terrain!"));
                     }
                     break;
                 //endregion
@@ -5670,7 +5643,7 @@ public class GungingOotilities implements CommandExecutor {
                             // Gets that player boi
                             ArrayList<Player> targets = OotilityCeption.GetPlayers(senderLocation, args[1], null);
                             Entity asNonplayer = null;
-                            if (targets.size() < 1) {
+                            if (targets.isEmpty()) {
 
                                 // Perhaps its an entity
                                 asNonplayer = OotilityCeption.getEntityByUniqueId(args[1]);
@@ -5694,7 +5667,7 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 // Mention
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Scoreboard Objective '\u00a73" + args[2] + "\u00a77' does not exist."));
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Scoreboard Objective '§3" + args[2] + "§7' does not exist."));
                             }
 
                             // Parse score form
@@ -5731,7 +5704,7 @@ public class GungingOotilities implements CommandExecutor {
                                         // Failure, not numeric nor keyword
                                         failure = true;
 
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Expected integer number for score or one of the math operation keywords instead of \u00a73" + args[3]));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Expected integer number for score or one of the math operation keywords instead of §3" + args[3]));
                                         break;
                                 }
                             }
@@ -5782,8 +5755,8 @@ public class GungingOotilities implements CommandExecutor {
                             if (cmprd) {
 
                                 // Build both
-                                anything = anythingBLDR.toString().substring(1);
-                                something = somethingBLDR.toString().substring(1);
+                                anything = anythingBLDR.substring(1);
+                                something = somethingBLDR.substring(1);
                                 operator = operator.substring("GC_".length());
 
                                 // Parse operator
@@ -5804,7 +5777,7 @@ public class GungingOotilities implements CommandExecutor {
                                     // Fail
                                     failure = true;
 
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Forcing a string operation (\u00a7bS\u00a77) with your operator (\u00a73" + operator + "\u00a77) is incompatible with math operations like \u00a73" + args[3]));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Forcing a string operation (§bS§7) with your operator (§3" + operator + "§7) is incompatible with math operations like §3" + args[3]));
                                 }
 
                                 // Operator unsuccessful
@@ -5813,7 +5786,7 @@ public class GungingOotilities implements CommandExecutor {
                                     // Fail
                                     failure = true;
 
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Your operator \u00a73" + operator + "\u00a77 doesnt make sense. Try \u00a7bGC_=\u00a77 or \u00a7bGC_>\u00a77 for beginners. Full explanation in \u00a7e/goop compare"));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Your operator §3" + operator + "§7 doesnt make sense. Try §bGC_=§7 or §bGC_>§7 for beginners. Full explanation in §e/goop compare"));
                                 }
 
                                 // Force string with guaranteed parsed non-integer
@@ -5822,7 +5795,7 @@ public class GungingOotilities implements CommandExecutor {
                                     // Fail
                                     failure = true;
 
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Forcing a string operation (\u00a7bS\u00a77) with your operator (\u00a73" + operator + "\u00a77) is incompatible with math comparators \u00a7b>\u00a77 and \u00a7b<\u00a77."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "Forcing a string operation (§bS§7) with your operator (§3" + operator + "§7) is incompatible with math comparators §b>§7 and §b<§7."));
                                 }
 
                             } else {
@@ -5830,7 +5803,7 @@ public class GungingOotilities implements CommandExecutor {
                                 // Must be comparing something-yo!
                                 failure = true;
 
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "You must insert a comparison operation there! Try \u00a7bGC_=\u00a77 or \u00a7bGC_>=\u00a77 for beginners. Full explanation in \u00a7e/goop compare"));
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Compare", "You must insert a comparison operation there! Try §bGC_=§7 or §bGC_>=§7 for beginners. Full explanation in §e/goop compare"));
                             }
 
                             if (!failure) {
@@ -5942,13 +5915,13 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Notify the success
                                             if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback)
-                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true! Setting score \u00a73" + args[2] + "\u00a77 of \u00a73" + asNonplayer.getName() + "\u00a77 to \u00a7e" + scoreSet + "\u00a77."));
+                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true! Setting score §3" + args[2] + "§7 of §3" + asNonplayer.getName() + "§7 to §e" + scoreSet + "§7."));
 
                                         } else {
 
                                             // Notify the success
                                             if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback)
-                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true! Result is \u00a7e" + scoreSet + "\u00a77."));
+                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true! Result is §e" + scoreSet + "§7."));
 
                                         }
 
@@ -5962,7 +5935,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // lol found no
                                         if (Gunging_Ootilities_Plugin.sendGooPFailFeedback)
-                                            logReturn.add(OotilityCeption.LogFormat("Compare", "{Something} (\u00a73" + pSomething + "\u00a77) did not match {Anything} (\u00a73" + pAnything + "\u00a77)."));
+                                            logReturn.add(OotilityCeption.LogFormat("Compare", "{Something} (§3" + pSomething + "§7) did not match {Anything} (§3" + pAnything + "§7)."));
                                     }
                                 }
 
@@ -6072,13 +6045,13 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Notify the success
                                             if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback)
-                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true! Setting score \u00a73" + args[2] + "\u00a77 of player \u00a73" + target.getName() + "\u00a77 to \u00a7e" + scoreSet + "\u00a77."));
+                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true! Setting score §3" + args[2] + "§7 of player §3" + target.getName() + "§7 to §e" + scoreSet + "§7."));
 
                                         } else {
 
                                             // Notify the success
                                             if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback)
-                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true for player \u00a73" + target.getName() + "\u00a77! Result is \u00a7e" + scoreSet + "\u00a77."));
+                                                logReturn.add(OotilityCeption.LogFormat("Compare", "Comparison returned true for player §3" + target.getName() + "§7! Result is §e" + scoreSet + "§7."));
 
                                         }
 
@@ -6094,51 +6067,51 @@ public class GungingOotilities implements CommandExecutor {
 
                                         // lol found no
                                         if (Gunging_Ootilities_Plugin.sendGooPFailFeedback)
-                                            logReturn.add(OotilityCeption.LogFormat("Compare", "{Something} (\u00a73" + pSomething + "\u00a77) did not match {Anything} (\u00a73" + pAnything + "\u00a77)."));
+                                            logReturn.add(OotilityCeption.LogFormat("Compare", "{Something} (§3" + pSomething + "§7) did not match {Anything} (§3" + pAnything + "§7)."));
                                     }
                                 }
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Compare, \u00a77Parses placeholders and changes a player's score.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop compare <player> <objective> <score> {Something} GC_<operator> {Anything}");
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player to parse placeholders, and change score.");
-                            logReturn.add("\u00a73 - \u00a7e<objective> \u00a77Scoreboard objective to store results IF the values match.");
-                            logReturn.add("\u00a73 --> \u00a7bread \u00a77Ignore scoreboard, just perform the comparison operation");
-                            logReturn.add("\u00a73 - \u00a7e<score> \u00a77Score value that will be given \u00a7nif this succeeds.");
-                            logReturn.add("\u00a73 -> If both {Something} and {Anything} are numeric, you can use these keywords:");
-                            logReturn.add("\u00a73 --> \u00a7bsum \u00a77The result of \u00a7e{Something}\u00a73+\u00a7e{Anything}");
-                            logReturn.add("\u00a73 --> \u00a7bdifference \u00a77The result of \u00a7e{Something}\u00a73-\u00a7e{Anything}");
-                            logReturn.add("\u00a73 --> \u00a7bproduct \u00a77The result of \u00a7e{Something}\u00a73*\u00a7e{Anything}");
-                            logReturn.add("\u00a73 --> \u00a7bdivision \u00a77The result of \u00a7e{Something}\u00a73/\u00a7e{Anything}");
-                            logReturn.add("\u00a73 --> \u00a7bpower \u00a77The result of \u00a7e{Something}\u00a73^\u00a7e{Anything}");
-                            logReturn.add("\u00a73 --> \u00a7broot \u00a77The \u00a7e{Anything}th \u00a73root of \u00a7e{Something}\u00a77.");
-                            logReturn.add("\u00a73 --> \u00a7bcos \u00a77Will ignore {Anything} and set to the Cosine of \u00a7e{Something}\u00a77 (degrees).");
-                            logReturn.add("\u00a73 --> \u00a7bsin \u00a77Will ignore {Anything} and set to the Sine of \u00a7e{Something}\u00a77 (degrees).");
-                            logReturn.add("\u00a73 --> \u00a7btan \u00a77Will ignore {Anything} and set to the Tangent of \u00a7e{Something}\u00a77 (degrees).");
-                            logReturn.add("\u00a73 --> \u00a7barcCos \u00a77Will ignore {Anything} and set to the ArcCosine of \u00a7e{Something}\u00a77 (degrees).");
-                            logReturn.add("\u00a73 --> \u00a7barcSin \u00a77Will ignore {Anything} and set to the ArcSine of \u00a7e{Something}\u00a77 (degrees).");
-                            logReturn.add("\u00a73 --> \u00a7barcTan \u00a77Will ignore {Anything} and set to the ArcTangent of \u00a7e{Something}\u00a77 (degrees).");
-                            logReturn.add("\u00a77 ----- \u00a7cValues will be multiplied by 100, basically to store two decimal places.");
-                            logReturn.add("\u00a77 ----- *Math Errors (\u00a7fdiv by 0, etc\u00a77) will cause score to be set to -32767, but the command will 'succeed'");
-                            logReturn.add("\u00a73 - \u00a7e{Something} \u00a77Any length and order of placeholders and strings (even with spaces).");
-                            logReturn.add("\u00a73 - \u00a7e<operator> \u00a77The way to compare. Must be preceded with \u00a7eGC_");
-                            logReturn.add("\u00a73 --> \u00a7b= \u00a77If these are equal. Will parse numeric placeholders automatically.");
-                            logReturn.add("\u00a73 --> \u00a7b> \u00a77If {Something} exceeds {Anything}. Will fail if even one isnt numerical.");
-                            logReturn.add("\u00a73 --> \u00a7b< \u00a77If {Something} is less than {Anything}. Will fail if even one isnt numerical.");
-                            logReturn.add("\u00a73 --> \u00a7bS \u00a77Will not parse numerically, and strictly check as strings (\u00a7f0.00 \u00a77wont equal \u00a7f0\u00a77, thus).");
-                            logReturn.add("\u00a73 --> \u00a7bC \u00a77Ignore capitalization (\u00a7fno\u00a77 =\u00a7fNo\u00a77).");
-                            logReturn.add("\u00a73 --> \u00a7bE \u00a77Exact Result (\u00a7fDont multiply by 100 after operation\u00a77).");
-                            logReturn.add("\u00a73 --> \u00a7b! \u00a77Will run the comparison pretending its not there, then invert the result.");
-                            logReturn.add("\u00a77 ----- \u00a73Any combination and order is acceptable: \u00a7bGC_><\u00a73 for example, will fail if they are equal.");
-                            logReturn.add("\u00a77 ----- \u00a73Using \u00a7bGC_<=>\u00a73 can only fail if you input non-numerical stuff.");
-                            logReturn.add("\u00a73 - \u00a7e{Anything} \u00a77Any length and order of placeholders and strings (even with spaces).");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Compare, §7Parses placeholders and changes a player's score.");
+                            logReturn.add("§3Usage: §e/goop compare <player> <objective> <score> {Something} GC_<operator> {Anything}");
+                            logReturn.add("§3 - §e<player> §7Player to parse placeholders, and change score.");
+                            logReturn.add("§3 - §e<objective> §7Scoreboard objective to store results IF the values match.");
+                            logReturn.add("§3 --> §bread §7Ignore scoreboard, just perform the comparison operation");
+                            logReturn.add("§3 - §e<score> §7Score value that will be given §nif this succeeds.");
+                            logReturn.add("§3 -> If both {Something} and {Anything} are numeric, you can use these keywords:");
+                            logReturn.add("§3 --> §bsum §7The result of §e{Something}§3+§e{Anything}");
+                            logReturn.add("§3 --> §bdifference §7The result of §e{Something}§3-§e{Anything}");
+                            logReturn.add("§3 --> §bproduct §7The result of §e{Something}§3*§e{Anything}");
+                            logReturn.add("§3 --> §bdivision §7The result of §e{Something}§3/§e{Anything}");
+                            logReturn.add("§3 --> §bpower §7The result of §e{Something}§3^§e{Anything}");
+                            logReturn.add("§3 --> §broot §7The §e{Anything}th §3root of §e{Something}§7.");
+                            logReturn.add("§3 --> §bcos §7Will ignore {Anything} and set to the Cosine of §e{Something}§7 (degrees).");
+                            logReturn.add("§3 --> §bsin §7Will ignore {Anything} and set to the Sine of §e{Something}§7 (degrees).");
+                            logReturn.add("§3 --> §btan §7Will ignore {Anything} and set to the Tangent of §e{Something}§7 (degrees).");
+                            logReturn.add("§3 --> §barcCos §7Will ignore {Anything} and set to the ArcCosine of §e{Something}§7 (degrees).");
+                            logReturn.add("§3 --> §barcSin §7Will ignore {Anything} and set to the ArcSine of §e{Something}§7 (degrees).");
+                            logReturn.add("§3 --> §barcTan §7Will ignore {Anything} and set to the ArcTangent of §e{Something}§7 (degrees).");
+                            logReturn.add("§7 ----- §cValues will be multiplied by 100, basically to store two decimal places.");
+                            logReturn.add("§7 ----- *Math Errors (§fdiv by 0, etc§7) will cause score to be set to -32767, but the command will 'succeed'");
+                            logReturn.add("§3 - §e{Something} §7Any length and order of placeholders and strings (even with spaces).");
+                            logReturn.add("§3 - §e<operator> §7The way to compare. Must be preceded with §eGC_");
+                            logReturn.add("§3 --> §b= §7If these are equal. Will parse numeric placeholders automatically.");
+                            logReturn.add("§3 --> §b> §7If {Something} exceeds {Anything}. Will fail if even one isnt numerical.");
+                            logReturn.add("§3 --> §b< §7If {Something} is less than {Anything}. Will fail if even one isnt numerical.");
+                            logReturn.add("§3 --> §bS §7Will not parse numerically, and strictly check as strings (§f0.00 §7wont equal §f0§7, thus).");
+                            logReturn.add("§3 --> §bC §7Ignore capitalization (§fno§7 =§fNo§7).");
+                            logReturn.add("§3 --> §bE §7Exact Result (§fDont multiply by 100 after operation§7).");
+                            logReturn.add("§3 --> §b! §7Will run the comparison pretending its not there, then invert the result.");
+                            logReturn.add("§7 ----- §3Any combination and order is acceptable: §bGC_><§3 for example, will fail if they are equal.");
+                            logReturn.add("§7 ----- §3Using §bGC_<=>§3 can only fail if you input non-numerical stuff.");
+                            logReturn.add("§3 - §e{Anything} §7Any length and order of placeholders and strings (even with spaces).");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Compare", "Incorrect usage. For info: \u00a7e/goop compare"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop compare <player> <objective> <score> {Something} GC_<operator> {Anything}");
+                                logReturn.add(OotilityCeption.LogFormat("Compare", "Incorrect usage. For info: §e/goop compare"));
+                                logReturn.add("§3Usage: §e/goop compare <player> <objective> <score> {Something} GC_<operator> {Anything}");
                             }
                         }
 
@@ -6146,7 +6119,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to compare data!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to compare data!"));
                     }
                     break;
                 //endregion
@@ -6173,7 +6146,7 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Gets that player boi
                             ArrayList<Player> targets = OotilityCeption.GetPlayers(senderLocation, args[1], null);
-                            if (targets.size() < 1) {
+                            if (targets.isEmpty()) {
                                 // Failure
                                 failure = true;
 
@@ -6187,7 +6160,7 @@ public class GungingOotilities implements CommandExecutor {
                                 // Build message
                                 StringBuilder messageBuilder = new StringBuilder();
                                 for (int a = 2; a < args.length; a++) { messageBuilder.append(" ").append(args[a]); }
-                                String message = messageBuilder.toString().substring(1);
+                                String message = messageBuilder.substring(1);
 
                                 // Parse font codes
                                 message = GooP_FontUtils.ParseFontLinks(message);
@@ -6204,7 +6177,7 @@ public class GungingOotilities implements CommandExecutor {
                                     // Send
                                     target.sendMessage(mInstance);
                                     // Mention
-                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Tell", "Told \u00a73" + target.getName() + "\u00a77: \u00a7f" + mInstance)); }
+                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Tell", "Told §3" + target.getName() + "§7: §f" + mInstance)); }
 
                                     // Run Chain
                                     commandChain.chain(chained, target, sender);
@@ -6212,16 +6185,16 @@ public class GungingOotilities implements CommandExecutor {
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Tell, \u00a77Sends a message to a player, parses colour codes and placeholders.");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop tell <player> <message...>");
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player that will be displayed such a message.");
-                            logReturn.add("\u00a73 - \u00a7e<message...> \u00a77Message to display");
-                            logReturn.add("\u00a78In more technical language, parses placeholders, and then colour codes.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Tell, §7Sends a message to a player, parses colour codes and placeholders.");
+                            logReturn.add("§3Usage: §e/goop tell <player> <message...>");
+                            logReturn.add("§3 - §e<player> §7Player that will be displayed such a message.");
+                            logReturn.add("§3 - §e<message...> §7Message to display");
+                            logReturn.add("§8In more technical language, parses placeholders, and then colour codes.");
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Tell", "Incorrect usage. For info: \u00a7e/goop tell"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop tell <player> <message...>");
+                                logReturn.add(OotilityCeption.LogFormat("Tell", "Incorrect usage. For info: §e/goop tell"));
+                                logReturn.add("§3Usage: §e/goop tell <player> <message...>");
                             }
                         }
 
@@ -6229,7 +6202,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oCan you not tell whats happening?"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oCan you not tell whats happening?"));
                     }
                     break;
                 //endregion
@@ -6258,7 +6231,6 @@ public class GungingOotilities implements CommandExecutor {
                             // Identify args
                             String whoms = "";
                             String pW = null, pX = null, pY = null, pZ = null;
-                            String pYaw = null, pPitch = null;
                             Player pAt;
                             Location targetLocation = null;
 
@@ -6303,7 +6275,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Notify
-                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Tp", "Could not find location of player \u00a73" + args[args.length-1]));}
+                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Tp", "Could not find location of player §3" + args[args.length-1]));}
                                 }
 
                                 // Thus thats their location
@@ -6320,7 +6292,7 @@ public class GungingOotilities implements CommandExecutor {
                                     if (sender instanceof  Player) {
 
                                         // Gets the name
-                                        whoms = ((Player) sender).getName();
+                                        whoms = sender.getName();
 
 
                                     // Cant implicitly tp the console
@@ -6343,7 +6315,7 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Gets that player boi
                             ArrayList<Player> targets = OotilityCeption.GetPlayers(senderLocation, whoms, null);
-                            if (targets.size() < 1 && !failure) {
+                            if (targets.isEmpty() && !failure) {
                                 // Failure
                                 failure = true;
 
@@ -6361,7 +6333,7 @@ public class GungingOotilities implements CommandExecutor {
                                     target.teleport(targetLocation);
 
                                     // Mention
-                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Tp", "Teleported \u00a73" + target.getName() + "\u00a77 to \u00a7e" + OotilityCeption.BlockLocation2String(targetLocation))); }
+                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Tp", "Teleported §3" + target.getName() + "§7 to §e" + OotilityCeption.BlockLocation2String(targetLocation))); }
 
                                     // Run Chain
                                     commandChain.chain(chained, target, sender);
@@ -6369,18 +6341,18 @@ public class GungingOotilities implements CommandExecutor {
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Teleport, \u00a77Straight up teleports someone somewhere");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop tp [who] <where>");
-                            logReturn.add("\u00a73 - \u00a7e[who] \u00a77Players to teleport; you if missing.");
-                            logReturn.add("\u00a73 - \u00a7e<where> \u00a77Location to teleport them all.");
-                            logReturn.add("\u00a7b ---> \u00a77May be another player's name.");
-                            logReturn.add("\u00a7b ---> \u00a77May in the format \u00a7ew x y z");
-                            logReturn.add("\u00a78Because vanilla command does not support world ffs.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Teleport, §7Straight up teleports someone somewhere");
+                            logReturn.add("§3Usage: §e/goop tp [who] <where>");
+                            logReturn.add("§3 - §e[who] §7Players to teleport; you if missing.");
+                            logReturn.add("§3 - §e<where> §7Location to teleport them all.");
+                            logReturn.add("§b ---> §7May be another player's name.");
+                            logReturn.add("§b ---> §7May in the format §ew x y z");
+                            logReturn.add("§8Because vanilla command does not support world ffs.");
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Teleport", "Incorrect usage. For info: \u00a7e/goop tp"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop tp [who] <where>");
+                                logReturn.add(OotilityCeption.LogFormat("Teleport", "Incorrect usage. For info: §e/goop tp"));
+                                logReturn.add("§3Usage: §e/goop tp [who] <where>");
                             }
                         }
 
@@ -6388,7 +6360,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oCant zip zoom, no permission."));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oCant zip zoom, no permission."));
                     }
                     break;
                 //endregion
@@ -6427,7 +6399,7 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 // Notify
-                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Delay", "Expected integer number of ticks instead of \u00a73" + args[1])); }
+                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Delay", "Expected integer number of ticks instead of §3" + args[1])); }
 
                             }
 
@@ -6461,16 +6433,16 @@ public class GungingOotilities implements CommandExecutor {
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Delay, \u00a77Execute a command after some ticks");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop delay <ticks> <command>");
-                            logReturn.add("\u00a73 - \u00a7e<ticks> \u00a77Ticks to wait, 1 sec = 20 ticks");
-                            logReturn.add("\u00a73 - \u00a7e<command> \u00a77Command to execute");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Delay, §7Execute a command after some ticks");
+                            logReturn.add("§3Usage: §e/goop delay <ticks> <command>");
+                            logReturn.add("§3 - §e<ticks> §7Ticks to wait, 1 sec = 20 ticks");
+                            logReturn.add("§3 - §e<command> §7Command to execute");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Delay", "Incorrect usage. For info: \u00a7e/goop delay"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop delay <ticks> <command>");
+                                logReturn.add(OotilityCeption.LogFormat("Delay", "Incorrect usage. For info: §e/goop delay"));
+                                logReturn.add("§3Usage: §e/goop delay <ticks> <command>");
                             }
                         }
 
@@ -6478,7 +6450,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oWait a moment to use this command."));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oWait a moment to use this command."));
                     }
                     break;
                 //endregion
@@ -6522,7 +6494,7 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 // Notify
-                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Chance", "Expected a number (even followed by a % symbol) instead of \u00a73" + args[1])); }
+                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Chance", "Expected a number (even followed by a % symbol) instead of §3" + args[1])); }
 
                             }
 
@@ -6548,7 +6520,7 @@ public class GungingOotilities implements CommandExecutor {
                                     String cmddd = lLine.toString();
 
                                     // Mention
-                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Chance", "Roll of \u00a7b" + chance + "%\u00a77 chance \u00a7asucceeded\u00a77!")); }
+                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat("Chance", "Roll of §b" + chance + "%§7 chance §asucceeded§7!")); }
 
                                     // Just run I guess
                                     OotilityCeption.SendConsoleCommand(cmddd, null, null, null);
@@ -6556,22 +6528,22 @@ public class GungingOotilities implements CommandExecutor {
                                 } else {
 
                                     // Mention
-                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Chance", "Roll of \u00a7b" + chance + "%\u00a77 chance \u00a7cfailed\u00a77!")); }
+                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat("Chance", "Roll of §b" + chance + "%§7 chance §cfailed§7!")); }
 
                                 }
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Chance, \u00a77Random chance to run a command");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop chance <chance> <command>");
-                            logReturn.add("\u00a73 - \u00a7e<chance> \u00a77Chance to run following command");
-                            logReturn.add("\u00a73 - \u00a7e<command> \u00a77Command to execute");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Chance, §7Random chance to run a command");
+                            logReturn.add("§3Usage: §e/goop chance <chance> <command>");
+                            logReturn.add("§3 - §e<chance> §7Chance to run following command");
+                            logReturn.add("§3 - §e<command> §7Command to execute");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Chance", "Incorrect usage. For info: \u00a7e/goop chance"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop chance <chance> <command>");
+                                logReturn.add(OotilityCeption.LogFormat("Chance", "Incorrect usage. For info: §e/goop chance"));
+                                logReturn.add("§3Usage: §e/goop chance <chance> <command>");
                             }
                         }
 
@@ -6579,7 +6551,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oWhat are the odds of this?!"));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oWhat are the odds of this?!"));
                     }
                     break;
                 //endregion
@@ -6603,7 +6575,7 @@ public class GungingOotilities implements CommandExecutor {
                             if (args.length >= 2) {
                                 // Some bool to know if failure
                                 boolean failure = false;
-                                ArrayList<OfflinePlayer> targets = null;
+                                ArrayList<OfflinePlayer> targets;
 
                                 switch (args[1].toLowerCase()) {
                                     //region charge
@@ -6619,7 +6591,7 @@ public class GungingOotilities implements CommandExecutor {
                                             targets = OotilityCeption.GetPlayers(senderLocation, args[2], true, null);
 
                                             // Does the player exist?
-                                            if (targets.size() < 1) {
+                                            if (targets.isEmpty()) {
                                                 // Failure
                                                 failure = true;
 
@@ -6637,7 +6609,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 failure = true;
 
                                                 // Notify the error
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Expected positive numeric value instead of \u00a73" + args[3]));
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Expected positive numeric value instead of §3" + args[3]));
                                             }
 
                                             // Valid Sintax
@@ -6659,12 +6631,12 @@ public class GungingOotilities implements CommandExecutor {
                                                         commandChain.chain(chained, target.getPlayer(), sender);
 
                                                         // Say that
-                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Charged \u00a7e" + charge + " to player \u00a73" + target.getName() + "\u00a77, they now have \u00a7e" + GooPVault.GetPlayerBalance(target)));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Charged §e" + charge + " to player §3" + target.getName() + "§7, they now have §e" + GooPVault.GetPlayerBalance(target)));
 
                                                     } else {
 
                                                         // Say that
-                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Player \u00a73" + target.getName() + "\u00a77 doesnt have enough money!"));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Player §3" + target.getName() + "§7 doesnt have enough money!"));
 
                                                         // Notify
                                                         if (failMessage != null && target.isOnline()) { target.getPlayer().sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage.replace("%charge%", String.valueOf(charge)), target.getPlayer(), target.getPlayer(), null, null))); }
@@ -6677,8 +6649,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Notify
                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Incorrect usage. For info: \u00a7e/goop vault"));
-                                                logReturn.add("\u00a73Usage: \u00a7e/goop vault charge <player> <amount>");
+                                                logReturn.add(OotilityCeption.LogFormat("Vault - Charge", "Incorrect usage. For info: §e/goop vault"));
+                                                logReturn.add("§3Usage: §e/goop vault charge <player> <amount>");
                                             }
                                         }
 
@@ -6698,14 +6670,14 @@ public class GungingOotilities implements CommandExecutor {
                                         // Help form?
                                         if (args.length == 2)  {
 
-                                            logReturn.add("\u00a7e______________________________________________");
-                                            logReturn.add("\u00a73Vault - \u00a7b" + subcommand + ",\u00a77 Check the balance of players.");
-                                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                            logReturn.add("\u00a73 - \u00a7e<range> \u00a77Balance range by which command succeeds.");
-                                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Scoreboard to output the result.");
-                                            logReturn.add("\u00a73 - \u00a7e[±][score][%] \u00a77Scoreboard operation if command succeeds.");
-                                            logReturn.add("\u00a73      * \u00a7bamount\u00a77 keyword to set the score to the player's balance.");
+                                            logReturn.add("§e______________________________________________");
+                                            logReturn.add("§3Vault - §b" + subcommand + ",§7 Check the balance of players.");
+                                            logReturn.add("§3Usage: §e" + usage);
+                                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                            logReturn.add("§3 - §e<range> §7Balance range by which command succeeds.");
+                                            logReturn.add("§3 - §e[objective] §7Scoreboard to output the result.");
+                                            logReturn.add("§3 - §e[±][score][%] §7Scoreboard operation if command succeeds.");
+                                            logReturn.add("§3      * §bamount§7 keyword to set the score to the player's balance.");
 
                                             // Correct number of args?
                                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -6714,7 +6686,7 @@ public class GungingOotilities implements CommandExecutor {
                                             targets = OotilityCeption.GetPlayers(senderLocation, args[2], true, null);
 
                                             // Does the player exist?
-                                            if (targets.size() < 1) {
+                                            if (targets.isEmpty()) {
                                                 // Failure
                                                 failure = true;
 
@@ -6723,7 +6695,7 @@ public class GungingOotilities implements CommandExecutor {
                                             }
 
                                             // Parse amount?
-                                            QuickNumberRange charge = null;
+                                            QuickNumberRange charge;
                                             charge = QuickNumberRange.FromString(args[3]);
                                             if (charge == null) {
 
@@ -6731,7 +6703,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 failure = true;
 
                                                 // Notify the error
-                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected a number or numeric range instead of \u00a73" + args[3] + "\u00a77. Ranges are specified with two numbers separated by \u00a7bb\u00a77. Example \u00a7e-4\u00a77 and \u00a7e32.4\u00a77: \u00a7b-4..32.5\u00a77. They are inclusive, and you may not specify either of the bounds (\u00a7b10..\u00a77 will match anything equal or greater than 10)."));
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected a number or numeric range instead of §3" + args[3] + "§7. Ranges are specified with two numbers separated by §bb§7. Example §e-4§7 and §e32.4§7: §b-4..32.5§7. They are inclusive, and you may not specify either of the bounds (§b10..§7 will match anything equal or greater than 10)."));
                                             }
 
                                             Objective objective = null;
@@ -6751,11 +6723,11 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Notify the error
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Objective \u00a73" + args[4] + "\u00a77 not found."));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Objective §3" + args[4] + "§7 not found."));
                                                 }
 
                                                 // Aequal?
-                                                if (args[5].toLowerCase().equals("amount")) {
+                                                if (args[5].equalsIgnoreCase("amount")) {
 
                                                     asAmount = true;
 
@@ -6766,7 +6738,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     failure = true;
 
                                                     // Notify the error
-                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected numeric value, PMP, or \u00a7bamount\u00a77 keyword instead of \u00a7e" + args[5] + "\u00a77."));
+                                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected numeric value, PMP, or §bamount§7 keyword instead of §e" + args[5] + "§7."));
                                                 }
                                             }
 
@@ -6789,14 +6761,14 @@ public class GungingOotilities implements CommandExecutor {
                                                             if (asAmount) { scoreOps = new PlusMinusPercent(balance, false, false); }
 
                                                             // Operate
-                                                            OotilityCeption.SetEntryScore(objective, target.getName().toString(), scoreOps);
+                                                            OotilityCeption.SetEntryScore(objective, target.getName(), scoreOps);
                                                         }
 
                                                         // Run Chain
                                                         commandChain.chain(chained, target.getPlayer(), sender);
 
                                                         // Say that
-                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Player \u00a73" + target.getName() + "\u00a77 has \u00a7e" + balance + "\u00a77. \u00a7aSuccessfuly\u00a77 in range \u00a73" + args[3]));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Player §3" + target.getName() + "§7 has §e" + balance + "§7. §aSuccessfuly§7 in range §3" + args[3]));
 
                                                     } else {
 
@@ -6804,7 +6776,7 @@ public class GungingOotilities implements CommandExecutor {
                                                         if (failMessage != null && target.isOnline()) { target.getPlayer().sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage.replace("%charge%", charge.qrToString()), target.getPlayer(), target.getPlayer(), null, null))); }
 
                                                         // Say that
-                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Player \u00a73" + target.getName() + "\u00a77 has \u00a7e" + balance + "\u00a77. \u00a7cNot within\u00a77 range \u00a73" + args[3]));
+                                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Player §3" + target.getName() + "§7 has §e" + balance + "§7. §cNot within§7 range §3" + args[3]));
                                                     }
                                                 }
                                             }
@@ -6814,15 +6786,15 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Notify Error
                                             if (args.length >= argsMinLength) {
-                                                logReturn.add(OotilityCeption.LogFormat("Vault - " + subcommand, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop vault checkbalance"));
+                                                logReturn.add(OotilityCeption.LogFormat("Vault - " + subcommand, "Incorrect usage (too§e many§7 args). For info: §e/goop vault checkbalance"));
 
                                             } else {
 
-                                                logReturn.add(OotilityCeption.LogFormat("Vault - " + subcommand, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop vault checkbalance"));
+                                                logReturn.add(OotilityCeption.LogFormat("Vault - " + subcommand, "Incorrect usage (too§6 few§7 args). For info: §e/goop vault checkbalance"));
                                             }
 
                                             // Notify Usage
-                                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                            logReturn.add("§3Usage: §e" + usage);
                                         }
 
                                         break;
@@ -6840,7 +6812,7 @@ public class GungingOotilities implements CommandExecutor {
                                             targets = OotilityCeption.GetPlayers(senderLocation, args[2], true, null);
 
                                             // Does the player exist?
-                                            if (targets.size() < 1) {
+                                            if (targets.isEmpty()) {
                                                 // Failure
                                                 failure = true;
 
@@ -6869,13 +6841,13 @@ public class GungingOotilities implements CommandExecutor {
                                                 for (OfflinePlayer target : targets) {
 
                                                     // Get this' eco
-                                                    double balance = GooPVault.GetPlayerBalance(target);
+                                                    GooPVault.GetPlayerBalance(target);
 
                                                     // Charge I guess
                                                     GooPVault.SetPlayerBalance(target, charge);
 
                                                     // Say that
-                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Operation", "Player \u00a73" + target.getName() + "\u00a77 now has a balance of \u00a7e" + GooPVault.GetPlayerBalance(target)));
+                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat("Vault - Operation", "Player §3" + target.getName() + "§7 now has a balance of §e" + GooPVault.GetPlayerBalance(target)));
 
 
                                                     // Run Chain
@@ -6888,8 +6860,8 @@ public class GungingOotilities implements CommandExecutor {
 
                                             // Notify
                                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                                logReturn.add(OotilityCeption.LogFormat("Vault - Operation", "Incorrect usage. For info: \u00a7e/goop vault"));
-                                                logReturn.add("\u00a73Usage: \u00a7e/goop vault operation <player> [±]<amount>[%]");
+                                                logReturn.add(OotilityCeption.LogFormat("Vault - Operation", "Incorrect usage. For info: §e/goop vault"));
+                                                logReturn.add("§3Usage: §e/goop vault operation <player> [±]<amount>[%]");
                                             }
                                         }
 
@@ -6897,25 +6869,25 @@ public class GungingOotilities implements CommandExecutor {
                                     //endregion
                                     default:
                                         // I have no memory of that shit
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Vault", "'\u00a73" + args[1] + "\u00a77' is not a valid Vault action! do \u00a7e/goop vault\u00a77 for the list of actions."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Vault", "'§3" + args[1] + "§7' is not a valid Vault action! do §e/goop vault§7 for the list of actions."));
                                         break;
                                 }
 
                             } else if (args.length == 1) {
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73GooP-Vault, \u00a77Related to the third party plugin.");
-                                logReturn.add("\u00a73Usage: \u00a7e/goop vault {action}");
-                                logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                                logReturn.add("\u00a73 --> \u00a7echarge <player> <amount>");
-                                logReturn.add("\u00a73      * \u00a77If the player has enoigh eco, charges this amount.");
-                                logReturn.add("\u00a73      * \u00a77If the target doesnt have enough, fails and doesn't do anything.");
-                                logReturn.add("\u00a73 --> \u00a7eoperation <player> [±]<amount>[%]");
-                                logReturn.add("\u00a73      * \u00a77Performs a PMP Operation on the player's balance.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3GooP-Vault, §7Related to the third party plugin.");
+                                logReturn.add("§3Usage: §e/goop vault {action}");
+                                logReturn.add("§3 - §e{action} §7What actions to perform:");
+                                logReturn.add("§3 --> §echarge <player> <amount>");
+                                logReturn.add("§3      * §7If the player has enoigh eco, charges this amount.");
+                                logReturn.add("§3      * §7If the target doesnt have enough, fails and doesn't do anything.");
+                                logReturn.add("§3 --> §eoperation <player> [±]<amount>[%]");
+                                logReturn.add("§3      * §7Performs a PMP Operation on the player's balance.");
 
                             } else {
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                    logReturn.add(OotilityCeption.LogFormat("Vault", "Incorrect usage. For info: \u00a7e/goop vault"));
-                                    logReturn.add("\u00a73Usage: \u00a7e/goop vault {action}");
+                                    logReturn.add(OotilityCeption.LogFormat("Vault", "Incorrect usage. For info: §e/goop vault"));
+                                    logReturn.add("§3Usage: §e/goop vault {action}");
                                 }
                             }
 
@@ -6923,14 +6895,14 @@ public class GungingOotilities implements CommandExecutor {
                         } else {
 
                             // Tell him lmao
-                            logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to use vault-related commands!"));
+                            logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to use vault-related commands!"));
                         }
 
                     // Vault not installed. Returning
                     } else {
 
                         // Tell him lmao
-                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("\u00a77These commands are to be used with the third party plugin \u00a7e\u00a7lVault \u00a77which you dont have installed."));
+                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("§7These commands are to be used with the third party plugin §e§lVault §7which you dont have installed."));
                     }
                     break;
                 //endregion
@@ -6964,11 +6936,11 @@ public class GungingOotilities implements CommandExecutor {
 
                             // not console?
                             if (!args[1].equals("console")) {
-                                //DBG//OotilityCeption.Log("\u00a73sudop\u00a77 Sudoing entity? \u00a7e" + (asEntity != null));
-                                //DBG//OotilityCeption.Log("\u00a73sudop\u00a77 Sudoing players? \u00a7e" + targets.size());
+                                //DBG//OotilityCeption.Log("§3sudop§7 Sudoing entity? §e" + (asEntity != null));
+                                //DBG//OotilityCeption.Log("§3sudop§7 Sudoing players? §e" + targets.size());
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asEntity == null) {
+                                if (targets.isEmpty() && asEntity == null) {
                                     // Failure
                                     failure = true;
 
@@ -6981,7 +6953,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                 // As console IG
                                 isConsole = true;
-                                //DBG//OotilityCeption.Log("\u00a73sudop\u00a77 Sudoing console");
+                                //DBG//OotilityCeption.Log("§3sudop§7 Sudoing console");
                             }
 
                             // If player was found
@@ -7006,7 +6978,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                     // Run
                                     for (Player target : targets) {
-                                        //DBG//OotilityCeption.Log("\u00a73sudop\u00a77 Running as \u00a7e" + target.getName() + "\u00a73 " + cmddd);
+                                        //DBG//OotilityCeption.Log("§3sudop§7 Running as §e" + target.getName() + "§3 " + cmddd);
 
                                         // OP Perms?
                                         boolean wasOP = target.isOp();
@@ -7027,7 +6999,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                     // Run
                                     if (asEntity != null) {
-                                        //DBG//OotilityCeption.Log("\u00a73sudop\u00a77 Running as \u00a7e" + asEntity.getName() + "\u00a73 " + cmddd);
+                                        //DBG//OotilityCeption.Log("§3sudop§7 Running as §e" + asEntity.getName() + "§3 " + cmddd);
 
                                         // As Entity
                                         OotilityCeption.SendAndParseConsoleCommand(asEntity.getUniqueId(), cmddd, asEntity, null, null, null, null);
@@ -7035,7 +7007,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                 // Lest go
                                 } else {
-                                    //DBG//OotilityCeption.Log("\u00a73sudop\u00a77 Running as \u00a7econsole\u00a73 " + cmddd);
+                                    //DBG//OotilityCeption.Log("§3sudop§7 Running as §econsole§3 " + cmddd);
 
                                     // As Entity
                                     OotilityCeption.SendAndParseConsoleCommand(cmddd, asConsole, null, null, null);
@@ -7044,18 +7016,18 @@ public class GungingOotilities implements CommandExecutor {
                             }
 
                         } else if (args.length == 1) {
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Sudo, \u00a77Execute a command as someone");
-                            logReturn.add("\u00a73Usage: \u00a7e/goop sudo <entity> <command>");
-                            logReturn.add("\u00a73 - \u00a7e<entity> \u00a77UUID, vanilla selector, player name");
-                            logReturn.add("\u00a73 - \u00a7e<command> \u00a77Command to execute");
-                            logReturn.add("\u00a7c> \u00a77May use command \u00a7csudop\u00a77 to run with OP perms.");
-                            logReturn.add("\u00a78Be aware that this turns players OP for the sync duration of the command, and they will remain OPd if the command crashes the server while executing. Async commands may not finish executing by the time a player is reverted to normal.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Sudo, §7Execute a command as someone");
+                            logReturn.add("§3Usage: §e/goop sudo <entity> <command>");
+                            logReturn.add("§3 - §e<entity> §7UUID, vanilla selector, player name");
+                            logReturn.add("§3 - §e<command> §7Command to execute");
+                            logReturn.add("§c> §7May use command §csudop§7 to run with OP perms.");
+                            logReturn.add("§8Be aware that this turns players OP for the sync duration of the command, and they will remain OPd if the command crashes the server while executing. Async commands may not finish executing by the time a player is reverted to normal.");
 
                         } else {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat("Sudo", "Incorrect usage. For info: \u00a7e/goop sudo"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop sudo <players / entity uuid> <command>");
+                                logReturn.add(OotilityCeption.LogFormat("Sudo", "Incorrect usage. For info: §e/goop sudo"));
+                                logReturn.add("§3Usage: §e/goop sudo <players / entity uuid> <command>");
                             }
                         }
 
@@ -7063,7 +7035,7 @@ public class GungingOotilities implements CommandExecutor {
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oNo permission to hyjack people's command sending abilities."));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oNo permission to hyjack people's command sending abilities."));
                     }
                     break;
                 //endregion
@@ -7091,20 +7063,20 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 1)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Permission, \u00a77Succeeds if the player has permission");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77UUID, vanilla selector, player name.");
-                            logReturn.add("\u00a73 - \u00a7e<perm> \u00a77Permission to check.");
-                            logReturn.add("\u00a73      * \u00a77Negate with \u00a7b!\u00a77 prefix.");
-                            logReturn.add("\u00a73      * \u00a77Separate two permissions with a comma as 'OR'");
-                            logReturn.add("\u00a73      * \u00a77to succeed with either permission.");
-                            logReturn.add("\u00a73      * \u00a77Use && as 'AND' for permissions.");
-                            logReturn.add("\u00a73      * \u00a77Separate two permissions with \u00a7b&&\u00a77 as 'AND'");
-                            logReturn.add("\u00a73      * \u00a77to rquire both permissions to succeed.");
-                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Will store the score result.");
-                            logReturn.add("\u00a73 - \u00a7e[score] \u00a77Score result if succeeds.");
-                            logReturn.add("\u00a78 Can combine OR and AND, ex: perm1,perm2&&perm3,!perm4&&perm5");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Permission, §7Succeeds if the player has permission");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7UUID, vanilla selector, player name.");
+                            logReturn.add("§3 - §e<perm> §7Permission to check.");
+                            logReturn.add("§3      * §7Negate with §b!§7 prefix.");
+                            logReturn.add("§3      * §7Separate two permissions with a comma as 'OR'");
+                            logReturn.add("§3      * §7to succeed with either permission.");
+                            logReturn.add("§3      * §7Use && as 'AND' for permissions.");
+                            logReturn.add("§3      * §7Separate two permissions with §b&&§7 as 'AND'");
+                            logReturn.add("§3      * §7to rquire both permissions to succeed.");
+                            logReturn.add("§3 - §e[objective] §7Will store the score result.");
+                            logReturn.add("§3 - §e[score] §7Score result if succeeds.");
+                            logReturn.add("§8 Can combine OR and AND, ex: perm1,perm2&&perm3,!perm4&&perm5");
 
                             // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -7114,7 +7086,7 @@ public class GungingOotilities implements CommandExecutor {
                             RefSimulator<String> logAddtion = new RefSimulator<>("");
 
                             // Get Playes / Entity
-                            CommandSender asConsole = Bukkit.getServer().getConsoleSender(); boolean isConsole = false;
+                            Bukkit.getServer().getConsoleSender();
                             Entity asEntity = OotilityCeption.getEntityByUniqueId(args[1]);
                             ArrayList<Player> targets = OotilityCeption.GetPlayers(senderLocation, args[1], logAddtion);
 
@@ -7122,7 +7094,7 @@ public class GungingOotilities implements CommandExecutor {
                             ArrayList<ArrayList<String>> permissionREQ = GCSR_Permission.Parse(args[2]);
 
                             // Does the player exist?
-                            if (targets.size() < 1 && asEntity == null) {
+                            if (targets.isEmpty() && asEntity == null) {
                                 // Failure
                                 failure = true;
 
@@ -7145,7 +7117,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Notify the error
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Objective \u00a73" + args[3] + "\u00a77 not found."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Objective §3" + args[3] + "§7 not found."));
                                 }
 
                                 // PMP
@@ -7155,7 +7127,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Notify the error
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected numeric value or PMP instead of \u00a7e" + args[4] + "\u00a77."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected numeric value or PMP instead of §e" + args[4] + "§7."));
                                 }
                             }
 
@@ -7173,7 +7145,7 @@ public class GungingOotilities implements CommandExecutor {
                                     for (GCSR_Permission criterion : criteria) { if (!criterion.isUnlockedForOP()) { faux = true; break; } }
 
                                     // Mention
-                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Non-Players \u00a7aalways\u00a77 have permission.")); }
+                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Non-Players §aalways§7 have permission.")); }
 
                                     // If not failure
                                     if (!faux) {
@@ -7203,7 +7175,7 @@ public class GungingOotilities implements CommandExecutor {
                                         }
 
                                         // Mention
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Player \u00a73" + target.getName() + "\u00a7a had\u00a77 the specified permissions.")); }
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Player §3" + target.getName() + "§a had§7 the specified permissions.")); }
 
                                         // Run Chain
                                         commandChain.chain(chained, target, sender);
@@ -7214,7 +7186,7 @@ public class GungingOotilities implements CommandExecutor {
                                         if (failMessage != null) { target.sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage, target.getPlayer(), target.getPlayer(), null, null))); }
 
                                         // Mention
-                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Player \u00a73" + target.getName() + "\u00a7c failed\u00a77 at meeting " + fail + " permission.")); }
+                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Player §3" + target.getName() + "§c failed§7 at meeting " + fail + " permission.")); }
                                     }
                                 }
                             }
@@ -7224,22 +7196,22 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop permission"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop permission"));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop permission"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop permission"));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
 
                         // No perms
                     } else {
 
                         // Clarify it lack of perms
-                        logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou have no permission to check permissio... holdon... this command failed unspecifiedly."));
+                        logReturn.add(OotilityCeption.LogFormat("§c§oYou have no permission to check permissio... holdon... this command failed unspecifiedly."));
                     }
                     break;
                 //endregion
@@ -7268,7 +7240,7 @@ public class GungingOotilities implements CommandExecutor {
             for (String s : logReturn) {
                 oots.CLog(s);
 
-                if (Gunging_Ootilities_Plugin.devLogging) { if (Gunging_Ootilities_Plugin.devPlayer != null) { Gunging_Ootilities_Plugin.devPlayer.sendMessage("\u00a76CONSOLE " + s); } }
+                if (Gunging_Ootilities_Plugin.devLogging) { if (Gunging_Ootilities_Plugin.devPlayer != null) { Gunging_Ootilities_Plugin.devPlayer.sendMessage("§6CONSOLE " + s); } }
             }
         }
 
@@ -7276,7 +7248,11 @@ public class GungingOotilities implements CommandExecutor {
         //return super.onCommand(sender, command, label, args);
     }
 
-    public void onCommand_GooPUnlock(@NotNull CommandSender sender, Command command, @NotNull String label, @NotNull String[] args, @Nullable Location senderLocation, boolean chained, @Nullable SuccessibleChain commandChain, @NotNull RefSimulator<List<String>> logReturnUrn, @Nullable String failMessage) {
+    private static boolean isSuccess(boolean success) {
+        return success;
+    }
+
+    public void onCommand_GooPUnlock(@NotNull CommandSender sender, @NotNull String[] args, @Nullable Location senderLocation, boolean chained, @Nullable SuccessibleChain commandChain, @NotNull RefSimulator<List<String>> logReturnUrn, @Nullable String failMessage) {
         // Has permission?
         boolean permission = true;
 
@@ -7330,25 +7306,25 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Unlockables - \u00a7b" + subcommand + ",\u00a77 Unlocks an unlockable :B");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who will unlock this goal.");
-                            logReturn.add("\u00a73      * \u00a7bserver \u00a77Global unlockable for the entire server");
-                            logReturn.add("\u00a73 - \u00a7e<goal> \u00a77Name of the goal.");
-                            logReturn.add("\u00a73 - \u00a7e[x] \u00a77Value of the goal, \u00a7btrue\u00a77 by default.");
-                            logReturn.add("\u00a73      * \u00a7btoggle\u00a77 Always succeeds, will lock the unlockable if it was unlocked. ");
-                            logReturn.add("\u00a73      * \u00a77Can be any number except 0, instead.");
-                            logReturn.add("\u00a73 - \u00a7e[reset timer] \u00a77If this new timer will take prevalence.");
-                            logReturn.add("\u00a73      * \u00a7bfalse \u00a77The old timer will remain, but if this");
-                            logReturn.add("\u00a73          \u00a77goal was locked, the new timer will be set.");
-                            logReturn.add("\u00a73 - \u00a7e[time] \u00a77Time this goal will remain unlocked.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Unlockables - §b" + subcommand + ",§7 Unlocks an unlockable :B");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who will unlock this goal.");
+                            logReturn.add("§3      * §bserver §7Global unlockable for the entire server");
+                            logReturn.add("§3 - §e<goal> §7Name of the goal.");
+                            logReturn.add("§3 - §e[x] §7Value of the goal, §btrue§7 by default.");
+                            logReturn.add("§3      * §btoggle§7 Always succeeds, will lock the unlockable if it was unlocked. ");
+                            logReturn.add("§3      * §7Can be any number except 0, instead.");
+                            logReturn.add("§3 - §e[reset timer] §7If this new timer will take prevalence.");
+                            logReturn.add("§3      * §bfalse §7The old timer will remain, but if this");
+                            logReturn.add("§3          §7goal was locked, the new timer will be set.");
+                            logReturn.add("§3 - §e[time] §7Time this goal will remain unlocked.");
 
                             // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                             // Does the player exist?
-                            if (targets.size() < 1) {
+                            if (targets.isEmpty()) {
                                 // Failure
                                 failure = true;
 
@@ -7405,7 +7381,7 @@ public class GungingOotilities implements CommandExecutor {
 
                                     // Kreate
                                     otf = OptimizedTimeFormat.Current();
-                                    Integer mag = OotilityCeption.ParseInt(magnitude);
+                                    int mag = OotilityCeption.ParseInt(magnitude);
                                     if (mag < 0) { mag = -mag; }
 
                                     // Units?
@@ -7430,7 +7406,7 @@ public class GungingOotilities implements CommandExecutor {
                                             // Fail
                                             failure = true;
 
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Time units '" + units + "\u00a77' not recognized. Must use \u00a7bs m h d \u00a77or\u00a7b y \u00a77(Second, Minute, Hour, Day, Year)"));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Time units '" + units + "§7' not recognized. Must use §bs m h d §7or§b y §7(Second, Minute, Hour, Day, Year)"));
 
                                             break;
                                     }
@@ -7440,7 +7416,7 @@ public class GungingOotilities implements CommandExecutor {
                                     // Fail
                                     failure = true;
 
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected an integer for time value instead of \u00a73" + magnitude));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected an integer for time value instead of §3" + magnitude));
                                 }
                             }
 
@@ -7457,7 +7433,7 @@ public class GungingOotilities implements CommandExecutor {
                                     // Fail
                                     failure = true;
 
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 instead of \u00a73" + args[5]));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected §btrue§7 or §bfalse§7 instead of §3" + args[5]));
 
                                 }
                             }
@@ -7495,7 +7471,7 @@ public class GungingOotilities implements CommandExecutor {
                                                     // Run Chain
                                                     chainingSuccess = true;
 
-                                                    logMod = "\u00a77 Removed old goal timer.";
+                                                    logMod = "§7 Removed old goal timer.";
                                                 }
 
                                             // Not unlocked
@@ -7504,7 +7480,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 // Failure
                                                 failure = true;
 
-                                                logMod = "\u00a77 Failed to remove goal timer: \u00a7eGoal is not unlocked!";
+                                                logMod = "§7 Failed to remove goal timer: §eGoal is not unlocked!";
                                             }
                                         }
 
@@ -7523,12 +7499,12 @@ public class GungingOotilities implements CommandExecutor {
                                             // Already unlocked?
                                             if (uck.isTimed()) {
 
-                                                logMod = "\u00a77 Set goal to automatically lock \u00a73" + args[6] + "\u00a77 from now.";
+                                                logMod = "§7 Set goal to automatically lock §3" + args[6] + "§7 from now.";
 
                                             } else {
 
 
-                                                logMod = "\u00a77 Replaced old goal timer with new one.";
+                                                logMod = "§7 Replaced old goal timer with new one.";
                                             }
 
                                         }
@@ -7544,7 +7520,7 @@ public class GungingOotilities implements CommandExecutor {
                                             uck.Lock();
 
                                             // Ntify
-                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 has \u00a72successfuly\u00a77 locked goal \u00a7e" + args[3] + "\u00a77." + logMod));
+                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 has §2successfuly§7 locked goal §e" + args[3] + "§7." + logMod));
 
                                         } else {
 
@@ -7552,7 +7528,7 @@ public class GungingOotilities implements CommandExecutor {
                                             uck.Unlock();
 
                                             // Ntify
-                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 has \u00a7asuccessfuly\u00a77 unlocked goal \u00a7e" + args[3] + "\u00a77." + logMod));
+                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 has §asuccessfuly§7 unlocked goal §e" + args[3] + "§7." + logMod));
                                         }
 
                                         // Run Chain
@@ -7574,7 +7550,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 uck.Unlock();
 
                                                 // Ntify
-                                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 has \u00a7asuccessfuly\u00a77 unlocked goal \u00a7e" + args[3] + "\u00a77." + logMod));
+                                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 has §asuccessfuly§7 unlocked goal §e" + args[3] + "§7." + logMod));
 
                                                 // Run Chain
                                                 chainingSuccess = true;
@@ -7595,7 +7571,7 @@ public class GungingOotilities implements CommandExecutor {
                                                 if (u != uck.GetUnlock()) {
 
                                                     // Ntify
-                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 has \u00a7asuccessfuly\u00a77 unlocked goal \u00a7e" + args[3] + "\u00a77 at \u00a7b" + uck.GetUnlock() + "\u00a77." + logMod));
+                                                    if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 has §asuccessfuly§7 unlocked goal §e" + args[3] + "§7 at §b" + uck.GetUnlock() + "§7." + logMod));
 
                                                     // Run Chain
                                                     chainingSuccess = true;
@@ -7606,20 +7582,21 @@ public class GungingOotilities implements CommandExecutor {
                                                 } else {
 
                                                     // L
-                                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 already had goal \u00a7e" + args[3] + "\u00a77 unlocked." + logMod));
+                                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 already had goal §e" + args[3] + "§7 unlocked." + logMod));
                                                 }
                                             }
 
                                         } else {
 
                                             // L
-                                            if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 alraedy had goal \u00a7e" + args[3] + "\u00a77 unlocked." + logMod));
+                                            if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 alraedy had goal §e" + args[3] + "§7 unlocked." + logMod));
                                         }
                                     }
 
                                     // Run Chain
-                                    if (chainingSuccess) { commandChain.chain(chained, (target instanceof GOOPUCKTPlayer) ? ((GOOPUCKTPlayer) target).getPlayer() : null, sender); }
-
+                                    if (chainingSuccess) {
+                                        assert commandChain != null;
+                                        commandChain.chain(chained, (target instanceof GOOPUCKTPlayer) ? ((GOOPUCKTPlayer) target).getPlayer() : null, sender); }
                                     else if (!chainingSuccess) {
 
                                         if (failMessage != null && target instanceof GOOPUCKTPlayer) { ((GOOPUCKTPlayer) target).getPlayer().sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage, ((GOOPUCKTPlayer) target).getPlayer(), ((GOOPUCKTPlayer) target).getPlayer(), null, null))); }
@@ -7632,15 +7609,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop unlockables unlock"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop unlockables unlock"));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop unlockables unlock"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop unlockables unlock"));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
 
                         break;
@@ -7661,18 +7638,18 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Unlockables - \u00a7b" + subcommand + ",\u00a77 Locks an unlockable.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who will unlock this goal.");
-                            logReturn.add("\u00a73      * \u00a7bserver \u00a77Global unlockable for the entire server");
-                            logReturn.add("\u00a73 - \u00a7e<goal> \u00a77Name of the goal to lock");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Unlockables - §b" + subcommand + ",§7 Locks an unlockable.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who will unlock this goal.");
+                            logReturn.add("§3      * §bserver §7Global unlockable for the entire server");
+                            logReturn.add("§3 - §e<goal> §7Name of the goal to lock");
 
                             // Correct number of args?
-                        } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
+                        } else if (args.length >= argsMinLength && args.length == argsMaxLength) {
 
                             // Does the player exist?
-                            if (targets.size() < 1) {
+                            if (targets.isEmpty()) {
                                 // Failure
                                 failure = true;
 
@@ -7697,9 +7674,10 @@ public class GungingOotilities implements CommandExecutor {
                                         uck.Lock();
 
                                         // Ntify
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 now has goal \u00a7e" + args[3] + "\u00a77 as \u00a7clocked\u00a77."));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 now has goal §e" + args[3] + "§7 as §clocked§7."));
 
                                         // Run Chain
+                                        assert commandChain != null;
                                         commandChain.chain(chained, (target instanceof GOOPUCKTPlayer) ? ((GOOPUCKTPlayer) target).getPlayer() : null, sender);
 
                                         // Save
@@ -7710,7 +7688,7 @@ public class GungingOotilities implements CommandExecutor {
                                         if (failMessage != null && target instanceof GOOPUCKTPlayer) { ((GOOPUCKTPlayer) target).getPlayer().sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage, ((GOOPUCKTPlayer) target).getPlayer(), ((GOOPUCKTPlayer) target).getPlayer(), null, null))); }
 
                                         // L
-                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 alraedy had goal \u00a7e" + args[3] + "\u00a77 locked."));
+                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 alraedy had goal §e" + args[3] + "§7 locked."));
                                     }
                                 }
                             }
@@ -7720,15 +7698,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop unlockables lock"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop unlockables lock"));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop unlockables lock"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop unlockables lock"));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -7748,23 +7726,23 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Unlockables - \u00a7b" + subcommand + ",\u00a77 Read the lock state of a goal.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who will unlock this goal.");
-                            logReturn.add("\u00a73      * \u00a7bserver \u00a77Global unlockable for the entire server");
-                            logReturn.add("\u00a73 - \u00a7e<goal> \u00a77Name of the goal to lock");
-                            logReturn.add("\u00a73 - \u00a7e[range] \u00a77Range by which this command succeeds");
-                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Objective to write the score onto");
-                            logReturn.add("\u00a73 - \u00a7e[±][score][%] \u00a77Score operation to perform");
-                            logReturn.add("\u00a73      * \u00a7bread \u00a77To read the unlockable value.");
-                            logReturn.add("\u00a73      * \u00a7bread# \u00a77Read but multiply by # (a number) in the score.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Unlockables - §b" + subcommand + ",§7 Read the lock state of a goal.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who will unlock this goal.");
+                            logReturn.add("§3      * §bserver §7Global unlockable for the entire server");
+                            logReturn.add("§3 - §e<goal> §7Name of the goal to lock");
+                            logReturn.add("§3 - §e[range] §7Range by which this command succeeds");
+                            logReturn.add("§3 - §e[objective] §7Objective to write the score onto");
+                            logReturn.add("§3 - §e[±][score][%] §7Score operation to perform");
+                            logReturn.add("§3      * §bread §7To read the unlockable value.");
+                            logReturn.add("§3      * §bread# §7Read but multiply by # (a number) in the score.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                             // Does the player exist?
-                            if (targets.size() < 1) {
+                            if (targets.isEmpty()) {
                                 // Failure
                                 failure = true;
 
@@ -7777,12 +7755,12 @@ public class GungingOotilities implements CommandExecutor {
                             boolean anySuccess = false;
                             int lockArgInsert = 0;
                             if (args.length >= 5) {
-                                anySuccess = args[4].toLowerCase().equals("true");
+                                anySuccess = args[4].equalsIgnoreCase("true");
 
                                 if (OotilityCeption.BoolTryParse(args[4])) {
 
                                     // Parse
-                                    Boolean tBool = Boolean.parseBoolean(args[4]);
+                                    boolean tBool = Boolean.parseBoolean(args[4]);
 
                                     // Modify if tru
                                     if (tBool) { tLock = new QuickNumberRange(1.0, 1.0); }
@@ -7836,7 +7814,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Note
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Could not find objective of name \u00a73" + objectiveName));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Could not find objective of name §3" + objectiveName));
                                 }
 
                                 // Got anything to say?
@@ -7886,12 +7864,12 @@ public class GungingOotilities implements CommandExecutor {
                                             OotilityCeption.SetPlayerScore(targetObjective, ((GOOPUCKTPlayer) target).getPlayer(), targetScore);
 
                                             // Ntify
-                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a7a had \u00a77goal in the correct lock state. Set their score \u00a73" + targetObjective.getName() + "\u00a77 to \u00a7b" + OotilityCeption.GetPlayerScore(targetObjective, ((GOOPUCKTPlayer) target).getPlayer())));
+                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§a had §7goal in the correct lock state. Set their score §3" + targetObjective.getName() + "§7 to §b" + OotilityCeption.GetPlayerScore(targetObjective, ((GOOPUCKTPlayer) target).getPlayer())));
 
                                         } else {
 
                                             // Ntify
-                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a7a had \u00a77goal in the correct lock state."));
+                                            if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§a had §7goal in the correct lock state."));
                                         }
 
                                     // Score doesnt match
@@ -7900,7 +7878,7 @@ public class GungingOotilities implements CommandExecutor {
                                         if (failMessage != null && target instanceof GOOPUCKTPlayer) { ((GOOPUCKTPlayer) target).getPlayer().sendMessage(OotilityCeption.ParseColour(OotilityCeption.ParseConsoleCommand(failMessage, ((GOOPUCKTPlayer) target).getPlayer(), ((GOOPUCKTPlayer) target).getPlayer(), null, null))); }
 
                                         // Ntify
-                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "\u00a77 did \u00a7cnot\u00a77 have the goal in the correct unlock state (\u00a7e" + uck.GetUnlock() + "\u00a77)."));
+                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, target.getName() + "§7 did §cnot§7 have the goal in the correct unlock state (§e" + uck.GetUnlock() + "§7)."));
                                     }
                                 }
                             }
@@ -7910,15 +7888,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop unlockables lockstate"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop unlockables lockstate"));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop unlockables lockstate"));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop unlockables lockstate"));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -7937,12 +7915,12 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73Unlockables - \u00a7b" + subcommand + ",\u00a77 Print the unlockable states of a player.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player to check unlocks.");
-                            logReturn.add("\u00a73      * \u00a7bserver \u00a77Check active global unlockables");
-                            logReturn.add("\u00a78Meant for admin use, it accomplishes nothing except letting you read a player's unlockable values.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3Unlockables - §b" + subcommand + ",§7 Print the unlockable states of a player.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player to check unlocks.");
+                            logReturn.add("§3      * §bserver §7Check active global unlockables");
+                            logReturn.add("§8Meant for admin use, it accomplishes nothing except letting you read a player's unlockable values.");
 
                             // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -7951,7 +7929,7 @@ public class GungingOotilities implements CommandExecutor {
                             OfflinePlayer asOffline = OotilityCeption.GetPlayer(args[2], true);
 
                             // Does the player exist?
-                            if (targets.size() < 1 && asOffline == null) {
+                            if (targets.isEmpty() && asOffline == null) {
                                 // Failure
                                 failure = true;
 
@@ -7963,11 +7941,11 @@ public class GungingOotilities implements CommandExecutor {
                             if (!failure) {
 
                                 // Strs
-                                String col, bol = " \u00a7c", suc = " \u00a7a";
+                                String col, bol = " §c", suc = " §a";
 
                                 // The offline one yes
                                 if (asOffline != null) {
-                                    logReturn.add("\u00a7b+++\u00a77 For player \u00a7e" + asOffline.getName());
+                                    logReturn.add("§b+++§7 For player §e" + asOffline.getName());
                                     for (GooPUnlockables uck : GooPUnlockables.getRegisteredTo(asOffline.getUniqueId())) {
                                         if (uck == null) { continue; }
                                         uck.CheckTimer();
@@ -7975,15 +7953,16 @@ public class GungingOotilities implements CommandExecutor {
 
                                         String timeRemaining = "";
                                         if (uck.isTimed()) {
-                                            timeRemaining = "\u00a73 " + OotilityCeption.NicestTimeValueFrom((double) OotilityCeption.SecondsElapsedSince(OptimizedTimeFormat.Current(), uck.GetTimed())); }
+                                            assert uck.GetTimed() != null;
+                                            timeRemaining = "§3 " + OotilityCeption.NicestTimeValueFrom((double) OotilityCeption.SecondsElapsedSince(OptimizedTimeFormat.Current(), uck.GetTimed())); }
 
-                                        logReturn.add("\u00a7a> \u00a77 " + uck.getGoalname() + col + uck.IsUnlocked() + timeRemaining); } }
+                                        logReturn.add("§a> §7 " + uck.getGoalname() + col + uck.IsUnlocked() + timeRemaining); } }
 
                                 // For every player
                                 for (GooPUnlockableTarget target : targets) {
                                     if (asOffline != null && target.getUniqueId().equals(asOffline.getUniqueId())) { continue; }
 
-                                    logReturn.add("\u00a7b+++\u00a77 For player \u00a7e" + target.getName());
+                                    logReturn.add("§b+++§7 For player §e" + target.getName());
                                     for (GooPUnlockables uck : GooPUnlockables.getRegisteredTo(target.getUniqueId())) {
                                         if (uck == null) { continue; }
                                         uck.CheckTimer();
@@ -7991,9 +7970,10 @@ public class GungingOotilities implements CommandExecutor {
 
                                         String timeRemaining = "";
                                         if (uck.isTimed()) {
-                                            timeRemaining = "\u00a73 " + OotilityCeption.NicestTimeValueFrom((double) OotilityCeption.SecondsElapsedSince(OptimizedTimeFormat.Current(), uck.GetTimed())); }
+                                            assert uck.GetTimed() != null;
+                                            timeRemaining = "§3 " + OotilityCeption.NicestTimeValueFrom((double) OotilityCeption.SecondsElapsedSince(OptimizedTimeFormat.Current(), uck.GetTimed())); }
 
-                                        logReturn.add("\u00a7a> \u00a77 " + uck.getGoalname() + col + uck.IsUnlocked() + timeRemaining);
+                                        logReturn.add("§a> §7 " + uck.getGoalname() + col + uck.IsUnlocked() + timeRemaining);
                                     }
                                 }
                             }
@@ -8002,60 +7982,54 @@ public class GungingOotilities implements CommandExecutor {
                         } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
                             // Notify Error
-                            if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop unlockables check"));
-
-                            } else {
-
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop unlockables check"));
-                            }
+                            logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop unlockables check"));
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
 
                     default:
                         // I have no memory of that shit
-                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Unlockables", "'\u00a73" + args[1] + "\u00a77' is not a valid Unlockables action! do \u00a7e/goop unlockables\u00a77 for the list of actions."));
+                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("Unlockables", "'§3" + args[1] + "§7' is not a valid Unlockables action! do §e/goop unlockables§7 for the list of actions."));
                         break;
                 }
 
             } else if (args.length == 1) {
-                logReturn.add("\u00a7e______________________________________________");
-                logReturn.add("\u00a73Unlockables, \u00a77Yet another way of 'unlocking' stuff.");
-                logReturn.add("\u00a73Usage: \u00a7e/goop unlockables {action}");
-                logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                logReturn.add("\u00a73 --> \u00a7eunlock <player> <goal> [x] [reset timer] [time]");
-                logReturn.add("\u00a73      * \u00a77Target goal is now unlocked by target player");
-                logReturn.add("\u00a73      * \u00a77You may specify a non-zero value for X to store");
-                logReturn.add("\u00a73 --> \u00a7elock <player> <goal>");
-                logReturn.add("\u00a73      * \u00a77Target goal, to target player, is now locked");
-                logReturn.add("\u00a73 --> \u00a7elockstate <player> <goal> <x> [objective] [score]");
-                logReturn.add("\u00a73      * \u00a77Checks that the goal is locked or unlocked.");
-                logReturn.add("\u00a73      * \u00a77You may specify a range, \u00a7b0..10\u00a77 for x.");
-                logReturn.add("\u00a73      * \u00a78Note that '\u00a7clocked\u00a78' means that \u00a7cx = 0.0");
-                logReturn.add("\u00a73 --> \u00a7echeck <player>");
-                logReturn.add("\u00a73      * \u00a77For debugging, check the goals of all the players.");
-                logReturn.add("\u00a73      * \u00a77This just prints their values so you can read them.");
+                logReturn.add("§e______________________________________________");
+                logReturn.add("§3Unlockables, §7Yet another way of 'unlocking' stuff.");
+                logReturn.add("§3Usage: §e/goop unlockables {action}");
+                logReturn.add("§3 - §e{action} §7What actions to perform:");
+                logReturn.add("§3 --> §eunlock <player> <goal> [x] [reset timer] [time]");
+                logReturn.add("§3      * §7Target goal is now unlocked by target player");
+                logReturn.add("§3      * §7You may specify a non-zero value for X to store");
+                logReturn.add("§3 --> §elock <player> <goal>");
+                logReturn.add("§3      * §7Target goal, to target player, is now locked");
+                logReturn.add("§3 --> §elockstate <player> <goal> <x> [objective] [score]");
+                logReturn.add("§3      * §7Checks that the goal is locked or unlocked.");
+                logReturn.add("§3      * §7You may specify a range, §b0..10§7 for x.");
+                logReturn.add("§3      * §8Note that '§clocked§8' means that §cx = 0.0");
+                logReturn.add("§3 --> §echeck <player>");
+                logReturn.add("§3      * §7For debugging, check the goals of all the players.");
+                logReturn.add("§3      * §7This just prints their values so you can read them.");
             } else {
                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                    logReturn.add(OotilityCeption.LogFormat("Unlock", "Incorrect usage. For info: \u00a7e/goop unlockables"));
-                    logReturn.add("\u00a73Usage: \u00a7e/goop unlockables {action} <player> <goal>");
+                    logReturn.add(OotilityCeption.LogFormat("Unlock", "Incorrect usage. For info: §e/goop unlockables"));
+                    logReturn.add("§3Usage: §e/goop unlockables {action} <player> <goal>");
                 }
             }
 
         } else {
 
             // Tell him lmao
-            logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission unlock stuff this way!"));
+            logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission unlock stuff this way!"));
         }
 
         //Set Log Return Urn Value
         logReturnUrn.SetValue(logReturn);
     }
-    public void onCommand_GooPNBT(@NotNull CommandSender sender, Command command, @NotNull String label, @NotNull String[] args, @Nullable Location senderLocation, boolean chained, @Nullable SuccessibleChain commandChain, @NotNull RefSimulator<List<String>> logReturnUrn, @Nullable String failMessage) {
+    public void onCommand_GooPNBT(@NotNull CommandSender sender, @NotNull String[] args, @Nullable Location senderLocation, boolean chained, @Nullable SuccessibleChain commandChain, @NotNull RefSimulator<List<String>> logReturnUrn, @Nullable String failMessage) {
         // Has permission?
         boolean permission = true;
 
@@ -8089,7 +8063,6 @@ public class GungingOotilities implements CommandExecutor {
                     asDroppedItem = OotilityCeption.getEntityByUniqueId(args[playerIndex]);
                 }
                 if (!(asDroppedItem instanceof Item)) { asDroppedItem = null; }
-                StringBuilder successSlots = new StringBuilder();
                 Attribute attribute = null;
 
                 // Help Parameters
@@ -8097,7 +8070,6 @@ public class GungingOotilities implements CommandExecutor {
                 String subcommand, subsection, usage;
 
                 // Amount of successes
-                int succ = 0;
 
                 switch (subsonic) {
                     //region Rename
@@ -8113,12 +8085,12 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Changes the name of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e<name> \u00a77Name to set to the items.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Changes the name of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e<name> §7Name to set to the items.");
 
                             // Correct number of args?
                         } else if (args.length >= argsMinLength) {
@@ -8127,7 +8099,7 @@ public class GungingOotilities implements CommandExecutor {
                             RefSimulator<String> refAddition = new RefSimulator<>("");
 
                             // Does the player exist?
-                            if (targets.size() < 1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -8185,7 +8157,7 @@ public class GungingOotilities implements CommandExecutor {
                                 if (asDroppedItem != null) { asDroppedItem.setCustomName(OotilityCeption.GetItemName(OotilityCeption.RenameItem(OotilityCeption.FromDroppedItem(asDroppedItem), aLoreLine, refAddition))); }
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
+                                if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
 
                             }
 
@@ -8194,15 +8166,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -8221,12 +8193,12 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Changes the name of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e<name> \u00a77Name to set to the items.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Changes the name of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e<name> §7Name to set to the items.");
 
                             // Correct number of args?
                         } else if (args.length >= argsMinLength) {
@@ -8294,7 +8266,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Notify the error
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Must specify at least one variable in the format \u00a73[name_no_spaces]=[text with <$sc> instead of semicolons]\u00a77. To specify more than one variable, make a semicolon separated list."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Must specify at least one variable in the format §3[name_no_spaces]=[text with <$sc> instead of semicolons]§7. To specify more than one variable, make a semicolon separated list."));
 
                                 } else {
 
@@ -8445,8 +8417,8 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage. For info: \u00a7e/goop nbt"));
-                                logReturn.add("\u00a73Usage: \u00a7e/goop nbt revariable <player> <slot> <variable=value...>");
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage. For info: §e/goop nbt"));
+                                logReturn.add("§3Usage: §e/goop nbt revariable <player> <slot> <variable=value...>");
                             }
                         }
                         break;
@@ -8465,24 +8437,23 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Changes the lore of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<index> \u00a77Where to insert the lore line.");
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Changes the lore of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<index> §7Where to insert the lore line.");
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
                             if (Gunging_Ootilities_Plugin.foundMMOItems) {
-                                logReturn.add("\u00a73 - \u00a7e[fv] \u00a77MMOItem lore is targetted by default, if you are editing");
+                                logReturn.add("§3 - §e[fv] §7MMOItem lore is targetted by default, if you are editing");
                                 logReturn.add("           a MMOItem; Use this to force-target vanilla lore.");
                                 logReturn.add("           Vanilla lore changes often undone in MMOItems.");
                             }
-                            logReturn.add("\u00a73 - \u00a7e<lore...> \u00a77Lore to add to the items.");
+                            logReturn.add("§3 - §e<lore...> §7Lore to add to the items.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength) {
 
                             // Gets that player boi
-                            RefSimulator<String> logAddition = new RefSimulator<>("");
 
                             // Index Parses?
                             Integer iIndex = 0;
@@ -8510,11 +8481,11 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 // Log
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subsection, "Expected index to be an integer number or \u00a7etop\u00a77/\u00a7ebottom\u00a77 keywords instead of '\u00a73" + args[2] + "\u00a77'.")); }
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subsection, "Expected index to be an integer number or §etop§7/§ebottom§7 keywords instead of '§3" + args[2] + "§7'.")); }
                             }
 
                             // Does the player exist?
-                            if (targets.size() <  1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -8594,7 +8565,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
+                                if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
                             }
 
                         // Incorrect number of args
@@ -8602,15 +8573,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -8628,14 +8599,14 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Removes lore from items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<index> \u00a77Which lore line to remove.");
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Removes lore from items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<index> §7Which lore line to remove.");
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
                             if (Gunging_Ootilities_Plugin.foundMMOItems) {
-                                logReturn.add("\u00a73 - \u00a7e[fv] \u00a77MMOItem lore is targetted by default, if you are editing");
+                                logReturn.add("§3 - §e[fv] §7MMOItem lore is targetted by default, if you are editing");
                                 logReturn.add("           a MMOItem; Use this to force-target vanilla lore.");
                                 logReturn.add("           Vanilla lore changes often undone in MMOItems.");
                             }
@@ -8645,7 +8616,6 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Gets that player boi
                             boolean revAll = false;
-                            RefSimulator<String> logAddition = new RefSimulator<>("");
 
                             // Index Parses?
                             Integer iIndex = 0;
@@ -8679,11 +8649,11 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 // Log
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subsection, "Expected index to be an integer number or \u00a7etop\u00a77/\u00a7ebottom\u00a77 keywords instead of '\u00a73" + args[2] + "\u00a77'.")); }
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subsection, "Expected index to be an integer number or §etop§7/§ebottom§7 keywords instead of '§3" + args[2] + "§7'.")); }
                             }
 
                             // Does the player exist?
-                            if (targets.size() < 1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -8701,7 +8671,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Log
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Expected '\u00a7etrue\u00a77' or '\u00a7efalse\u00a77' instead of '\u00a73" + args[5] + "\u00a77'"));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Expected '§etrue§7' or '§efalse§7' instead of '§3" + args[5] + "§7'"));
                                 }
                             }
 
@@ -8750,7 +8720,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) {
+                                if (!executor.getIncludedStrBuilder().isEmpty()) {
                                     logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString()));
                                 }
                             }
@@ -8760,15 +8730,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
 
@@ -8820,14 +8790,14 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Modifies the " + subcommand +  " bonus of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e[±][value][%] \u00a77Amount of attribute to set.");
-                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Save the result onto the player's score.");
-                            logReturn.add("\u00a78Score is the final value miltiplied by 10.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Modifies the " + subcommand +  " bonus of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e[±][value][%] §7Amount of attribute to set.");
+                            logReturn.add("§3 - §e[objective] §7Save the result onto the player's score.");
+                            logReturn.add("§8Score is the final value miltiplied by 10.");
 
                             // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -8839,14 +8809,12 @@ public class GungingOotilities implements CommandExecutor {
                             ScoreboardManager manager = Bukkit.getScoreboardManager();
                             Scoreboard targetScoreboard = manager.getMainScoreboard();
                             Objective targetObjective = null;
-                            RefSimulator<Double> scor = null;
                             if (args.length == 6) {
                                 targetObjective = targetScoreboard.getObjective(args[5]);
-                                scor = new RefSimulator<>(0.0);
                             }
 
                             // Does the player exist?
-                            if (targets.size() < 1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -8869,11 +8837,10 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback)
-                                    logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective \u00a73" + args[5] + "\u00a77 does not exist."));
+                                    logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective §3" + args[5] + "§7 does not exist."));
                             }
 
                             // For cummulative score
-                            double tScore = 0.0;
 
                             if (!failure) {
 
@@ -8918,7 +8885,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) {
+                                if (!executor.getIncludedStrBuilder().isEmpty()) {
                                     logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString()));
                                 }
                             }
@@ -8928,15 +8895,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -8958,14 +8925,14 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Modifies the CustomModelData value of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e[±][value][%] \u00a77Value of model to set.");
-                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Save the result onto the player's score.");
-                            logReturn.add("\u00a78Score is the final value miltiplied by 10.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Modifies the CustomModelData value of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e[±][value][%] §7Value of model to set.");
+                            logReturn.add("§3 - §e[objective] §7Save the result onto the player's score.");
+                            logReturn.add("§8Score is the final value miltiplied by 10.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -8977,14 +8944,12 @@ public class GungingOotilities implements CommandExecutor {
                             ScoreboardManager manager = Bukkit.getScoreboardManager();
                             Scoreboard targetScoreboard = manager.getMainScoreboard();
                             Objective targetObjective = null;
-                            RefSimulator<Double> scor = null;
                             if (args.length == 6) {
                                 targetObjective = targetScoreboard.getObjective(args[5]);
-                                scor = new RefSimulator<>(0.0);
                             }
 
                             // Does the player exist?
-                            if (targets.size() < 1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -9007,7 +8972,7 @@ public class GungingOotilities implements CommandExecutor {
                                 failure = true;
 
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback)
-                                    logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective \u00a73" + args[5] + "\u00a77 does not exist."));
+                                    logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective §3" + args[5] + "§7 does not exist."));
                             }
 
                             // Correct MC Versions?
@@ -9018,12 +8983,11 @@ public class GungingOotilities implements CommandExecutor {
 
                                 // Notify the error
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback)
-                                    logReturn.add(OotilityCeption.LogFormat(subsection, "\u00a7cCustom Model Data is for Minecraft 1.14+"));
+                                    logReturn.add(OotilityCeption.LogFormat(subsection, "§cCustom Model Data is for Minecraft 1.14+"));
 
                             }
 
                             // For cummulative score
-                            double tScore = 0.0;
 
                             if (!failure) {
 
@@ -9067,7 +9031,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) {
+                                if (!executor.getIncludedStrBuilder().isEmpty()) {
                                     logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString()));
                                 }
                             }
@@ -9077,15 +9041,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -9104,20 +9068,20 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Modify durability damage of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e[±][damage][%] \u00a77Damage the item has taken.");
-                            logReturn.add("\u00a73 - \u00a7e[preventBreak] \u00a77If the damage exceeds max durability, destroy item?.");
-                            logReturn.add("\u00a73 --> \u00a7btrue \u00a77Item will always survive with 1 durability left.");
-                            logReturn.add("\u00a73 --> \u00a7bfalse \u00a77Item might break because of this command.");
-                            logReturn.add("\u00a73 - \u00a7e[useMax] \u00a77Perform operation based on max durability?");
-                            logReturn.add("\u00a73 --> \u00a7btrue \u00a77Damage operation uses the item max durability.");
-                            logReturn.add("\u00a73 --> \u00a7bfalse \u00a77Damage operation uses the item current durability.");
-                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Save the result onto the player's score.");
-                            logReturn.add("\u00a78Score is the final value miltiplied by 10.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Modify durability damage of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e[±][damage][%] §7Damage the item has taken.");
+                            logReturn.add("§3 - §e[preventBreak] §7If the damage exceeds max durability, destroy item?.");
+                            logReturn.add("§3 --> §btrue §7Item will always survive with 1 durability left.");
+                            logReturn.add("§3 --> §bfalse §7Item might break because of this command.");
+                            logReturn.add("§3 - §e[useMax] §7Perform operation based on max durability?");
+                            logReturn.add("§3 --> §btrue §7Damage operation uses the item max durability.");
+                            logReturn.add("§3 --> §bfalse §7Damage operation uses the item current durability.");
+                            logReturn.add("§3 - §e[objective] §7Save the result onto the player's score.");
+                            logReturn.add("§8Score is the final value miltiplied by 10.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -9130,7 +9094,7 @@ public class GungingOotilities implements CommandExecutor {
                             boolean useMaxDura = false;
                             String scoreboardGit = null;
                             if (args.length >= 6) {
-                                //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Optional Arguments");
+                                //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Optional Arguments");
 
                                 String preventBreakingRaw = args[5];
                                 String useMaxDuraRaw = null;
@@ -9150,23 +9114,23 @@ public class GungingOotilities implements CommandExecutor {
                                     scoreboardGit = args[7];
                                 }
 
-                                //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Arg Prevent Break:\u00a73 " + preventBreakingRaw);
-                                //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Arg Use Max:\u00a73 " + useMaxDuraRaw);
-                                //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Arg Score:\u00a73 " + scoreboardGit);
+                                //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Arg Prevent Break:§3 " + preventBreakingRaw);
+                                //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Arg Use Max:§3 " + useMaxDuraRaw);
+                                //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Arg Score:§3 " + scoreboardGit);
 
                                 // Does it parse as boolean?
                                 if (OotilityCeption.BoolTryParse(preventBreakingRaw)) {
 
                                     // Thats the prevent break
                                     preventBreaking = Boolean.parseBoolean(preventBreakingRaw);
-                                    //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Parsed Prevent Break:\u00a7b " + preventBreaking);
+                                    //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Parsed Prevent Break:§b " + preventBreaking);
 
                                 // If the size is exactly six, the scoreboard may alternatively have been there
                                 } else if (args.length == 6) {
 
                                     // Length is 6 and it is not a bool value, assume it is the coreboard
                                     scoreboardGit = args[5];
-                                    //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Transfer to Score:\u00a7b " + scoreboardGit);
+                                    //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Transfer to Score:§b " + scoreboardGit);
 
                                 // It doesnt parse but it is of length 7 or 8, thats error parsing that boolean
                                 } else {
@@ -9175,26 +9139,26 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // Notify
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 instead of \u00a73" + preventBreakingRaw + "\u00a77 for prevent breaking option."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Expected §btrue§7 or §bfalse§7 instead of §3" + preventBreakingRaw + "§7 for prevent breaking option."));
                                 }
 
                                 // Specified max dura raw?
                                 if (useMaxDuraRaw != null) {
-                                    //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Step Parse\u00a7c " + useMaxDuraRaw);
+                                    //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Step Parse§c " + useMaxDuraRaw);
 
                                     // Does it parse as boolean?
                                     if (OotilityCeption.BoolTryParse(useMaxDuraRaw)) {
 
                                         // Thats the use max durability
                                         useMaxDura = Boolean.parseBoolean(useMaxDuraRaw);
-                                        //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Parsed Max Dura:\u00a7b " + useMaxDura);
+                                        //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Parsed Max Dura:§b " + useMaxDura);
 
                                         // If the size is exactly seven, the scoreboard may alternatively have been there
                                     } else if (args.length == 7) {
 
                                         // Length is 6 and it is not a bool value, assume it is the coreboard
                                         scoreboardGit = args[6];
-                                        //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Transfer to Score:\u00a7b " + scoreboardGit);
+                                        //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Transfer to Score:§b " + scoreboardGit);
 
                                     // It doesnt parse but it is of length 8, thats error parsing that boolean
                                     } else {
@@ -9203,34 +9167,32 @@ public class GungingOotilities implements CommandExecutor {
                                         failure = true;
 
                                         // Notify
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 instead of \u00a73" + useMaxDuraRaw + "\u00a77 for using max durability option."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Expected §btrue§7 or §bfalse§7 instead of §3" + useMaxDuraRaw + "§7 for using max durability option."));
                                     }
-                                    //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Step Parse\u00a7a " + useMaxDura);
+                                    //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Step Parse§a " + useMaxDura);
                                 }
-                                //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Step Dura\u00a7a " + useMaxDura);
+                                //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Step Dura§a " + useMaxDura);
                             }
-                            //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Step -2\u00a7a " + useMaxDura);
+                            //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Step -2§a " + useMaxDura);
 
                             // Some scoreboards to test
                             ScoreboardManager manager = Bukkit.getScoreboardManager();
                             Scoreboard targetScoreboard = manager.getMainScoreboard();
                             Objective targetObjective = null;
-                            RefSimulator<Double> scor = null;
                             if (scoreboardGit != null) {
                                 targetObjective = targetScoreboard.getObjective(scoreboardGit);
-                                scor = new RefSimulator<>(0.0);
                             }
-                            //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Step -1\u00a7a " + useMaxDura);
+                            //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Step -1§a " + useMaxDura);
 
                             // Does the player exist?
-                            if (targets.size() <  1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
                                 // Notify the error
                                 if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Target must be an online player!"));
                             }
-                            //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Step 0\u00a7a " + useMaxDura);
+                            //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Step 0§a " + useMaxDura);
 
                             PlusMinusPercent pValue = PlusMinusPercent.GetPMP(args[4], logAddition);
                             if (logAddition.getValue() != null) { logReturn.add(OotilityCeption.LogFormat(subsection, logAddition.getValue())); }
@@ -9238,18 +9200,17 @@ public class GungingOotilities implements CommandExecutor {
                                 // Failure
                                 failure = true;
                             }
-                            //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Step 1\u00a7a " + useMaxDura);
+                            //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Step 1§a " + useMaxDura);
 
                             if (scoreboardGit != null && targetObjective == null) {
                                 // Failure
                                 failure = true;
 
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective \u00a73" + scoreboardGit + "\u00a77 does not exist."));
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective §3" + scoreboardGit + "§7 does not exist."));
                             }
 
                             // For cummulative score
-                            double tScore = 0.0;
-                            //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Pre Failure\u00a7a " + useMaxDura);
+                            //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Pre Failure§a " + useMaxDura);
 
                             if (!failure) {
 
@@ -9258,7 +9219,7 @@ public class GungingOotilities implements CommandExecutor {
                                 final boolean useObjective = targetObjective != null;
                                 boolean finalPreventBreaking = preventBreaking;
                                 boolean finalUseMax = useMaxDura;
-                                //DUR//OotilityCeption.Log("\u00a78COMMAND\u00a73 DUR\u00a77 Passing Use Max Dura:\u00a72 " + finalUseMax);
+                                //DUR//OotilityCeption.Log("§8COMMAND§3 DUR§7 Passing Use Max Dura:§2 " + finalUseMax);
 
                                 // Preparation of Methods
                                 TargetedItems executor = new TargetedItems(false, !pValue.isNeutral(),
@@ -9296,7 +9257,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
+                                if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
 
                             }
 
@@ -9305,15 +9266,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -9333,16 +9294,16 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Modify durability damage of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e<enchantment> \u00a77Enchantment to apply.");
-                            logReturn.add("\u00a73 --> \u00a7ball \u00a77Keyword to target every enchantment.");
-                            logReturn.add("\u00a73 - \u00a7e[±][level][%] \u00a77Enchantment level to set.");
-                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Save the final ench level onto the player's score.");
-                            logReturn.add("\u00a78Score is the final value miltiplied by 10.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Modify durability damage of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e<enchantment> §7Enchantment to apply.");
+                            logReturn.add("§3 --> §ball §7Keyword to target every enchantment.");
+                            logReturn.add("§3 - §e[±][level][%] §7Enchantment level to set.");
+                            logReturn.add("§3 - §e[objective] §7Save the final ench level onto the player's score.");
+                            logReturn.add("§8Score is the final value miltiplied by 10.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -9354,14 +9315,12 @@ public class GungingOotilities implements CommandExecutor {
                             ScoreboardManager manager = Bukkit.getScoreboardManager();
                             Scoreboard targetScoreboard = manager.getMainScoreboard();
                             Objective targetObjective = null;
-                            RefSimulator<Integer> scor = null;
                             if (args.length == 7) {
                                 targetObjective = targetScoreboard.getObjective(args[6]);
-                                scor = new RefSimulator<>(0);
                             }
 
                             // Does the player exist?
-                            if (targets.size() <  1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -9371,7 +9330,7 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Enchantment exsts?
                             Enchantment tEnch = null;
-                            if (!args[4].toLowerCase().equals("all")) {
+                            if (!args[4].equalsIgnoreCase("all")) {
 
                                 // If it is not 'all', get target
                                 tEnch = OotilityCeption.GetEnchantmentByName(args[4]);
@@ -9383,7 +9342,7 @@ public class GungingOotilities implements CommandExecutor {
                                     failure = true;
 
                                     // log
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subsection, "Enchantment '\u00a73" + args[4] + "\u00a77' does not exist. Remember to use vanilla names.")); }
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subsection, "Enchantment '§3" + args[4] + "§7' does not exist. Remember to use vanilla names.")); }
                                 }
                             }
 
@@ -9395,14 +9354,15 @@ public class GungingOotilities implements CommandExecutor {
                             }
 
                             if (args.length == 7 && targetObjective == null) {
-                                // Failure
-                                failure = true;
-
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective \u00a73" + args[6] + "\u00a77 does not exist."));
+                                // Create the objective if it doesn't exist
+                                targetObjective = targetScoreboard.registerNewObjective(args[6], "dummy", args[6]);
+                                
+                                if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) {
+                                    logReturn.add(OotilityCeption.LogFormat(subsection, "Created scoreboard objective §3" + args[6] + "§7."));
+                                }
                             }
 
                             // For cummulative score
-                            int tScore = 0;
 
                             if (!failure) {
 
@@ -9448,7 +9408,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) {
+                                if (!executor.getIncludedStrBuilder().isEmpty()) {
                                     logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString()));
                                 }
                             }
@@ -9459,15 +9419,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -9485,12 +9445,12 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Modify durability damage of items.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e<material> \u00a77Material to which transform this item.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Modify durability damage of items.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e<material> §7Material to which transform this item.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -9498,7 +9458,7 @@ public class GungingOotilities implements CommandExecutor {
                             // Gets that player boi
 
                             // Does the player exist?
-                            if (targets.size() <  1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -9552,7 +9512,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
+                                if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
                             }
 
                         // Incorrect number of args
@@ -9560,15 +9520,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -9586,14 +9546,14 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Modify the amount of items in this stack.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e[±][amount][%] \u00a77Amount of items to set.");
-                            logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Save the final ench level onto the player's score.");
-                            logReturn.add("\u00a78Score is the final value miltiplied by 10.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Modify the amount of items in this stack.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e[±][amount][%] §7Amount of items to set.");
+                            logReturn.add("§3 - §e[objective] §7Save the final ench level onto the player's score.");
+                            logReturn.add("§8Score is the final value miltiplied by 10.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -9605,14 +9565,12 @@ public class GungingOotilities implements CommandExecutor {
                             ScoreboardManager manager = Bukkit.getScoreboardManager();
                             Scoreboard targetScoreboard = manager.getMainScoreboard();
                             Objective targetObjective = null;
-                            RefSimulator<Double> scor = null;
                             if (args.length == 6) {
                                 targetObjective = targetScoreboard.getObjective(args[5]);
-                                scor = new RefSimulator<>(0.0);
                             }
 
                             // Does the player exist?
-                            if (targets.size() <  1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -9631,11 +9589,10 @@ public class GungingOotilities implements CommandExecutor {
                                 // Failure
                                 failure = true;
 
-                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective \u00a73" + args[5] + "\u00a77 does not exist."));
+                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subsection, "Scoreboard objective §3" + args[5] + "§7 does not exist."));
                             }
 
                             // For cummulative score
-                            double tScore = 0.0;
 
                             if (!failure) {
 
@@ -9657,6 +9614,7 @@ public class GungingOotilities implements CommandExecutor {
                                         (iSource, sInfo) -> {
 
                                             // Re-set amount .-.
+                                            assert iSource.getResult() != null;
                                             iSource.getResult().setAmount(OotilityCeption.RoundToInt(iSource.getRef_dob_a().getValue()));
 
                                             // If the scoreboard stuff is even active
@@ -9682,7 +9640,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
+                                if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
                             }
 
 
@@ -9691,15 +9649,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -9717,16 +9675,16 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Change the item in this stack.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                            logReturn.add("\u00a73 - \u00a7e{nbt} \u00a77These are the formats that match your plugins:");
-                            logReturn.add("\u00a73 --> \u00a7ee <enchantment name> <level> \u00a77Tests for an enchantment.");
-                            logReturn.add("\u00a73 --> \u00a7ev <material> * \u00a77Tests for a vanilla item.");
-                            if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("\u00a73 --> \u00a7em <mmoitem type> <mmoitem id> \u00a77Tests for it being a precise mmoitem."); }
-                            logReturn.add("\u00a73 - \u00a7e[±][amount][%] \u00a77Edit the amount of items in the stack, too.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Change the item in this stack.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                            logReturn.add("§3 - §e{nbt} §7These are the formats that match your plugins:");
+                            logReturn.add("§3 --> §ee <enchantment name> <level> §7Tests for an enchantment.");
+                            logReturn.add("§3 --> §ev <material> * §7Tests for a vanilla item.");
+                            if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("§3 --> §em <mmoitem type> <mmoitem id> §7Tests for it being a precise mmoitem."); }
+                            logReturn.add("§3 - §e[±][amount][%] §7Edit the amount of items in the stack, too.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -9735,7 +9693,7 @@ public class GungingOotilities implements CommandExecutor {
                             RefSimulator<String> logAddition = new RefSimulator<>("");
 
                             // Does the player exist?
-                            if (targets.size() <  1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -9803,6 +9761,7 @@ public class GungingOotilities implements CommandExecutor {
                                         ((iSource, sInfo) -> {
 
                                             // Set amount, again
+                                            assert iSource.getResult() != null;
                                             iSource.getResult().setAmount(iSource.getRef_int_a().getValue());
                                         })
                                 );
@@ -9815,7 +9774,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
+                                if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
                             }
 
                         // Incorrect number of args
@@ -9823,15 +9782,15 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
@@ -9849,14 +9808,14 @@ public class GungingOotilities implements CommandExecutor {
                         // Help form?
                         if (args.length == 2)  {
 
-                            logReturn.add("\u00a7e______________________________________________");
-                            logReturn.add("\u00a73NBT - \u00a7b" + subcommand + ",\u00a77 Copy the contents from one to another slot.");
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                            logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                            logReturn.add("\u00a73 - \u00a7e<slots> \u00a77Slots onto which to copy the target item.");
-                            logReturn.add("\u00a73 - \u00a7e<source-slot> \u00a77Slot of the target item to copy.");
-                            logReturn.add("\u00a73 --> \u00a7cCannot \u00a77target multiple slots.");
-                            logReturn.add("\u00a73 - \u00a7e[±][amount][%] \u00a77Edit the amount of items in the stack, too.");
+                            logReturn.add("§e______________________________________________");
+                            logReturn.add("§3NBT - §b" + subcommand + ",§7 Copy the contents from one to another slot.");
+                            logReturn.add("§3Usage: §e" + usage);
+                            logReturn.add("§3 - §e<player> §7Player who has the item.");
+                            logReturn.add("§3 - §e<slots> §7Slots onto which to copy the target item.");
+                            logReturn.add("§3 - §e<source-slot> §7Slot of the target item to copy.");
+                            logReturn.add("§3 --> §cCannot §7target multiple slots.");
+                            logReturn.add("§3 - §e[±][amount][%] §7Edit the amount of items in the stack, too.");
 
                         // Correct number of args?
                         } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
@@ -9865,7 +9824,7 @@ public class GungingOotilities implements CommandExecutor {
                             RefSimulator<String> logAddition = new RefSimulator<>("");
 
                             // Does the player exist?
-                            if (targets.size() <  1 && asDroppedItem == null) {
+                            if (targets.isEmpty() && asDroppedItem == null) {
                                 // Failure
                                 failure = true;
 
@@ -9908,6 +9867,7 @@ public class GungingOotilities implements CommandExecutor {
                                         ((iSource, sInfo) -> {
 
                                             // Set amount, again
+                                            assert iSource.getResult() != null;
                                             iSource.getResult().setAmount(iSource.getRef_int_a().getValue());
                                         })
                                 );
@@ -9920,7 +9880,7 @@ public class GungingOotilities implements CommandExecutor {
                                 executor.process();
 
                                 // Was there any log messages output?
-                                if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
+                                if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subsection, executor.getIncludedStrBuilder().toString())); }
                             }
 
                         // Incorrect number of args
@@ -9928,84 +9888,84 @@ public class GungingOotilities implements CommandExecutor {
 
                             // Notify Error
                             if (args.length >= argsMinLength) {
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§e many§7 args). For info: §e/goop nbt " + subsection));
 
                             } else {
 
-                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop nbt " + subsection));
+                                logReturn.add(OotilityCeption.LogFormat(subsection, "Incorrect usage (too§6 few§7 args). For info: §e/goop nbt " + subsection));
                             }
 
                             // Notify Usage
-                            logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                            logReturn.add("§3Usage: §e" + usage);
                         }
                         break;
                     //endregion
                     default:
                         // I have no memory of that shit
-                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("NBT", "'\u00a73" + args[1] + "\u00a77' is not a valid NBT action! do \u00a7e/goop nbt\u00a77 for the list of actions."));
+                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("NBT", "'§3" + args[1] + "§7' is not a valid NBT action! do §e/goop nbt§7 for the list of actions."));
                         break;
                 }
 
             } else if (args.length == 1) {
-                logReturn.add("\u00a7e______________________________________________");
-                logReturn.add("\u00a73NBT Manipulation, \u00a77Mostly add lore and edit item name.");
-                logReturn.add("\u00a73Usage: \u00a7e/goop nbt {action}");
-                logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                logReturn.add("\u00a73 --> \u00a7erename <player> <slot> <item name>");
-                logReturn.add("\u00a73      * \u00a77Sets the name of target item.");
-                logReturn.add("\u00a73 --> \u00a7eaddLore <index> <player> <slot> [fv] <lore line>");
-                logReturn.add("\u00a73      * \u00a77Adds a lore line to the item. <index> supports keywords \u00a7etop\u00a77 and \u00a7ebottom\u00a77.");
-                logReturn.add("\u00a73 --> \u00a7eremoveLore <index> <player> <slot> [fv]");
-                logReturn.add("\u00a73      * \u00a77Removes a line of lore. <index> supports keywords \u00a7etop\u00a77 and \u00a7ebottom\u00a77.");
-                logReturn.add("\u00a73 --> \u00a7emSpeed <player> <slot> [±]<movement speed value>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the movement speed attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7emHealth <player> <slot> [±]<max health>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the health boost attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7earmour <player> <slot> [±]<armor>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the armour boost attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7eaToughness <player> <slot> [±]<armor toughness>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the armor toughness attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7eaDamage <player> <slot> [±]<attack damage>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the attack damage attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7eaSpeed <player> <slot> [±]<attack speed>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the attack speed attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7ekResistance <player> <slot> [±]<knockback resistance>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the knockback resistance attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7eluck <player> <slot> [±]<luck>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the luck attribute of the item.");
-                logReturn.add("\u00a73 --> \u00a7ecModelData <player> <slot> [±]<custom model data>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies the CustomModelData of the item.");
-                logReturn.add("\u00a73 --> \u00a7eenchantment <player> <slot> <enchantment> [±]<enchantment>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Modifies an enchantment of the item.");
-                logReturn.add("\u00a73 --> \u00a7esetMaterial <player> <slot> <material>");
-                logReturn.add("\u00a73      * \u00a77Sets the material of target item.");
-                logReturn.add("\u00a73 --> \u00a7eamount <player> <slot> [±]<quantity>[%] [objective]");
-                logReturn.add("\u00a73      * \u00a77Increases or decreases the amount of target item.");
-                logReturn.add("\u00a73 --> \u00a7esetItem <player> <slot> {nbt} [[±]<amount>[%]]");
-                logReturn.add("\u00a73      * \u00a77Sets target item, {nbt} can be for vanilla or MMOItem.");
-                logReturn.add("\u00a73      * \u00a77Amount operation applied to old item amount, if there was.");
-                logReturn.add("\u00a73 --> \u00a7edamage <player> <slot> {nbt} [[±]<repair>[%]]");
-                logReturn.add("\u00a73      * \u00a77Modifies durability of item.");
-                logReturn.add("\u00a73      * \u00a73Can never break or go negative - will be set to 1 instead.");
-                //logReturn.add("\u00a73 --> \u00a7erevar <player> <slot> <variable=value...>");
-                //logReturn.add("\u00a73      * \u00a77Changes the value of a variable in the name/lore of an item");
-                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Target slot in player's inventory.");
-                logReturn.add("\u00a73 --> \u00a77Possible slots: \u00a7bhead\u00a73, \u00a7bchest\u00a73, \u00a7blegs\u00a73, \u00a7bfeet\u00a73, \u00a7bmainhand\u00a73, \u00a7boffhand\u00a73, and any number \u00a7b0\u00a73-\u00a7b35\u00a73.");
-                if (Gunging_Ootilities_Plugin.foundMMOItems) logReturn.add("\u00a73 - \u00a7e[fv] \u00a77Forces vanilla lore operations (For MMOItems).");
-                if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("\u00a73         **\u00a77If not set or false, all operations will target MMOItem item data."); }
-                logReturn.add("\u00a73 - \u00a7e[objective] \u00a77If specified, the resulting value of the attribute will be stored in that objective score of the target player.");
+                logReturn.add("§e______________________________________________");
+                logReturn.add("§3NBT Manipulation, §7Mostly add lore and edit item name.");
+                logReturn.add("§3Usage: §e/goop nbt {action}");
+                logReturn.add("§3 - §e{action} §7What actions to perform:");
+                logReturn.add("§3 --> §erename <player> <slot> <item name>");
+                logReturn.add("§3      * §7Sets the name of target item.");
+                logReturn.add("§3 --> §eaddLore <index> <player> <slot> [fv] <lore line>");
+                logReturn.add("§3      * §7Adds a lore line to the item. <index> supports keywords §etop§7 and §ebottom§7.");
+                logReturn.add("§3 --> §eremoveLore <index> <player> <slot> [fv]");
+                logReturn.add("§3      * §7Removes a line of lore. <index> supports keywords §etop§7 and §ebottom§7.");
+                logReturn.add("§3 --> §emSpeed <player> <slot> [±]<movement speed value>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the movement speed attribute of the item.");
+                logReturn.add("§3 --> §emHealth <player> <slot> [±]<max health>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the health boost attribute of the item.");
+                logReturn.add("§3 --> §earmour <player> <slot> [±]<armor>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the armour boost attribute of the item.");
+                logReturn.add("§3 --> §eaToughness <player> <slot> [±]<armor toughness>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the armor toughness attribute of the item.");
+                logReturn.add("§3 --> §eaDamage <player> <slot> [±]<attack damage>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the attack damage attribute of the item.");
+                logReturn.add("§3 --> §eaSpeed <player> <slot> [±]<attack speed>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the attack speed attribute of the item.");
+                logReturn.add("§3 --> §ekResistance <player> <slot> [±]<knockback resistance>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the knockback resistance attribute of the item.");
+                logReturn.add("§3 --> §eluck <player> <slot> [±]<luck>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the luck attribute of the item.");
+                logReturn.add("§3 --> §ecModelData <player> <slot> [±]<custom model data>[%] [objective]");
+                logReturn.add("§3      * §7Modifies the CustomModelData of the item.");
+                logReturn.add("§3 --> §eenchantment <player> <slot> <enchantment> [±]<enchantment>[%] [objective]");
+                logReturn.add("§3      * §7Modifies an enchantment of the item.");
+                logReturn.add("§3 --> §esetMaterial <player> <slot> <material>");
+                logReturn.add("§3      * §7Sets the material of target item.");
+                logReturn.add("§3 --> §eamount <player> <slot> [±]<quantity>[%] [objective]");
+                logReturn.add("§3      * §7Increases or decreases the amount of target item.");
+                logReturn.add("§3 --> §esetItem <player> <slot> {nbt} [[±]<amount>[%]]");
+                logReturn.add("§3      * §7Sets target item, {nbt} can be for vanilla or MMOItem.");
+                logReturn.add("§3      * §7Amount operation applied to old item amount, if there was.");
+                logReturn.add("§3 --> §edamage <player> <slot> {nbt} [[±]<repair>[%]]");
+                logReturn.add("§3      * §7Modifies durability of item.");
+                logReturn.add("§3      * §3Can never break or go negative - will be set to 1 instead.");
+                //logReturn.add("§3 --> §erevar <player> <slot> <variable=value...>");
+                //logReturn.add("§3      * §7Changes the value of a variable in the name/lore of an item");
+                logReturn.add("§3 - §e<slot> §7Target slot in player's inventory.");
+                logReturn.add("§3 --> §7Possible slots: §bhead§3, §bchest§3, §blegs§3, §bfeet§3, §bmainhand§3, §boffhand§3, and any number §b0§3-§b35§3.");
+                if (Gunging_Ootilities_Plugin.foundMMOItems) logReturn.add("§3 - §e[fv] §7Forces vanilla lore operations (For MMOItems).");
+                if (Gunging_Ootilities_Plugin.foundMMOItems) { logReturn.add("§3         **§7If not set or false, all operations will target MMOItem item data."); }
+                logReturn.add("§3 - §e[objective] §7If specified, the resulting value of the attribute will be stored in that objective score of the target player.");
 
             } else {
                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                    logReturn.add(OotilityCeption.LogFormat("NBT", "Incorrect usage. For info: \u00a7e/goop nbt"));
-                    logReturn.add("\u00a73Usage: \u00a7e/goop nbt {action}");
+                    logReturn.add(OotilityCeption.LogFormat("NBT", "Incorrect usage. For info: §e/goop nbt"));
+                    logReturn.add("§3Usage: §e/goop nbt {action}");
                 }
             }
 
             // No perms
         } else {
             // Tell him lmao
-            logReturn.add(OotilityCeption.LogFormat("\u00a7c\u00a7oYou dont have permission to edit item nbt!"));
+            logReturn.add(OotilityCeption.LogFormat("§c§oYou dont have permission to edit item nbt!"));
         }
 
         //Set Log Return Urn Value
@@ -10022,26 +9982,17 @@ public class GungingOotilities implements CommandExecutor {
     public static void setProvidedSlot(@NotNull UUID player, @NotNull SearchLocation location, int number) {
 
         // The one to set
-        ItemStackSlot ret;
-        switch (location) {
-            default:
-
-                // Just in inventory
-                ret = new ISSInventory(number, null);
-                break;
-            case OBSERVED_CONTAINER:
-            case PERSONAL_CONTAINER:
-
+        ItemStackSlot ret = switch (location) {
+            case OBSERVED_CONTAINER, PERSONAL_CONTAINER ->
                 // Just in observed container
-                ret = new ISSObservedContainer(number, null, null);
-                break;
-            case ENDERCHEST:
-
+                    new ISSObservedContainer(number, null, null);
+            case ENDERCHEST ->
                 // Just in inventory
-                ret = new ISSEnderchest(number, null);
-                break;
-        }
-
+                    new ISSEnderchest(number, null);
+            default ->
+                // Just in inventory
+                    new ISSInventory(number, null);
+        };
         // Put simple
         ArrayList<ItemStackSlot> cleared = new ArrayList<>();
         cleared.add(ret);
@@ -10054,11 +10005,9 @@ public class GungingOotilities implements CommandExecutor {
      * Sets the one slot the player clicked.
      *
      * @param player Player who is clicking
-     * @param location Location where they did click
-     * @param number Slot number they clicked
+     * @param locs Location where they did click
      */
     public static void setProvidedSlots(@NotNull UUID player, @NotNull ArrayList<ItemStackSlot> locs) {
-
         // Register
         providedSlot.put(player, locs);
     }
@@ -10073,7 +10022,7 @@ public class GungingOotilities implements CommandExecutor {
         if (player == null) { return null; }
 
         ArrayList<ItemStackSlot> found = providedSlot.get(player);
-        if (found == null || found.size() == 0) { return null; }
+        if (found == null || found.isEmpty()) { return null; }
 
         boolean separated = false;
         StringBuilder builder = new StringBuilder();

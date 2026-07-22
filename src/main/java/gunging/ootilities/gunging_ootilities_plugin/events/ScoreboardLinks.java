@@ -146,31 +146,29 @@ public class ScoreboardLinks implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void OnChestMinecartAccess(PlayerInteractEntityEvent event) {
         if (Gunging_Ootilities_Plugin.blacklistedEnchantments.size() == 0) { return; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a73 IE\u00a77 On Chest Minecart Kick\u00a7b -------");
+        //ENCH//OotilityCeption.Log("§8RELOAD§3 IE§7 On Chest Minecart Kick§b -------");
 
         /*
          * Villager? :flushed:
          */
         Entity entity = event.getRightClicked();
-        if (!(entity instanceof InventoryHolder)) { return; }
+        if (!(entity instanceof InventoryHolder holder)) { return; }
 
         // Cast it
-        InventoryHolder holder = (InventoryHolder) entity;
         removeBlacklistedEnchantments(holder.getInventory());
     }
     @EventHandler(priority = EventPriority.LOW)
     public void OnVillagerTalk(PlayerInteractEntityEvent event) {
         if (Gunging_Ootilities_Plugin.blacklistedEnchantments.size() == 0) { return; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a73 IE\u00a77 On Villager Talk Kick\u00a7b -------");
+        //ENCH//OotilityCeption.Log("§8RELOAD§3 IE§7 On Villager Talk Kick§b -------");
 
         /*
          * Villager? :flushed:
          */
         Entity entity = event.getRightClicked();
-        if (!(entity instanceof Merchant)) { return; }
+        if (!(entity instanceof Merchant merchant)) { return; }
 
         // Cast it
-        Merchant merchant = (Merchant) entity;
         for (int m = 0; m < merchant.getRecipes().size(); m++) {
             MerchantRecipe recipe = merchant.getRecipe(m);
 
@@ -180,13 +178,13 @@ public class ScoreboardLinks implements Listener {
                 ItemStack baked = removeBlacklistedEnchantments(ingredient);
                 if (baked == null) { bakedIngredients.add(ingredient); continue; }
 
-                //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a79 IE\u00a77 Replacing Recipe ingredient\u00a79 #" + m);
+                //ENCH//OotilityCeption.Log("§8RELOAD§9 IE§7 Replacing Recipe ingredient§9 #" + m);
                 bakedIngredients.add(baked);
             }
 
             ItemStack bakedResult = removeBlacklistedEnchantments(recipe.getResult());
             if (bakedResult != null) {
-                //ENCH// OotilityCeption.Log("\u00a78RELOAD\u00a79 IE\u00a77 Replacing Recipe at\u00a79 #" + m);
+                //ENCH// OotilityCeption.Log("§8RELOAD§9 IE§7 Replacing Recipe at§9 #" + m);
 
                 /*
                  * If the result is enchanted... we must  remove this recipe entirely!
@@ -208,7 +206,7 @@ public class ScoreboardLinks implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void OnPlayerJoin(PlayerJoinEvent event) {
         if (Gunging_Ootilities_Plugin.blacklistedEnchantments.size() == 0) { return; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a73 IE\u00a77 On Player Join Kick\u00a7b -------");
+        //ENCH//OotilityCeption.Log("§8RELOAD§3 IE§7 On Player Join Kick§b -------");
 
         // Scourge inventory and enderchest
         removeBlacklistedEnchantments(event.getPlayer().getInventory());
@@ -217,7 +215,7 @@ public class ScoreboardLinks implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void OnChestOpen(PlayerInteractEvent event) {
         if (Gunging_Ootilities_Plugin.blacklistedEnchantments.size() == 0) { return; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a73 IE\u00a77 On Chest Open Kick\u00a7b -------");
+        //ENCH//OotilityCeption.Log("§8RELOAD§3 IE§7 On Chest Open Kick§b -------");
 
         /*
          * Chest? :flushed:
@@ -226,8 +224,7 @@ public class ScoreboardLinks implements Listener {
         Block block = event.getClickedBlock();
 
         // Ah
-        if (!(block.getState() instanceof Container)) { return; }
-        Container container = (Container) block.getState();
+        if (!(block.getState() instanceof Container container)) { return; }
 
         // Delete them, delete them all!
         removeBlacklistedEnchantments(container.getInventory());
@@ -235,7 +232,7 @@ public class ScoreboardLinks implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void OnLootGen(LootGenerateEvent event) {
         if (Gunging_Ootilities_Plugin.blacklistedEnchantments.size() == 0) { return; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a73 IE\u00a77 On Loot Gen Kick\u00a7b -------");
+        //ENCH//OotilityCeption.Log("§8RELOAD§3 IE§7 On Loot Gen Kick§b -------");
 
         // If it wasn't cancelled and the picker upper was a player
         if (event.isCancelled()) { return; }
@@ -258,17 +255,15 @@ public class ScoreboardLinks implements Listener {
     @EventHandler(priority = EventPriority.LOW)
     public void OnLootGen(PlayerFishEvent event) {
         if (Gunging_Ootilities_Plugin.blacklistedEnchantments.size() == 0) { return; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a73 IE\u00a77 On Fish Kick\u00a7b -------");
+        //ENCH//OotilityCeption.Log("§8RELOAD§3 IE§7 On Fish Kick§b -------");
 
         // If it wasn't cancelled and the picker upper was a player
         if (event.isCancelled()) { return; }
-        if (!(event.getCaught() instanceof Item)) { return; }
-
-        Item caught = (Item) event.getCaught();
+        if (!(event.getCaught() instanceof Item caught)) { return; }
 
         ItemStack bakedItem = removeBlacklistedEnchantments(caught.getItemStack());
         if (bakedItem == null) { return; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a79 IE\u00a77 Replacing Fished item");
+        //ENCH//OotilityCeption.Log("§8RELOAD§9 IE§7 Replacing Fished item");
 
         // Yes
         caught.setItemStack(bakedItem);
@@ -280,7 +275,7 @@ public class ScoreboardLinks implements Listener {
      * @param inven Source Inventory
      */
     public static void removeBlacklistedEnchantments(@NotNull Inventory inven) {
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a79 IE\u00a77 Queried for inventory... ");
+        //ENCH//OotilityCeption.Log("§8RELOAD§9 IE§7 Queried for inventory... ");
 
         // For every item in the inventory
         for (int i = 0; i < inven.getSize(); i++) {
@@ -288,7 +283,7 @@ public class ScoreboardLinks implements Listener {
             // ts
             ItemStack res = removeBlacklistedEnchantments(inven.getItem(i));
             if (res == null) { continue; }
-            //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a79 IE\u00a77 Replacing Item at\u00a79 #" + i);
+            //ENCH//OotilityCeption.Log("§8RELOAD§9 IE§7 Replacing Item at§9 #" + i);
 
             // Update
             inven.setItem(i, res);
@@ -301,7 +296,7 @@ public class ScoreboardLinks implements Listener {
      */
     @Nullable public static ItemStack removeBlacklistedEnchantments(@Nullable ItemStack iSource) {
         if (OotilityCeption.IsAirNullAllowed(iSource)) { return null; }
-        //ENCH//OotilityCeption.Log("\u00a78RELOAD\u00a73 IE\u00a77 Queried for " + OotilityCeption.GetItemName(iSource));
+        //ENCH//OotilityCeption.Log("§8RELOAD§3 IE§7 Queried for " + OotilityCeption.GetItemName(iSource));
 
         // From MMOItems Stat Histories
         if (Gunging_Ootilities_Plugin.foundMMOItems) { return GooPMMOItems.removeBlacklistedEnchantments(iSource); }
@@ -331,9 +326,8 @@ public class ScoreboardLinks implements Listener {
             if (addedLvl > Gunging_Ootilities_Plugin.replacementEnchantment.getMaxLevel()) { addedLvl = Gunging_Ootilities_Plugin.replacementEnchantment.getMaxLevel(); }
             iMeta.addEnchant(Gunging_Ootilities_Plugin.replacementEnchantment, addedLvl, false); }
 
-        if (iMeta instanceof EnchantmentStorageMeta) {
+        if (iMeta instanceof EnchantmentStorageMeta eMeta) {
             addedLvl = 0;
-            EnchantmentStorageMeta eMeta = (EnchantmentStorageMeta) iMeta;
 
             for (Enchantment e : Gunging_Ootilities_Plugin.blacklistedEnchantments) {
                 addedLvl += eMeta.getStoredEnchantLevel(e);
@@ -402,14 +396,14 @@ public class ScoreboardLinks implements Listener {
     @EventHandler(priority = EventPriority.MONITOR)
     public void OnPlayerDealDamage(EntityDamageByEntityEvent event) {
 
-        //EVENT//OotilityCeption.Log("Cause \u00a7e- \u00a73" + event.getCause().toString());
-        //EVENT//OotilityCeption.Log("Original (ABSORPTION) \u00a7e- \u00a73" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.ABSORPTION));
-        //EVENT//OotilityCeption.Log("Original (ARMOR) \u00a7e- \u00a73" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.ARMOR));
-        //EVENT//OotilityCeption.Log("Original (BASE) \u00a7e- \u00a73" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.BASE));
-        //EVENT//OotilityCeption.Log("Original (BLOCKING) \u00a7e- \u00a73" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.BLOCKING));
-        //EVENT//OotilityCeption.Log("Original (HARD_HAT) \u00a7e- \u00a73" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.HARD_HAT));
-        //EVENT//OotilityCeption.Log("Original (MAGIC) \u00a7e- \u00a73" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.MAGIC));
-        //EVENT//OotilityCeption.Log("Original (RESISTANCE) \u00a7e- \u00a73" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.RESISTANCE));
+        //EVENT//OotilityCeption.Log("Cause §e- §3" + event.getCause().toString());
+        //EVENT//OotilityCeption.Log("Original (ABSORPTION) §e- §3" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.ABSORPTION));
+        //EVENT//OotilityCeption.Log("Original (ARMOR) §e- §3" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.ARMOR));
+        //EVENT//OotilityCeption.Log("Original (BASE) §e- §3" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.BASE));
+        //EVENT//OotilityCeption.Log("Original (BLOCKING) §e- §3" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.BLOCKING));
+        //EVENT//OotilityCeption.Log("Original (HARD_HAT) §e- §3" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.HARD_HAT));
+        //EVENT//OotilityCeption.Log("Original (MAGIC) §e- §3" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.MAGIC));
+        //EVENT//OotilityCeption.Log("Original (RESISTANCE) §e- §3" + event.getOriginalDamage(EntityDamageEvent.DamageModifier.RESISTANCE));
 
         // Who was the true damager?
         Entity trueDamager = event.getDamager();
@@ -428,10 +422,9 @@ public class ScoreboardLinks implements Listener {
                 trueDamager = (Entity) arrow.getShooter();
             }
         }
-        if (event.getDamager() instanceof Firework) {
+        if (event.getDamager() instanceof Firework arrow) {
 
             // If shooter is not null
-            Firework arrow = (Firework) event.getDamager();
             if (XBow_Rockets.fireworkSources.containsKey(arrow.getUniqueId())) {
 
                 // Real damager is the one who fired this
@@ -447,8 +440,8 @@ public class ScoreboardLinks implements Listener {
             ArrayList<String> mmOHs = GooPMMOItems.CummaltiveEquipmentStringStatValue((Player) trueDamager, GooPMMOItems.ONHIT_COMMAND);
             ArrayList<String> mmOKs = GooPMMOItems.CummaltiveEquipmentStringStatValue((Player) trueDamager, GooPMMOItems.ONKILL_COMMAND);
 
-            //OHK//OotilityCeption.Log("Found OHs\u00a73 x" + mmOHs.size() + "\u00a77:\u00a7b " + SilentNumbers.collapseList(mmOHs, "\u00a77,\u00a7b"));
-            //OHK//OotilityCeption.Log("Found OKs\u00a76 x" + mmOHs.size() + "\u00a77:\u00a7e " + SilentNumbers.collapseList(mmOHs, "\u00a77,\u00a7e"));
+            //OHK//OotilityCeption.Log("Found OHs§3 x" + mmOHs.size() + "§7:§b " + SilentNumbers.collapseList(mmOHs, "§7,§b"));
+            //OHK//OotilityCeption.Log("Found OKs§6 x" + mmOHs.size() + "§7:§e " + SilentNumbers.collapseList(mmOHs, "§7,§e"));
 
             // Funny variables
             Location loc = event.getEntity().getLocation();
@@ -554,10 +547,10 @@ public class ScoreboardLinks implements Listener {
 
                         boolean receiverValid = true;
                         if (linkedEntity instanceof EntityLinkedEntity) {
-                            //DMG//OotilityCeption.Log("\u00a7e------------------Receiver-----------------");
-                            //DMG//OotilityCeption.Log("\u00a77Living: \u00a72" + (((EntityLinkedEntity) linkedEntity).getReceiver() instanceof LivingEntity));
-                            //DMG//OotilityCeption.Log("\u00a77Valid: \u00a73" + ((EntityLinkedEntity) linkedEntity).isReceiverValid());
-                            //DMG//OotilityCeption.Log("\u00a77UUID: \u00a76" + ((EntityLinkedEntity) linkedEntity).getReceiverUUID());
+                            //DMG//OotilityCeption.Log("§e------------------Receiver-----------------");
+                            //DMG//OotilityCeption.Log("§7Living: §2" + (((EntityLinkedEntity) linkedEntity).getReceiver() instanceof LivingEntity));
+                            //DMG//OotilityCeption.Log("§7Valid: §3" + ((EntityLinkedEntity) linkedEntity).isReceiverValid());
+                            //DMG//OotilityCeption.Log("§7UUID: §6" + ((EntityLinkedEntity) linkedEntity).getReceiverUUID());
 
                             // Only living entity supported for these
                             receiverValid = (((EntityLinkedEntity) linkedEntity).getReceiver() instanceof LivingEntity) && ((EntityLinkedEntity) linkedEntity).isReceiverValid(); }
@@ -565,9 +558,9 @@ public class ScoreboardLinks implements Listener {
                         // Skip if the entity has died
                         if (!linkedEntity.getEntity().isValid() || !receiverValid) {
 
-                            //DMG//OotilityCeption.Log("\u00a7c------------------Invalid-----------------");
-                            //DMG//OotilityCeption.Log("\u00a77Receiver: \u00a76" + receiverValid);
-                            //DMG//OotilityCeption.Log("\u00a77Self: \u00a76" + linkedEntity.getEntity().isValid() + " \u00a78(" + linkedEntity.getEntityUUID() + "\u00a78)");
+                            //DMG//OotilityCeption.Log("§c------------------Invalid-----------------");
+                            //DMG//OotilityCeption.Log("§7Receiver: §6" + receiverValid);
+                            //DMG//OotilityCeption.Log("§7Self: §6" + linkedEntity.getEntity().isValid() + " §8(" + linkedEntity.getEntityUUID() + "§8)");
                             continue; }
 
                         // Was any damage actually dealt?
@@ -597,17 +590,17 @@ public class ScoreboardLinks implements Listener {
                                 // Thats the new base
                                 event.setDamage(finalEventBase);
 
-                                //DMG//OotilityCeption.Log("\u00a7e------------------------------------------");
-                                //DMG//OotilityCeption.Log("Entity Damage Dealt \u00a7e- \u00a73" + event.getEntity().getName());
-                                //DMG//OotilityCeption.Log("Damage \u00a7e- \u00a7b" + baseDamage);
-                                //DMG//OotilityCeption.Log("Final Damage \u00a7e- \u00a7b" + finalDamage);
-                                //DMG//OotilityCeption.Log("Expected Damage \u00a7e- \u00a73" + finalEventDamage + "\u00a78 (\u00a77" +  (1 - ((DamageTransferLink) linkedEntity).getPrevent()) + "x\u00a78)");
-                                //DMG//OotilityCeption.Log("Extra Sources \u00a7e- \u00a7b" + extraSources);
-                                //DMG//OotilityCeption.Log("Final Base \u00a7e- \u00a73" + finalEventBase);
-                                //DMG//OotilityCeption.Log("Actual Final Base \u00a7e- \u00a73" + event.getDamage());
-                                //DMG//OotilityCeption.Log("Actual Final Damage \u00a7e- \u00a73" + event.getFinalDamage());
-                                //DMG//OotilityCeption.Log("Life-Limited Damage \u00a7e- \u00a73" + actualDamage);
-                                //DMG//OotilityCeption.Log("Transferred Damage \u00a7e- \u00a7d" + transferredDamage + "\u00a78 (\u00a77" +  ((DamageTransferLink) linkedEntity).getTransfer() + "x\u00a78)");
+                                //DMG//OotilityCeption.Log("§e------------------------------------------");
+                                //DMG//OotilityCeption.Log("Entity Damage Dealt §e- §3" + event.getEntity().getName());
+                                //DMG//OotilityCeption.Log("Damage §e- §b" + baseDamage);
+                                //DMG//OotilityCeption.Log("Final Damage §e- §b" + finalDamage);
+                                //DMG//OotilityCeption.Log("Expected Damage §e- §3" + finalEventDamage + "§8 (§7" +  (1 - ((DamageTransferLink) linkedEntity).getPrevent()) + "x§8)");
+                                //DMG//OotilityCeption.Log("Extra Sources §e- §b" + extraSources);
+                                //DMG//OotilityCeption.Log("Final Base §e- §3" + finalEventBase);
+                                //DMG//OotilityCeption.Log("Actual Final Base §e- §3" + event.getDamage());
+                                //DMG//OotilityCeption.Log("Actual Final Damage §e- §3" + event.getFinalDamage());
+                                //DMG//OotilityCeption.Log("Life-Limited Damage §e- §3" + actualDamage);
+                                //DMG//OotilityCeption.Log("Transferred Damage §e- §d" + transferredDamage + "§8 (§7" +  ((DamageTransferLink) linkedEntity).getTransfer() + "x§8)");
 
 
                                 if (!((DamageTransferLink) linkedEntity).isSilent()) {
@@ -615,12 +608,12 @@ public class ScoreboardLinks implements Listener {
                                     // Fire event
                                     EntityDamageByEntityEvent loudness = new EntityDamageByEntityEvent(event.getDamager(), ((DamageTransferLink) linkedEntity).getReceiver(), EntityDamageEvent.DamageCause.THORNS, transferredDamage);
                                     Bukkit.getPluginManager().callEvent(loudness);
-                                    //DMG//OotilityCeption.Log("Transferred Evented Damage \u00a7e- \u00a7d" + loudness.getDamage());
-                                    //DMG//OotilityCeption.Log("Transferred Final Damage \u00a7e- \u00a7d" + loudness.getFinalDamage());
+                                    //DMG//OotilityCeption.Log("Transferred Evented Damage §e- §d" + loudness.getDamage());
+                                    //DMG//OotilityCeption.Log("Transferred Final Damage §e- §d" + loudness.getFinalDamage());
 
                                     // Cancel and don't apply damage
                                     if (loudness.isCancelled()) {
-                                        //DMG//OotilityCeption.Log("Event Cancelled \u00a7c---");
+                                        //DMG//OotilityCeption.Log("Event Cancelled §c---");
                                         return; }
                                     
                                     // Does not update damage because MMOItems scales and crits it which is ridiculous
@@ -630,11 +623,11 @@ public class ScoreboardLinks implements Listener {
                             }
 
 
-                            //EVENT//oots.CLog("\u00a7e------------------------------------------");
-                            //EVENT//oots.CLog("Entity Damage Dealt \u00a7e- \u00a73" + event.getEntity().getName());
-                            //EVENT//oots.CLog("Damage \u00a7e- \u00a73" + event.getDamage());
-                            //EVENT//oots.CLog("Final Damage \u00a7e- \u00a73" + event.getFinalDamage());
-                            //EVENT//oots.CLog("Actual Damage \u00a7e- \u00a73" + actualDamage);
+                            //EVENT//oots.CLog("§e------------------------------------------");
+                            //EVENT//oots.CLog("Entity Damage Dealt §e- §3" + event.getEntity().getName());
+                            //EVENT//oots.CLog("Damage §e- §3" + event.getDamage());
+                            //EVENT//oots.CLog("Final Damage §e- §3" + event.getFinalDamage());
+                            //EVENT//oots.CLog("Actual Damage §e- §3" + actualDamage);
                         }
                     }
                 }
@@ -651,8 +644,8 @@ public class ScoreboardLinks implements Listener {
         // Evaluate every linked entity
         for (int L = 0; L < olEntities.size(); L++) {
             LinkedEntity linkedEntity = olEntities.get(L);
-            //DMG//OotilityCeption.Log("Linked \u00a7e- " + linkedEntity.getEntity().getName());
-            //DMG//OotilityCeption.Log("Reason \u00a7e- " + linkedEntity.getReason().toString());
+            //DMG//OotilityCeption.Log("Linked §e- " + linkedEntity.getEntity().getName());
+            //DMG//OotilityCeption.Log("Reason §e- " + linkedEntity.getReason().toString());
 
             // If observed entity is of damage taken
             if (linkedEntity.getReason() == ObjectiveLinks.DamageTakenLink || linkedEntity.getReason() == ObjectiveLinks.DamageTransferLink) {
@@ -667,9 +660,9 @@ public class ScoreboardLinks implements Listener {
 
                     receiverValid = ((EntityLinkedEntity) linkedEntity).isReceiverValid();
 
-                    //DMG//OotilityCeption.Log("Transfer Count \u00a7b- " + transfers.get(rec));
-                    //DMG//OotilityCeption.Log("Receiver Valid? \u00a7b- " + receiverValid);
-                    //DMG//OotilityCeption.Log("\u00a78Receiver: \u00a73- " + ((EntityLinkedEntity) linkedEntity).getReceiver().getName() + " \u00a79" + rec.toString());
+                    //DMG//OotilityCeption.Log("Transfer Count §b- " + transfers.get(rec));
+                    //DMG//OotilityCeption.Log("Receiver Valid? §b- " + receiverValid);
+                    //DMG//OotilityCeption.Log("§8Receiver: §3- " + ((EntityLinkedEntity) linkedEntity).getReceiver().getName() + " §9" + rec.toString());
                 }
 
                 // Remove, skip, and repeat if the entity has died
@@ -684,7 +677,7 @@ public class ScoreboardLinks implements Listener {
                         removed.putIfAbsent(rec, 0);
                         removed.put(rec, removed.get(rec) + 1);
 
-                        //DMG//OotilityCeption.Log("Removed Count \u00a7c- " + removed.get(rec));
+                        //DMG//OotilityCeption.Log("Removed Count §c- " + removed.get(rec));
                     }
                 }
             }
@@ -707,7 +700,7 @@ public class ScoreboardLinks implements Listener {
                 // Lock it = Unregister it
                 uck.Lock();
 
-                //DMG//OotilityCeption.Log("No Longer Receiver \u00a7d- " + trans.toString());
+                //DMG//OotilityCeption.Log("No Longer Receiver §d- " + trans.toString());
             }
         }
     }

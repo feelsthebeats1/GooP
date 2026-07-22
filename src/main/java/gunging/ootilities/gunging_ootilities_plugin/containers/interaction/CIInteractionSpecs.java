@@ -116,13 +116,13 @@ public class CIInteractionSpecs {
         if (getEvent().getView().getType() == InventoryType.CRAFTING && getEvent().getRawSlot() < getEvent().getView().getTopInventory().getSize()) {
 
             // Return correct
-            switch (getEvent().getSlot()){
-                default: return 84;
-                case 1: return 80;
-                case 2: return 81;
-                case 3: return 82;
-                case 4: return 83;
-            }
+            return switch (getEvent().getSlot()) {
+                case 1 -> 80;
+                case 2 -> 81;
+                case 3 -> 82;
+                case 4 -> 83;
+                default -> 84;
+            };
         }
 
         // Just the usual

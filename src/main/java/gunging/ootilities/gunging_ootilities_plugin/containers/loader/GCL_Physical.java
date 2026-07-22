@@ -759,7 +759,7 @@ public class GCL_Physical {
         if (toSave == null) { return ret; }
 
         // Encode
-        for (CSBlock block : toSave) { if (block == null) { continue; } ret.add(block.getBlockType().toString() + " " + block.getSideOffset() + " " + block.getVerticalOffset() + " " + block.getForwardOffset()); }
+        for (CSBlock block : toSave) { if (block == null) { continue; } ret.add(block.getBlockType() + " " + block.getSideOffset() + " " + block.getVerticalOffset() + " " + block.getForwardOffset()); }
 
         // Yes
         return ret;

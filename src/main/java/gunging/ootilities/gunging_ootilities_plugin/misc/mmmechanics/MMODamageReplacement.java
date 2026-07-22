@@ -11,14 +11,14 @@ public class MMODamageReplacement extends DamageMechanic {
 
     public MMODamageReplacement(CustomMechanic manager, String line, MythicLineConfig mlc) {
         super(manager.getManager(), manager.getFile(), line, mlc);
-        construct(mlc);
+        construct();
     }
     public MMODamageReplacement(SkillExecutor manager, String line, MythicLineConfig mlc) {
         super(manager, null, line, mlc);
-        construct(mlc);
+        construct();
     }
 
-    void construct(MythicLineConfig mlc) {
+    void construct() {
         String typesString = config.getString(new String[]{"type", "t"}, null);
         if (typesString == null || MythicBukkit.isVolatile()) {
             this.element = PlaceholderString.of(typesString);

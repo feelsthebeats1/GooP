@@ -37,7 +37,7 @@ public class OptiFineGlint {
 
                 // Get Enchantment Value
                 Enchantment tEnchant = null;
-                if (ofgStorage.contains(tName + ".Enchantment")) { tEnchant = oots.GetEnchantmentByName(ofgStorage.getString(tName + ".Enchantment")); }
+                if (ofgStorage.contains(tName + ".Enchantment")) { tEnchant = OotilityCeption.GetEnchantmentByName(ofgStorage.getString(tName + ".Enchantment")); }
 
                 // Get Enchantment Level
                 Integer tLevel = null; Boolean igLevel = true;
@@ -46,7 +46,7 @@ public class OptiFineGlint {
                     igLevel = false;
 
                     // Does it parse bruh
-                    if (oots.IntTryParse(ofgStorage.getString(tName + ".Level"))) {
+                    if (OotilityCeption.IntTryParse(ofgStorage.getString(tName + ".Level"))) {
 
                         // Set
                         tLevel = ofgStorage.getInt(tName + ".Level");

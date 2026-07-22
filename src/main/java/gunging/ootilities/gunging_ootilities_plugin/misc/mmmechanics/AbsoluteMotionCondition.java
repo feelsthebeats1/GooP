@@ -49,9 +49,9 @@ public class AbsoluteMotionCondition extends SkillCondition implements IEntityCo
         if (acceptedY != null) { if (!acceptedY.InRange(v.getY())) {
             //AMC//OotilityCeption.Log("\u00a78MMC\u00a73 AMC\u00a7c Y");
             return false; } }
-        if (acceptedZ != null) { if (!acceptedZ.InRange(v.getZ())) {
-            //AMC//OotilityCeption.Log("\u00a78MMC\u00a73 AMC\u00a7c Z");
-            return false; } }
+        if (acceptedZ != null) { //AMC//OotilityCeption.Log("\u00a78MMC\u00a73 AMC\u00a7c Z");
+            return acceptedZ.InRange(v.getZ());
+        }
         return true;
      }
 }

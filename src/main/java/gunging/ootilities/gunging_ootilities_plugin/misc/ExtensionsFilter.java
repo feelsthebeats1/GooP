@@ -4,7 +4,7 @@ import java.io.FileFilter;
 
 public class ExtensionsFilter implements FileFilter
 {
-    private char[][] extensions;
+    private final char[][] extensions;
 
     public ExtensionsFilter(String[] extensions) {
         int length = extensions.length;

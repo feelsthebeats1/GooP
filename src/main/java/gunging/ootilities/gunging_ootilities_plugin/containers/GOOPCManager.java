@@ -68,7 +68,7 @@ public class GOOPCManager {
 //     * Loads the Containers Engine
 //     */
 //    static void enableLiteEquipment(@Nullable String str) {
-//        //PRM//OotilityCeption.Log("\u00a78LITE\u00a7b INPUT\u00a77 " + str);
+//        //PRM//OotilityCeption.Log("§8LITE§b INPUT§7 " + str);
 //        if (str == null) { return; }
 //
 //        StringBuilder decoder = new StringBuilder();
@@ -80,15 +80,15 @@ public class GOOPCManager {
 //
 //        } else { Gunging_Ootilities_Plugin.theOots.CLog(ChatColor.DARK_GREEN + "Invalid ELE Code"); }
 //
-//        //PRM//OotilityCeption.Log("\u00a78LITE\u00a7c RCVD\u00a77 " + decoder.toString());
-//        //PRM//OotilityCeption.Log("\u00a78LITE\u00a7e ACCE\u00a77 " + liteEquipmentEnabled);
+//        //PRM//OotilityCeption.Log("§8LITE§c RCVD§7 " + decoder.toString());
+//        //PRM//OotilityCeption.Log("§8LITE§e ACCE§7 " + liteEquipmentEnabled);
 //    }
 //
 //    /**
 //     * Loads the Containers Engine
 //     */
 //    static void enableEntitiesInSlash(@Nullable String str) {
-//        //PRM//OotilityCeption.Log("\u00a78ENTITIES\u00a7b INPUT\u00a77 " + str);
+//        //PRM//OotilityCeption.Log("§8ENTITIES§b INPUT§7 " + str);
 //        if (str == null) { return; }
 //
 //        StringBuilder decoder = new StringBuilder();
@@ -100,14 +100,14 @@ public class GOOPCManager {
 //
 //        } else { Gunging_Ootilities_Plugin.theOots.CLog(ChatColor.DARK_GREEN + "Invalid EES Code"); }
 //
-//        //PRM//OotilityCeption.Log("\u00a78ENTITIES\u00a7c RCVD\u00a77 " + decoder.toString());
-//        //PRM//OotilityCeption.Log("\u00a78ENTITIES\u00a7e ACCE\u00a77 " + entitiesInSlash);
+//        //PRM//OotilityCeption.Log("§8ENTITIES§c RCVD§7 " + decoder.toString());
+//        //PRM//OotilityCeption.Log("§8ENTITIES§e ACCE§7 " + entitiesInSlash);
 //    }
 //    /**
 //     * Loads the Containers Engine
 //     */
 //    static void enableLocationsInSlash(@Nullable String str) {
-//        //PRM//OotilityCeption.Log("\u00a78LOCATIONS\u00a7b INPUT\u00a77 " + str);
+//        //PRM//OotilityCeption.Log("§8LOCATIONS§b INPUT§7 " + str);
 //        if (str == null) { return; }
 //
 //        StringBuilder decoder = new StringBuilder();
@@ -119,8 +119,8 @@ public class GOOPCManager {
 //
 //        } else { Gunging_Ootilities_Plugin.theOots.CLog(ChatColor.DARK_GREEN + "Invalid ELS Code"); }
 //
-//        //PRM//OotilityCeption.Log("\u00a78LOCATIONS\u00a7c RCVD\u00a77 " + decoder.toString());
-//        //PRM//OotilityCeption.Log("\u00a78LOCATIONS\u00a7e ACCE\u00a77 " + locationsInSlash);
+//        //PRM//OotilityCeption.Log("§8LOCATIONS§c RCVD§7 " + decoder.toString());
+//        //PRM//OotilityCeption.Log("§8LOCATIONS§e ACCE§7 " + locationsInSlash);
 //    }
 //
 //    /**
@@ -216,7 +216,7 @@ public class GOOPCManager {
                 if (usedTemplateNames.contains(internalName)) {
 
                     // Ignore
-                    Gunging_Ootilities_Plugin.theOots.CPLog("Multiple Container Templates have the same name \u00a73" + internalName + "\u00a77. \u00a7cIgnoring them all except the first one.");
+                    Gunging_Ootilities_Plugin.theOots.CPLog("Multiple Container Templates have the same name §3" + internalName + "§7. §cIgnoring them all except the first one.");
 
                     continue; }
 
@@ -238,17 +238,17 @@ public class GOOPCManager {
 
         // All right read all the personal container files
         HashMap<String, ChunkMap<FileConfigPair>> fetchedPhysicalFiles = getPhysicalContainerFiles();
-        //LOAD//OotilityCeption.Log("\u00a77Loading \u00a7a" + fetchedFiles.keySet().size() + "\u00a77 Different Personal Containers");
+        //LOAD//OotilityCeption.Log("§7Loading §a" + fetchedFiles.keySet().size() + "§7 Different Personal Containers");
         for (GOOPCTemplate template : GCL_Templates.getLoaded()) {
 
             // Only personal...
             if (!template.isPhysical()) { continue; }
-            //LOAD//OotilityCeption.Log("\u00a78GCLPHYS \u00a75LOAD\u00a77 Reloading Physical \u00a7b" + template.getInternalName());
+            //LOAD//OotilityCeption.Log("§8GCLPHYS §5LOAD§7 Reloading Physical §b" + template.getInternalName());
 
             // Find associated files
             ChunkMap<FileConfigPair> files = fetchedPhysicalFiles.get(template.getInternalName());
             if (files == null) { files = new ChunkMap<>(); }
-            //LOAD//OotilityCeption.Log("\u00a78GCLPHYS \u00a75LOAD\u00a7f " + template.getInternalName() + " \u00a77 contains information on \u00a7a" + files.getEntries().size() + "\u00a77 content instances. ");
+            //LOAD//OotilityCeption.Log("§8GCLPHYS §5LOAD§f " + template.getInternalName() + " §7 contains information on §a" + files.getEntries().size() + "§7 content instances. ");
 
             /*
              * Create a new container pertaint to that template
@@ -270,7 +270,7 @@ public class GOOPCManager {
 
         // All right read all the personal container files
         HashMap<String, HashMap<UUID, FileConfigPair>> fetchedPersonalFiles = getPersonalContainerFiles();
-        //LOAD//OotilityCeption.Log("\u00a77Loading \u00a7a" + fetchedFiles.keySet().size() + "\u00a77 Different Personal Containers");
+        //LOAD//OotilityCeption.Log("§7Loading §a" + fetchedFiles.keySet().size() + "§7 Different Personal Containers");
         for (GOOPCTemplate template : GCL_Templates.getLoaded()) {
 
             // Only personal...
@@ -279,7 +279,7 @@ public class GOOPCManager {
             // Find associated files
             HashMap<UUID, FileConfigPair> files = fetchedPersonalFiles.get(template.getInternalName());
             if (files == null) { files = new HashMap<>(); }
-            //LOAD//OotilityCeption.Log("\u00a7a+\u00a7f" + templateName + " \u00a77 Contains Information on \u00a7a" + files.size() + "\u00a77 Content Instances");
+            //LOAD//OotilityCeption.Log("§a+§f" + templateName + " §7 Contains Information on §a" + files.size() + "§7 Content Instances");
 
             /*
              * Create a new container pertaint to that template
@@ -327,7 +327,7 @@ public class GOOPCManager {
 
             // Only personal...
             if (!template.isPlayer()) { continue; }
-            //CLT//OotilityCeption.Log("\u00a78GCLT\u00a73 LOAD\u00a77 Loading\u00a7e " + template.getInternalName());
+            //CLT//OotilityCeption.Log("§8GCLT§3 LOAD§7 Loading§e " + template.getInternalName());
 
             /*
              * Files would be loaded here, except player containers lack
@@ -348,7 +348,7 @@ public class GOOPCManager {
             GCL_Player.load(player);
             GCL_Player.live(player);
 
-            //CLT//OotilityCeption.Log("\u00a78GCLT\u00a73 LOAD\u00a77 Defaulted? \u00a7e " + player.isDefaulted());
+            //CLT//OotilityCeption.Log("§8GCLT§3 LOAD§7 Defaulted? §e " + player.isDefaulted());
 
             // Kind a assume one is the default yeah
             if (player.isDefaulted()) { GCL_Player.setDefaultInventoryNoSave(player); }
@@ -398,7 +398,7 @@ public class GOOPCManager {
             // Load all the configs in there
             ArrayList<FileConfigPair> perLocationContainerContents = Gunging_Ootilities_Plugin.theMain.GetConfigsAt("container-instances/physical/" + template.getInternalName());
 
-            //LOAD//OotilityCeption.Log("\u00a78GCLPHYS \u00a75LOAD\u00a77 Physical, found \u00a7e" + perLocationContainerContents.size() + "\u00a77 associated YML storages.");
+            //LOAD//OotilityCeption.Log("§8GCLPHYS §5LOAD§7 Physical, found §e" + perLocationContainerContents.size() + "§7 associated YML storages.");
             for (FileConfigPair pair : perLocationContainerContents) {
 
                 // The name shall be the location
@@ -448,7 +448,7 @@ public class GOOPCManager {
 
                 // Load
                 pairs.put(containedLocation, updatedPair);
-                //LOAD//OotilityCeption.Log("\u00a7e+>\u00a77 Loaded\u00a7e " + OotilityCeption.BlockLocation2String(containedLocation));
+                //LOAD//OotilityCeption.Log("§e+>§7 Loaded§e " + OotilityCeption.BlockLocation2String(containedLocation));
 
                 // Delete ID-named file
                 pair.getFile().delete();
@@ -460,7 +460,7 @@ public class GOOPCManager {
 
             // Re-put
             ret.put(template.getInternalName(), pairs);
-            //LOAD//OotilityCeption.Log("\u00a7e+>\u00a76 Loaded\u00a7e " + pairs.size());
+            //LOAD//OotilityCeption.Log("§e+>§6 Loaded§e " + pairs.size());
         }
 
         // Updated files were included
@@ -500,7 +500,7 @@ public class GOOPCManager {
             // Load all the configs in there
             ArrayList<FileConfigPair> perOwnerContainerContents = Gunging_Ootilities_Plugin.theMain.GetConfigsAt("container-instances/personal/" + template.getInternalName());
 
-            //LOAD//OotilityCeption.Log("\u00a7e+\u00a77 Personal, found \u00a7e" + perOwnerContainerContents.size() + "\u00a77 associated YML storages.");
+            //LOAD//OotilityCeption.Log("§e+§7 Personal, found §e" + perOwnerContainerContents.size() + "§7 associated YML storages.");
             for (FileConfigPair fcP : perOwnerContainerContents) {
 
                 // The name shall be the location
@@ -515,7 +515,7 @@ public class GOOPCManager {
 
                 // Invalid name
                 if (owner == null) { continue; }
-                //LOAD//OotilityCeption.Log("\u00a7e+>\u00a77 Loaded\u00a7e " + owner);
+                //LOAD//OotilityCeption.Log("§e+>§7 Loaded§e " + owner);
 
                 // Load
                 pairs.put(owner, fcP);
@@ -529,7 +529,7 @@ public class GOOPCManager {
             // Re-put
             ret.put(template.getInternalName(), pairs);
 
-            //LOAD//OotilityCeption.Log("\u00a7e+>\u00a76 Loaded\u00a7e " + pairs.size());
+            //LOAD//OotilityCeption.Log("§e+>§6 Loaded§e " + pairs.size());
         }
 
         // Updated files were included
@@ -715,7 +715,7 @@ public class GOOPCManager {
                     if (uid == null) { continue; }
 
                     // All right create the file
-                    FileConfigPair trueFile = Gunging_Ootilities_Plugin.theMain.GetConfigAt("container-instances/personal/" + parentTemplateName, uid.toString() + ".yml", false, true);
+                    FileConfigPair trueFile = Gunging_Ootilities_Plugin.theMain.GetConfigAt("container-instances/personal/" + parentTemplateName, uid + ".yml", false, true);
                     YamlConfiguration trueConfig = trueFile.getStorage();
 
                     // Get the content ItemStacks and their Indices
@@ -787,8 +787,7 @@ public class GOOPCManager {
     //region Containers Ootilities
     @NotNull public static String parseAsContainers(@NotNull String input, @Nullable ContainerInventory instance) {
         if (instance == null) { return input; }
-        if (instance instanceof PhysicalContainerInventory) {
-            PhysicalContainerInventory asPhys = (PhysicalContainerInventory) instance;
+        if (instance instanceof PhysicalContainerInventory asPhys) {
 
             input = input.replace("%goop_container_owner%", String.valueOf(asPhys.getContent().getContainerOwner()));
             input = input.replace("%goop_container_x%", String.valueOf(asPhys.getLocation().getX()));
@@ -798,8 +797,7 @@ public class GOOPCManager {
             input = input.replace("%goop_container_location%", asPhys.getLocation().getX() + " " + asPhys.getLocation().getY() + " " + asPhys.getLocation().getZ());
             input = input.replace("%goop_container_location_comma%", asPhys.getLocation().getX() + "," + asPhys.getLocation().getY() + "," + asPhys.getLocation().getZ());
 
-        } else if (instance instanceof PersonalContainerInventory) {
-            PersonalContainerInventory asPers = (PersonalContainerInventory) instance;
+        } else if (instance instanceof PersonalContainerInventory asPers) {
 
             input = input.replace("%goop_container_owner%", String.valueOf(asPers.getOwnerUUID()));
         }
@@ -834,19 +832,18 @@ public class GOOPCManager {
      * @return The corresponding CRP to this reason
      */
     @NotNull public static ContainerReasonProcess getReasonProcessOf(@NotNull ContainerOpeningReason reason) {
-        switch (reason) {
-            case USAGE: return new CRP_Usage();
-            case EDITION_DISPLAY: return CRP_EditionDisplay.getInstance();
-            case EDITION_STORAGE: return CRP_EditionStorage.getInstance();
-            case EDITION_COMMANDS: return CRP_EditionCommands.getInstance();
-
-            case EDITION_PLAYER_STORAGE: return CRP_PlayerStorage.getInstance();
-            case EDITION_PLAYER_COMMANDS: return CRP_PlayerCommands.getInstance();
-            case EDITION_PLAYER_DISPLAY: return CRP_PlayerDisplay.getInstance();
+        return switch (reason) {
+            case USAGE -> new CRP_Usage();
+            case EDITION_DISPLAY -> CRP_EditionDisplay.getInstance();
+            case EDITION_STORAGE -> CRP_EditionStorage.getInstance();
+            case EDITION_COMMANDS -> CRP_EditionCommands.getInstance();
+            case EDITION_PLAYER_STORAGE -> CRP_PlayerStorage.getInstance();
+            case EDITION_PLAYER_COMMANDS -> CRP_PlayerCommands.getInstance();
+            case EDITION_PLAYER_DISPLAY -> CRP_PlayerDisplay.getInstance();
 
             // LOCK_STORAGE
-            default: return new CRP_Preview();
-        }
+            default -> new CRP_Preview();
+        };
     }
 
     /**
@@ -881,7 +878,7 @@ public class GOOPCManager {
         if (defaultAttr == null) { defaultAttr = Attribute.GENERIC_ARMOR; }
         iMeta.addAttributeModifier(defaultAttr, DEFAULT_ATTRIBUTE);
         iMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
-        if (!iMeta.hasDisplayName()) { iMeta.setDisplayName("\u00a73\u00a7f\u00a7r"); }
+        if (!iMeta.hasDisplayName()) { iMeta.setDisplayName("§3§f§r"); }
         processed.setItemMeta(iMeta);
 
         // That's it
@@ -963,10 +960,7 @@ public class GOOPCManager {
 
         // Fetch template
         GOOPCTemplate template = GCL_Templates.getByInternalName(templateInternalName);
-        if (template == null) { return new ArrayList<>(); }
-
-        // Yeah
-        return template.getAliasSlots(alias);
+        return getAliasSlots(template, alias);
     }
     /**
      * @param template Template to search alias slots within
@@ -981,11 +975,11 @@ public class GOOPCManager {
     /**
      * Encapsulates the title so it can be separated.
      */
-    @NotNull public static final String TITLE_ID_OPEN = "\u00a7{\u00a7{";
+    @NotNull public static final String TITLE_ID_OPEN = "§{§{";
     /**
      * Encapsulates the title so it can be separated.
      */
-    @NotNull public static final String TITLE_ID_CLOSE = "\u00a7}\u00a7}";
+    @NotNull public static final String TITLE_ID_CLOSE = "§}§}";
     /**
      * @param inven Inventory being opened that could be a Goop Container
      *
@@ -1010,24 +1004,24 @@ public class GOOPCManager {
     /**
      * Encapsulates the Physical Instance ID so it can be identified.
      */
-    @NotNull public static final String PHYS_ID_OPEN = "\u00a7[\u00a7|";
+    @NotNull public static final String PHYS_ID_OPEN = "§[§|";
     /**
      * Encapsulates the Physical Instance ID so it can be identified.
      */
-    @NotNull public static final String PHYS_ID_CLOSE = "\u00a7|\u00a7]";
+    @NotNull public static final String PHYS_ID_CLOSE = "§|§]";
     /**
      * Encapsulates the Personal Instance ID and the Owner ID to identify them.
      */
-    @NotNull public static final String PERS_ID_OPEN = "\u00a7{\u00a7[";
+    @NotNull public static final String PERS_ID_OPEN = "§{§[";
     /**
      * Encapsulates the Personal Instance ID and the Owner ID to identify them.
      */
-    @NotNull public static final String PERS_ID_CLOSE = "\u00a7]\u00a7}";
+    @NotNull public static final String PERS_ID_CLOSE = "§]§}";
 
     /**
      * Allows to identify the usage of the container as Edition of Display
      */
-    public static final String MODE_EDIT_DISPLAY = "\u00a7<\u00a7d\u00a7>";
+    public static final String MODE_EDIT_DISPLAY = "§<§d§>";
     /**
      * @param inven Inventory being opened that could be a Goop Container
      *
@@ -1044,7 +1038,7 @@ public class GOOPCManager {
     /**
      * Allows to identify the usage of the container as Edition of Storage
      */
-    public static final String MODE_EDIT_STORAGE = "\u00a7<\u00a7s\u00a7>";
+    public static final String MODE_EDIT_STORAGE = "§<§s§>";
     /**
      * @param inven Inventory being opened that could be a Goop Container
      *
@@ -1062,7 +1056,7 @@ public class GOOPCManager {
     /**
      * Allows to identify the usage of the container as Edition of Commands
      */
-    public static final String MODE_EDIT_COMMAND = "\u00a7<\u00a7c\u00a7>";
+    public static final String MODE_EDIT_COMMAND = "§<§c§>";
     /**
      * @param inven Inventory being opened that could be a Goop Container
      *
@@ -1079,7 +1073,7 @@ public class GOOPCManager {
     /**
      * Allows to identify the usage of the container as Preview Mode
      */
-    public static final String MODE_PREVIEW = "\u00a7<\u00a7n\u00a7>";
+    public static final String MODE_PREVIEW = "§<§n§>";
     /**
      * @param inven Inventory being opened that could be a Goop Container
      *
@@ -1156,7 +1150,7 @@ public class GOOPCManager {
 
         // Step #3: Get Numeric String
         StringBuilder numeric = new StringBuilder();
-        for (char c : idCont.toCharArray()) { if (c != '\u00a7') { numeric.append(c); } }
+        for (char c : idCont.toCharArray()) { if (c != '§') { numeric.append(c); } }
 
         // Step #4: Parse
         long id; try { id = Long.parseLong(numeric.toString()); } catch (NumberFormatException ignored) { return null; }
@@ -1198,7 +1192,7 @@ public class GOOPCManager {
 
         // Step #3: Get Numeric String
         StringBuilder numeric = new StringBuilder();
-        for (char c : idCont.toCharArray()) { if (c != '\u00a7') { numeric.append(c); } }
+        for (char c : idCont.toCharArray()) { if (c != '§') { numeric.append(c); } }
 
         // Step #4: Parse
         long id; try { id = Long.parseLong(numeric.toString()); } catch (NumberFormatException ignored) { return null; }
@@ -1241,7 +1235,7 @@ public class GOOPCManager {
 
         // Step #3: Get Numeric String
         StringBuilder numeric = new StringBuilder();
-        for (char c : idCont.toCharArray()) { if (c != '\u00a7') { numeric.append(c); } }
+        for (char c : idCont.toCharArray()) { if (c != '§') { numeric.append(c); } }
 
         // Step #4: Parse
         long id; try { id = Long.parseLong(numeric.toString()); } catch (NumberFormatException ignored) { return null; }
@@ -1286,7 +1280,7 @@ public class GOOPCManager {
         if (observer == null) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cInvalid slot: \u00a77You must specify a player. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cInvalid slot: §7You must specify a player. ");
 
             // Nothing
             return null;
@@ -1296,7 +1290,7 @@ public class GOOPCManager {
         if (slot == null || slot < 0) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cInvalid slot: \u00a77Index out of range. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cInvalid slot: §7Index out of range. ");
 
             // Nothing
             return null;
@@ -1307,7 +1301,7 @@ public class GOOPCManager {
         if (deployed ==  null) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cInvalid slot: \u00a77Player has no container open. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cInvalid slot: §7Player has no container open. ");
 
             // Nothing
             return null;
@@ -1317,7 +1311,7 @@ public class GOOPCManager {
         if (slot >= deployed.getTemplate().getTotalSlotCount()) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cInvalid slot: \u00a77Index out of range. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cInvalid slot: §7Index out of range. ");
 
             // Nothing
             return null;
@@ -1339,7 +1333,7 @@ public class GOOPCManager {
         if (player == null) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cInvalid player. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cInvalid player. ");
 
             // Nothing
             return 0;
@@ -1350,7 +1344,7 @@ public class GOOPCManager {
         if (container == null) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a77This player has \u00a7cno\u00a77 container open. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§7This player has §cno§7 container open. ");
 
             // Nothing
             return 0;
@@ -1372,7 +1366,7 @@ public class GOOPCManager {
         if (player == null) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cInvalid player. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cInvalid player. ");
 
             // Nothing
             return null;
@@ -1383,7 +1377,7 @@ public class GOOPCManager {
         if (container == null) {
 
             // Return result
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a77This player has \u00a7cno\u00a77 container open. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§7This player has §cno§7 container open. ");
 
             // Nothing
             return null;
@@ -1424,7 +1418,7 @@ public class GOOPCManager {
             if (containerSlot == null) {
 
                 // Just the number I guess... This should never really happen
-                inven.setItem(i, OotilityCeption.RenameItem(new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE), "\u00a73[ \u00a7e" + i + "\u00a73 ]", null));
+                inven.setItem(i, OotilityCeption.RenameItem(new ItemStack(Material.LIGHT_GRAY_STAINED_GLASS_PANE), "§3[ §e" + i + "§3 ]", null));
                 continue;
             }
 
@@ -1450,24 +1444,24 @@ public class GOOPCManager {
 
         // Send info on onClose and onOpen commands
         if (template.hasCommandsOnClose()) {
-            player.sendMessage(OotilityCeption.LogFormat("Commands \u00a7bonClose\u00a77 of " + template.getInternalName() + "\u00a77:"));
+            player.sendMessage(OotilityCeption.LogFormat("Commands §bonClose§7 of " + template.getInternalName() + "§7:"));
 
             // Log commands on close
             ArrayList<String> comms = template.getCommandsOnClose();
-            for (int i = 0; i < comms.size(); i++) { player.sendMessage("\u00a73" + i + "\u00a77: " + comms.get(i));  }
+            for (int i = 0; i < comms.size(); i++) { player.sendMessage("§3" + i + "§7: " + comms.get(i));  }
 
             // No commands on close
-        } else { player.sendMessage("\u00a73(\u00a7eNo Command On Close\u00a73)"); }
+        } else { player.sendMessage("§3(§eNo Command On Close§3)"); }
 
         if (template.hasCommandsOnOpen()) {
-            player.sendMessage(OotilityCeption.LogFormat("Commands \u00a7bonOpen\u00a77 of " + template.getInternalName() + "\u00a77:"));
+            player.sendMessage(OotilityCeption.LogFormat("Commands §bonOpen§7 of " + template.getInternalName() + "§7:"));
 
             // Log commands on open
             ArrayList<String> comms = template.getCommandsOnOpen();
-            for (int i = 0; i < comms.size(); i++) { player.sendMessage("\u00a73" + i + "\u00a77: " + comms.get(i));  }
+            for (int i = 0; i < comms.size(); i++) { player.sendMessage("§3" + i + "§7: " + comms.get(i));  }
 
             // No commands on open
-        } else { player.sendMessage("\u00a73(\u00a7eNo Command On Open\u00a73)"); }
+        } else { player.sendMessage("§3(§eNo Command On Open§3)"); }
     }
 
     /**
@@ -1480,7 +1474,7 @@ public class GOOPCManager {
 
         ItemStack ret = iSource.clone();
         ItemMeta iMeta = ret.getItemMeta();
-        iMeta.setDisplayName("\u00a73\u00a7f\u00a7r");
+        iMeta.setDisplayName("§3§f§r");
         ret.setItemMeta(iMeta);
         return ret;
     }
@@ -1512,7 +1506,7 @@ public class GOOPCManager {
         if (getEditionUnavailable().containsKey(editor.getUniqueId())) {
 
             // Fail that
-            OotilityCeption.Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Contents of template '\u00a73{0}\u00a77' are currently being edited by another player. ", template.getInternalName());
+            OotilityCeption.Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Contents of template '§3{0}§7' are currently being edited by another player. ", template.getInternalName());
 
             // Nope
             return;

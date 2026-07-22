@@ -108,7 +108,7 @@ public class GungingOotilitiesTab implements TabCompleter {
 
 
                     // Yes it is! Lets go
-                    if (args[0].toLowerCase().equals("sudop")) {
+                    if (args[0].equalsIgnoreCase("sudop")) {
                         cmd = GooP_Commands.sudo;
                         supp = true;
                     }
@@ -148,7 +148,7 @@ public class GungingOotilitiesTab implements TabCompleter {
 
                             // If it happens to be 'gungingootilities' ffs no
                             String obz = args[c];
-                            if (obz.toLowerCase().equals("gungingootilities")) { obz = "goop"; }
+                            if (obz.equalsIgnoreCase("gungingootilities")) { obz = "goop"; }
 
                             // Append
                             if (!(cropCBuilder.length() == 0)) { cropCBuilder.append(" "); }
@@ -172,12 +172,10 @@ public class GungingOotilitiesTab implements TabCompleter {
                     int min = 1; if (sp) { min = 0; }
                     String[] argz = new String[argzExtended.length - min];
                     //OST//OotilityCeption.Log("\u00a78[\u00a76C\u00a78]\u00a7e- \u00a77" + argzExtended[0]);
-                    for (int a = 1; a < argzExtended.length; a++) {
-
-                        // Put
-                        argz[a - 1] = argzExtended[a];
-                        //OST//OotilityCeption.Log("\u00a78[\u00a7b" + (a - 1) + "\u00a78]\u00a73- \u00a77" + argz[a - 1]);
-                    }
+                    // Put
+                    //OST//OotilityCeption.Log("\u00a78[\u00a7b" + (a - 1) + "\u00a78]\u00a73- \u00a77" + argz[a - 1]);
+                    if (argzExtended.length - 1 >= 0)
+                        System.arraycopy(argzExtended, 1, argz, 0, argzExtended.length - 1);
                     if (sp && argzExtended.length > 1) {
                         argz[argz.length - 1] = "";
                         //OST//OotilityCeption.Log("\u00a78[\u00a7b" + (argz.length - 1) + "\u00a78]\u00a73- \u00a77" + argz[argz.length - 1]);
@@ -210,7 +208,7 @@ public class GungingOotilitiesTab implements TabCompleter {
 
 
                                 // Yes it is! Lets go
-                                if (args[0].toLowerCase().equals("sudop")) {
+                                if (args[0].equalsIgnoreCase("sudop")) {
                                     cmd = GooP_Commands.sudo;
                                     supp = true;
                                 }
@@ -274,7 +272,7 @@ public class GungingOotilitiesTab implements TabCompleter {
                         if (args.length >= 6) {
 
                             // Is it add or edit?
-                            if (args[3].toLowerCase().equals("add")) {
+                            if (args[3].equalsIgnoreCase("add")) {
 
                                 // yep
                                 gtc = true;
@@ -286,7 +284,7 @@ public class GungingOotilitiesTab implements TabCompleter {
                                 // Establish gIndex
                                 if (args[5].equals("goop")) { gIndex = 5; }
 
-                            } else if (args[3].toLowerCase().equals("edit") && args.length >= 7) {
+                            } else if (args[3].equalsIgnoreCase("edit") && args.length >= 7) {
 
                                 // yep
                                 gtc = true;
@@ -326,7 +324,7 @@ public class GungingOotilitiesTab implements TabCompleter {
                         if (gIndex >= 0) {
 
                             // Alr now get the index of goop
-                            StringBuilder troueCommand = new StringBuilder("");
+                            StringBuilder troueCommand = new StringBuilder();
                             for (int t = gIndex; t < args.length; t++) {
 
                                 // Append the current
@@ -343,12 +341,10 @@ public class GungingOotilitiesTab implements TabCompleter {
                             int min = 1; if (sp) { min = 0; }
                             String[] argz = new String[argzExtended.length - min];
                             //OST//OotilityCeption.Log("\u00a78[\u00a76C\u00a78]\u00a7e- \u00a77" + argzExtended[0]);
-                            for (int a = 1; a < argzExtended.length; a++) {
-
-                                // Put
-                                argz[a - 1] = argzExtended[a];
-                                //OST//OotilityCeption.Log("\u00a78[\u00a7b" + (a - 1) + "\u00a78]\u00a73- \u00a77" + argz[a - 1]);
-                            }
+                            // Put
+                            //OST//OotilityCeption.Log("\u00a78[\u00a7b" + (a - 1) + "\u00a78]\u00a73- \u00a77" + argz[a - 1]);
+                            if (argzExtended.length - 1 >= 0)
+                                System.arraycopy(argzExtended, 1, argz, 0, argzExtended.length - 1);
                             if (sp && argzExtended.length > 1) {
                                 argz[argz.length - 1] = "";
                                 //OST//OotilityCeption.Log("\u00a78[\u00a7b" + (argz.length - 1) + "\u00a78]\u00a73- \u00a77" + argz[argz.length - 1]);
@@ -381,7 +377,7 @@ public class GungingOotilitiesTab implements TabCompleter {
 
 
                                         // Yes it is! Lets go
-                                        if (args[0].toLowerCase().equals("sudop")) {
+                                        if (args[0].equalsIgnoreCase("sudop")) {
                                             cmd = GooP_Commands.sudo;
                                             supp = true;
                                         }
@@ -1085,7 +1081,7 @@ public class GungingOotilitiesTab implements TabCompleter {
                         // /goop nbt {action}
                         //   -    0     1      args[n]
 
-                        if (args.length == 2 && (args[0].toLowerCase()).equals("nbt")) {
+                        if (args.length == 2 && (args[0]).equalsIgnoreCase("nbt")) {
                             tabM.add("removeLore");
                             tabM.add("addLore");
                             tabM.add("rename");
@@ -1226,12 +1222,12 @@ public class GungingOotilitiesTab implements TabCompleter {
 
                                             for (Objective objectiv : scoreboard.getObjectives()) { tabM.add(objectiv.getName()); }
 
-                                            if (args[1].toLowerCase().equals("damage")) { Collections.addAll(tabM, "(prevent-breaking?)", "true", "false"); }
+                                            if (args[1].equalsIgnoreCase("damage")) { Collections.addAll(tabM, "(prevent-breaking?)", "true", "false"); }
                                             break;
                                         case 7:
-                                            if (args[1].toLowerCase().equals("damage")) { Collections.addAll(tabM, "(use-max-durability?)", "true", "false"); }
+                                            if (args[1].equalsIgnoreCase("damage")) { Collections.addAll(tabM, "(use-max-durability?)", "true", "false"); }
                                         case 8:
-                                            if (args[1].toLowerCase().equals("damage")) {
+                                            if (args[1].equalsIgnoreCase("damage")) {
                                                 scoreboardManager = Bukkit.getScoreboardManager();
                                                 scoreboard = scoreboardManager.getMainScoreboard();
 
@@ -2910,11 +2906,11 @@ public class GungingOotilitiesTab implements TabCompleter {
                                                         Collections.addAll(tabM, "type", "id", "(Leave blanc to remove masks)");
                                                         break;
                                                     case 7:
-                                                        if (args[5].toLowerCase().equals("type")) {
+                                                        if (args[5].equalsIgnoreCase("type")) {
                                                             tabM.addAll(ApplicableMask.getLoadedMaskNames());
                                                             if (Gunging_Ootilities_Plugin.foundMMOItems) { tabM.addAll(GooPMMOItems.GetMMOItem_TypeNames()); }
                                                         }
-                                                        else if (args[5].toLowerCase().equals("id")) {
+                                                        else if (args[5].equalsIgnoreCase("id")) {
                                                             Collections.addAll(tabM, "<MMOItem ID to allow to be placed>");
                                                             for (KindRestriction kr : KindRestriction.values()) { tabM.add(kr.toString()); }
                                                         }
@@ -3015,7 +3011,6 @@ public class GungingOotilitiesTab implements TabCompleter {
                                                         break;
                                                     case 7:
                                                         switch (args[5].toLowerCase().replace(" ", "_").replace("-", "_")) {
-                                                            default: break;
                                                             case "behaviour":
                                                                 for (RestrictedBehaviour rb : RestrictedBehaviour.values()) { tabM.add(rb.toString()); }
                                                                 break;
@@ -3030,6 +3025,8 @@ public class GungingOotilitiesTab implements TabCompleter {
                                                                 break;
                                                             case "level":
                                                                 Collections.addAll(tabM, "1..", "6..", "10..20", "..6");
+                                                                break;
+                                                            default:
                                                                 break;
                                                         }
                                                         break;

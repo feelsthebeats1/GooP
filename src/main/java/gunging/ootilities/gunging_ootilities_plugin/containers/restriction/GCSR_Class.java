@@ -67,7 +67,7 @@ public class GCSR_Class extends SlotRestriction {
         for (String clas : allowedClasses) { OotilityCeption.ListIntoBuilder(sb, clas, " \u00a77or\u00a7b "); }
 
         // Add the line with color parsed
-        item.add(OotilityCeption.ParseColour("\u00a73>\u00a77 Classes:\u00a7b " + sb.toString()));
+        item.add(OotilityCeption.ParseColour("\u00a73>\u00a77 Classes:\u00a7b " + sb));
 
         // Return thay
         return item;

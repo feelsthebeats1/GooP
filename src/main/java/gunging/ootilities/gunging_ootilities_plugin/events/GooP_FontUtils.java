@@ -208,7 +208,7 @@ public class GooP_FontUtils implements Listener {
                 //DBG//OotilityCeption. Log("Comparing to registerd code \u00a73" + fCode);
 
                 // Does it equal?
-                if (fCode.toLowerCase().equals(source.toLowerCase())) {
+                if (fCode.equalsIgnoreCase(source)) {
                     //DBG//OotilityCeption. Log("\u00a7aAccepted: \u00a77Match");
 
                     // Return it
@@ -244,7 +244,7 @@ public class GooP_FontUtils implements Listener {
             String[] kodes = source.split(":");
 
             // Finished rebuilt
-            StringBuilder builder = new StringBuilder("");
+            StringBuilder builder = new StringBuilder();
             boolean kounterAppend = true;
 
             // Evaluate each ig

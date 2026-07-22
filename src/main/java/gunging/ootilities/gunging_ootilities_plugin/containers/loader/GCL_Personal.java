@@ -35,7 +35,7 @@ public class GCL_Personal {
      */
     public static void load(@NotNull GOOPCPersonal personal, @NotNull UUID owner) {
         GOOPCTemplate template = personal.getTemplate();
-        String error = "Error when loading personal container \u00a73" + template.getInternalName() + "\u00a77 for player \u00a6e " + owner.toString() + "\u00a77: \u00a7c";
+        String error = "Error when loading personal container \u00a73" + template.getInternalName() + "\u00a77 for player \u00a6e " + owner + "\u00a77: \u00a7c";
         //String warning = "Warning when loading personal container \u00a73" + template.getInternalName() + "\u00a77 for player \u00a6e " + owner.toString() + "\u00a77: \u00a76";
 
         // Get the pair

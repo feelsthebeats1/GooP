@@ -4,10 +4,6 @@ import gunging.ootilities.gunging_ootilities_plugin.Gunging_Ootilities_Plugin;
 import gunging.ootilities.gunging_ootilities_plugin.compatibilities.GooPMMOItems;
 import gunging.ootilities.gunging_ootilities_plugin.misc.mmoitemstats.ConverterTypeNames;
 import gunging.ootilities.gunging_ootilities_plugin.misc.mmoitemstats.ConvertingReason;
-import io.lumine.mythic.lib.api.item.NBTItem;
-import net.Indyuce.mmoitems.ItemStats;
-import net.Indyuce.mmoitems.api.item.mmoitem.LiveMMOItem;
-import net.Indyuce.mmoitems.stat.data.StringListData;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
@@ -27,17 +23,7 @@ public class ConverterTypeSettings {
      */
     public static void reset() { liveConverters.clear(); }
 
-    /**
-     * @return The converters available to convert items yeah
-     */
-    @NotNull public static HashMap<ConverterTypeNames, ConverterTypeSettings> getLiveConverters() { return liveConverters; }
     @NotNull final static HashMap<ConverterTypeNames, ConverterTypeSettings> liveConverters = new HashMap<>();
-    /**
-     * @param kindOfItems The kind of items that you are converting
-     *
-     * @return If any is loaded, the converter to convert this item.
-     */
-    @Nullable public ConverterTypeSettings getConverterFor(@NotNull ConverterTypeNames kindOfItems) { return liveConverters.get(kindOfItems); }
 
     /**
      * @param kindOfItems Kind of items you are converting
@@ -48,10 +34,6 @@ public class ConverterTypeSettings {
     //endregion
 
     //region Constructor
-    /**
-     * @return The kind of items this converter will apply to
-     */
-    @NotNull public ConverterTypeNames getTargetItemKinds() { return targetItemKinds; }
     @NotNull final ConverterTypeNames targetItemKinds;
 
     /**
@@ -68,10 +50,6 @@ public class ConverterTypeSettings {
     //endregion
 
     //region Per-Action Converting
-    /**
-     * @return Per-Converting-Action, the random list of tiers that will be applied to items.
-     */
-    @NotNull public HashMap<ConvertingReason, ListPlaceholder> getRandomTiering() { return randomTiering; }
     @NotNull final HashMap<ConvertingReason, ListPlaceholder> randomTiering = new HashMap<>();
     /**
      * @param reason Reason by which you are converting
@@ -103,10 +81,6 @@ public class ConverterTypeSettings {
         String chosen = lph.RandomListItem();
         return "none".equals(chosen) ? null : chosen; }
 
-    /**
-     * @return Per-Converting-Action, the tier displayed before the tier is decided.
-     */
-    @NotNull public HashMap<ConvertingReason, ConverterPerTier> getNullTier() { return nullTier; }
     @NotNull final HashMap<ConvertingReason, ConverterPerTier> nullTier = new HashMap<>();
     /**
      * @param reason Reason by which you are converting
@@ -120,10 +94,7 @@ public class ConverterTypeSettings {
      * @return The name of the tier uuuuh or something like that Im not entirely sure.
      */
     @Nullable public String getNullTierName(@NotNull ConvertingReason reason) { ConverterPerTier cpt = nullTier.get(reason); return cpt == null ? null : cpt.interestingTierName;}
-    /**
-     * @return Per-Converting-Action, the different bonuses applied to each tier
-     */
-    @NotNull public HashMap<ConvertingReason, HashMap<String, ConverterPerTier>> getPerTierSettings() { return perTierSettings; }
+
     @NotNull final HashMap<ConvertingReason, HashMap<String, ConverterPerTier>> perTierSettings = new HashMap<>();
     /**
      * @param reason Reason by which you are converting
@@ -155,11 +126,11 @@ public class ConverterTypeSettings {
 
     /**
      * Applies things that should be applied before an item is crafted.
-     *
+     * <p>
      * Specifically, non tier-specific settings, because it must be
      * crafted to finally decide what it will look like, and this
      * step happens before deciding the tier.
-     *
+     * <p>
      * <b>It is applied before {@link #applyTo(ItemStack, Player, ConvertingReason, RefSimulator)}</b>
      */
     @NotNull public ItemStack applyDisplayTo(@NotNull ItemStack iSource, @Nullable Player parseAS, @NotNull ConvertingReason asPickup) {
@@ -169,7 +140,7 @@ public class ConverterTypeSettings {
 
         // Contained?
         if (cpt2 != null) {
-            //RLD//OotilityCeption.Log("\u00a78CONVERTER \u00a7bPREVIEW\u00a77 Does have Null-Tier Settings");
+            //RLD//OotilityCeption.Log("§8CONVERTER §bPREVIEW§7 Does have Null-Tier Settings");
 
             // Apply
             iSource = cpt2.ApplyTo(iSource, parseAS);
@@ -184,31 +155,31 @@ public class ConverterTypeSettings {
 
     /**
      * Applies such changes that should happen AFTER the item is crafted.
-     *
+     * <p>
      * Specifically, tier-specific settings, because it must be
      * crafted to finally decide what it will look like.
-     *
+     * <p>
      * <b>It is applied after {@link #applyDisplayTo(ItemStack, Player, ConvertingReason)}</b>
      */
     @NotNull
     public ItemStack applyTo(@NotNull ItemStack iSource, @Nullable Player parseAS, @NotNull ConvertingReason asPickup, @Nullable RefSimulator<ConverterPerTier> cptRet) {
-        //RLD//OotilityCeption.Log("\u00a78CONVERTER \u00a7bAPPLY\u00a77 Post applying onto " + OotilityCeption.GetItemName(iSource));
+        //RLD//OotilityCeption.Log("§8CONVERTER §bAPPLY§7 Post applying onto " + OotilityCeption.GetItemName(iSource));
 
         // AH
         ItemStack iResult = iSource;
 
         // Roll for tier
         if (hasRandomTier(asPickup)) {
-            //RLD//OotilityCeption.Log("\u00a78CONVERTER \u00a7bAPPLY\u00a77 Random tiering detected");
+            //RLD//OotilityCeption.Log("§8CONVERTER §bAPPLY§7 Random tiering detected");
 
             // Get Random Tier
             String preChosenTier = getRandomTier(asPickup);
 
-            //RLD//OotilityCeption.Log("\u00a78CONVERTER \u00a7bAPPLY\u00a77 Random Chance ~ " + preChosenTier);
+            //RLD//OotilityCeption.Log("§8CONVERTER §bAPPLY§7 Random Chance ~ " + preChosenTier);
 
             // If exists
             if (GooPMMOItems.TierExists(preChosenTier)) {
-                //RLD//OotilityCeption.Log("\u00a78CONVERTER \u00a7bAPPLY\u00a77 Choosing " + preChosenTier);
+                //RLD//OotilityCeption.Log("§8CONVERTER §bAPPLY§7 Choosing " + preChosenTier);
 
                 // Apply
                 iSource = GooPMMOItems.SetTier(iSource, preChosenTier, null,null);
@@ -219,7 +190,7 @@ public class ConverterTypeSettings {
 
                 // Contained?
                 if (cpt != null) {
-                    //RLD//OotilityCeption.Log("\u00a78CONVERTER \u00a7bAPPLY\u00a77 Does have Per-Tier Settings");
+                    //RLD//OotilityCeption.Log("§8CONVERTER §bAPPLY§7 Does have Per-Tier Settings");
 
                     // Apply
                     iSource = cpt.ApplyTo(iSource, parseAS);

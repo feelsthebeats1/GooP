@@ -63,7 +63,7 @@ public abstract class CSMSRelativeOrientation extends CSMetaSource<CSMRelativeOr
             if (separated) { builder.append(" "); } else { separated = true; }
 
             // Add
-            builder.append(orientation.toString());
+            builder.append(orientation);
         }
 
         // Um yeah just that

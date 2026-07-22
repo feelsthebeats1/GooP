@@ -1615,7 +1615,7 @@ public class GooP_MinecraftVersions {
      * @return Either the Enchantment, or null if it doesnt exist.
      */
     @Nullable public static Enchantment GetEnchantmentFromString(@Nullable String str) {
-        if (str == null) { return null; };
+        if (str == null) { return null; }
         str = str.toLowerCase();
 
         if (mcVersion < 20.3) {
@@ -1660,7 +1660,7 @@ public class GooP_MinecraftVersions {
      * @return Either the Attributes, or null if it doesnt exist.
      */
     @Nullable public static Attribute GetAttributeFromString(@Nullable String str) {
-        if (str == null) { return null; };
+        if (str == null) { return null; }
         String upperStr = str.toUpperCase();
         String lowerStr = str.toLowerCase();
 
@@ -1710,7 +1710,7 @@ public class GooP_MinecraftVersions {
      * @return Either the Attributes, or null if it doesnt exist.
      */
     @Nullable public static PotionEffectType GetPotionEffectFromString(@Nullable String str) {
-        if (str == null) { return null; };
+        if (str == null) { return null; }
         str = str.toLowerCase();
 
         if (mcVersion < 21.3) {

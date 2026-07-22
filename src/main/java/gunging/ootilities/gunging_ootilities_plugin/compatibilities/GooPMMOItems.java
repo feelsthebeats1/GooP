@@ -1,7 +1,6 @@
 package gunging.ootilities.gunging_ootilities_plugin.compatibilities;
 
 import com.google.common.collect.Multimap;
-import github.scarsz.discordsrv.dependencies.jackson.databind.annotation.NoClass;
 import gunging.ootilities.gunging_ootilities_plugin.Gunging_Ootilities_Plugin;
 import gunging.ootilities.gunging_ootilities_plugin.OotilityCeption;
 import gunging.ootilities.gunging_ootilities_plugin.compatibilities.versions.*;
@@ -28,12 +27,10 @@ import net.Indyuce.mmoitems.api.interaction.GemStone;
 import net.Indyuce.mmoitems.api.interaction.UseItem;
 import org.bukkit.inventory.EquipmentSlot;
 import net.Indyuce.mmoitems.api.interaction.util.DurabilityItem;
-import net.Indyuce.mmoitems.api.item.build.MMOItemBuilder;
 import net.Indyuce.mmoitems.api.item.mmoitem.LiveMMOItem;
 import net.Indyuce.mmoitems.api.item.mmoitem.MMOItem;
 import net.Indyuce.mmoitems.api.item.mmoitem.VolatileMMOItem;
 import net.Indyuce.mmoitems.api.item.template.MMOItemTemplate;
-import net.Indyuce.mmoitems.api.item.template.NameModifier;
 import net.Indyuce.mmoitems.api.item.util.identify.IdentifiedItem;
 import net.Indyuce.mmoitems.api.player.PlayerData;
 import net.Indyuce.mmoitems.api.player.RPGPlayer;
@@ -73,7 +70,7 @@ import java.util.*;
 @SuppressWarnings("unused")
 public class GooPMMOItems {
 
-    @NotNull static ConfigurationSection dummySectionReal;
+    static ConfigurationSection dummySectionReal = null;
 
     /**
      * Somewhy, MMO loves using Configuration Sections in constructors which it
@@ -84,10 +81,10 @@ public class GooPMMOItems {
      * <p></p>
      * <code>
      * boolean shouldDoSomething = true;
-     *
+     * <p>
      * ConfigurationSection section;
      * section.setBoolean("something-enabled", shouldDoSomething);
-     *
+     * <p>
      * SomethingOptions options = new SomethingOptions(section);
      * </code>
      * <p></p>
@@ -136,7 +133,7 @@ public class GooPMMOItems {
         if(MMOItems.plugin == null) { return false; }
         // Use reflection for MMOItems version compatibility
         try {
-            java.lang.reflect.Method regMethod = MMOItems.class.getMethod("registerPlayerInventory", Class.forName("net.Indyuce.mmoitems.comp.inventory.PlayerInventory"));
+            Method regMethod = MMOItems.class.getMethod("registerPlayerInventory", Class.forName("net.Indyuce.mmoitems.comp.inventory.PlayerInventory"));
             regMethod.invoke(MMOItems.plugin, new ContainerToMIInventory());
         } catch (Exception ignored) {
             // MMOItems 6.10.1+ removed registerPlayerInventory
@@ -157,24 +154,23 @@ public class GooPMMOItems {
         // Honestly what could possibly go wrong
         } catch (Exception e) {
 
-            Gunging_Ootilities_Plugin.theOots.CPLog("Something weird happened when trying to read a MMOItem, \u00a7cis MMOItems working correctly?");
+            Gunging_Ootilities_Plugin.theOots.CPLog("Something weird happened when trying to read a MMOItem, §cis MMOItems working correctly?");
             e.printStackTrace();
             //noinspection ConstantConditions
             return null;
         }
     }
-    @NotNull public static VolatileMMOItem VolatileFromNBT(@NotNull NBTItem nbt) {
 
+    @NotNull public static VolatileMMOItem VolatileFromNBT(@NotNull NBTItem nbt) {
         // Only if MMOItems gets disabled would this not work
         try {
-
             // Create new :wazowskibruhmoment:
             return new VolatileMMOItem(nbt);
 
         // Honestly what could possibly go wrong
         } catch (Exception e) {
 
-            Gunging_Ootilities_Plugin.theOots.CPLog("Something weird happened when trying to read a MMOItem, \u00a7cis MMOItems working correctly?");
+            Gunging_Ootilities_Plugin.theOots.CPLog("Something weird happened when trying to read a MMOItem, §cis MMOItems working correctly?");
             e.printStackTrace();
             //noinspection ConstantConditions
             return null;
@@ -193,7 +189,7 @@ public class GooPMMOItems {
         ItemStack res = GetMMOItem(type, id);
 
         // Return 'Default'
-        if (res == null) { res = OotilityCeption.RenameItem(new ItemStack(Material.STRUCTURE_VOID), "\u00a7cInvalid MMOItem\u00a7e " + type + " " + id, null); }
+        if (res == null) { res = OotilityCeption.RenameItem(new ItemStack(Material.STRUCTURE_VOID), "§cInvalid MMOItem§e " + type + " " + id, null); }
 
         //DBG*/Gunging_Ootilities_Plugin.theOots.CLog("Providing " + OotilityCeption.GetItemName(res));
         //noinspection ConstantConditions
@@ -247,7 +243,7 @@ public class GooPMMOItems {
 
         // Valid?
         /*CURRENT-MMOITEMS*/if (!mod.canReforge()) {
-        /*CURRENT-MMOITEMS*/    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Item " + OotilityCeption.GetItemName(item) + "\u00a77 is \u00a7cnot\u00a77 reforgeable. ");
+        /*CURRENT-MMOITEMS*/    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Item " + OotilityCeption.GetItemName(item) + "§7 is §cnot§7 reforgeable. ");
         /*CURRENT-MMOITEMS*/    return null; }
 
         ReforgeOptions reforgeOptionsBuild = null;
@@ -257,7 +253,7 @@ public class GooPMMOItems {
             try {
 
                 // Build using the good old boolean array (reflection for API compat)
-                java.lang.reflect.Constructor<ReforgeOptions> oldCtor = ReforgeOptions.class.getConstructor(boolean[].class);
+                Constructor<ReforgeOptions> oldCtor = ReforgeOptions.class.getConstructor(boolean[].class);
                 reforgeOptionsBuild = oldCtor.newInstance(new Object[]{regenParams});
 
                 mmoitems_6_10_1 = false;
@@ -287,11 +283,11 @@ public class GooPMMOItems {
 
         // Proc
         /*CURRENT-MMOITEMS*/if (!mod.reforge(reforgeOptionsBuild)) {
-        /*CURRENT-MMOITEMS*/    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Item " + OotilityCeption.GetItemName(item) + "\u00a77 could \u00a7cnot\u00a77 be reforged. ");
+        /*CURRENT-MMOITEMS*/    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Item " + OotilityCeption.GetItemName(item) + "§7 could §cnot§7 be reforged. ");
         /*CURRENT-MMOITEMS*/    return null; }
 
         // Notify
-        /*CURRENT-MMOITEMS*/OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Item " + OotilityCeption.GetItemName(item) + "\u00a77 was \u00a7areforged\u00a77. ");
+        /*CURRENT-MMOITEMS*/OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Item " + OotilityCeption.GetItemName(item) + "§7 was §areforged§7. ");
 
         // Output
         /*CURRENT-MMOITEMS*/return mod.getResult();
@@ -334,7 +330,7 @@ public class GooPMMOItems {
     public static boolean IsConsumable(@NotNull NBTItem consumable, @NotNull Player player) {
 
         // Decrease usage if consumable
-        return (UseItem.getItem(player, consumable, GetMMOItemType(consumable)) instanceof Consumable);
+        return (UseItem.getItem(player, consumable, GetMMOItemType(consumable))) instanceof Consumable;
     }
 
     public static boolean IsGemstone(@Nullable ItemStack gemstone, @NotNull Player player) {
@@ -346,7 +342,7 @@ public class GooPMMOItems {
     public static boolean IsGemstone(@NotNull NBTItem gemstone, @NotNull Player player) {
 
         // Decrease usage if consumable
-        return (UseItem.getItem(player, gemstone, GetMMOItemType(gemstone)) instanceof GemStone);
+        return (UseItem.getItem(player, gemstone, GetMMOItemType(gemstone))) instanceof GemStone;
     }
 
     @NotNull
@@ -418,7 +414,7 @@ public class GooPMMOItems {
         Material mMat = miscMats[currentMat];
         currentMat++; if (currentMat >= miscMats.length) { currentMat = 0; }
 
-        ItemStat MISCC = new DoubleStat(name, mMat, "Extra Stat \u00a7l" + terminology, new String[]{"Doesnt do anything by itself.", "\u00a7a", "You can retrieve it in mythic", "skills though, using these:", "\u00a7e<goop.castermmostat.misc" + terminology.toLowerCase() + ">", "\u00a7e<goop.triggermmostat.misc" + terminology.toLowerCase() + ">", "", "or use in PlaceholderAPI with", "\u00a73%mmoitems_stat_goop_misc_" + terminology.toLowerCase() + "%", "", ""}, new String[]{"!consumable", "!miscellaneous", "all"});
+        ItemStat MISCC = new DoubleStat(name, mMat, "Extra Stat §l" + terminology, new String[]{"Doesnt do anything by itself.", "§a", "You can retrieve it in mythic", "skills though, using these:", "§e<goop.castermmostat.misc" + terminology.toLowerCase() + ">", "§e<goop.triggermmostat.misc" + terminology.toLowerCase() + ">", "", "or use in PlaceholderAPI with", "§3%mmoitems_stat_goop_misc_" + terminology.toLowerCase() + "%", "", ""}, new String[]{"!consumable", "!miscellaneous", "all"});
         RegisterStat(name, MISCC);
         MISC.put(terminology, MISCC);
     }
@@ -437,13 +433,13 @@ public class GooPMMOItems {
         Material mMat = stringMats[currentMat];
         currentMat++; if (currentMat >= stringMats.length) { currentMat = 0; }
 
-        ItemStat MISCC = new StringStat(name, mMat, "Extra String Stat \u00a7l" + terminology, new String[]{"Doesnt do anything by itself.", "\u00a7a", "You can retrieve it in mythic", "skills though, using these:", "\u00a7e<goop.castermmostat.[slot]." + name.toUpperCase() + ">", "\u00a7e<goop.triggermmostat.[slot]." + name.toUpperCase() + ">"}, new String[]{ "all" });
+        ItemStat MISCC = new StringStat(name, mMat, "Extra String Stat §l" + terminology, new String[]{"Doesnt do anything by itself.", "§a", "You can retrieve it in mythic", "skills though, using these:", "§e<goop.castermmostat.[slot]." + name.toUpperCase() + ">", "§e<goop.triggermmostat.[slot]." + name.toUpperCase() + ">"}, new String[]{ "all" });
         RegisterStat(name, MISCC);
         STR_MISC.put(terminology, MISCC);
     }
 
     public static void RegisterRstMiscStat(@Nullable String rst) {
-        if (rst == null) { Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("MMOItems - Misc Restriction Stat", "Null entry in \u00a7econfig.yml\u00a77 list. ")); return; }
+        if (rst == null) { Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("MMOItems - Misc Restriction Stat", "Null entry in §econfig.yml§7 list. ")); return; }
 
         // Format is "[%YES% ... %HO% %HE%] 1..3"
         String[] rstSplit;
@@ -452,10 +448,10 @@ public class GooPMMOItems {
 
         // Parse the last
         QuickNumberRange qnr = QuickNumberRange.FromString(rstSplit[rstSplit.length - 1]);
-        if (qnr == null) { Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("MMOItems - Misc Restriction Stat", "Invalid number range '\u00a7c" + rst + "\u00a77' specified in \u00a7econfig.yml\u00a77 list. It must always end with a number range in the format \u00a7b4..28\u00a77 or whatever. ")); return; }
+        if (qnr == null) { Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("MMOItems - Misc Restriction Stat", "Invalid number range '§c" + rst + "§7' specified in §econfig.yml§7 list. It must always end with a number range in the format §b4..28§7 or whatever. ")); return; }
 
         ArrayList<String> px = new ArrayList<>();
-        for (int i = 0; i < rstSplit.length - 1; i++) { px.add(rstSplit[i]); }
+        px.addAll(Arrays.asList(rstSplit).subList(0, rstSplit.length - 1));
 
         // Get Name
         StringBuilder mOrder = new StringBuilder(rstPrefix);
@@ -469,7 +465,7 @@ public class GooPMMOItems {
         Material mMat = restMats[currentMat];
         currentMat++; if (currentMat >= restMats.length) { currentMat = 0; }
 
-        ItemStat MISCC = new MiscRestrictionStat(name, mMat, "Extra Restriction Stat \u00a7l" + terminology, new String[]{"Specify in the \u00a7econfig.yml\u00a77 the", "number range which this stat", "allows the item to be used. ", "\u00a73", "Allows use at range\u00a7e " + qnr.toString(), "Other config additions: \u00a7bx" + (rstSplit.length - 1), "\u00a78Changes require a server reboot. " }, new String[]{"!consumable", "!miscellaneous", "all"}, qnr, px);
+        ItemStat MISCC = new MiscRestrictionStat(name, mMat, "Extra Restriction Stat §l" + terminology, new String[]{"Specify in the §econfig.yml§7 the", "number range which this stat", "allows the item to be used. ", "§3", "Allows use at range§e " + qnr, "Other config additions: §bx" + (rstSplit.length - 1), "§8Changes require a server reboot. " }, new String[]{"!consumable", "!miscellaneous", "all"}, qnr, px);
         RegisterStat(name, MISCC);
         RST_MISC.put(terminology, MISCC);
     }
@@ -495,7 +491,7 @@ public class GooPMMOItems {
         LUCK = new LuckStat();
         RegisterStat(LUCK);
 
-        HAT = new BooleanStat("GOOP_HAT", Material.CHAINMAIL_HELMET, "Hat / Helmet", new String[]{"This item will automatically equip", "in the head slot if:", "\u00a7a + \u00a77It is Shift+LeftClicked in inventory", "\u00a7a + \u00a77It is placed on the helmet slot.", "", "This will not:", "\u00a7c - \u00a77Prevent blocks from being placed (disable interactions for this)", "\u00a7c - \u00a77Equip it to the head if the item is right-clicked while held."}, new String[]{"all"});
+        HAT = new BooleanStat("GOOP_HAT", Material.CHAINMAIL_HELMET, "Hat / Helmet", new String[]{"This item will automatically equip", "in the head slot if:", "§a + §7It is Shift+LeftClicked in inventory", "§a + §7It is placed on the helmet slot.", "", "This will not:", "§c - §7Prevent blocks from being placed (disable interactions for this)", "§c - §7Equip it to the head if the item is right-clicked while held."}, new String[]{"all"});
         RegisterStat(HAT);
 
         currentMisc = 0; generation = 0; currentMat = 0;
@@ -505,42 +501,42 @@ public class GooPMMOItems {
         currentMisc = 0; generation = 0; currentMat = 0;
         for (int m = 1; m <= miscRstAmount.size(); m++) { RegisterRstMiscStat(miscRstAmount.get(m - 1)); }
 
-        GROUND_POUND_STAT = new StringStat("GROUND_POUND_SKILL", Material.COARSE_DIRT, "Ground Pound Skill", new String[]{"When the item is dropped to the ground,", "what mythicmob skill to run when", "it hits the ground?", "", "\u00a76Player that dropped the item: \u00a7f@Self", "\u00a76Item Entity Itself: \u00a7e@Trigger"}, new String[]{"all"});
+        GROUND_POUND_STAT = new StringStat("GROUND_POUND_SKILL", Material.COARSE_DIRT, "Ground Pound Skill", new String[]{"When the item is dropped to the ground,", "what mythicmob skill to run when", "it hits the ground?", "", "§6Player that dropped the item: §f@Self", "§6Item Entity Itself: §e@Trigger"}, new String[]{"all"});
         RegisterStat(GROUND_POUND_STAT);
 
         if (Gunging_Ootilities_Plugin.foundMythicMobs) {
-            MINIONS = new DoubleStat("GOOP_MINIONS", Material.TOTEM_OF_UNDYING, "Max Minions", new String[]{"The max number of entities that this player", "can have as minions, will kill the oldest", "one if this is exceeded and a new spawns.", "", "\u00a7e/goop mythicmobs minion"}, new String[]{"!consumable", "!miscellaneous", "all"});
+            MINIONS = new DoubleStat("GOOP_MINIONS", Material.TOTEM_OF_UNDYING, "Max Minions", new String[]{"The max number of entities that this player", "can have as minions, will kill the oldest", "one if this is exceeded and a new spawns.", "", "§e/goop mythicmobs minion"}, new String[]{"!consumable", "!miscellaneous", "all"});
             RegisterStat(MINIONS);
         }
 
-        ONKILL_COMMAND = new StringStat("GOOP_MM_KILL", Material.BONE, "On Kill Command", new String[]{"Run a command when murdering something", "while having this item equipped.", "", "\u00a73Maybe run a mythic skill?", "\u00a7b/goop mythicmobs runSkillAs <SKILL> %player% @%victim%"}, new String[]{"!consumable", "!miscellaneous", "!skin", "all", "!skin", "!miscellaneous", "!consumable" });
+        ONKILL_COMMAND = new StringStat("GOOP_MM_KILL", Material.BONE, "On Kill Command", new String[]{"Run a command when murdering something", "while having this item equipped.", "", "§3Maybe run a mythic skill?", "§b/goop mythicmobs runSkillAs <SKILL> %player% @%victim%"}, new String[]{"!consumable", "!miscellaneous", "!skin", "all", "!skin", "!miscellaneous", "!consumable" });
         RegisterStat(ONKILL_COMMAND);
 
-        ONHIT_COMMAND = new StringStat("GOOP_MM_HIT", Material.STONE_SWORD, "On Hit Command", new String[]{"Run a command when damaging something", "while having this item equipped.", "", "\u00a73Maybe run a mythic skill?", "\u00a7b/goop mythicmobs runSkillAs <SKILL> %player% @%victim%"}, new String[]{"!consumable", "!miscellaneous", "!skin", "all", "!skin", "!miscellaneous", "!consumable" });
+        ONHIT_COMMAND = new StringStat("GOOP_MM_HIT", Material.STONE_SWORD, "On Hit Command", new String[]{"Run a command when damaging something", "while having this item equipped.", "", "§3Maybe run a mythic skill?", "§b/goop mythicmobs runSkillAs <SKILL> %player% @%victim%"}, new String[]{"!consumable", "!miscellaneous", "!skin", "all", "!skin", "!miscellaneous", "!consumable" });
         RegisterStat(ONHIT_COMMAND);
 
-        APPLICABLE_COMMAND = new StringStatProper("GOOP_APPLY_COMMAND", Material.FILLED_MAP, "GooP OnApply Command", new String[]{"What command is run when this item", "is applied on other items?", "\u00a7a", "\u00a7aRestrict which types this can be", "\u00a7aapplied to with an apply mask.", "\u00a7a", "\u00a73Supports GooP commands by choosing slot", "\u00a73as \u00a7a%player% %provided-slot%\u00a73;", "\u00a7b\u00a7lPAPI supported."}, new String[]{"all"});
+        APPLICABLE_COMMAND = new StringStatProper("GOOP_APPLY_COMMAND", Material.FILLED_MAP, "GooP OnApply Command", new String[]{"What command is run when this item", "is applied on other items?", "§a", "§aRestrict which types this can be", "§aapplied to with an apply mask.", "§a", "§3Supports GooP commands by choosing slot", "§3as §a%player% %provided-slot%§3;", "§b§lPAPI supported."}, new String[]{"all"});
         RegisterStat(APPLICABLE_COMMAND);
 
-        APPLICABLE_MASK = new StringStatProper("GOOP_APPLY_MASK", Material.FILLED_MAP, "GooP OnApply Mask", new String[]{"Define Masks in \u00a7bonapply-masks.yml", "\u00a7a", "Restricts to which MMOItem types", "this item can be applied to IF", "it has an OnApply Command."}, new String[]{"!gem_stone", "all", "!gem_stone"});
+        APPLICABLE_MASK = new StringStatProper("GOOP_APPLY_MASK", Material.FILLED_MAP, "GooP OnApply Mask", new String[]{"Define Masks in §bonapply-masks.yml", "§a", "Restricts to which MMOItem types", "this item can be applied to IF", "it has an OnApply Command."}, new String[]{"!gem_stone", "all", "!gem_stone"});
         RegisterStat(APPLICABLE_MASK);
 
         APPLICABLE_CONSUME = new BooleanStat("GOOP_APPLY_CONSUME", Material.PAPER, "Not Consume on GooP OnApply", new String[]{"Consumables are consumed when using their OnApply.", "This will prevent them from doing so."}, new String[]{"consumable"});
         RegisterStat(APPLICABLE_CONSUME);
 
-        APPLICABLE_CLASS = new StringStatProper("GOOP_APPLY_CLASS", Material.MAP, "GooP OnApply Reference", new String[]{"Used to limit how many times the", "OnApply Command can run on the", "same item.", "", "\u00a7bIf this is not specified, but a limit is,", "\u00a7bthe limit will apply to only this MMOItem."}, new String[]{"all"});
+        APPLICABLE_CLASS = new StringStatProper("GOOP_APPLY_CLASS", Material.MAP, "GooP OnApply Reference", new String[]{"Used to limit how many times the", "OnApply Command can run on the", "same item.", "", "§bIf this is not specified, but a limit is,", "§bthe limit will apply to only this MMOItem."}, new String[]{"all"});
         RegisterStat(APPLICABLE_CLASS);
 
-        APPLICABLE_LIMIT = new DoubleStatProper("GOOP_APPLY_LIMIT", Material.MAP, "GooP OnApply Limit", new String[]{"Used to limit how many times the", "OnApply Command can run on the", "same item.", "", "\u00a73This is the number of times OnApply", "\u00a73commands of the same \u00a7bReference\u00a73 will", "\u00a73act upon the same item."}, new String[]{"all"});
+        APPLICABLE_LIMIT = new DoubleStatProper("GOOP_APPLY_LIMIT", Material.MAP, "GooP OnApply Limit", new String[]{"Used to limit how many times the", "OnApply Command can run on the", "same item.", "", "§3This is the number of times OnApply", "§3commands of the same §bReference§3 will", "§3act upon the same item."}, new String[]{"all"});
         RegisterStat(APPLICABLE_LIMIT);
 
-        APPLICABLE_TIMES = new StringListStatProper("GOOP_APPLY_TIMES", Material.LIGHT_GRAY_STAINED_GLASS_PANE, "GooP OnApply Repetitions", new String[]{"Tech stat that keeps track of how", "many times an OnApply item has been", "used on this item.", "", "\u00a76I guess you could use it to make", "\u00a76an item think an OnApply has been used", "\u00a76a few times on it already.", "", "\u00a78Format: &n[reference] [number of times]", "\u00a7cEx: &nUpgradeRef 2"}, new String[]{"all"});
+        APPLICABLE_TIMES = new StringListStatProper("GOOP_APPLY_TIMES", Material.LIGHT_GRAY_STAINED_GLASS_PANE, "GooP OnApply Repetitions", new String[]{"Tech stat that keeps track of how", "many times an OnApply item has been", "used on this item.", "", "§6I guess you could use it to make", "§6an item think an OnApply has been used", "§6a few times on it already.", "", "§8Format: &n[reference] [number of times]", "§cEx: &nUpgradeRef 2"}, new String[]{"all"});
         RegisterStat(APPLICABLE_TIMES);
 
-        CONTAINER = new StringStat("GOOP_CONTAINER", Material.CHEST, "GooP Container", new String[]{"This item will serve as a a bag!", "Right-Click to open as if it was a backpack", "", "\u00a7cThe container uuid will be saved in this item.", "\u00a78Can only be opened as a single stack."}, new String[]{"!consumable", "!gem_stone", "!musket", "!bow", "!crossbow", "!lute", "!skin", "all", "!skin", "!consumable", "!gem_stone", "!musket", "!bow", "!crossbow", "!lute"});
+        CONTAINER = new StringStat("GOOP_CONTAINER", Material.CHEST, "GooP Container", new String[]{"This item will serve as a a bag!", "Right-Click to open as if it was a backpack", "", "§cThe container uuid will be saved in this item.", "§8Can only be opened as a single stack."}, new String[]{"!consumable", "!gem_stone", "!musket", "!bow", "!crossbow", "!lute", "!skin", "all", "!skin", "!consumable", "!gem_stone", "!musket", "!bow", "!crossbow", "!lute"});
         RegisterStat(CONTAINER);
 
-        REVARIABLE = new StringStat("GOOP_REVARIABLE", Material.NAME_TAG, "Revariable", new String[]{"When a player puts this in the second", "anvil slot, and renames the item in", "the first anvil slot, this variable will", "be rewritten by the renaming operation.", "", "\u00a7cCase sensitive\u00a77, no spaces, preferably alphanumeric.", "", "\u00a7cNot working with MMOItems anymore :c"}, new String[]{"miscellaneous", "consumable"});
+        REVARIABLE = new StringStat("GOOP_REVARIABLE", Material.NAME_TAG, "Revariable", new String[]{"When a player puts this in the second", "anvil slot, and renames the item in", "the first anvil slot, this variable will", "be rewritten by the renaming operation.", "", "§cCase sensitive§7, no spaces, preferably alphanumeric.", "", "§cNot working with MMOItems anymore :c"}, new String[]{"miscellaneous", "consumable"});
         //RegisterStat(REVARIABLE);
     }
 
@@ -568,23 +564,23 @@ public class GooPMMOItems {
         // Get Eq
         PlayerData p;
         try { p = PlayerData.get(player); } catch (NullPointerException ignored) {
-            //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7c Null Player Data");
+            //EQP//OotilityCeption.Log("§8MMO§3 EQP§c Null Player Data");
             return vot; }
 
         // Find method
         if (equipped == null) {
-            //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a75 Finding Equipment Method...");
+            //EQP//OotilityCeption.Log("§8MMO§3 EQP§5 Finding Equipment Method...");
 
             // Reflection or not
             try {
 
                 // Identify Method
                 equipped = p.getInventory().getClass().getMethod("getEquipped");
-                //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7d Equipment Method Found");
+                //EQP//OotilityCeption.Log("§8MMO§3 EQP§d Equipment Method Found");
 
             // lol no
             } catch (NoSuchMethodException ignored) {
-                //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7c No Equipment Method");
+                //EQP//OotilityCeption.Log("§8MMO§3 EQP§c No Equipment Method");
                 return vot; }
         }
 
@@ -595,37 +591,65 @@ public class GooPMMOItems {
 
             // Using Equipped Player Items?
             if (usingEquippedPlayerItems) {
-                //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a75 Identifying Equipment Class...");
+                //EQP//OotilityCeption.Log("§8MMO§3 EQP§5 Identifying Equipment Class...");
 
                 try {
 
                     // We all know it is a list (real)
-                    List list = ((List) equippedItems);
+                    if (equippedItems instanceof List list) {
 
-                    // List of something
-                    for (int i = 0; i < list.size(); i++) {
+                        // List of something
+                        for (int i = 0; i < list.size(); i++) {
 
-                        // Get that item I hope
-                        Object equippedPlayerItem = (Object) list.get(i);
+                            // Get that item I hope
+                            Object equippedPlayerItem = list.get(i);
 
-                        // Find method
-                        if (getitem == null) {
+                            // Find method
+                            if (getitem == null) {
 
-                            // Reflection or not
-                            getitem = equippedPlayerItem.getClass().getMethod("getItem");
-                            //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7d Using EquippedPlayerItem.getItem()");
+                                // Reflection or not
+                                getitem = equippedPlayerItem.getClass().getMethod("getItem");
+                                //EQP//OotilityCeption.Log("§8MMO§3 EQP§d Using EquippedPlayerItem.getItem()");
+                            }
+
+                            // That should be the result - might be NBTItem or VolatileMMOItem
+                            Object itemResult = getitem.invoke(equippedPlayerItem);
+                            if (itemResult instanceof VolatileMMOItem) {
+                                vot.add((VolatileMMOItem) itemResult);
+                            } else if (itemResult instanceof NBTItem) {
+                                vot.add(VolatileFromNBT((NBTItem) itemResult));
+                            }
+                            //EQP//OotilityCeption.Log("§8MMO§3 EQP§a +§7 Added!");
                         }
+                    } else if (equippedItems instanceof Collection collection) {
 
-                        // That should be the result
-                        vot.add((VolatileMMOItem) getitem.invoke(equippedPlayerItem));
-                        //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7a +\u00a77 Added!");
+                        // Collection of something (e.g. HashSet from newer MMOItems)
+                        for (Object equippedPlayerItem : collection) {
+
+                            // Find method
+                            if (getitem == null) {
+
+                                // Reflection or not
+                                getitem = equippedPlayerItem.getClass().getMethod("getItem");
+                                //EQP//OotilityCeption.Log("§8MMO§3 EQP§d Using EquippedPlayerItem.getItem()");
+                            }
+
+                            // That should be the result - might be NBTItem or VolatileMMOItem
+                            Object itemResult = getitem.invoke(equippedPlayerItem);
+                            if (itemResult instanceof VolatileMMOItem) {
+                                vot.add((VolatileMMOItem) itemResult);
+                            } else if (itemResult instanceof NBTItem) {
+                                vot.add(VolatileFromNBT((NBTItem) itemResult));
+                            }
+                            //EQP//OotilityCeption.Log("§8MMO§3 EQP§a +§7 Added!");
+                        }
                     }
 
                     // Right....
                     return vot;
 
                 } catch (NoClassDefFoundError|NoSuchMethodException ignored) {
-                    //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7d Equipped Item Method must be used");
+                    //EQP//OotilityCeption.Log("§8MMO§3 EQP§d Equipped Item Method must be used");
                     usingEquippedPlayerItems = false; getitem = null; }
             }
 
@@ -641,21 +665,21 @@ public class GooPMMOItems {
 
                         // Identify Method
                         getitem = e.getClass().getMethod("getNBT");
-                        //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7d Using EquippedItem.getNBT()");
+                        //EQP//OotilityCeption.Log("§8MMO§3 EQP§d Using EquippedItem.getNBT()");
 
                     // lol no
                     } catch (NoSuchMethodException ignored) {
-                        //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7c Could not find EquippedItem.getNBT()");
+                        //EQP//OotilityCeption.Log("§8MMO§3 EQP§c Could not find EquippedItem.getNBT()");
                         return vot; }
                 }
 
                 vot.add(new VolatileMMOItem((NBTItem) getitem.invoke(e)));
-                //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7a +\u00a77 Added!");
+                //EQP//OotilityCeption.Log("§8MMO§3 EQP§a +§7 Added!");
             }
 
         } catch (InvocationTargetException|IllegalAccessException ignored) {
 
-            //EQP//OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a7c Could not identify Equipped Items method");
+            //EQP//OotilityCeption.Log("§8MMO§3 EQP§c Could not identify Equipped Items method");
         }
 
         // Return thay
@@ -789,7 +813,7 @@ public class GooPMMOItems {
                         ret += cValue;
                     }
 
-                    //DBG//oots.C Log("\u00a7e - \u00a77" + OotilityCeption.GetItemName(mod.getItem()) + "\u00a7 " + cValue + " \u00a73Cummulative " + ret);
+                    //DBG//oots.C Log("§e - §7" + OotilityCeption.GetItemName(mod.getItem()) + "§ " + cValue + " §3Cummulative " + ret);
                 }
             }
 
@@ -808,7 +832,7 @@ public class GooPMMOItems {
         boolean ret = base;
 
         //DBG//OotilityCeption oots = new OotilityCeption();
-        //DBG//oots.C Log("Getting cummulative \u00a7e" + statName.getName() + "\u00a77 from \u00a73" + target.getName());
+        //DBG//oots.C Log("Getting cummulative §e" + statName.getName() + "§7 from §3" + target.getName());
 
         // Get all the items
         ArrayList<VolatileMMOItem> pItems = GetPlayerEquipment(target);
@@ -835,7 +859,7 @@ public class GooPMMOItems {
 
                         ret = ret || cValue;
                     }
-                    //DBG//oots.C Log("\u00a7e - \u00a77" + OotilityCeption.GetItemName(mod.getItem()) + "\u00a7 " + cValue + " \u00a73Cummulative " + ret);
+                    //DBG//oots.C Log("§e - §7" + OotilityCeption.GetItemName(mod.getItem()) + "§ " + cValue + " §3Cummulative " + ret);
                 }
             }
         }
@@ -854,11 +878,11 @@ public class GooPMMOItems {
 
         // Get all the items
         ArrayList<VolatileMMOItem> pItems = GetPlayerEquipment(target);
-        OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a77 Player Equipment\u00a79 x" + pItems.size());
+        OotilityCeption.Log("§8MMO§3 EQP§7 Player Equipment§9 x" + pItems.size());
 
         // I dont know how many there
         for (MMOItem pItem : pItems) {
-            OotilityCeption.Log("\u00a78MMO\u00a73 EQP\u00a73 +\u00a77 " + pItem.getType() + " " + pItem.getId());
+            OotilityCeption.Log("§8MMO§3 EQP§3 +§7 " + pItem.getType() + " " + pItem.getId());
 
             if (pItem != null) {
 
@@ -871,7 +895,7 @@ public class GooPMMOItems {
                     // Add if it is not contained
                     if (!ret.contains(cValue)) { ret.add(cValue); }
 
-                    //DBG//oots.C Log("\u00a7e - \u00a77" + OotilityCeption.GetItemName(mod.getItem()) + "\u00a7 " + cValue + " \u00a73Cummulative " + ret);
+                    //DBG//oots.C Log("§e - §7" + OotilityCeption.GetItemName(mod.getItem()) + "§ " + cValue + " §3Cummulative " + ret);
                 }
             }
         }
@@ -1144,7 +1168,7 @@ public class GooPMMOItems {
             // If the player meets the requirements, return the value
             BooleanData dddData = ( BooleanData ) mmoitem.getData(statName);
             if (dddData != null) {
-                //STAT//OotilityCeption. Log(" §c+§7 Data Found: \u00a76" + dddData.isEnabled());
+                //STAT//OotilityCeption. Log(" §c+§7 Data Found: §6" + dddData.isEnabled());
                 return dddData.isEnabled();
             }
         }
@@ -1309,7 +1333,7 @@ public class GooPMMOItems {
         }
 
        // Memmories...
-        // OotilityCeption.Log4Success(logOutput, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "\u00a7cOutdated MMOItems version. \u00a77Counting Gem Slots to items requires \u00a7aMMOItems 5.4 \u00a7o(Build #254)\u00a77 or newer.");
+        // OotilityCeption.Log4Success(logOutput, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "§cOutdated MMOItems version. §7Counting Gem Slots to items requires §aMMOItems 5.4 §o(Build #254)§7 or newer.");
 
     }
     public static ItemStack MMOItemAddGemSlot(ItemStack base, String gemSlotColour, RefSimulator<String> logOutput) {
@@ -1338,7 +1362,7 @@ public class GooPMMOItems {
                     if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback){
 
                         // Return a Log Message, for good shit.
-                        logOutput.SetValue("Added a new \u00a73" + gemSlotColour + "\u00a77 gem slot to \u00a73" + OotilityCeption.GetItemName(base) + "\u00a77. ");
+                        logOutput.SetValue("Added a new §3" + gemSlotColour + "§7 gem slot to §3" + OotilityCeption.GetItemName(base) + "§7. ");
 
                         // Otherwise, send nothing.
                     } else {
@@ -1361,7 +1385,7 @@ public class GooPMMOItems {
                         if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback){
 
                             // Return a Log Message, for good shit.
-                            logOutput.SetValue("Cant add \u00a73" + gemSlotColour + "\u00a77 slots to air! ");
+                            logOutput.SetValue("Cant add §3" + gemSlotColour + "§7 slots to air! ");
 
                         // Otherwise, send nothing.
                         } else {
@@ -1393,7 +1417,7 @@ public class GooPMMOItems {
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
                                 // Return a Log Message, for good shit.
-                                logOutput.SetValue("\u00a77To add gems to vanilla items, they must first be converted to MMOItems. \u00a7cFor that to be possible, please create an empty MMOItem with ID (name) '\u00a7eVANILLA\u00a7c' under the type '\u00a7e" + tNBT.getString("MMOITEMS_ITEM_TYPE") + "\u00a7c.' \u00a77(The type that \u00a73" + base.getType().name() + "\u00a77' falls into). ");
+                                logOutput.SetValue("§7To add gems to vanilla items, they must first be converted to MMOItems. §cFor that to be possible, please create an empty MMOItem with ID (name) '§eVANILLA§c' under the type '§e" + tNBT.getString("MMOITEMS_ITEM_TYPE") + "§c.' §7(The type that §3" + base.getType().name() + "§7' falls into). ");
 
                             // Otherwise, send nothing.
                             } else {
@@ -1409,7 +1433,7 @@ public class GooPMMOItems {
                             if (Gunging_Ootilities_Plugin.sendGooPFailFeedback){
 
                                 // Return a Log Message, for good shit.
-                                logOutput.SetValue("Item Type \u00a7e" + tNBT.getString("MMOITEMS_ITEM_TYPE") + "\u00a77 does not support Gem Slots. Cancelling operation. ");
+                                logOutput.SetValue("Item Type §e" + tNBT.getString("MMOITEMS_ITEM_TYPE") + "§7 does not support Gem Slots. Cancelling operation. ");
 
                             // Otherwise, send nothing.
                             } else {
@@ -1428,7 +1452,7 @@ public class GooPMMOItems {
                             if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback){
 
                                 // Return a Log Message, for good shit.
-                                logOutput.SetValue("Successfuly Converted \u00a73" + OotilityCeption.GetItemName(base) + "\u00a77 into a MMOItem and added an empty \u00a73" + gemSlotColour + "\u00a77 slot. ");
+                                logOutput.SetValue("Successfuly Converted §3" + OotilityCeption.GetItemName(base) + "§7 into a MMOItem and added an empty §3" + gemSlotColour + "§7 slot. ");
 
                             // Otherwise, send nothing.
                             } else {
@@ -1455,7 +1479,7 @@ public class GooPMMOItems {
                 if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) {
 
                     // Return a Log Message, for good shit.
-                    logOutput.SetValue("Cant add \u00a73" + gemSlotColour + "\u00a77 gem slots to air!");
+                    logOutput.SetValue("Cant add §3" + gemSlotColour + "§7 gem slots to air!");
 
                 // Otherwise, send nothing.
                 } else {
@@ -1616,20 +1640,17 @@ public class GooPMMOItems {
 
         // Does it have any gem sockets?
         if (!targetMMO.hasData(GooPMMOItems.Stat(GooPMMOItemsItemStats.GEM_SOCKETS))) { return false; }
-
         // Get Ouse Item
         UseItem asUse = GooPMMOItems.GetUseItem(gemstone, applier);
 
         // Is it a gemstone?
-        if (!(asUse instanceof GemStone)) { return false; }
+        if (!(asUse instanceof GemStone asGem)) { return false; }
 
         // Does it match the colours?
-        GemStone asGem = (GemStone) asUse;
         String gemType = asGem.getNBTItem().getString("MMOITEMS_GEM_COLOR");
 
         GemSocketsData sockets = (GemSocketsData)targetMMO.getData(GooPMMOItems.Stat(GooPMMOItemsItemStats.GEM_SOCKETS));
         if (!sockets.canReceive(gemType)) { return false; }
-
 
         // Does it match the type
         String appliableTypes = asGem.getNBTItem().getString("MMOITEMS_ITEM_TYPE_RESTRICTION");
@@ -1647,7 +1668,7 @@ public class GooPMMOItems {
             }
 
             // Actually read this method
-            boolean applicableCancel = false;
+            boolean applicableCancel;
             if (usingGetItemSet) {
                 try {
                     Object itemTypeSet = getItemSet.invoke(targetType);
@@ -1664,7 +1685,7 @@ public class GooPMMOItems {
 
             boolean nonWeaponCancel = !targetType.isWeapon() || !appliableTypes.contains("WEAPON");
             boolean explicitCancel = !appliableTypes.contains(targetType.getId());
-            if (nonWeaponCancel && applicableCancel && explicitCancel) { return false; }
+            return !nonWeaponCancel || !applicableCancel || !explicitCancel;
         }
 
         // HUH, Success!
@@ -1689,7 +1710,7 @@ public class GooPMMOItems {
         NBTItem tNBT = NBTItem.get(base);
 
         // Attribute Information
-        double vDamage = 0.0, vSpeed = 0.0, vArmor = 0.0, vArmorT = 0.0, mHealthT = 0.0, mSpeedT = 0.0, mKRes = 0.0, mLuck = 0.0;
+        double vDamage = 0.0, vSpeed, vArmor, vArmorT, mHealthT = 0.0, mSpeedT = 0.0, mKRes, mLuck = 0.0;
 
         // Decide what TYPE this item will be
         String tName;
@@ -1790,7 +1811,7 @@ public class GooPMMOItems {
 
         //region Set Original Datas
         // Build and add Enchant - If enchanted to begin with
-        if (oEnchantments.keySet().size() > 0) {
+        if (!oEnchantments.isEmpty()) {
             EnchantListData elData = new EnchantListData();
             for (Enchantment e : oEnchantments.keySet()) { elData.addEnchant(e, oEnchantments.get(e)); }
             mmoitem.mergeData(GooPMMOItems.Stat(GooPMMOItemsItemStats.ENCHANTS), elData, null);
@@ -1798,8 +1819,7 @@ public class GooPMMOItems {
 
         // Lore Adding - If has lore to begin with
         if (oLore != null) {
-            if (oLore.size() > 0) {
-
+            if (!oLore.isEmpty()) {
                 StringListData slData = new StringListData(oLore);
                 mmoitem.setData(GooPMMOItems.Stat(GooPMMOItemsItemStats.LORE), slData);
             }
@@ -1856,7 +1876,7 @@ public class GooPMMOItems {
         boolean readonly = "read".equals(unidentifiedValue);
         boolean clearStatSuccess = false;
 
-        //STAT//OotilityCeption.Log("\u00a77STAT\u00a7c OPS\u00a77 Editing \u00a73" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 into\u00a7e " + unidentifiedValue + "\u00a77 if \u00a7b" + unparsedRange);
+        //STAT//OotilityCeption.Log("§7STAT§c OPS§7 Editing §3" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 into§e " + unidentifiedValue + "§7 if §b" + unparsedRange);
 
         // Get as NBT Item
         NBTItem iNBT = NBTItem.get(iSource);
@@ -1866,7 +1886,7 @@ public class GooPMMOItems {
         if (miType == null) {
 
             // Mention
-            OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "MMOItem type \u00a7e" + GetMMOItemTypeRaw(iNBT) + "\u00a77 is not loaded. ");
+            OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "MMOItem type §e" + GetMMOItemTypeRaw(iNBT) + "§7 is not loaded. ");
             return null;
         }
 
@@ -1874,7 +1894,7 @@ public class GooPMMOItems {
         if (!miType.getAvailableStats().contains(stat)) {
 
             // Mention
-            OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "MMOItem type \u00a7e" + GetMMOItemTypeRaw(iNBT) + "\u00a77 does not support stat \u00a73" + stat.getId() + "\u00a77. ");
+            OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "MMOItem type §e" + GetMMOItemTypeRaw(iNBT) + "§7 does not support stat §3" + stat.getId() + "§7. ");
 
             // Well so it cannot be edited... but is it being read?
             if (readonly) {
@@ -1891,7 +1911,7 @@ public class GooPMMOItems {
 
         // All right what treatment
         if (stat instanceof DoubleStat) {
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7c OPS\u00a77 Treating as \u00a7eDOUBLE DATA");
+            //STAT//OotilityCeption.Log("§7STAT§c OPS§7 Treating as §eDOUBLE DATA");
 
             // The value to put
             DoubleData endData;
@@ -1900,7 +1920,7 @@ public class GooPMMOItems {
             // Get its data
             DoubleData current = (DoubleData) mmo.getData(stat);
             if (current == null) { current = new DoubleData(((DoubleData) stat.getClearStatData()).getValue()); }
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7e DBD\u00a77 Current:\u00a7b " + current.getValue());
+            //STAT//OotilityCeption.Log("§7STAT§e DBD§7 Current:§b " + current.getValue());
 
             // Does it have a value?
             if (unidentifiedValue != null && !readonly && !clearStatSuccess) {
@@ -1910,7 +1930,7 @@ public class GooPMMOItems {
 
                 // Failure
                 if (value == null) {
-                    OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected numeric operation (\u00a7b+4\u00a77, \u00a7b12\u00a77) instead of \u00a7e" + unidentifiedValue + "\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected numeric operation (§b+4§7, §b12§7) instead of §e" + unidentifiedValue + "§7. ");
 
                     // Kap
                     return null;
@@ -1919,13 +1939,13 @@ public class GooPMMOItems {
                 // Perform operation
                 expectedData = value.apply(current.getValue());
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7e DBD\u00a77 Expected:\u00a7b " + expectedData);
+                //STAT//OotilityCeption.Log("§7STAT§e DBD§7 Expected:§b " + expectedData);
 
             // Just read bro
             } if (readonly) {
                 expectedData = current.getValue();
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7e DBD\u00a77 Expected:\u00a7b" + expectedData + "\u00a73 (read-only)");
+                //STAT//OotilityCeption.Log("§7STAT§e DBD§7 Expected:§b" + expectedData + "§3 (read-only)");
             }
 
             // Is the expected data in range?
@@ -1936,19 +1956,19 @@ public class GooPMMOItems {
 
                 // There should have been a range, excuse me.
                 if (qnr == null) {
-                    OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected numeric range (\u00a7b2..10\u00a77, \u00a7b4..\u00a77) instead of \u00a7e" + unparsedRange + "\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected numeric range (§b2..10§7, §b4..§7) instead of §e" + unparsedRange + "§7. ");
 
                     // Kap
                     return null;
 
                 } else if (!qnr.InRange(expectedData)) {
-                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result \u00a7b" + expectedData + "\u00a77 would not fall in range \u00a7e" + qnr.qrToString() + "\u00a77; \u00a7cCancelling\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result §b" + expectedData + "§7 would not fall in range §e" + qnr.qrToString() + "§7; §cCancelling§7. ");
 
                     // Kap
                     return null;
                 }
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7e DBD\u00a77 Expected within \u00a7e" + qnr.qrToString());
+                //STAT//OotilityCeption.Log("§7STAT§e DBD§7 Expected within §e" + qnr.qrToString());
             }
 
             // Store final value
@@ -1965,7 +1985,7 @@ public class GooPMMOItems {
                 endData = new DoubleData(current.getValue());
                 endData.setValue(expectedData - current.getValue());
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7e DBD\u00a77 Difference:\u00a7b " + endData.getValue());
+                //STAT//OotilityCeption.Log("§7STAT§e DBD§7 Difference:§b " + endData.getValue());
 
                 // Get SH
                 StatHistory hist = StatHistory.from(mmo, stat);
@@ -1978,16 +1998,16 @@ public class GooPMMOItems {
                 mmo.setData(stat, hist.recalculate(mmo.getUpgradeLevel()));
 
                 // Notify
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 changed by \u00a7b" + endData.getValue() + "\u00a77 into \u00a7b" + expectedData + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 changed by §b" + endData.getValue() + "§7 into §b" + expectedData + "§7. ");
 
             // Read only notify
             } else {
 
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 was \u00a7b" + expectedData + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 was §b" + expectedData + "§7. ");
             }
 
         } else if (stat instanceof BooleanStat) {
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7c OPS\u00a77 Treating as \u00a7aBOOLEAN DATA");
+            //STAT//OotilityCeption.Log("§7STAT§c OPS§7 Treating as §aBOOLEAN DATA");
 
             // The value to put
             BooleanData endData = null;
@@ -1997,7 +2017,7 @@ public class GooPMMOItems {
             // Get its data
             BooleanData current = (BooleanData) mmo.getData(stat);
             if (current == null) { current = new BooleanData(((BooleanData) stat.getClearStatData()).isEnabled()); }
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7a BOL\u00a77 Current:\u00a7b " + current.isEnabled());
+            //STAT//OotilityCeption.Log("§7STAT§a BOL§7 Current:§b " + current.isEnabled());
 
             // Does it have a value?
             if (unidentifiedValue != null && !readonly && !clearStatSuccess) {
@@ -2010,7 +2030,7 @@ public class GooPMMOItems {
 
                     // Failure
                     if (value == null) {
-                        OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected boolean (\u00a7btrue\u00a77 or \u00a7bfalse\u00a77) or \u00a7btoggle\u00a77 instead of \u00a7e" + unidentifiedValue + "\u00a77. ");
+                        OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected boolean (§btrue§7 or §bfalse§7) or §btoggle§7 instead of §e" + unidentifiedValue + "§7. ");
 
                         // Kap
                         return null;
@@ -2020,12 +2040,12 @@ public class GooPMMOItems {
                     expectedData = value;
                 }
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7a BOL\u00a77 Expected:\u00a7b" + expectedData);
+                //STAT//OotilityCeption.Log("§7STAT§a BOL§7 Expected:§b" + expectedData);
 
             } else if (readonly) {
                 expectedData = current.isEnabled();
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7a BOL\u00a77 Expected:\u00a7b" + expectedData + "\u00a73 (read-only)");
+                //STAT//OotilityCeption.Log("§7STAT§a BOL§7 Expected:§b" + expectedData + "§3 (read-only)");
             }
 
             // Is the expected data in range?
@@ -2036,19 +2056,19 @@ public class GooPMMOItems {
 
                 // There should have been a range, excuse me.
                 if (qnr == null) {
-                    OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected boolean (\u00a7btrue\u00a77 or \u00a7bfalse\u00a77) instead of \u00a7e" + unparsedRange + "\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Expected boolean (§btrue§7 or §bfalse§7) instead of §e" + unparsedRange + "§7. ");
 
                     // Kap
                     return null;
 
                 } else if (qnr != expectedData) {
-                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result \u00a7b" + expectedData + "\u00a77 would not be the expected \u00a7e" + qnr + "\u00a77; \u00a7cCancelling\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result §b" + expectedData + "§7 would not be the expected §e" + qnr + "§7; §cCancelling§7. ");
 
                     // Kap
                     return null;
                 }
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7a BOL\u00a77 Expected matched \u00a7e" + qnr);
+                //STAT//OotilityCeption.Log("§7STAT§a BOL§7 Expected matched §e" + qnr);
             }
 
             // Store final value
@@ -2059,22 +2079,22 @@ public class GooPMMOItems {
 
             if (!readonly && !clearStatSuccess) {
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7a BOL\u00a77 Result:\u00a7b " + endData);
+                //STAT//OotilityCeption.Log("§7STAT§a BOL§7 Result:§b " + endData);
 
                 // Register
                 if (endData == null) { mmo.removeData(stat); } else { mmo.setData(stat, endData); }
 
                 // Notify
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Set value \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 to \u00a7b" + expectedData + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Set value §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 to §b" + expectedData + "§7. ");
 
             } else {
 
                 // Notify
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 was \u00a7b" + current.isEnabled() + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 was §b" + current.isEnabled() + "§7. ");
             }
 
         } else if (stat instanceof StringStat) {
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7c OPS\u00a77 Treating as \u00a7dSTRING DATA");
+            //STAT//OotilityCeption.Log("§7STAT§c OPS§7 Treating as §dSTRING DATA");
 
             // The value to put
             StringData endData;
@@ -2083,17 +2103,17 @@ public class GooPMMOItems {
             // Get its data
             StringData current = (StringData) mmo.getData(stat);
             if (current == null) { current = new StringData(((StringData) stat.getClearStatData()).getString()); }
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a73 STR\u00a77 Current:\u00a7b " + current);
+            //STAT//OotilityCeption.Log("§7STAT§3 STR§7 Current:§b " + current);
 
             // Does it have a value? Replace those spaces and roll
             if (unidentifiedValue != null && !readonly && !clearStatSuccess) {
                 expectedData = unidentifiedValue.replace("__", " ");
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a73 STR\u00a77 Expected:\u00a7b " + expectedData);
+                //STAT//OotilityCeption.Log("§7STAT§3 STR§7 Expected:§b " + expectedData);
             } else if (readonly) {
                 expectedData = current.getString();
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a73 STR\u00a77 Expected:\u00a7b " + expectedData + "\u00a73 (read-only)");
+                //STAT//OotilityCeption.Log("§7STAT§3 STR§7 Expected:§b " + expectedData + "§3 (read-only)");
             }
-            //STAT//else { OotilityCeption.Log("\u00a77STAT\u00a73 STR\u00a77 Expected:\u00a7b " + expectedData); }
+            //STAT//else { OotilityCeption.Log("§7STAT§3 STR§7 Expected:§b " + expectedData); }
 
             // Is the expected data?
             if (unparsedRange != null) {
@@ -2101,13 +2121,13 @@ public class GooPMMOItems {
                 // They must be the same
                 if (!unparsedRange.equals(expectedData)) {
 
-                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result \u00a7b" + expectedData + "\u00a77 would not be the expected \u00a7e" + unparsedRange + "\u00a77; \u00a7cCancelling\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result §b" + expectedData + "§7 would not be the expected §e" + unparsedRange + "§7; §cCancelling§7. ");
 
                     // Kap
                     return null;
                 }
 
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a73 STR\u00a77 Expected Matched \u00a7e " + unparsedRange);
+                //STAT//OotilityCeption.Log("§7STAT§3 STR§7 Expected Matched §e " + unparsedRange);
             }
 
             // Store final value
@@ -2136,23 +2156,23 @@ public class GooPMMOItems {
                 } else { mmo.setData(stat, endData); }
 
                 // Notify
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Set value \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 to \u00a7b" + endData.getString() + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Set value §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 to §b" + endData.getString() + "§7. ");
 
             // Read only notify
             } else {
 
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 was \u00a7b" + current.getString() + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Value §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 was §b" + current.getString() + "§7. ");
             }
 
         } else if (stat instanceof StringListStat) {
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7c OPS\u00a77 Treating as \u00a79STRING LIST DATA");
+            //STAT//OotilityCeption.Log("§7STAT§c OPS§7 Treating as §9STRING LIST DATA");
 
             // The value to put
-            StringListData endData = null;
+            StringListData endData;
             StringListData currentData = (StringListData) mmo.getData(stat);
             ArrayList<String> expectedData = currentData == null ? new ArrayList<>() : new ArrayList<>(currentData.getList());
             ArrayList<String> addedData = new ArrayList<>();
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Current size: \u00a7b " + expectedData.size());
+            //STAT//OotilityCeption.Log("§7STAT§9 STL§7 Current size: §b " + expectedData.size());
 
             // What kinda mode is it
             boolean removeMode = false;
@@ -2169,7 +2189,7 @@ public class GooPMMOItems {
 
                     // Clear Mode
                     clearMode = "all".equals(unidentifiedValue);
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Clear mode? \u00a73 " + clearMode + "\u00a78 " + unidentifiedValue);
+                    //STAT//OotilityCeption.Log("§7STAT§9 STL§7 Clear mode? §3 " + clearMode + "§8 " + unidentifiedValue);
                 }
 
                 // Process spaces
@@ -2180,22 +2200,22 @@ public class GooPMMOItems {
 
                     // Clearing??? :flushed:
                     if (clearMode) {
-                        actuallyRemoved = expectedData.size() > 0;
+                        actuallyRemoved = !expectedData.isEmpty();
                         expectedData.clear();
 
                     } else { actuallyRemoved = expectedData.remove(unidentifiedValue); }
 
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Removing: \u00a7b " + unidentifiedValue + "\u00a78 (Succ?\u00a73 " + actuallyRemoved + "\u00a78)");
+                    //STAT//OotilityCeption.Log("§7STAT§9 STL§7 Removing: §b " + unidentifiedValue + "§8 (Succ?§3 " + actuallyRemoved + "§8)");
                 } else {
                     expectedData.add(unidentifiedValue);
                     addedData.add(unidentifiedValue);
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Added: \u00a7b " + unidentifiedValue);
+                    //STAT//OotilityCeption.Log("§7STAT§9 STL§7 Added: §b " + unidentifiedValue);
                 }
 
             } else if (readonly) {
                 removeMode = true;
                 actuallyRemoved = false;
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 (read only)");
+                //STAT//OotilityCeption.Log("§7STAT§9 STL§7 (read only)");
 
             // Not a list operation
             } else {
@@ -2216,22 +2236,22 @@ public class GooPMMOItems {
 
                     if (!expectedData.contains(unparsedRange)) {
 
-                        OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "The result would not have \u00a73" + unparsedRange + "\u00a77; \u00a7cCancelling\u00a77. ");
+                        OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "The result would not have §3" + unparsedRange + "§7; §cCancelling§7. ");
 
                         // Kap
                         return null;
                     }
 
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Final data\u00a7a had\u00a7b " + unparsedRange);
+                    //STAT//OotilityCeption.Log("§7STAT§9 STL§7 Final data§a had§b " + unparsedRange);
 
                 } else if (!qnr.InRange(expectedData.size())) {
-                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result would have \u00a7b" + expectedData.size() + "\u00a77 entries, so it would not fall in range \u00a7e" + qnr.qrToString() + "\u00a77; \u00a7cCancelling\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result would have §b" + expectedData.size() + "§7 entries, so it would not fall in range §e" + qnr.qrToString() + "§7; §cCancelling§7. ");
 
                     // Kap
                     return null;
                 }
 
-                //STAT//else { OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Expected List Size\u00a7b " + expectedData.size() + "\u00a77 was in range\u00a7e " + qnr.qrToString()); }
+                //STAT//else { OotilityCeption.Log("§7STAT§9 STL§7 Expected List Size§b " + expectedData.size() + "§7 was in range§e " + qnr.qrToString()); }
             }
 
             // Store final value
@@ -2261,11 +2281,11 @@ public class GooPMMOItems {
 
                 // Did the operation even work?
                 } else if (actuallyRemoved) {
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Removing data from the Stat History....");
+                    //STAT//OotilityCeption.Log("§7STAT§9 STL§7 Removing data from the Stat History....");
 
                     // Clearing?? :flushed:
                     if (clearMode) {
-                        //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a7b-CLEAR\u00a77 Clearing Stat History....");
+                        //STAT//OotilityCeption.Log("§7STAT§9 STL§b-CLEAR§7 Clearing Stat History....");
 
                         // Removing EXSH
                         hist.clearExternalData();
@@ -2279,7 +2299,7 @@ public class GooPMMOItems {
                         // Finally, original data
                         ArrayList<String> lst = new ArrayList<>(((StringListData) hist.getOriginalData()).getList());
                         for (String str : lst) {
-                            //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a7b-CLEAR\u00a77 Removing\u00a7b " + str);
+                            //STAT//OotilityCeption.Log("§7STAT§9 STL§b-CLEAR§7 Removing§b " + str);
 
                             // Remove via the provided methode
                             try {
@@ -2288,7 +2308,7 @@ public class GooPMMOItems {
 
                                 // That's not good
                             } catch (Exception ex) {
-                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cCould not remove \u00a7e" + str + "\u00a77c from " + stat.getId() + " for unknown reasons.\u00a77 ");
+                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cCould not remove §e" + str + "§7c from " + stat.getId() + " for unknown reasons.§7 ");
 
                                 // Kap
                                 return null;
@@ -2298,11 +2318,11 @@ public class GooPMMOItems {
                             //YE-OLDEN-MMO//((StringListData) hist.getOriginalData()).getList().remove(unidentifiedValue);
                         }
 
-                        //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a7b-CLEAR\u00a77 Result");
-                        //STAT//for (String str : ((StringListData) hist.getOriginalData()).getList()) { OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a7b-CLEAR\u00a77 Data: \u00a7b " + str); }
+                        //STAT//OotilityCeption.Log("§7STAT§9 STL§b-CLEAR§7 Result");
+                        //STAT//for (String str : ((StringListData) hist.getOriginalData()).getList()) { OotilityCeption.Log("§7STAT§9 STL§b-CLEAR§7 Data: §b " + str); }
 
                     } else {
-                        //STAT//OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a7b-REM\u00a77 Removing '\u00a7b" + unidentifiedValue + "' Stat History....");
+                        //STAT//OotilityCeption.Log("§7STAT§9 STL§b-REM§7 Removing '§b" + unidentifiedValue + "' Stat History....");
 
                         boolean foundAndDestroyed = false;
 
@@ -2328,7 +2348,7 @@ public class GooPMMOItems {
 
                                 // That's not good
                             } catch (Exception ex) {
-                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cCould not remove \u00a7e" + unidentifiedValue + "\u00a77c from " + stat.getId() + " for unknown reasons.\u00a77 ");
+                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cCould not remove §e" + unidentifiedValue + "§7c from " + stat.getId() + " for unknown reasons.§7 ");
 
                                 // Kap
                                 return null;
@@ -2360,7 +2380,7 @@ public class GooPMMOItems {
 
                                 // That's not good
                             } catch (Exception ex) {
-                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cCould not remove \u00a7e" + unidentifiedValue + "\u00a77c from " + stat.getId() + " for unknown reasons.\u00a77 ");
+                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cCould not remove §e" + unidentifiedValue + "§7c from " + stat.getId() + " for unknown reasons.§7 ");
 
                                 // Kap
                                 return null;
@@ -2392,7 +2412,7 @@ public class GooPMMOItems {
 
                                 // That's not good
                             } catch (Exception ex) {
-                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cCould not remove \u00a7e" + unidentifiedValue + "\u00a77c from " + stat.getId() + " for unknown reasons.\u00a77 ");
+                                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cCould not remove §e" + unidentifiedValue + "§7c from " + stat.getId() + " for unknown reasons.§7 ");
 
                                 // Kap
                                 return null;
@@ -2416,7 +2436,7 @@ public class GooPMMOItems {
 
                                     // That's not good
                                 } catch (Exception ex) {
-                                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a7cCould not remove \u00a7e" + unidentifiedValue + "\u00a77c from " + stat.getId() + " for unknown reasons.\u00a77 ");
+                                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§cCould not remove §e" + unidentifiedValue + "§7c from " + stat.getId() + " for unknown reasons.§7 ");
 
                                     // Kap
                                     return null;
@@ -2429,7 +2449,7 @@ public class GooPMMOItems {
                     mmo.setData(stat, hist.recalculate(mmo.getUpgradeLevel()));
 
                 } else {
-                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Could not remove \u00a73" + unidentifiedValue + "\u00a77 because it was\u00a7c not in the list\u00a77 initially. ");
+                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Could not remove §3" + unidentifiedValue + "§7 because it was§c not in the list§7 initially. ");
 
                     // Kap
                     return null;
@@ -2438,29 +2458,29 @@ public class GooPMMOItems {
                 StringListData finalData = (StringListData) mmo.getData(stat);
                 ArrayList<String> finalList = finalData == null ? new ArrayList<>() : new ArrayList<>(finalData.getList());
 
-                //STAT//for (String str : finalList) { OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Final data: \u00a7b " + str); }
+                //STAT//for (String str : finalList) { OotilityCeption.Log("§7STAT§9 STL§7 Final data: §b " + str); }
 
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Changed list \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 to have \u00a7b" + finalList.size() + "\u00a77 entries. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Changed list §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 to have §b" + finalList.size() + "§7 entries. ");
 
             } else {
 
                 StringListData finalData = (StringListData) mmo.getData(stat);
                 ArrayList<String> finalList = finalData == null ? new ArrayList<>() : new ArrayList<>(finalData.getList());
 
-                //STAT//for (String str : finalList) { OotilityCeption.Log("\u00a77STAT\u00a79 STL\u00a77 Final data: \u00a7b " + str); }
+                //STAT//for (String str : finalList) { OotilityCeption.Log("§7STAT§9 STL§7 Final data: §b " + str); }
 
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "List \u00a7e" + stat.getId() + "\u00a77 of " + OotilityCeption.GetItemName(iSource) + "\u00a77 had \u00a7b" + finalList.size() + "\u00a77 entries. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "List §e" + stat.getId() + "§7 of " + OotilityCeption.GetItemName(iSource) + "§7 had §b" + finalList.size() + "§7 entries. ");
             }
 
         } else if (stat == ItemStats.GEM_SOCKETS) {
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7c OPS\u00a77 Treating as \u00a7fGEM SOCKETS DATA");
+            //STAT//OotilityCeption.Log("§7STAT§c OPS§7 Treating as §fGEM SOCKETS DATA");
 
             // The value to put
-            GemSocketsData endData = null;
+            GemSocketsData endData;
             GemSocketsData currentData = (GemSocketsData) mmo.getData(stat);
             ArrayList<String> expectedData = currentData == null ? new ArrayList<>() : new ArrayList<>(currentData.getEmptySlots());
             ArrayList<String> addedData = new ArrayList<>();
-            //STAT//OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Current size: \u00a7b " + expectedData.size());
+            //STAT//OotilityCeption.Log("§7STAT§f GEM§7 Current size: §b " + expectedData.size());
 
             // What kinda mode is it
             boolean removeMode = false;
@@ -2477,7 +2497,7 @@ public class GooPMMOItems {
 
                     // Clear Mode
                     clearMode = "all".equals(unidentifiedValue);
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Clear mode? \u00a73 " + clearMode + "\u00a78 " + unidentifiedValue);
+                    //STAT//OotilityCeption.Log("§7STAT§f GEM§7 Clear mode? §3 " + clearMode + "§8 " + unidentifiedValue);
                 }
 
                 // Process spaces
@@ -2488,22 +2508,22 @@ public class GooPMMOItems {
 
                     // Clearing??? :flushed:
                     if (clearMode) {
-                        actuallyRemoved = expectedData.size() > 0;
+                        actuallyRemoved = !expectedData.isEmpty();
                         expectedData.clear();
 
                     } else { actuallyRemoved = expectedData.remove(unidentifiedValue); }
 
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Removing: \u00a7b " + unidentifiedValue + "\u00a78 (Succ?\u00a73 " + actuallyRemoved + "\u00a78)");
+                    //STAT//OotilityCeption.Log("§7STAT§f GEM§7 Removing: §b " + unidentifiedValue + "§8 (Succ?§3 " + actuallyRemoved + "§8)");
                 } else {
                     expectedData.add(unidentifiedValue);
                     addedData.add(unidentifiedValue);
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Added: \u00a7b " + unidentifiedValue);
+                    //STAT//OotilityCeption.Log("§7STAT§f GEM§7 Added: §b " + unidentifiedValue);
                 }
 
             } else if (readonly) {
                 removeMode = true;
                 actuallyRemoved = false;
-                //STAT//OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 (read only)");
+                //STAT//OotilityCeption.Log("§7STAT§f GEM§7 (read only)");
 
                 // Not a list operation
             } else {
@@ -2524,22 +2544,22 @@ public class GooPMMOItems {
 
                     if (!expectedData.contains(unparsedRange)) {
 
-                        OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "The result would not have \u00a73" + unparsedRange + "\u00a77; \u00a7cCancelling\u00a77. ");
+                        OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "The result would not have §3" + unparsedRange + "§7; §cCancelling§7. ");
 
                         // Kap
                         return null;
                     }
 
-                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Final data\u00a7a had\u00a7b " + unparsedRange);
+                    //STAT//OotilityCeption.Log("§7STAT§f GEM§7 Final data§a had§b " + unparsedRange);
 
                 } else if (!qnr.InRange(expectedData.size())) {
-                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result would have \u00a7b" + expectedData.size() + "\u00a77 entries, so it would not fall in range \u00a7e" + qnr.qrToString() + "\u00a77; \u00a7cCancelling\u00a77. ");
+                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Operation result would have §b" + expectedData.size() + "§7 entries, so it would not fall in range §e" + qnr.qrToString() + "§7; §cCancelling§7. ");
 
                     // Kap
                     return null;
                 }
 
-                //STAT//else { OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Expected List Size\u00a7b " + expectedData.size() + "\u00a77 was in range\u00a7e " + qnr.qrToString()); }
+                //STAT//else { OotilityCeption.Log("§7STAT§f GEM§7 Expected List Size§b " + expectedData.size() + "§7 was in range§e " + qnr.qrToString()); }
             }
 
             // Store final value
@@ -2658,7 +2678,7 @@ public class GooPMMOItems {
                     mmo.setData(stat, hist.recalculate(mmo.getUpgradeLevel()));
 
                 } else {
-                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Could not remove \u00a73" + unidentifiedValue + "\u00a77 because it was\u00a7c not in the list\u00a77 initially. ");
+                    OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Could not remove §3" + unidentifiedValue + "§7 because it was§c not in the list§7 initially. ");
 
                     // Kap
                     return null;
@@ -2667,18 +2687,18 @@ public class GooPMMOItems {
                 GemSocketsData finalData = (GemSocketsData) mmo.getData(stat);
                 ArrayList<String> finalList = finalData == null ? new ArrayList<>() : new ArrayList<>(finalData.getEmptySlots());
 
-                //STAT//for (String str : finalList) { OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Final data: \u00a7b " + str); }
+                //STAT//for (String str : finalList) { OotilityCeption.Log("§7STAT§f GEM§7 Final data: §b " + str); }
 
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Empty gem sockets of " + OotilityCeption.GetItemName(iSource) + "\u00a77 changed to a total of \u00a7b" + finalList.size() + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Empty gem sockets of " + OotilityCeption.GetItemName(iSource) + "§7 changed to a total of §b" + finalList.size() + "§7. ");
 
             } else {
 
                 GemSocketsData finalData = (GemSocketsData) mmo.getData(stat);
                 ArrayList<String> finalList = finalData == null ? new ArrayList<>() : new ArrayList<>(finalData.getEmptySlots());
 
-                //STAT//for (String str : finalList) { OotilityCeption.Log("\u00a77STAT\u00a7f GEM\u00a77 Final data: \u00a7b " + str); }
+                //STAT//for (String str : finalList) { OotilityCeption.Log("§7STAT§f GEM§7 Final data: §b " + str); }
 
-                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Empty gem sockets of " + OotilityCeption.GetItemName(iSource) + "\u00a77 were a total of \u00a7b" + finalList.size() + "\u00a77. ");
+                OotilityCeption.Log4Success(logAddition, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Empty gem sockets of " + OotilityCeption.GetItemName(iSource) + "§7 were a total of §b" + finalList.size() + "§7. ");
             }
         }
 
@@ -2733,7 +2753,7 @@ public class GooPMMOItems {
         // Check volatile
         VolatileMMOItem vol = VolatileFromNBT(nbt);
         if (!vol.hasUpgradeTemplate()) {
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "This MMOItem has no Upgrade Template (\u00a7citem not upgradable\u00a77). ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "This MMOItem has no Upgrade Template (§citem not upgradable§7). ");
             return null; }
 
         // Live
@@ -2760,10 +2780,10 @@ public class GooPMMOItems {
 
         if (limited) {
 
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Upgraded " + OotilityCeption.GetItemName(base) + "\u00a77 to maximum level \u00a7b" + result + "\u00a77. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Upgraded " + OotilityCeption.GetItemName(base) + "§7 to maximum level §b" + result + "§7. ");
         } else {
 
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Upgraded " + OotilityCeption.GetItemName(base) + "\u00a77 to level \u00a7b" + result + "\u00a77. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Upgraded " + OotilityCeption.GetItemName(base) + "§7 to level §b" + result + "§7. ");
         }
 
         // Deal
@@ -2774,8 +2794,6 @@ public class GooPMMOItems {
      * Identifies a stack of Unidentified MMOItems
      *
      * @param base ItemStack that may not be an MMOItem
-     * @param toLevel Level operaton
-     * @param breakLimit if it should overshoot the max upgrade level of an item
      * @return <code>null</code> if anything goes wrong
      */
     @Nullable public static ItemStack IdentifyMMOItem(@Nullable ItemStack base, @Nullable RefSimulator<String> logger) {
@@ -2787,14 +2805,14 @@ public class GooPMMOItems {
 
         // Is Unidentified right
         if (!IsUnidentified(base)) {
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, OotilityCeption.GetItemName(base) + "\u00a77 is not an unidentified MMOItem. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, OotilityCeption.GetItemName(base) + "§7 is not an unidentified MMOItem. ");
             return null; }
 
         // Get NBT
         ItemStack result = (new IdentifiedItem(NBTItem.get(base)).identify());
 
         // Log success
-        OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Identified " + OotilityCeption.GetItemName(result) + "\u00a77. ");
+        OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Identified " + OotilityCeption.GetItemName(result) + "§7. ");
 
         // Deal
         return result;
@@ -2914,9 +2932,9 @@ public class GooPMMOItems {
                 // Log if Appropiate
                 if (result != null) {
 
-                    // Gunging_Ootilities_Plugin.theOots.CLog("\u00a73-------------Resultant Lore--------------");
-                    // for (String str : result.getLore()) { Gunging_Ootilities_Plugin.theOots.CLog("\u00a7e - \u00a77" + str); }
-                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully added lore line " + OotilityCeption.ParseColour(loreLine) + "\u00a77 to " + OotilityCeption.GetItemName(base));
+                    // Gunging_Ootilities_Plugin.theOots.CLog("§3-------------Resultant Lore--------------");
+                    // for (String str : result.getLore()) { Gunging_Ootilities_Plugin.theOots.CLog("§e - §7" + str); }
+                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfully added lore line " + OotilityCeption.ParseColour(loreLine) + "§7 to " + OotilityCeption.GetItemName(base));
 
                 } else {
 
@@ -3003,11 +3021,11 @@ public class GooPMMOItems {
                 // Log if Appropiate
                 if (result != null) {
 
-                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified attribute \u00a73" + attrib.name() + "\u00a77 of "+ OotilityCeption.GetItemName(base));
+                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified attribute §3" + attrib.name() + "§7 of "+ OotilityCeption.GetItemName(base));
 
                 } else {
 
-                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "\u00a77Attribute \u00a73" + attrib.name() + "\u00a77 doesnt seem to be supported as to modify its MMOItem counterpart.");
+                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "§7Attribute §3" + attrib.name() + "§7 doesnt seem to be supported as to modify its MMOItem counterpart.");
                 }
             }
 
@@ -3066,7 +3084,7 @@ public class GooPMMOItems {
 
                         // Log ig
                         //OotilityCeption. Log("-----------------");
-                        //OotilityCeption. Log("Stat: \u00a73" + statt.getName());
+                        //OotilityCeption. Log("Stat: §3" + statt.getName());
 
                         // Contained?
                         if (datt != null) {
@@ -3092,10 +3110,10 @@ public class GooPMMOItems {
                             }
 
                             // kk
-                            //OotilityCeption. Log("N: \u00a7e" + datt.getClass().getName());
-                            //OotilityCeption. Log("C: \u00a7e" + datt.getClass().getCanonicalName());
-                            //OotilityCeption. Log("S: \u00a7e" + datt.getClass().getSimpleName());
-                            //OotilityCeption. Log("T: \u00a7e" + datt.getClass().getTypeName());
+                            //OotilityCeption. Log("N: §e" + datt.getClass().getName());
+                            //OotilityCeption. Log("C: §e" + datt.getClass().getCanonicalName());
+                            //OotilityCeption. Log("S: §e" + datt.getClass().getSimpleName());
+                            //OotilityCeption. Log("T: §e" + datt.getClass().getTypeName());
                             //endregion
 
                             // Save
@@ -3107,7 +3125,7 @@ public class GooPMMOItems {
                     ItemMeta iMeta = b.getItem().getItemMeta();
                     //ArrayList<String> iLore = new ArrayList<>(iMeta.getLore());
                     ArrayList<String> keptLore = new ArrayList<>();
-                    //for (String str : iLore) { if (str.startsWith("\u00a77")) { keptLore.add(str); } }
+                    //for (String str : iLore) { if (str.startsWith("§7")) { keptLore.add(str); } }
 
                     // Extract Tier and Type
                     RefSimulator<String> mType = new RefSimulator<>(""), mID = new RefSimulator<>("");
@@ -3263,7 +3281,7 @@ public class GooPMMOItems {
     public static ItemStack MMOItemModifyDurability(@Nullable ItemStack base, @Nullable Player holder, @NotNull PlusMinusPercent operation, @Nullable RefSimulator<Double> reslt, boolean preventBreaking, boolean useMaxDura, @Nullable RefSimulator<String> logger) {
         String pname = "no";
         if (holder != null) { pname = holder.getName(); }
-        //dur//OotilityCeption. Log("Dura As MMOItem: " + OotilityCeption.GetItemName(base) + "\u00a77, holder " + pname + "\u00a77, prevent break \u00a7b" + preventBreaking);
+        //dur//OotilityCeption. Log("Dura As MMOItem: " + OotilityCeption.GetItemName(base) + "§7, holder " + pname + "§7, prevent break §b" + preventBreaking);
 
         // Gemstone Support is Enabled (Correct MMOItems version)
         //dur//OotilityCeption. Log("Gem Stuppot Found ");
@@ -3273,12 +3291,12 @@ public class GooPMMOItems {
             //dur//OotilityCeption. Log("Base Real ");
 
             // Result
-            ItemStack result = null;
+            ItemStack result;
             DurabilityItem durItem;
 
             if (usingDurabilityItemAbstract == null) {
                 try {
-                    durabilityItemNonAbstract = DurabilityItem.class.getConstructor(new Class[]{Player.class, ItemStack.class});
+                    durabilityItemNonAbstract = DurabilityItem.class.getConstructor(Player.class, ItemStack.class);
                     durabilityItemValidity = DurabilityItem.class.getMethod("isValid");
                     usingDurabilityItemAbstract = false;
                 } catch (NoSuchMethodException ignored ){
@@ -3288,11 +3306,11 @@ public class GooPMMOItems {
                 }
             }
 
-	            boolean isValid = false;
+	            boolean isValid;
 	            if (usingDurabilityItemAbstract) {
 	                // DurabilityItem is abstract in 6.10.1+, use reflection
 	                try {
-	                    java.lang.reflect.Constructor<?> ctor = DurabilityItem.class.getDeclaredConstructor(org.bukkit.entity.Player.class, io.lumine.mythic.lib.api.item.NBTItem.class, org.bukkit.inventory.EquipmentSlot.class);
+	                    Constructor<?> ctor = DurabilityItem.class.getDeclaredConstructor(Player.class, NBTItem.class, EquipmentSlot.class);
 	                    ctor.setAccessible(true);
 	                    durItem = (DurabilityItem) ctor.newInstance(holder, base, EquipmentSlot.HAND);
 	                    isValid = (durItem != null);
@@ -3309,7 +3327,7 @@ public class GooPMMOItems {
                     isValid = (boolean) durabilityItemValidity.invoke(durItem);
 
                 } catch (IllegalAccessException|InstantiationException|InvocationTargetException ignored) {
-                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback){  Gunging_Ootilities_Plugin.theOots.CPLog(OotilityCeption.LogFormat("MMOItems - Modify Durability", "\u00a7cCould not instantiate Durability Item class in\u00a7e GooPMMOitems.MMOItemModifyDurability(ItemStack, Player, PlusMinusPercent, RefSimulator, boolean, boolean, RefSimulator)")); }
+                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback){  Gunging_Ootilities_Plugin.theOots.CPLog(OotilityCeption.LogFormat("MMOItems - Modify Durability", "§cCould not instantiate Durability Item class in§e GooPMMOitems.MMOItemModifyDurability(ItemStack, Player, PlusMinusPercent, RefSimulator, boolean, boolean, RefSimulator)")); }
                     OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Could not modify durability due to compatibility issues. ");
                     return null;
                 }
@@ -3317,20 +3335,20 @@ public class GooPMMOItems {
 
             // Attempt to get durability item
             if (isValid) {
-                //dur//OotilityCeption. Log("\u00a7aUses MMOItems dura ");
+                //dur//OotilityCeption. Log("§aUses MMOItems dura ");
 
                 // Get Name
                 String iName = OotilityCeption.GetItemName(base);
 
                 // Durabilitied Item Meta
-                ItemMeta dur = null;
+                ItemMeta dur;
 
                 // Get Current amount
                 int currentDura = durItem.getDurability();
 
                 // Get max
                 int maxDura = durItem.getMaxDurability();
-                //dur//OotilityCeption. Log("\u00a77Current Durability: \u00a7b" + currentDura + "/" + maxDura);
+                //dur//OotilityCeption. Log("§7Current Durability: §b" + currentDura + "/" + maxDura);
 
                 // Simulate Vanilla
                 int vanillaStyleDamage = maxDura - currentDura;
@@ -3347,8 +3365,8 @@ public class GooPMMOItems {
                  *
                  * #4 Plus Percent ~ Adds to the current damage this percent of the max damage
                  */
-                //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 ------ MMOITems ------ \u00a7f" + operation.toString());
-                //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 Current Damage:\u00a7e " + vanillaStyleDamage);
+                //DUR//OotilityCeption.Log("§8DURA§b FV§7 ------ MMOITems ------ §f" + operation.toString());
+                //DUR//OotilityCeption.Log("§8DURA§b FV§7 Current Damage:§e " + vanillaStyleDamage);
                 if (useMaxDura) {
 
                     // Recreate plus minus percent
@@ -3356,61 +3374,61 @@ public class GooPMMOItems {
 
                     // Not relative, just get percent from the max durability
                     toMax.setRelative(false);
-                    //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 Applying Max Operation:\u00a7e " + toMax.toString() + "\u00a77 to max durability\u00a79 " + base.getType().getMaxDurability());
+                    //DUR//OotilityCeption.Log("§8DURA§b FV§7 Applying Max Operation:§e " + toMax.toString() + "§7 to max durability§9 " + base.getType().getMaxDurability());
 
                     // Apply to that
                     double convertedMax = toMax.apply((double) base.getType().getMaxDurability());
 
-                    //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 Max Operation Result:\u00a7e " + convertedMax);
+                    //DUR//OotilityCeption.Log("§8DURA§b FV§7 Max Operation Result:§e " + convertedMax);
 
                     // Was it additive in the first place?
                     if (operation.getRelative()) {
 
                         // Add this percent of max durability to the current
                         finalValue = convertedMax + vanillaStyleDamage;
-                        //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 Adding result:\u00a7e " + finalValue);
+                        //DUR//OotilityCeption.Log("§8DURA§b FV§7 Adding result:§e " + finalValue);
 
                         // It was a set command
                     } else {
 
                         // The final value is this percent
                         finalValue = convertedMax;
-                        //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 Setting result:\u00a7e " + finalValue);
+                        //DUR//OotilityCeption.Log("§8DURA§b FV§7 Setting result:§e " + finalValue);
                     }
 
                 } else {
-                    //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 Applying Direct Operation:\u00a7e " + operation.toString());
+                    //DUR//OotilityCeption.Log("§8DURA§b FV§7 Applying Direct Operation:§e " + operation.toString());
 
                     // Yeah
                     finalValue = operation.apply((double) vanillaStyleDamage);
-                    //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 Result:\u00a7e " + finalValue);
+                    //DUR//OotilityCeption.Log("§8DURA§b FV§7 Result:§e " + finalValue);
                 }
 
                 // Perform operation to current damage
                 int finalDamage = (int) Math.round(finalValue);
-                //dur//OotilityCeption. Log("\u00a77As Damage: \u00a7b" + vanillaStyleDamage + " -> " + finalDamage);
+                //dur//OotilityCeption. Log("§7As Damage: §b" + vanillaStyleDamage + " -> " + finalDamage);
 
                 // Constrain I suppose, if its preventing from breaking or there is no holder :thinking:
                 if (preventBreaking) { if (finalDamage >= (maxDura - 1)) { finalDamage = (maxDura - 1); } } else if (finalDamage > maxDura) { finalDamage = maxDura + 1; }
                 if (finalDamage < 0) { finalDamage = 0; }
-                //DUR//OotilityCeption.Log("\u00a78DURA\u00a7b FV\u00a77 True Result:\u00a76 " + finalValue);
+                //DUR//OotilityCeption.Log("§8DURA§b FV§7 True Result:§6 " + finalValue);
 
                 // Get Actual Durability
                 int finalDura = maxDura - finalDamage;
 
                 // Get shift
                 int shift = finalDura - currentDura;
-                //dur//OotilityCeption. Log("\u00a77Processed: \u00a7e" + finalDamage + " -> " + finalDura + "\u00a77(\u00a7a" + shift + "\u00a77) ");
+                //dur//OotilityCeption. Log("§7Processed: §e" + finalDamage + " -> " + finalDura + "§7(§a" + shift + "§7) ");
 
                 // Set result
                 if (reslt != null) { reslt.setValue(finalDamage + 0.0D); }
 
                 // Did it break? Must GooP do something (because MMOItems will generate an exception)?
                 if (finalDura < 0 && holder == null) {
-                    //dur//OotilityCeption. Log("\u00a7cBroke - No Playr ");
+                    //dur//OotilityCeption. Log("§cBroke - No Playr ");
 
                     // Broke
-                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified durability of \u00a7f" + iName + "\u00a77, it broke though. ");
+                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified durability of §f" + iName + "§7, it broke though. ");
 
                     // Return as air
                     return OotilityCeption.asQuantity(base, 0);
@@ -3440,7 +3458,7 @@ public class GooPMMOItems {
                     if (OotilityCeption.If(breakable)) {
 
                         // Broke
-                        OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified durability of \u00a7f" + iName + "\u00a77, it broke though. ");
+                        OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified durability of §f" + iName + "§7, it broke though. ");
 
                         ItemStack broken = base.clone();
                         broken.setAmount(0);
@@ -3455,7 +3473,7 @@ public class GooPMMOItems {
                 result.setItemMeta(dur);
 
                 // Result
-                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified durability of \u00a7f" + iName + "\u00a77. ");
+                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified durability of §f" + iName + "§7. ");
 
                 // If false, do the operation vanilla-wise alv
             } else {
@@ -3588,7 +3606,6 @@ public class GooPMMOItems {
 
             // Get Socket Data
             StringListData loreData = (StringListData) mmoitem.getData(GooPMMOItems.Stat(GooPMMOItemsItemStats.LORE));
-
             // Has the items any sockets already?
             if (loreData != null) {
 
@@ -3606,7 +3623,7 @@ public class GooPMMOItems {
                 ArrayList<String> iLore = new ArrayList<>(loreData.getList());
 
                 // Make sure there is any relevant lore data
-                if (iLore.size() > 0) {
+                if (!iLore.isEmpty()) {
 
                     //Choose True Index
                     Integer tIndex = OotilityCeption.BakeIndex4Remove(index, iLore.size());
@@ -3622,7 +3639,7 @@ public class GooPMMOItems {
                     mmoitem.removeData(GooPMMOItems.Stat(GooPMMOItemsItemStats.LORE));
 
                     // Was there any lore left?
-                    if (iLore.size() > 0) {
+                    if (!iLore.isEmpty()) {
 
                         // Create that data, and assign this list to it
                         StringListData finalLore = new StringListData(iLore);
@@ -3663,8 +3680,8 @@ public class GooPMMOItems {
             if (mmoitem == null) { return null; }
 
             // Get Socket Data
-            DoubleData mData = null;
-            ItemStat stt = null;
+            DoubleData mData;
+            ItemStat stt;
 
             // Gather initial vanilla
             if (attrib.equals(GooP_MinecraftVersions.GetVersionAttribute(GooPVersionAttributes.GENERIC_MOVEMENT_SPEED))) {
@@ -3699,8 +3716,8 @@ public class GooPMMOItems {
             mData = (DoubleData) mmoitem.getData(stt);
 
             // Retrieve existing
-            double vData = 0.0;
-            double cData = 0.0;
+            double vData;
+            double cData;
             if (mData != null) {
 
                 // Get Current Value
@@ -3765,15 +3782,15 @@ public class GooPMMOItems {
             if (result != null) {
 
                 if (get)  {
-                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "The tier of "+ OotilityCeption.GetItemName(base) + "\u00a77 was \u00a7b" + tierNameRef.getValue() + "\u00a77. ");
+                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "The tier of "+ OotilityCeption.GetItemName(base) + "§7 was §b" + tierNameRef.getValue() + "§7. ");
 
                 } else {
-                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified tier of "+ OotilityCeption.GetItemName(base) + "\u00a77 to \u00a7b" + tierNameRef.getValue() + "\u00a77. ");
+                    OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Modified tier of "+ OotilityCeption.GetItemName(base) + "§7 to §b" + tierNameRef.getValue() + "§7. ");
                 }
 
             } else {
 
-                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Failed to modify tier, perhaps \u00a73" + newTier + "\u00a77 is not a loaded tier? ");
+                OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPFailFeedback, "Failed to modify tier, perhaps §3" + newTier + "§7 is not a loaded tier? ");
             }
 
             // Set
@@ -3791,12 +3808,12 @@ public class GooPMMOItems {
 
     @Nullable public static ItemStack AddAbility(@Nullable ItemStack base, @NotNull String ability, @NotNull String trigger, @NotNull ArrayList<CompactCodedValue> mods, @Nullable RefSimulator<String> logger) {
         if (!MMOItems.plugin.getSkills().hasSkill(ability)) {
-            OotilityCeption.Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Ability \u00a7c" + ability + "\u00a77 is not loaded. ");
+            OotilityCeption.Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Ability §c" + ability + "§7 is not loaded. ");
             return null;}
 
         TriggerType tt = TriggerType.valueOf(trigger);
         if (tt == null) {
-            OotilityCeption.Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Ability Trigger \u00a7c" + trigger + "\u00a77 is not loaded. ");
+            OotilityCeption.Log4Success(logger, !Gunging_Ootilities_Plugin.blockImportantErrorFeedback, "Ability Trigger §c" + trigger + "§7 is not loaded. ");
             return null;
         }
 
@@ -3836,7 +3853,7 @@ public class GooPMMOItems {
 
             // Get Finished Product
             result = mmoitem.newBuilder().build();
-            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfuly added ability \u00a73" + ability+ "\u00a77 to " + OotilityCeption.GetItemName(result) + "\u00a77. ");
+            OotilityCeption.Log4Success(logger, Gunging_Ootilities_Plugin.sendGooPSuccessFeedback, "Successfuly added ability §3" + ability+ "§7 to " + OotilityCeption.GetItemName(result) + "§7. ");
             return result;
 
         // This man passing on a null item wth
@@ -3865,7 +3882,7 @@ public class GooPMMOItems {
             if (mmoitem == null) { return null; }
 
             // Get Socket Data
-            StringData tData = null;
+            StringData tData;
 
             // Apply if non-null
             if (setTier) {
@@ -3972,17 +3989,9 @@ public class GooPMMOItems {
                 if (list == null) { list = new HashMap<>(); }
 
                 // Does the list contain the value already?
-                Integer count = list.get(val);
-                if (count == null) {
-
-                    // Include as count 1
-                    list.put(val, 1);
-
-                } else {
-
-                    // Increase count and put
-                    list.put(val, count + 1);
-                }
+                // Include as count 1
+                // Increase count and put
+                list.merge(val, 1, Integer::sum);
 
                 // Yeah
                 tagValues.put(tag, list);
@@ -4086,18 +4095,18 @@ public class GooPMMOItems {
         // YML-Name: ItemStat.getPath();
         // To get the value: NBTItem.getStat(ItemStat)
 
-        //logReturn.add(ChatColor.GRAY + "\u00a7lStats:");
-        //for (ItemStat statt : tMMoitem.getAvailableStats()) { logReturn.add("\u00a7e - \u00a77Stat: \u00a73" + statt.getId() + "\u00a7b " + tNBT.getStat(statt)); }
+        //logReturn.add(ChatColor.GRAY + "§lStats:");
+        //for (ItemStat statt : tMMoitem.getAvailableStats()) { logReturn.add("§e - §7Stat: §3" + statt.getId() + "§b " + tNBT.getStat(statt)); }
 
         //if (tMMoitem.getItemSet() != null) { logReturn.add(ChatColor.GRAY + "Item Set:" + ChatColor.DARK_AQUA + tMMoitem.getItemSet().getName()); }
         //if (tMMoitem.getParent() != null) { logReturn.add(ChatColor.YELLOW + "Parent Name:" + ChatColor.DARK_AQUA + tMMoitem.getParent().getName()); }
 
         //logReturn.add(ChatColor.YELLOW + "Equipment Type:" + ChatColor.DARK_AQUA + tMMoitem.getEquipmentType().toString());
-        //logReturn.add(ChatColor.GRAY + "\u00a7lNBT Tags:");
-        //for (String tagg : tNBT.getTags()) { logReturn.add("\u00a7e - \u00a77" + tagg); }
+        //logReturn.add(ChatColor.GRAY + "§lNBT Tags:");
+        //for (String tagg : tNBT.getTags()) { logReturn.add("§e - §7" + tagg); }
         //String tagg = "";
-        //tagg = "MMOITEMS_ITEM_ID"; logReturn.add("\u00a7e - \u00a77" + tagg + " \u00a7b" + tNBT.getString(tagg));
-        //tagg = "MMOITEMS_ITEM_TYPE"; logReturn.add("\u00a7e - \u00a77" + tagg + " \u00a7b" + tNBT.getString(tagg));
+        //tagg = "MMOITEMS_ITEM_ID"; logReturn.add("§e - §7" + tagg + " §b" + tNBT.getString(tagg));
+        //tagg = "MMOITEMS_ITEM_TYPE"; logReturn.add("§e - §7" + tagg + " §b" + tNBT.getString(tagg));
     }
 
     static List<Type> lastTypes = new ArrayList<>();
@@ -4109,11 +4118,8 @@ public class GooPMMOItems {
         TypeManager types = MMOItems.plugin.getTypes();
 
         // Add them
-        for (net.Indyuce.mmoitems.api.Type t :  types.getAll()) {
-
-            // To the Type Rememberance
-            lastTypes.add(t);
-        }
+        // To the Type Rememberance
+        lastTypes.addAll(types.getAll());
     }
     public static ArrayList<String> GetTierNames() {
 
@@ -4137,7 +4143,7 @@ public class GooPMMOItems {
         ArrayList<String> lTypes = new ArrayList<String>();
 
         // Add them
-        for (net.Indyuce.mmoitems.api.Type t :  types.getAll()) {
+        for (Type t :  types.getAll()) {
 
             // To the Type Rememberance
             lastTypes.add(t);
@@ -4184,7 +4190,7 @@ public class GooPMMOItems {
     public static Type GetMMOItemType(@Nullable NBTItem target) {
 
         // From string
-        return GetMMOItemTypeFromString((String) GetMMOItemTypeRaw(target));
+        return GetMMOItemTypeFromString(GetMMOItemTypeRaw(target));
     }
 
     @Nullable
@@ -4298,7 +4304,7 @@ public class GooPMMOItems {
             idStorage.SetValue(itm.getString("MMOITEMS_ITEM_ID"));
         }
 
-        //CNV// else { OotilityCeption.Log("\u00a78GOOPMI \u00a7cINTERNALS\u00a77 Object " + OotilityCeption.GetItemName(iSource) + " \u00a77is \u00a7cnot\u00a77 a MMOItem"); }
+        //CNV// else { OotilityCeption.Log("§8GOOPMI §cINTERNALS§7 Object " + OotilityCeption.GetItemName(iSource) + " §7is §cnot§7 a MMOItem"); }
     }
 
     /**
@@ -4461,7 +4467,7 @@ public class GooPMMOItems {
 
     public static boolean hasBlacklistedEnchants(@NotNull  VolatileMMOItem mmo) {
         if (!mmo.hasData(ItemStats.ENCHANTS)) {
-            //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Item has no enchantments");
+            //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Item has no enchantments");
             return false; }
 
         // Lets see if its worth making it a live MMOItem...
@@ -4471,9 +4477,9 @@ public class GooPMMOItems {
             if (!(data instanceof EnchantListData)) { continue; }
 
             for (Enchantment e : Gunging_Ootilities_Plugin.blacklistedEnchantments) {
-                //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Checking\u00a7e EXSH\u00a77 ~\u00a7a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
+                //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Checking§e EXSH§7 ~§a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
                 if (((EnchantListData) data).getLevel(e) != 0) {
-                    //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Item is\u00a7c illegal\u00a77.");
+                    //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Item is§c illegal§7.");
                     return true; }
             }
         }
@@ -4483,9 +4489,9 @@ public class GooPMMOItems {
             if (!(data instanceof EnchantListData)) { continue; }
 
             for (Enchantment e : Gunging_Ootilities_Plugin.blacklistedEnchantments) {
-                //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Checking\u00a7a MOD\u00a77 ~\u00a7a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
+                //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Checking§a MOD§7 ~§a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
                 if (((EnchantListData) data).getLevel(e) != 0) {
-                    //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Item is\u00a7c illegal\u00a77.");
+                    //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Item is§c illegal§7.");
                     return true; }
             }
         }
@@ -4495,31 +4501,31 @@ public class GooPMMOItems {
             if (!(data instanceof EnchantListData)) { continue; }
 
             for (Enchantment e : Gunging_Ootilities_Plugin.blacklistedEnchantments) {
-                //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Checking\u00a7c GEM\u00a77 ~\u00a7a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
+                //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Checking§c GEM§7 ~§a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
                 if (((EnchantListData) data).getLevel(e) != 0) {
-                    //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Item is\u00a7c illegal\u00a77.");
+                    //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Item is§c illegal§7.");
                     return true; }
             }
         }
 
         StatData data = hist.getOriginalData();
         if (!(data instanceof EnchantListData)) {
-            //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Item is\u00a7a clear\u00a77.");
+            //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Item is§a clear§7.");
             return false; }
 
         for (Enchantment e : Gunging_Ootilities_Plugin.blacklistedEnchantments) {
-            //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Checking\u00a79 OG\u00a77 ~\u00a7a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
+            //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Checking§9 OG§7 ~§a " + e.getName() + " " + ((EnchantListData) data).getLevel(e));
             if (((EnchantListData) data).getLevel(e) != 0) {
-                //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Item is\u00a7c illegal\u00a77.");
+                //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Item is§c illegal§7.");
                 return true; } }
 
-        //ENCH//OotilityCeption.Log("\u00a78MMOITEMS\u00a73 IE\u00a77 Item is\u00a7a clear\u00a77.");
+        //ENCH//OotilityCeption.Log("§8MMOITEMS§3 IE§7 Item is§a clear§7.");
         return false;
     }
 
     /**
      * Apparently, for MMOItems 6.3, instead of using <code>ItemStat.DURABILITY</code> you have to use <code>ItemStats.DURABILITY</code>.
-     *
+     * <p>
      * Also, some item stats evolve so this will give you the item stat closest to what you mean if it is not loaded in that MI version.
      * @param statt Stat you want
      * @return The stat you want or the closest stat (if theres one that makes sense) if it doesnt exist in thay MMOItems version.
@@ -4604,7 +4610,7 @@ public class GooPMMOItems {
                 case RESTORE: return ItemStats.RESTORE_HEALTH;
 
                 default:
-                    Gunging_Ootilities_Plugin.theOots.CPLog("No Update Stat for \u00a7e" + statt.name() + "\u00a77 is defined! ");
+                    Gunging_Ootilities_Plugin.theOots.CPLog("No Update Stat for §e" + statt.name() + "§7 is defined! ");
                     break;
             }
         }
@@ -4669,7 +4675,7 @@ public class GooPMMOItems {
             // Seems that those Types/IDs did not match wth
         } catch (Exception e) {
 
-            //STAT//OotilityCeption. Log("   \u00a74***\u00a7c Exception - \u00a7n" + e.getMessage());
+            //STAT//OotilityCeption. Log("   §4***§c Exception - §n" + e.getMessage());
             //e.printStackTrace();
             return null;
         }
@@ -4735,7 +4741,7 @@ public class GooPMMOItems {
             StatHistory hist = StatHistory.from(mmoitem, stat);
 
 
-            //OotilityCeption.Log("\u00a76<---- \u00a7eBefore Setting \u00a76---->");
+            //OotilityCeption.Log("§6<---- §eBefore Setting §6---->");
             //logSH(hist);
 
             if (asEXSHConsolidate) {
@@ -4760,7 +4766,7 @@ public class GooPMMOItems {
             // Seems that those Types/IDs did not match wth
         } catch (Exception e) {
 
-            //STAT//OotilityCeption. Log("   \u00a74***\u00a7c Exception - \u00a7n" + e.getMessage());
+            //STAT//OotilityCeption. Log("   §4***§c Exception - §n" + e.getMessage());
             //e.printStackTrace();
             return null;
         }
@@ -4801,7 +4807,7 @@ public class GooPMMOItems {
     @Nullable
     public static ItemStack SetStringStatData(@Nullable ItemStack itm, @Nullable String stat, String value) {
         if (stat == null) { return null; }
-        //STAT//OotilityCeption. Log("   \u00a76*\u00a77 Nonull Stat ");
+        //STAT//OotilityCeption. Log("   §6*§7 Nonull Stat ");
         return SetStringStatData(itm, Stat(stat), value);
     }
     @Nullable
@@ -4809,7 +4815,7 @@ public class GooPMMOItems {
         if (itm == null) { return null; }
         if (!IsMMOItem(itm)) { return null; }
         if (stat == null) { return null; }
-        //STAT//OotilityCeption. Log("   \u00a76*\u00a77 Nonull Qualificatons ");
+        //STAT//OotilityCeption. Log("   §6*§7 Nonull Qualificatons ");
 
 
         // Create Stat Data
@@ -4818,57 +4824,57 @@ public class GooPMMOItems {
 
         // String list or String?
         if (stat instanceof StringStat) {
-            //STAT//OotilityCeption. Log("   \u00a76*\u00a77 As \u00a7eString Stat ");
+            //STAT//OotilityCeption. Log("   §6*§7 As §eString Stat ");
 
             // Get as SData
             sData = new StringData(value);
 
         // Perform List Operations
         } else {
-            //STAT//OotilityCeption. Log("   \u00a76*\u00a77 As \u00a7eString List Stat ");
+            //STAT//OotilityCeption. Log("   §6*§7 As §eString List Stat ");
 
             // Cant be null
             if (value == null) {
-                //STAT//OotilityCeption. Log("   \u00a76*\u00a7c No Value ");
+                //STAT//OotilityCeption. Log("   §6*§c No Value ");
                 return null;
             }
 
             // Check as list
             if (!(stat instanceof StringListStat) && !(stat.equals(Stat(GooPMMOItemsItemStats.GEM_SOCKETS)))) {
-                //STAT//OotilityCeption. Log("   \u00a76*\u00a7c Not correct stat ");
+                //STAT//OotilityCeption. Log("   §6*§c Not correct stat ");
                 return null;
             }
 
             // Get already existing list
             ArrayList<String> old = GetStringListStatValue(nbt, stat);
             if (old == null) {
-                //STAT//OotilityCeption. Log("   \u00a76*\u00a77 No Old Value found, \u00a7eCreated ");
+                //STAT//OotilityCeption. Log("   §6*§7 No Old Value found, §eCreated ");
                 old = new ArrayList<>();
             }
 
             // Does it begin with a -
             if (value.startsWith("-")) {
-                //STAT//OotilityCeption. Log("   \u00a76*\u00a77 Removant ");
+                //STAT//OotilityCeption. Log("   §6*§7 Removant ");
 
                 // Cook
                 String v = value.substring(1);
 
                 // Is it contained?
                 if (old.contains(v)) {
-                    //STAT//OotilityCeption. Log("   \u00a76*\u00a7a Removed Old ");
+                    //STAT//OotilityCeption. Log("   §6*§a Removed Old ");
 
                     // Remove
                     old.remove(v);
 
                 } else {
-                    //STAT//OotilityCeption. Log("   \u00a76*\u00a7e Missing Faulure ");
+                    //STAT//OotilityCeption. Log("   §6*§e Missing Faulure ");
 
                     // Nope, fail
                     return null;
                 }
 
             } else {
-                //STAT//OotilityCeption. Log("   \u00a76*\u00a7a Added ");
+                //STAT//OotilityCeption. Log("   §6*§a Added ");
 
                 // Append
                 old.add(value);
@@ -4884,7 +4890,7 @@ public class GooPMMOItems {
 
         // Return
         if (result == null) {
-            //STAT//OotilityCeption. Log("   \u00a76*\u00a7c Fatal Result Error ");
+            //STAT//OotilityCeption. Log("   §6*§c Fatal Result Error ");
             return null;
         }
 
@@ -4897,7 +4903,7 @@ public class GooPMMOItems {
     @Nullable
     public static ItemStack SetBooleanStatData(@Nullable ItemStack itm, @Nullable String stat, Boolean value) {
         if (stat == null) { return null; }
-        //STAT//OotilityCeption. Log("   \u00a76*\u00a77 Nonull Stat ");
+        //STAT//OotilityCeption. Log("   §6*§7 Nonull Stat ");
         return SetBooleanStatData(itm, Stat(stat), value);
     }
     @Nullable
@@ -4907,7 +4913,7 @@ public class GooPMMOItems {
         if (stat == null) { return null; }
         if (value == null) { return null; }
         if (!(stat instanceof BooleanStat)) { return null; }
-        //STAT//OotilityCeption. Log("   \u00a76*\u00a77 Nonull Qualificatons ");
+        //STAT//OotilityCeption. Log("   §6*§7 Nonull Qualificatons ");
 
 
         // Create Stat Data
@@ -4919,7 +4925,7 @@ public class GooPMMOItems {
 
         // Return
         if (result == null) {
-            //STAT//OotilityCeption. Log("   \u00a76*\u00a7c Fatal Result Error ");
+            //STAT//OotilityCeption. Log("   §6*§c Fatal Result Error ");
             return null;
         }
 
@@ -4929,7 +4935,7 @@ public class GooPMMOItems {
 
     @NotNull
     public static ItemStack Build(@NotNull NBTItem itm) {
-        //STAT//OotilityCeption. Log("   \u00a7a*\u00a77 Building ");
+        //STAT//OotilityCeption. Log("   §a*§7 Building ");
 
         // Build
         return (LiveFromNBT(itm)).newBuilder().build();
@@ -5026,16 +5032,16 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Forces MMOItems to recalculate player's stats.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player to update equipment from.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Forces MMOItems to recalculate player's stats.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player to update equipment from.");
 
                             // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1) {
+                                if (targets.isEmpty()) {
 
                                     // Failure
                                     failure = true;
@@ -5053,7 +5059,7 @@ public class GooPMMOItems {
                                         UpdatePlayerEquipment(target);
 
                                         // Log Success
-                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Forced \u00a73" + target.getName() + "\u00a77 to reload their equipped items. "));
+                                        if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Forced §3" + target.getName() + "§7 to reload their equipped items. "));
 
                                         // Run Chain
                                         commandChain.chain(chained, target, sender);
@@ -5065,15 +5071,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -5093,18 +5099,18 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Adds gem slots to items.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<color> \u00a77Color of the gem slot to add.");
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Adds gem slots to items.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<color> §7Color of the gem slot to add.");
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
 
                             // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
 
                                     // Failure
                                     failure = true;
@@ -5141,7 +5147,7 @@ public class GooPMMOItems {
                                     executor.process();
 
                                     // Was there any log messages output?
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
                                 }
 
                             // Incorrect number of args
@@ -5149,15 +5155,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -5176,21 +5182,21 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Counts gemstones in items.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<includeEmpty> \u00a77If empty slots should also count.");
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e[range] \u00a77Count that succeeds this command.");
-                                logReturn.add("\u00a73 - \u00a7e[scoreboard] \u00a77To store the result of the count.");
-                                logReturn.add("\u00a78You must specify either a range or a scoreboard (or both).");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Counts gemstones in items.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<includeEmpty> §7If empty slots should also count.");
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e[range] §7Count that succeeds this command.");
+                                logReturn.add("§3 - §e[scoreboard] §7To store the result of the count.");
+                                logReturn.add("§8You must specify either a range or a scoreboard (or both).");
 
                             // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
 
                                     // Failure
                                     failure = true;
@@ -5206,7 +5212,7 @@ public class GooPMMOItems {
                                     // Fail
                                     failure = true;
 
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected \u00a7atrue\u00a77 or \u00a7cfalse\u00a77 instead of '\u00a73" + args[2] + "\u00a77'"));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected §atrue§7 or §cfalse§7 instead of '§3" + args[2] + "§7'"));
 
                                 } else {
                                     includeEmpty = OotilityCeption.BoolParse(args[2]);
@@ -5230,7 +5236,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Mention
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard Objective '\u00a73" + objectiveName + "\u00a77' does not exist."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard Objective '§3" + objectiveName + "§7' does not exist."));
                                     }
                                 }
 
@@ -5240,7 +5246,7 @@ public class GooPMMOItems {
                                     failure = true;
 
                                     // Mention
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected vanilla range format instead of '\u00a73" + args[5] + "\u00a77'"));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected vanilla range format instead of '§3" + args[5] + "§7'"));
                                 }
 
                                 if (!failure) {
@@ -5268,14 +5274,14 @@ public class GooPMMOItems {
 
                                                         // Notify
                                                         if (Gunging_Ootilities_Plugin.sendGooPSuccessFeedback) {
-                                                            iSource.addToLogAddition("Counted gems of " + OotilityCeption.GetItemName(iSource.getOriginal()) + "\u00a77,\u00a7b " + iSource.getRef_int_a() + "\u00a77 \u00a7awas\u00a77 in the specified range\u00a7e " + qnr.qrToString() + "\u00a77. ");
+                                                            iSource.addToLogAddition("Counted gems of " + OotilityCeption.GetItemName(iSource.getOriginal()) + "§7,§b " + iSource.getRef_int_a() + "§7 §awas§7 in the specified range§e " + qnr.qrToString() + "§7. ");
                                                         }
 
                                                     } else {
 
                                                         // Notify
                                                         if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) {
-                                                            iSource.addToLogAddition("Counted gems of " + OotilityCeption.GetItemName(iSource.getOriginal()) + "\u00a77,\u00a7b " + iSource.getRef_int_a() + "\u00a77 was \u00a7cnot\u00a77 in the specified range\u00a7e " + qnr.qrToString() + "\u00a77. ");
+                                                            iSource.addToLogAddition("Counted gems of " + OotilityCeption.GetItemName(iSource.getOriginal()) + "§7,§b " + iSource.getRef_int_a() + "§7 was §cnot§7 in the specified range§e " + qnr.qrToString() + "§7. ");
                                                         }
                                                     }
                                                 }
@@ -5309,7 +5315,7 @@ public class GooPMMOItems {
                                     executor.process();
 
                                     // Was there any log messages output?
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -5318,15 +5324,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -5345,24 +5351,24 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Upgrades items.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e[±]<levels>[%] \u00a77Operation on the upgrade level.");
-                                logReturn.add("\u00a73      * \u00a7bread\u00a77 Keyword to only read the level.");
-                                logReturn.add("\u00a73 - \u00a7e[break max] \u00a77Can this command upgrade beyond limit?");
-                                logReturn.add("\u00a73      * \u00a77There is no limit to downgrading (negative levels).");
-                                logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Scoreboard to output the result.");
-                                logReturn.add("\u00a73 - \u00a7e[scoreboard] \u00a77The result that will be written onto the score.");
-                                logReturn.add("\u00a73      * \u00a7blevel\u00a77 keyword to set the score to the result level.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Upgrades items.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e[±]<levels>[%] §7Operation on the upgrade level.");
+                                logReturn.add("§3      * §bread§7 Keyword to only read the level.");
+                                logReturn.add("§3 - §e[break max] §7Can this command upgrade beyond limit?");
+                                logReturn.add("§3      * §7There is no limit to downgrading (negative levels).");
+                                logReturn.add("§3 - §e[objective] §7Scoreboard to output the result.");
+                                logReturn.add("§3 - §e[scoreboard] §7The result that will be written onto the score.");
+                                logReturn.add("§3      * §blevel§7 keyword to set the score to the result level.");
 
                                 // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
                                     // Failure
                                     failure = true;
 
@@ -5380,7 +5386,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Mention it
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected a number or operation for level (like \u00a7b1\u00a77, \u00a7b5,\u00a77 \u00a7bn2\u00a77, or \u00a7b+2\u00a77) instead of \u00a7e" + args[4]));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected a number or operation for level (like §b1§7, §b5,§7 §bn2§7, or §b+2§7) instead of §e" + args[4]));
 
                                     } else { pmpLevel = new PlusMinusPercent(0D, true, false); }
                                 }
@@ -5396,7 +5402,7 @@ public class GooPMMOItems {
                                         // Failure
                                         failure = true;
 
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 instead of \u00a7e" + args[5]));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected §btrue§7 or §bfalse§7 instead of §e" + args[5]));
                                     }
                                 }
 
@@ -5411,18 +5417,18 @@ public class GooPMMOItems {
                                         // Failure
                                         failure = true;
 
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard objective \u00a73" + args[6] + "\u00a77 does not exist."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard objective §3" + args[6] + "§7 does not exist."));
                                     }
 
                                     if (args.length >= 8) {
                                         score = PlusMinusPercent.GetPMP(args[7], refAddition);
 
-                                        if (score == null && !(args[7].toLowerCase().equals("level"))) {
+                                        if (score == null && !(args[7].equalsIgnoreCase("level"))) {
                                             // Failure
                                             failure = true;
 
                                             // Mention it
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "The final score '\u00a73" + args[7] + "\u00a77' should be an integer number (maybe with an operation)."));
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "The final score '§3" + args[7] + "§7' should be an integer number (maybe with an operation)."));
                                         }
                                     }
                                 }
@@ -5472,7 +5478,7 @@ public class GooPMMOItems {
                                     executor.process();
 
                                     // Was there any log messages output?
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -5481,15 +5487,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -5508,17 +5514,17 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Identifies all items in the slot.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Identifies all items in the slot.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
 
                                 // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
                                     // Failure
                                     failure = true;
 
@@ -5550,7 +5556,7 @@ public class GooPMMOItems {
                                     executor.process();
 
                                     // Was there any log messages output?
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -5559,15 +5565,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -5589,20 +5595,20 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Adds abilities to items.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e<ability> \u00a77Internal name of the ability.");
-                                logReturn.add("\u00a73 - \u00a7e<trigger> \u00a77Trigger of the ability.");
-                                logReturn.add("\u00a73 - \u00a7e[modifier1]=[value];[modifier2]=[value];... \u00a77Modifiers of the ability");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Adds abilities to items.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e<ability> §7Internal name of the ability.");
+                                logReturn.add("§3 - §e<trigger> §7Trigger of the ability.");
+                                logReturn.add("§3 - §e[modifier1]=[value];[modifier2]=[value];... §7Modifiers of the ability");
 
                                 // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
                                     // Failure
                                     failure = true;
 
@@ -5615,7 +5621,7 @@ public class GooPMMOItems {
                                 RegisteredSkill skill = null;
                                 if (!MMOItems.plugin.getSkills().hasSkill(ability)) {
                                     failure = true;
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified ability \u00a73" + ability + "\u00a77 is not loaded."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified ability §3" + ability + "§7 is not loaded."));
                                 } else {
                                     skill = MMOItems.plugin.getSkills().getSkill(ability);
                                 }
@@ -5624,7 +5630,7 @@ public class GooPMMOItems {
                                 TriggerType tt = TriggerType.valueOf(trigger);
                                 if (tt == null) {
                                     failure = true;
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Ability trigger type \u00a73" + trigger + "\u00a77 does not exist."));}
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Ability trigger type §3" + trigger + "§7 does not exist."));}
 
                                 final ArrayList<CompactCodedValue> mods = new ArrayList<>();
                                 if (skill == null) { failure = true; } else if (args.length == 7) {
@@ -5632,11 +5638,11 @@ public class GooPMMOItems {
                                     for (CompactCodedValue mod : mods) {
                                         if (!skill.getHandler().getParameters().contains(mod.getID())) {
                                             failure = true;
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified modifier \u00a73" + mod.getID() + "\u00a77 is not loaded for ability \u00a7e" + ability));}
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified modifier §3" + mod.getID() + "§7 is not loaded for ability §e" + ability));}
 
                                         if (!OotilityCeption.DoubleTryParse(mod.getValue())) {
                                             failure = true;
-                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified value \u00a7b" + mod.getValue() + "\u00a77 for modifier \u00a73" + mod.getID() + "\u00a77 is not a number. "));}
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified value §b" + mod.getValue() + "§7 for modifier §3" + mod.getID() + "§7 is not a number. "));}
                                     }
                                 }
 
@@ -5663,7 +5669,7 @@ public class GooPMMOItems {
                                     executor.process();
 
                                     // Was there any log messages output?
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -5672,15 +5678,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -5701,19 +5707,19 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Changes the tier of items.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e<value> \u00a77Tier to set.");
-                                logReturn.add("\u00a73      * \u00a7bnone\u00a77 keyword to remove tier.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Changes the tier of items.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e<value> §7Tier to set.");
+                                logReturn.add("§3      * §bnone§7 keyword to remove tier.");
 
                                 // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
                                     // Failure
                                     failure = true;
 
@@ -5730,7 +5736,7 @@ public class GooPMMOItems {
                                         // Failure
                                         failure = true;
 
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified Tier \u00a73" + args[4] + "\u00a77 is not loaded."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified Tier §3" + args[4] + "§7 is not loaded."));
                                     }
                                 }
 
@@ -5760,7 +5766,7 @@ public class GooPMMOItems {
                                     executor.process();
 
                                     // Was there any log messages output?
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -5769,15 +5775,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -5798,22 +5804,22 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Changes the modifiers of items.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e<name> \u00a77Name of the modifier to add.");
-                                logReturn.add("\u00a73      * \u00a7bnone\u00a77 keyword to remove all modifiers.");
-                                logReturn.add("\u00a73      * \u00a7brandom\u00a77 keyword to to add random modifier.");
-                                logReturn.add("\u00a73 - \u00a7e[use-global] \u00a77Should this also consider those in modifiers.yml?");
-                                logReturn.add("\u00a73 - \u00a7e[use-chances] \u00a77Take into account the modifier chances?");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Changes the modifiers of items.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e<name> §7Name of the modifier to add.");
+                                logReturn.add("§3      * §bnone§7 keyword to remove all modifiers.");
+                                logReturn.add("§3      * §brandom§7 keyword to to add random modifier.");
+                                logReturn.add("§3 - §e[use-global] §7Should this also consider those in modifiers.yml?");
+                                logReturn.add("§3 - §e[use-chances] §7Take into account the modifier chances?");
 
                                 // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
                                     // Failure
                                     failure = true;
 
@@ -5838,7 +5844,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Notify the error
-                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 for 'use-global' instead of \u00a7e" + args[5] + "\u00a77. "));
+                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected §btrue§7 or §bfalse§7 for 'use-global' instead of §e" + args[5] + "§7. "));
                                     }
                                 }
 
@@ -5859,7 +5865,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Notify the error
-                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 for 'use-chances' instead of \u00a7e" + args[6] + "\u00a77. "));
+                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected §btrue§7 or §bfalse§7 for 'use-chances' instead of §e" + args[6] + "§7. "));
                                     }
                                 }
 
@@ -5901,7 +5907,7 @@ public class GooPMMOItems {
                                     /*
                                      *      Output Consolidation
                                      */
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -5910,15 +5916,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
                             break;
                         //endregion
@@ -5938,30 +5944,30 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 RevID-updates items to fix stacking.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e[reroll] \u00a77Should reroll item RNG stats?");
-                                logReturn.add("\u00a73 - \u00a7e[keep] \u00a77Item data to keep.");
-                                logReturn.add("\u00a73      *\u00a7b name\u00a77 Keep the display name.");
-                                logReturn.add("\u00a73      *\u00a7b lore\u00a77 Keep lore... refer to MI Docs.");
-                                logReturn.add("\u00a73      *\u00a7b ench\u00a77 Keep enchantments.");
-                                logReturn.add("\u00a73      *\u00a7b upgr\u00a77 Keep upgrades.");
-                                logReturn.add("\u00a73      *\u00a7b gems\u00a77 Keep gemstones.");
-                                logReturn.add("\u00a73      *\u00a7b soul\u00a77 Keep soulbounds.");
-                                logReturn.add("\u00a73      *\u00a7b skin\u00a77 Keep skin.");
-                                logReturn.add("\u00a73      *\u00a7b exsh\u00a77 Keep GooP's added stats.");
-                                logReturn.add("\u00a73      *\u00a7b mods\u00a77 Keep modifiers.");
-                                logReturn.add("\u00a78Specify all the data to keep by listing the keywords.");
-                                logReturn.add("\u00a78ex: \u00a76...<slot> [reroll] ench upgr gems skin exsh mods");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 RevID-updates items to fix stacking.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e[reroll] §7Should reroll item RNG stats?");
+                                logReturn.add("§3 - §e[keep] §7Item data to keep.");
+                                logReturn.add("§3      *§b name§7 Keep the display name.");
+                                logReturn.add("§3      *§b lore§7 Keep lore... refer to MI Docs.");
+                                logReturn.add("§3      *§b ench§7 Keep enchantments.");
+                                logReturn.add("§3      *§b upgr§7 Keep upgrades.");
+                                logReturn.add("§3      *§b gems§7 Keep gemstones.");
+                                logReturn.add("§3      *§b soul§7 Keep soulbounds.");
+                                logReturn.add("§3      *§b skin§7 Keep skin.");
+                                logReturn.add("§3      *§b exsh§7 Keep GooP's added stats.");
+                                logReturn.add("§3      *§b mods§7 Keep modifiers.");
+                                logReturn.add("§8Specify all the data to keep by listing the keywords.");
+                                logReturn.add("§8ex: §6...<slot> [reroll] ench upgr gems skin exsh mods");
 
                                 // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
                                     // Failure
                                     failure = true;
 
@@ -5978,7 +5984,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Notify the error
-                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected \u00a7btrue\u00a77 or \u00a7bfalse\u00a77 instead of \u00a7e" + args[4] + "\u00a77 regarding whether RNG stats should be rerolled."));
+                                        if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Expected §btrue§7 or §bfalse§7 instead of §e" + args[4] + "§7 regarding whether RNG stats should be rerolled."));
                                     } }
 
                                 boolean name = false,
@@ -6055,7 +6061,7 @@ public class GooPMMOItems {
                                     /*
                                      *      Output Consolidation
                                      */
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
                                 }
 
 
@@ -6064,15 +6070,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
                             break;
                         //endregion
@@ -6092,22 +6098,22 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Detect items by tier.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e<name> \u00a77Name of the modifier to add.");
-                                logReturn.add("\u00a73 - \u00a7e<value> \u00a77Internal name of the tier to match.");
-                                logReturn.add("\u00a73      * \u00a7bnone\u00a77 detect an item with no tier.");
-                                logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Scoreboard objective to output.");
-                                logReturn.add("\u00a73 - \u00a7e[±][score][%] \u00a77Score operation if success.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Detect items by tier.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e<name> §7Name of the modifier to add.");
+                                logReturn.add("§3 - §e<value> §7Internal name of the tier to match.");
+                                logReturn.add("§3      * §bnone§7 detect an item with no tier.");
+                                logReturn.add("§3 - §e[objective] §7Scoreboard objective to output.");
+                                logReturn.add("§3 - §e[±][score][%] §7Score operation if success.");
 
                             // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1) {
+                                if (targets.isEmpty()) {
                                     // Failure
                                     failure = true;
 
@@ -6123,7 +6129,7 @@ public class GooPMMOItems {
                                     // Failure
                                     failure = true;
 
-                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified Tier \u00a73" + args[4] + "\u00a77 is not loaded. If trying to detect the item not having any tier, use the \u00a7bnone\u00a77 keyword."));
+                                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Specified Tier §3" + args[4] + "§7 is not loaded. If trying to detect the item not having any tier, use the §bnone§7 keyword."));
                                 }
 
                                 // Some scoreboards to test
@@ -6138,7 +6144,7 @@ public class GooPMMOItems {
                                         // Failure
                                         failure = true;
 
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard objective \u00a73" + args[5] + "\u00a77 does not exist."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard objective §3" + args[5] + "§7 does not exist."));
                                     }
 
                                     score = PlusMinusPercent.GetPMP(args[6], refAddition);
@@ -6147,7 +6153,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Mention it
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "The final score '\u00a73" + args[6] + "\u00a77' should be an integer number (maybe with an operation)."));
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "The final score '§3" + args[6] + "§7' should be an integer number (maybe with an operation)."));
                                     }
                                 }
 
@@ -6205,7 +6211,7 @@ public class GooPMMOItems {
                                     /*
                                      *      Output Consolidation
                                      */
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -6214,15 +6220,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
                             break;
                         //endregion
@@ -6243,20 +6249,20 @@ public class GooPMMOItems {
 
                                 // Notify fuCk
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "\u00a7cYou don't have MMOItem Shrubs Module Installed!"));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "§cYou don't have MMOItem Shrubs Module Installed!"));
                                 }
 
                             // Help form?
                             } else if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Create a new shrub.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<type> \u00a77Type of shrub");
-                                logReturn.add("\u00a73 - \u00a7e[w] \u00a77World name");
-                                logReturn.add("\u00a73 - \u00a7e[x] \u00a77X Position");
-                                logReturn.add("\u00a73 - \u00a7e[y] \u00a77Y Position");
-                                logReturn.add("\u00a73 - \u00a7e[z] \u00a77Z Position");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Create a new shrub.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<type> §7Type of shrub");
+                                logReturn.add("§3 - §e[w] §7World name");
+                                logReturn.add("§3 - §e[x] §7X Position");
+                                logReturn.add("§3 - §e[y] §7Y Position");
+                                logReturn.add("§3 - §e[z] §7Z Position");
 
                                 // Correct number of args?
                                 } else if (args.length == argsMinLength || args.length == argsMaxLength) {
@@ -6349,15 +6355,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length <= argsMaxLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -6378,33 +6384,33 @@ public class GooPMMOItems {
                             // Help form?
                             if (args.length == 2)  {
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                logReturn.add("\u00a73MMOItems - \u00a7b" + subcommand + ",\u00a77 Edit MMOItem stat values.");
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
-                                logReturn.add("\u00a73 - \u00a7e<stat> \u00a77MMOItem Stat to Edit");
-                                logReturn.add("\u00a73 - \u00a7e<player> \u00a77Player who has the item.");
-                                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Slot of the target item.");
-                                logReturn.add("\u00a73 - \u00a7e[±]<value>[%] \u00a77Operation to perform on the stat.");
-                                logReturn.add("\u00a73      *\u00a7e boolean\u00a77 Either \u00a7btrue\u00a77, \u00a7bfalse\u00a77, or \u00a7btoggle\u00a77.");
-                                logReturn.add("\u00a73      *\u00a7e text\u00a77 This can be any text value,\u00a7b __\u00a77 as spaces.");
-                                logReturn.add("\u00a73      *\u00a7e text list\u00a77 Precede text with \u00a7b-\u00a77 to remove.");
-                                logReturn.add("\u00a73      *\u00a7b read\u00a77 Keyword to read the value only.");
-                                logReturn.add("\u00a73 - \u00a7e[range] \u00a77Range that allows this command to succeed.");
-                                logReturn.add("\u00a73      *\u00a7e boolean\u00a77 Supports \u00a7btrue\u00a77 or \u00a7bfalse\u00a77.");
-                                logReturn.add("\u00a73      *\u00a7e text\u00a77 Must match this exactly.");
-                                logReturn.add("\u00a73      *\u00a7e text list\u00a77 List size must fall in range (if number range).");
-                                logReturn.add("\u00a73      *\u00a7e text list\u00a77 List must contain this entry.");
-                                logReturn.add("\u00a73 - \u00a7e[objective] \u00a77Scoreboard objective to output.");
-                                logReturn.add("\u00a73 - \u00a7e[±][score][%] \u00a77Score operation if success.");
-                                logReturn.add("\u00a73      *\u00a77 Only works with numeric stats.");
-                                logReturn.add("\u00a73      *\u00a7b read\u00a77 keyword to store result of operation. Numeric");
-                                logReturn.add("\u00a77        stats only. Multiplies by \u00a7b100\u00a77 to preserve decimals.");
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Edit MMOItem stat values.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<stat> §7MMOItem Stat to Edit");
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the target item.");
+                                logReturn.add("§3 - §e[±]<value>[%] §7Operation to perform on the stat.");
+                                logReturn.add("§3      *§e boolean§7 Either §btrue§7, §bfalse§7, or §btoggle§7.");
+                                logReturn.add("§3      *§e text§7 This can be any text value,§b __§7 as spaces.");
+                                logReturn.add("§3      *§e text list§7 Precede text with §b-§7 to remove.");
+                                logReturn.add("§3      *§b read§7 Keyword to read the value only.");
+                                logReturn.add("§3 - §e[range] §7Range that allows this command to succeed.");
+                                logReturn.add("§3      *§e boolean§7 Supports §btrue§7 or §bfalse§7.");
+                                logReturn.add("§3      *§e text§7 Must match this exactly.");
+                                logReturn.add("§3      *§e text list§7 List size must fall in range (if number range).");
+                                logReturn.add("§3      *§e text list§7 List must contain this entry.");
+                                logReturn.add("§3 - §e[objective] §7Scoreboard objective to output.");
+                                logReturn.add("§3 - §e[±][score][%] §7Score operation if success.");
+                                logReturn.add("§3      *§7 Only works with numeric stats.");
+                                logReturn.add("§3      *§b read§7 keyword to store result of operation. Numeric");
+                                logReturn.add("§7        stats only. Multiplies by §b100§7 to preserve decimals.");
 
                                 // Correct number of args?
                             } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
 
                                 // Does the player exist?
-                                if (targets.size() < 1 && asDroppedItem == null) {
+                                if (targets.isEmpty() && asDroppedItem == null) {
                                     // Failure
                                     failure = true;
 
@@ -6422,7 +6428,7 @@ public class GooPMMOItems {
 
                                     // Notify the error
                                     if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback)
-                                        logReturn.add(OotilityCeption.LogFormat(subcategory, "Stat\u00a73 " + args[2] + "\u00a77 does not exist."));
+                                        logReturn.add(OotilityCeption.LogFormat(subcategory, "Stat§3 " + args[2] + "§7 does not exist."));
                                 }
 
                                 // Value will be identified.... later...
@@ -6436,7 +6442,7 @@ public class GooPMMOItems {
 
                                 String objectiveName = null;
                                 String objectiveOpp = null;
-                                //STAT//OotilityCeption.Log("\u00a77STAT\u00a76 CMD\u00a77 Default Readonly:\u00a7b " + readValue + "\u00a78 at\u00a79 " + args.length);
+                                //STAT//OotilityCeption.Log("§7STAT§6 CMD§7 Default Readonly:§b " + readValue + "§8 at§9 " + args.length);
 
                                 // Is it range or default-read objective?
                                 if (args.length == 7) {
@@ -6457,7 +6463,7 @@ public class GooPMMOItems {
                                     // Will fail if nonsense
                                     objectiveOpp = args[7];
                                     readValue = objectiveOpp.equals("read");
-                                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a76 CMD\u00a77 L8 Readonly:\u00a7b " + readValue);
+                                    //STAT//OotilityCeption.Log("§7STAT§6 CMD§7 L8 Readonly:§b " + readValue);
                                     if (!readValue) { scoreOperation = PlusMinusPercent.GetPMP(objectiveOpp, refAddition); }
                                 }
 
@@ -6472,7 +6478,7 @@ public class GooPMMOItems {
                                     // Will fail if nonsense
                                     objectiveOpp = args[8];
                                     readValue = objectiveOpp.equals("read");
-                                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a76 CMD\u00a77 L9 Readonly:\u00a7b " + readValue);
+                                    //STAT//OotilityCeption.Log("§7STAT§6 CMD§7 L9 Readonly:§b " + readValue);
                                     if (!readValue) { scoreOperation = PlusMinusPercent.GetPMP(objectiveOpp, refAddition); }
                                 }
 
@@ -6484,7 +6490,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Notify
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard objective \u00a73" + objectiveName + "\u00a77 does not exist. ")); }
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard objective §3" + objectiveName + "§7 does not exist. ")); }
                                     }
 
                                     if (!readValue && scoreOperation == null) {
@@ -6493,7 +6499,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Notify
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard operation \u00a73" + objectiveOpp + "\u00a77 is not in the correct format (\u00a7b+4\u00a77, \u00a7b10\u00a77, \u00a7b-20%\u00a77...) nor the \u00a7bread\u00a77 keyword: " + refAddition.getValue())); }
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Scoreboard operation §3" + objectiveOpp + "§7 is not in the correct format (§b+4§7, §b10§7, §b-20%§7...) nor the §bread§7 keyword: " + refAddition.getValue())); }
                                     }
                                 }
 
@@ -6506,7 +6512,7 @@ public class GooPMMOItems {
                                         failure = true;
 
                                         // Notify
-                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Please use \u00a7e/goop mmoitems upgrade\u00a77 to upgrade items, using \u00a7e/goop mmoitems stat UPGRADE\u00a77 is not supported because the upgrade stat stores information on the item's upgrade level, max level, min level, upgrade template, upgrade reference...")); }
+                                        if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) { logReturn.add(OotilityCeption.LogFormat(subcategory, "Please use §e/goop mmoitems upgrade§7 to upgrade items, using §e/goop mmoitems stat UPGRADE§7 is not supported because the upgrade stat stores information on the item's upgrade level, max level, min level, upgrade template, upgrade reference...")); }
                                     }
                                 }
 
@@ -6521,7 +6527,7 @@ public class GooPMMOItems {
                                     final PlusMinusPercent finalScoreOperation = scoreOperation;
                                     final Objective finalTargetObjective = targetObjective;
                                     final boolean finalReadValue = readValue;
-                                    //STAT//OotilityCeption.Log("\u00a77STAT\u00a76 CMD\u00a77 Final Readonly:\u00a7b " + finalReadValue);
+                                    //STAT//OotilityCeption.Log("§7STAT§6 CMD§7 Final Readonly:§b " + finalReadValue);
 
                                     /*
                                      *      Preparation of Methods and Lambdas
@@ -6582,7 +6588,7 @@ public class GooPMMOItems {
                                     /*
                                      *      Output Consolidation
                                      */
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
 
                                 }
 
@@ -6591,15 +6597,15 @@ public class GooPMMOItems {
 
                                 // Notify Error
                                 if (args.length >= argsMinLength) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 } else {
 
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a76 few\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§6 few§7 args). For info: §e/goop mmoitems " + subsonic));
                                 }
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
                             break;
                         //endregion
@@ -6619,7 +6625,7 @@ public class GooPMMOItems {
 
                                 // Notify fuCk
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "\u00a7cYou don't have MMOItem Shrubs Module Installed!"));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "§cYou don't have MMOItem Shrubs Module Installed!"));
                                 }
 
                                 // Help form?
@@ -6628,17 +6634,17 @@ public class GooPMMOItems {
                                 // Exec
                                 ArrayList<String> lShrubs = GooPE_Shrubs.getLoadedShrubTypes();
 
-                                if (lShrubs.size() < 1) {
+                                if (lShrubs.isEmpty()) {
                                     GooPE_Shrubs.ReloadShrubNames();
                                     lShrubs = GooPE_Shrubs.getLoadedShrubTypes();
                                 }
 
-                                logReturn.add("\u00a7e______________________________________________");
-                                if (lShrubs.size() == 0) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "\u00a77Would list all loaded shrub types if there were any."));
+                                logReturn.add("§e______________________________________________");
+                                if (lShrubs.isEmpty()) {
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "§7Would list all loaded shrub types if there were any."));
                                 } else {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "\u00a77All loaded shrub types:"));
-                                    for (String struct : lShrubs) { logReturn.add("\u00a73 - \u00a77" + struct); }
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "§7All loaded shrub types:"));
+                                    for (String struct : lShrubs) { logReturn.add("§3 - §7" + struct); }
                                 }
 
 
@@ -6646,10 +6652,10 @@ public class GooPMMOItems {
                             } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
                                 // Notify Error
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
@@ -6684,18 +6690,18 @@ public class GooPMMOItems {
 
                                     // Not contained, and from console
                                     if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) {
-                                        logReturn.add(OotilityCeption.LogFormat(subcategory, "\u00a77This cannot be called from the console without specifying a player."));
+                                        logReturn.add(OotilityCeption.LogFormat(subcategory, "§7This cannot be called from the console without specifying a player."));
                                     }
                                 }
                                 
-                                if (targets == null || targets.size() < 1) {
+                                if (targets == null || targets.isEmpty()) {
 
                                     // Fail
                                     failure = true;
 
                                     // Not contained, and from console
                                     if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) {
-                                        logReturn.add(OotilityCeption.LogFormat(subcategory, "\u00a77Must specify an online player."));
+                                        logReturn.add(OotilityCeption.LogFormat(subcategory, "§7Must specify an online player."));
                                     }
                                 }
                                 
@@ -6736,17 +6742,17 @@ public class GooPMMOItems {
                                     /*
                                      *      Output Consolidation
                                      */
-                                    if (executor.getIncludedStrBuilder().length() > 0) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
+                                    if (!executor.getIncludedStrBuilder().isEmpty()) { logReturn.add(OotilityCeption.LogFormat(subcategory, executor.getIncludedStrBuilder().toString())); }
                                 }
                                 
                             // Incorrect number of args
                             } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
                                 // Notify Error
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
                             
                             break;
@@ -6767,7 +6773,7 @@ public class GooPMMOItems {
 
                                 // Notify fuCk
                                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "\u00a7cYou don't have MMOItem Shrubs Module Installed!"));
+                                    logReturn.add(OotilityCeption.LogFormat(subcategory, "§cYou don't have MMOItem Shrubs Module Installed!"));
                                 }
 
                                 // Help form?
@@ -6781,50 +6787,50 @@ public class GooPMMOItems {
                             } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
 
                                 // Notify Error
-                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too\u00a7e many\u00a77 args). For info: \u00a7e/goop mmoitems " + subsonic));
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage (too§e many§7 args). For info: §e/goop mmoitems " + subsonic));
 
                                 // Notify Usage
-                                logReturn.add("\u00a73Usage: \u00a7e" + usage);
+                                logReturn.add("§3Usage: §e" + usage);
                             }
 
                             break;
                         //endregion
                         default:
                             // I have no memory of that shit
-                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MMOItems", "'\u00a73" + args[1] + "\u00a77' is not a valid MMOItems action! do \u00a7e/goop mmoitems\u00a77 for the list of actions."));
+                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MMOItems", "'§3" + args[1] + "§7' is not a valid MMOItems action! do §e/goop mmoitems§7 for the list of actions."));
                             break;
                     }
 
                 } else {
 
                     // Tell him lmao
-                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("\u00a7cLack of permission to proceed."));
+                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("§cLack of permission to proceed."));
                 }
 
             } else if (args.length == 1) {
-                logReturn.add("\u00a7e______________________________________________");
-                logReturn.add("\u00a73GooP-MMOItems, \u00a77Related to the third party plugin.");
-                logReturn.add("\u00a73Usage: \u00a7e/goop mmoitems {action}");
-                logReturn.add("\u00a73 - \u00a7e{action} \u00a77What actions to perform:");
-                logReturn.add("\u00a73 --> \u00a7eaddGemSlot\u00a77,\u00a7e countGems\u00a77,\u00a7e getTier\u00a77,\u00a7e setTier");
-                logReturn.add("\u00a73 --> \u00a7estat\u00a77,\u00a7e regenerate\u00a77,\u00a7e upgrade\u00a77,\u00a7e modifier");
-                logReturn.add("\u00a73 --> \u00a7efixStacks [player]");
-                logReturn.add("\u00a73      * \u00a77Updates MMOItems to the newest format, so that they stack.");
+                logReturn.add("§e______________________________________________");
+                logReturn.add("§3GooP-MMOItems, §7Related to the third party plugin.");
+                logReturn.add("§3Usage: §e/goop mmoitems {action}");
+                logReturn.add("§3 - §e{action} §7What actions to perform:");
+                logReturn.add("§3 --> §eaddGemSlot§7,§e countGems§7,§e getTier§7,§e setTier");
+                logReturn.add("§3 --> §estat§7,§e regenerate§7,§e upgrade§7,§e modifier");
+                logReturn.add("§3 --> §efixStacks [player]");
+                logReturn.add("§3      * §7Updates MMOItems to the newest format, so that they stack.");
                 if (Gunging_Ootilities_Plugin.usingMMOItemShrubs) {
-                    logReturn.add("\u00a73 --> \u00a7enewShrub <type> [w] [x] [y] [z]");
-                    logReturn.add("\u00a73      * \u00a77Creates a new shrub of type <type>");
-                    logReturn.add("\u00a73 --> \u00a7elistShrubTypes");
-                    logReturn.add("\u00a73      * \u00a77Lists the loaded shrub types");
-                    logReturn.add("\u00a73 --> \u00a7ereloadShrubTypes");
-                    logReturn.add("\u00a73      * \u00a77Reloads shrub types config");
+                    logReturn.add("§3 --> §enewShrub <type> [w] [x] [y] [z]");
+                    logReturn.add("§3      * §7Creates a new shrub of type <type>");
+                    logReturn.add("§3 --> §elistShrubTypes");
+                    logReturn.add("§3      * §7Lists the loaded shrub types");
+                    logReturn.add("§3 --> §ereloadShrubTypes");
+                    logReturn.add("§3      * §7Reloads shrub types config");
                 }
-                logReturn.add("\u00a73 - \u00a7e<slot> \u00a77Target slot in player's inventory.");
-                logReturn.add("\u00a73 --> \u00a77Possible slots: \u00a7bhead\u00a73, \u00a7bchest\u00a73, \u00a7blegs\u00a73, \u00a7bfeet\u00a73, \u00a7bmainhand\u00a73, \u00a7boffhand\u00a73, and any number \u00a7b0\u00a73-\u00a7b35\u00a73.");
+                logReturn.add("§3 - §e<slot> §7Target slot in player's inventory.");
+                logReturn.add("§3 --> §7Possible slots: §bhead§3, §bchest§3, §blegs§3, §bfeet§3, §bmainhand§3, §boffhand§3, and any number §b0§3-§b35§3.");
 
             } else {
                 if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
-                    logReturn.add(OotilityCeption.LogFormat("MMOItems", "Incorrect usage. For info: \u00a7e/goop mmoitems"));
-                    logReturn.add("\u00a73Usage: \u00a7e/goop mmoitems {action}");
+                    logReturn.add(OotilityCeption.LogFormat("MMOItems", "Incorrect usage. For info: §e/goop mmoitems"));
+                    logReturn.add("§3Usage: §e/goop mmoitems {action}");
                 }
             }
 
@@ -6832,7 +6838,7 @@ public class GooPMMOItems {
         } else {
 
             // Tell him lmao
-            logReturn.add(OotilityCeption.LogFormat("\u00a7cYou don't have permission to use mmoitems-related commands!"));
+            logReturn.add(OotilityCeption.LogFormat("§cYou don't have permission to use mmoitems-related commands!"));
         }
 
         //Set Log Return Urn Value

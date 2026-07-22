@@ -31,10 +31,9 @@ public class VexChargingMechanic extends SkillMechanic implements ITargetedEntit
     public SkillResult castAtEntity(SkillMetadata skillMetadata, AbstractEntity targetProbably) {
 
         // Must be vex
-        if (!(targetProbably.getBukkitEntity() instanceof Vex)) { return SkillResult.INVALID_TARGET; }
+        if (!(targetProbably.getBukkitEntity() instanceof Vex vex)) { return SkillResult.INVALID_TARGET; }
 
         // Okay
-        Vex vex = (Vex) targetProbably.getBukkitEntity();
 
         // Set
         vex.setCharging(valueToSet);

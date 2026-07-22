@@ -4,14 +4,12 @@ import gunging.ootilities.gunging_ootilities_plugin.Gunging_Ootilities_Plugin;
 import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCStation;
 import gunging.ootilities.gunging_ootilities_plugin.containers.compatibilities.ContainerTemplateMappingMMO;
 import io.lumine.mythic.lib.api.crafting.recipes.vmp.VanillaInventoryMapping;
-import io.lumine.mythic.lib.api.crafting.uimanager.ProvidedUIFilter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 
 public class GooPMMOLib {
 
     public static boolean CompatibilityCheck() {
-        ProvidedUIFilter poof = new ProvidedUIFilter(null, "", "");
 
         return true;
     }
@@ -20,7 +18,7 @@ public class GooPMMOLib {
     public static Double CDoubleStat(Player target, String arg) {
 
         // A value to return
-        Double result = null;
+        Double result;
 
         // MMOCore takes precedence (since it totals everything)
         if (Gunging_Ootilities_Plugin.foundMMOCore) {

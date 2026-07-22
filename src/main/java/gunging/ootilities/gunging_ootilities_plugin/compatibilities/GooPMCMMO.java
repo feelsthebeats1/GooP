@@ -130,8 +130,6 @@ public class GooPMCMMO {
 
         // Must look at each one damn separately lmao
         switch (stat) {
-            default: processedDamage = null; break;
-            //region Archery
             case ARCHERY_DAZE:
 
                 // Roll for daze
@@ -269,6 +267,10 @@ public class GooPMCMMO {
                 }
                 break;
             //endregion
+            default:
+                processedDamage = null;
+                break;
+            //region Archery
         }
 
 
