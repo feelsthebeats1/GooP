@@ -14,6 +14,7 @@ import gunging.ootilities.gunging_ootilities_plugin.misc.*;
 import gunging.ootilities.gunging_ootilities_plugin.misc.goop.translation.GTranslationManager;
 import gunging.ootilities.gunging_ootilities_plugin.misc.mmoitemstats.ApplicableMask;
 import gunging.ootilities.gunging_ootilities_plugin.misc.mmoitemstats.ConverterTypes;
+import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.configuration.InvalidConfigurationException;
@@ -21,8 +22,10 @@ import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Cancellable;
+import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.server.PluginEnableEvent;
 import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
@@ -304,14 +307,21 @@ public final class Gunging_Ootilities_Plugin extends JavaPlugin implements Liste
         }
         //region MMOItems Subversions and Stat Registry
         if (foundMMOItems) {
-            GooPMMOItems.ReflectionOnLoad();
+            try {
+                GooPMMOItems.ReflectionOnLoad();
 
-            // Jesus, this is horrible but hopefully low maintenance
-            // enough that I never have to deal with it again
-            GooPMMOItems.DefineSillyConfigurationSectionForMMOCompat(getConfig().createSection("MMODeveloperCompatibility"));
+                // Jesus, this is horrible but hopefully low maintenance
+                // enough that I never have to deal with it again
+                GooPMMOItems.DefineSillyConfigurationSectionForMMOCompat(getConfig().createSection("MMODeveloperCompatibility"));
 
-            // Register Stats
-            GooPMMOItems.RegisterCustomStats(getConfig().getInt("MiscStatAmount", 3), getConfig().getInt("MiscStrStatAmount", 1), getConfig().getStringList("MiscRstStatAmount"));
+                // Register Stats
+                GooPMMOItems.RegisterCustomStats(getConfig().getInt("MiscStatAmount", 3), getConfig().getInt("MiscStrStatAmount", 1), getConfig().getStringList("MiscRstStatAmount"));
+
+            } catch (Throwable e) {
+
+                // Never let an old leaked stat registry kill the whole reload
+                theOots.CLog(OotilityCeption.LogFormat("MMOItems", "Could not register GooP custom stats (" + e.getClass().getSimpleName() + "): " + e.getMessage()));
+            }
         }
         //endregion
         //endregion
@@ -490,6 +500,11 @@ public final class Gunging_Ootilities_Plugin extends JavaPlugin implements Liste
         if (foundMythicMobs) { getServer().getPluginManager().registerEvents(new GooPMythicMobs(), theMain); }
         if (foundTowny) { getServer().getPluginManager().registerEvents(new GooPTowny(), theMain); }
 
+        // Register a listener to detect when plugins become available later (e.g. PlugMan load order)
+        // UNTESTED!!!
+        // UNSTABLE!!!
+        getServer().getPluginManager().registerEvents(new PluginCompatibilityListener(), theMain);
+
         // Schedule insync
         Bukkit.getScheduler().scheduleSyncRepeatingTask(getPlugin(), ((Runnable) new SummonerClassUtils()), 40, 200);
 
@@ -608,7 +623,14 @@ public final class Gunging_Ootilities_Plugin extends JavaPlugin implements Liste
             theOots.CPLog(ChatColor.AQUA + "MythicMobs " + GooPMythicMobs.getVersionMajor() + "." + GooPMythicMobs.getVersionMinor() + "." + GooPMythicMobs.getVersionBuild() + " found\u00a77.");
 
             // Register placeholders
-            GooPMythicMobs.RegisterPlaceholders(foundMMOItems);
+            try {
+
+                GooPMythicMobs.RegisterPlaceholders(foundMMOItems);
+
+            } catch (Throwable e) {
+
+                theOots.CLog(OotilityCeption.LogFormat("MythicMobs", "Could not register GooP placeholders (" + e.getClass().getSimpleName() + "): " + e.getMessage()));
+            }
         } else {
 
             theOots.CPLog(ChatColor.BLUE + "MythicMobs not found\u00a77.");
@@ -625,7 +647,18 @@ public final class Gunging_Ootilities_Plugin extends JavaPlugin implements Liste
         if (foundPlaceholderAPI){
 
             theOots.CPLog(ChatColor.AQUA + "PlaceholderAPI found\u00a77.");
-            (new GooPPlaceholderAPI()).register();
+
+            try {
+
+                // If GooP was reloaded via PlugMan, the previous expansion is
+                // still registered under the "goop" identifier and re-registering
+                // would fail (which used to prevent the plugin from enabling).
+                if (!PlaceholderAPI.isRegistered("goop")) { (new GooPPlaceholderAPI()).register(); }
+
+            } catch (Throwable e) {
+
+                theOots.CLog(OotilityCeption.LogFormat("PlaceholderAPI", "Could not register the \u00a7egoop\u00a77 expansion (" + e.getClass().getSimpleName() + "): " + e.getMessage()));
+            }
 
         } else {
 
@@ -663,6 +696,108 @@ public final class Gunging_Ootilities_Plugin extends JavaPlugin implements Liste
 
         enabling = false;
         enabled = true;
+    }
+
+    /**
+     * Re-runs compatibility detection when a plugin becomes enabled later.
+     *
+     * GooP may be loaded via PlugMan before its soft-dependencies finish loading.
+     * This listener catches the moment MMOItems / MythicMobs / PlaceholderAPI
+     * become available and finishes the hookup that onEnable() missed.
+     */
+    class PluginCompatibilityListener implements Listener {
+
+        @EventHandler
+        public void onPluginEnable(PluginEnableEvent event) {
+
+            String pluginName = event.getPlugin().getName();
+
+            // Only care about the plugins GooP hooks into
+            if (!"MMOItems".equals(pluginName) && !"MythicMobs".equals(pluginName) && !"PlaceholderAPI".equals(pluginName)) { return; }
+
+            // Already found? Nothing to do.
+            if ("MMOItems".equals(pluginName) && foundMMOItems) { return; }
+            if ("MythicMobs".equals(pluginName) && foundMythicMobs) { return; }
+            if ("PlaceholderAPI".equals(pluginName) && foundPlaceholderAPI) { return; }
+
+            theOots.CLog(OotilityCeption.LogFormat("Compatibility", "Detected late-load of §e" + pluginName + "§7, re-running detection..."));
+
+            // MMOItems
+            if ("MMOItems".equals(pluginName)) {
+                try {
+                    foundMMOItems = GooPMMOItems.RegisterContainersEquipment();
+                    if (!foundMMOItems) {
+                        GooPMMOItems mmoitemsCheck = new GooPMMOItems();
+                        foundMMOItems = mmoitemsCheck.CompatibilityCheck();
+                    }
+
+                    if (foundMMOItems) {
+                        theOots.CLog(OotilityCeption.LogFormat("MMOItems", "§aMMOItems found§7 (late-load)."));
+
+                        // Register the stat hooks that onEnable() would have done
+                        try {
+                            GooPMMOItems.ReflectionOnLoad();
+                            GooPMMOItems.DefineSillyConfigurationSectionForMMOCompat(getConfig().createSection("MMODeveloperCompatibility"));
+                            GooPMMOItems.RegisterCustomStats(getConfig().getInt("MiscStatAmount", 3), getConfig().getInt("MiscStrStatAmount", 1), getConfig().getStringList("MiscRstStatAmount"));
+                        } catch (Throwable e) {
+                            theOots.CLog(OotilityCeption.LogFormat("MMOItems", "Could not register GooP custom stats (" + e.getClass().getSimpleName() + "): " + e.getMessage()));
+                        }
+
+                        // Register the event listener that onEnable() would have done
+                        getServer().getPluginManager().registerEvents(new OnApplyCommand(), theMain);
+                    } else {
+                        theOots.CLog(OotilityCeption.LogFormat("MMOItems", "§cMMOItems still not available after late-load check."));
+                    }
+                } catch (Throwable e) {
+                    theOots.CLog(OotilityCeption.LogFormat("MMOItems", "Error during late-load detection: " + e.getMessage()));
+                    foundMMOItems = false;
+                }
+            }
+
+            // MythicMobs
+            if ("MythicMobs".equals(pluginName)) {
+                try {
+                    foundMythicMobs = true;
+                    GooPMythicMobs.identifyVersion();
+                    theOots.CLog(OotilityCeption.LogFormat("MythicMobs", "§aMythicMobs found§7 (late-load)."));
+
+                    // Register placeholders
+                    try {
+                        GooPMythicMobs.RegisterPlaceholders(foundMMOItems);
+                    } catch (Throwable e) {
+                        theOots.CLog(OotilityCeption.LogFormat("MythicMobs", "Could not register GooP placeholders (" + e.getClass().getSimpleName() + "): " + e.getMessage()));
+                    }
+
+                    // Register the event listener that onEnable() would have done
+                    getServer().getPluginManager().registerEvents(new GooPMythicMobs(), theMain);
+
+                    // Run startup timers
+                    GooPMythicMobs.startupOnTimers();
+
+                } catch (Throwable e) {
+                    theOots.CLog(OotilityCeption.LogFormat("MythicMobs", "Error during late-load detection: " + e.getMessage()));
+                    foundMythicMobs = false;
+                }
+            }
+
+            // PlaceholderAPI
+            if ("PlaceholderAPI".equals(pluginName)) {
+                try {
+                    foundPlaceholderAPI = true;
+                    theOots.CLog(OotilityCeption.LogFormat("PlaceholderAPI", "§aPlaceholderAPI found§7 (late-load)."));
+
+                    // Register the expansion
+                    try {
+                        if (!PlaceholderAPI.isRegistered("goop")) { (new GooPPlaceholderAPI()).register(); }
+                    } catch (Throwable e) {
+                        theOots.CLog(OotilityCeption.LogFormat("PlaceholderAPI", "Could not register the §egoop§7 expansion (" + e.getClass().getSimpleName() + "): " + e.getMessage()));
+                    }
+                } catch (Throwable e) {
+                    theOots.CLog(OotilityCeption.LogFormat("PlaceholderAPI", "Error during late-load detection: " + e.getMessage()));
+                    foundPlaceholderAPI = false;
+                }
+            }
+        }
     }
 
     public void Reload(boolean reloadInstances) {

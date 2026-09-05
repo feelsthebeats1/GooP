@@ -8,7 +8,6 @@ import gunging.ootilities.gunging_ootilities_plugin.containers.GOOPCPersonal;
 import gunging.ootilities.gunging_ootilities_plugin.containers.loader.GCL_Personal;
 import io.lumine.mythic.lib.api.item.NBTItem;
 import net.Indyuce.mmoitems.api.player.inventory.EquippedItem;
-import net.Indyuce.mmoitems.api.player.inventory.EquippedItemImpl;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;

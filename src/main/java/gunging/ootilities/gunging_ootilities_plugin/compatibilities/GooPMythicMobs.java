@@ -575,26 +575,51 @@ public class GooPMythicMobs implements Listener {
         // Reload Timers I Suppose
         ReloadPlayerOnTimers();
     }
+/**
+     * Registers a placeholder safely.
+     *
+     * GooP can be reloaded via PlugMan (unload + load) without reloading MythicMobs
+     * itself. In that scenario MythicMobs may still hold the placeholder entries of
+     * the previous GooP load, so re-registering is skipped when already present.
+     * A failure to register must never abort the rest of the plugin's enable cycle.
+     */
+    static void SafeRegisterPlaceholder(PlaceholderManager phm, String id, Placeholder ph) {
+        try {
+
+            // Only register if it is missing
+            if (phm.getPlaceholder(id) != null) { return; }
+
+            // Register it
+            phm.register(id, ph);
+
+        } catch (Throwable t) {
+
+            // Notify but never kill the enable cycle
+            if (Gunging_Ootilities_Plugin.theOots != null) {
+                Gunging_Ootilities_Plugin.theOots.CLog(OotilityCeption.LogFormat("MythicMobs", "Could not register placeholder §e" + id + "§7: " + t.getMessage()));
+            }
+        }
+    }
     public static void RegisterPlaceholders(boolean withMMOItems) {
         PlaceholderManager phm = MythicBukkit.inst().getPlaceholderManager();
 
         // Register OnApply Placeholder
-        phm.register("goop.slot", MMPHSlot.getInst());
+        SafeRegisterPlaceholder(phm, "goop.slot", MMPHSlot.getInst());
 
         // Register Bow Draw Placeholder
-        phm.register("goop.bowdraw", MMPHBowdraw.getInst());
+        SafeRegisterPlaceholder(phm, "goop.bowdraw", MMPHBowdraw.getInst());
 
         // List placeholders
-        phm.register("goop.ordered", MMPHOrdered.getInst());
+        SafeRegisterPlaceholder(phm, "goop.ordered", MMPHOrdered.getInst());
 
         // List placeholders
-        phm.register("goop.random", MMPHRandom.getInst());
+        SafeRegisterPlaceholder(phm, "goop.random", MMPHRandom.getInst());
 
         // Projectile oriented ones
-        phm.register("goop.projectile", MMPHProjectile.getInst());
+        SafeRegisterPlaceholder(phm, "goop.projectile", MMPHProjectile.getInst());
 
         // List placeholders
-        phm.register("goop.font", Placeholder.meta((metadata, arg) -> {
+        SafeRegisterPlaceholder(phm, "goop.font", Placeholder.meta((metadata, arg) -> {
 
             // If valid
             if (arg == null) { return "{missing font code}"; }
@@ -608,7 +633,7 @@ public class GooPMythicMobs implements Listener {
         }));
 
         // List placeholders
-        phm.register("goop.dynamic", Placeholder.meta((metadata, arg) -> {
+        SafeRegisterPlaceholder(phm, "goop.dynamic", Placeholder.meta((metadata, arg) -> {
 
             // If valid
             if (arg == null) { return "{missing dynamic code}"; }
@@ -630,7 +655,7 @@ public class GooPMythicMobs implements Listener {
         }));
 
         // List placeholders
-        phm.register("goop.owner", Placeholder.meta((metadata, arg) -> {
+        SafeRegisterPlaceholder(phm, "goop.owner", Placeholder.meta((metadata, arg) -> {
 
             // Attempt to get owner
             Entity tPlayer = SummonerClassUtils.GetOwner(metadata.getCaster().getEntity().getUniqueId());
@@ -660,7 +685,7 @@ public class GooPMythicMobs implements Listener {
         }));
 
         // Owner PAPI
-        phm.register("goop.ownerpapi", Placeholder.meta((metadata, arg) -> {
+        SafeRegisterPlaceholder(phm, "goop.ownerpapi", Placeholder.meta((metadata, arg) -> {
             // If valid
             if (arg == null) { return "{missing placeholder name}"; }
             if (!Gunging_Ootilities_Plugin.foundPlaceholderAPI) { return "00.000"; }
@@ -684,15 +709,15 @@ public class GooPMythicMobs implements Listener {
         }));
 
         // List placeholders
-        phm.register("goop.castermmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.CASTER));
-        phm.register("goop.triggermmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.TRIGGER));
-        phm.register("goop.ownermmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.OWNER));
+        SafeRegisterPlaceholder(phm, "goop.castermmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.CASTER));
+        SafeRegisterPlaceholder(phm, "goop.triggermmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.TRIGGER));
+        SafeRegisterPlaceholder(phm, "goop.ownermmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.OWNER));
 
         // With McMMO?
         if (Gunging_Ootilities_Plugin.foundMCMMO) {
-            phm.register("goop.castermcmmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.CASTER));
-            phm.register("goop.triggermcmmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.TRIGGER));
-            phm.register("goop.ownermcmmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.OWNER));
+            SafeRegisterPlaceholder(phm, "goop.castermcmmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.CASTER));
+            SafeRegisterPlaceholder(phm, "goop.triggermcmmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.TRIGGER));
+            SafeRegisterPlaceholder(phm, "goop.ownermcmmostat", MMPHMMOStat.getInst(MMPHMMOStatTarget.OWNER));
         }
     }
 

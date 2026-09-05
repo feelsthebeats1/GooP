@@ -544,7 +544,27 @@ public class GooPMMOItems {
     public static void RegisterStat(@NotNull ItemStat statt) {
         if (!Gunging_Ootilities_Plugin.foundMMOItems) { return; }
         if (MMOItems.plugin == null || MMOItems.plugin.getStats() == null) { Gunging_Ootilities_Plugin.foundMMOItems = false; return; }
-        MMOItems.plugin.getStats().register(statt);
+
+        /*
+         * When GooP gets reloaded via PlugMan (unload + load) without MMOItems
+         * being reloaded, MMOItems' StatManager still holds an entry for this
+         * stat id, and its register(...) throws on duplicate ids - which used to
+         * kill the whole plugin load and disable every GooP command.
+         * If it is already registered, reuse the existing instance instead; GooP
+         * resolves stats by id through the registry anyway, so this is identical.
+         */
+        try {
+
+            // Already there?
+            if (MMOItems.plugin.getStats().get(statt.getId()) != null) { return; }
+
+            // Register
+            MMOItems.plugin.getStats().register(statt);
+
+        } catch (IllegalArgumentException duplicate) {
+
+            // Someone beat us to it (or the registry was in a weird state), fine.
+        }
     }
     //endregion
 
@@ -4175,6 +4195,9 @@ public class GooPMMOItems {
 
             // Ad by nmae
             ret.add(st.getId());
+
+            // Also advertise the NBT-style alias (eg MMOITEMS_SUCCESS_RATE) for tab completion
+            if (!st.getId().startsWith("MMOITEMS_")) { ret.add("MMOITEMS_" + st.getId()); }
         }
 
         // Return
@@ -4534,6 +4557,9 @@ public class GooPMMOItems {
     public static ItemStat Stat(@Nullable String statt) {
         if (statt == null) { return null;}
         statt = statt.toUpperCase().replace(" ", "_").replace("-","_");
+
+        // Some folk write stats like the NBT keys on the item itself: MMOITEMS_SUCCESS_RATE
+        if (statt.startsWith("MMOITEMS_")) { statt = statt.substring("MMOITEMS_".length()); }
 
         // Does it make sense?
         try {
@@ -5960,6 +5986,7 @@ public class GooPMMOItems {
                                 logReturn.add("§3      *§b skin§7 Keep skin.");
                                 logReturn.add("§3      *§b exsh§7 Keep GooP's added stats.");
                                 logReturn.add("§3      *§b mods§7 Keep modifiers.");
+                                logReturn.add("§3      *§b aench§7 Keep advanced enchantments.");
                                 logReturn.add("§8Specify all the data to keep by listing the keywords.");
                                 logReturn.add("§8ex: §6...<slot> [reroll] ench upgr gems skin exsh mods");
 
@@ -6011,7 +6038,7 @@ public class GooPMMOItems {
                                         if (str.contains("skin")) { skin = true; }
                                         if (str.contains("ex") && str.contains("sh")) { exsh = true; }
                                         if (str.contains("mod")) { mods = true; }
-                                        if (str.contains("ae") && str.contains("nc")) { ae = true; } }
+                                        if (str.contains("aench") || str.contains("advanced") || str.contains("adv")) { ae = true; } }
                                 }
 
                                 if (!failure) {
@@ -6039,7 +6066,19 @@ public class GooPMMOItems {
                                             chained, commandChain, sender, failMessage,
 
                                             // What method to use to process the item
-                                            iSource -> GooPMMOItems.ReforgeMMOItem(iSource.getValidOriginal(), iSource.getLogAddition(), finalName, finalLore, finalEnch, finalUpgr, finalGems, finalSoul, finalExsh, finalReroll, finalMods, finalAe, finalSkin),
+                                            iSource -> {
+                                                // Keep Advanced Enchantments?
+                                                Map<String, Integer> aeEnchants = null;
+                                                if (finalAe) { aeEnchants = GooPAdvancedEnchantments.getEnchantments(iSource.getValidOriginal()); }
+
+                                                // Reforge
+                                                ItemStack regenerated = GooPMMOItems.ReforgeMMOItem(iSource.getValidOriginal(), iSource.getLogAddition(), finalName, finalLore, finalEnch, finalUpgr, finalGems, finalSoul, finalExsh, finalReroll, finalMods, finalAe, finalSkin);
+
+                                                // Reapply Advanced Enchantments
+                                                if (regenerated != null && aeEnchants != null) { regenerated = GooPAdvancedEnchantments.reapplyEnchantments(regenerated, aeEnchants); }
+
+                                                return regenerated;
+                                            },
 
                                             // When will it succeed
                                             iSource -> iSource.getResult() != null,
