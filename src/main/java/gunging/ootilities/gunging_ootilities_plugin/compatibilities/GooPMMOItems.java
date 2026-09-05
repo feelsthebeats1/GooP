@@ -39,6 +39,7 @@ import net.Indyuce.mmoitems.api.util.MMOItemReforger;
 import net.Indyuce.mmoitems.manager.TypeManager;
 import net.Indyuce.mmoitems.skill.RegisteredSkill;
 import net.Indyuce.mmoitems.stat.data.*;
+import net.Indyuce.mmoitems.stat.data.random.RandomStatData;
 import net.Indyuce.mmoitems.stat.data.type.Mergeable;
 import net.Indyuce.mmoitems.stat.data.type.StatData;
 import net.Indyuce.mmoitems.stat.type.*;
@@ -1711,6 +1712,320 @@ public class GooPMMOItems {
         // HUH, Success!
         return true;
     }
+    //endregion
+
+    //region Gemstone Operations
+
+    /**
+     * Extracts a gemstone from an item at the given socket index.
+     */
+    @Nullable
+    public static ItemStack ExtractGemstone(@NotNull ItemStack itemStack, int socketIndex, @NotNull List<String> logReturn) {
+        if (!IsMMOItem(itemStack)) {
+            logReturn.add("§cItem is not an MMOItem!");
+            return null;
+        }
+
+        try {
+            LiveMMOItem mmoitem = new LiveMMOItem(NBTItem.get(itemStack));
+            GemSocketsData sockets = (GemSocketsData) mmoitem.getData(Stat(GooPMMOItemsItemStats.GEM_SOCKETS));
+
+            if (sockets == null) {
+                logReturn.add("§cItem has no gem sockets!");
+                return null;
+            }
+
+            List<GemstoneData> gems = sockets.getGems();
+            if (socketIndex < 0 || socketIndex >= gems.size()) {
+                logReturn.add("§cInvalid socket index! Item has " + gems.size() + " gemstone(s).");
+                return null;
+            }
+
+            GemstoneData gemData = gems.get(socketIndex);
+            String gemType = gemData.getMMOItemType();
+            String gemId = gemData.getMMOItemID();
+
+            // Build the gemstone item
+            Type type = MMOItems.plugin.getTypes().get(gemType);
+            if (type == null) {
+                logReturn.add("§cGemstone type '§e" + gemType + "§c' not found!");
+                return null;
+            }
+
+            MMOItem gemMMO = MMOItems.plugin.getMMOItem(type, gemId);
+            if (gemMMO == null) {
+                logReturn.add("§cGemstone '§e" + gemType + " " + gemId + "§c' not found!");
+                return null;
+            }
+
+            ItemStack gemItem = gemMMO.newBuilder().build();
+            if (gemItem == null) {
+                logReturn.add("§cFailed to build gemstone item!");
+                return null;
+            }
+
+            // Remove the gemstone from the item
+            List<GemstoneData> newGems = new ArrayList<>(gems);
+            newGems.remove(socketIndex);
+
+            GemSocketsData newSockets = new GemSocketsData(new ArrayList<>(sockets.getEmptySlots()));
+            for (GemstoneData gd : newGems) {
+                newSockets.add(gd);
+            }
+
+            mmoitem.setData(Stat(GooPMMOItemsItemStats.GEM_SOCKETS), newSockets);
+            ItemStack result = mmoitem.newBuilder().build();
+
+            logReturn.add("§aExtracted gemstone: §e" + gemType + " " + gemId);
+            return result;
+
+        } catch (Exception e) {
+            logReturn.add("§cError extracting gemstone: " + e.getMessage());
+            return null;
+        }
+    }
+
+    //endregion
+
+    //region Gemstone Swap
+
+    /**
+     * Swaps a gemstone in an item at the given socket index with a new gemstone.
+     */
+    @Nullable
+    public static ItemStack SwapGemstone(@NotNull ItemStack itemStack, int socketIndex, @NotNull String newGemType, @NotNull String newGemId, @NotNull List<String> logReturn) {
+        if (!IsMMOItem(itemStack)) {
+            logReturn.add("§cItem is not an MMOItem!");
+            return null;
+        }
+
+        try {
+            LiveMMOItem mmoitem = new LiveMMOItem(NBTItem.get(itemStack));
+            GemSocketsData sockets = (GemSocketsData) mmoitem.getData(Stat(GooPMMOItemsItemStats.GEM_SOCKETS));
+
+            if (sockets == null) {
+                logReturn.add("§cItem has no gem sockets!");
+                return null;
+            }
+
+            List<GemstoneData> gems = sockets.getGems();
+            if (socketIndex < 0 || socketIndex >= gems.size()) {
+                logReturn.add("§cInvalid socket index! Item has " + gems.size() + " gemstone(s).");
+                return null;
+            }
+
+            GemstoneData oldGem = gems.get(socketIndex);
+            String oldGemType = oldGem.getMMOItemType();
+            String oldGemId = oldGem.getMMOItemID();
+
+            // Verify the new gemstone exists
+            Type type = MMOItems.plugin.getTypes().get(newGemType);
+            if (type == null) {
+                logReturn.add("§cGemstone type '§e" + newGemType + "§c' not found!");
+                return null;
+            }
+
+            MMOItem newGemMMO = MMOItems.plugin.getMMOItem(type, newGemId);
+            if (newGemMMO == null) {
+                logReturn.add("§cGemstone '§e" + newGemType + " " + newGemId + "§c' not found!");
+                return null;
+            }
+
+            // Create new gemstone data with same color as old gemstone
+            GemstoneData newGemData = new GemstoneData(newGemType, newGemId, oldGem.getSocketColor(), oldGem.getHistoricUUID().toString());
+            newGemData.setLevel(oldGem.getLevel());
+
+            // Replace the gemstone
+            List<GemstoneData> newGems = new ArrayList<>(gems);
+            newGems.set(socketIndex, newGemData);
+
+            GemSocketsData newSockets = new GemSocketsData(new ArrayList<>(sockets.getEmptySlots()));
+            for (GemstoneData gd : newGems) {
+                newSockets.add(gd);
+            }
+
+            mmoitem.setData(Stat(GooPMMOItemsItemStats.GEM_SOCKETS), newSockets);
+            ItemStack result = mmoitem.newBuilder().build();
+
+            logReturn.add("§aSwapped gemstone: §e" + oldGemType + " " + oldGemId + " → " + newGemType + " " + newGemId);
+            return result;
+
+        } catch (Exception e) {
+            logReturn.add("§cError swapping gemstone: " + e.getMessage());
+            return null;
+        }
+    }
+
+    //endregion
+
+    //region Gemstone Migration
+
+    /**
+     * Migrates gemstone IDs across all MMOItems of a specific type.
+     */
+    public static int MigrateGemstones(@NotNull String gemType, @NotNull String oldId, @NotNull String newId, @NotNull List<String> logReturn) {
+        Type type = MMOItems.plugin.getTypes().get(gemType);
+        if (type == null) {
+            logReturn.add("§cGemstone type '§e" + gemType + "§c' not found!");
+            return 0;
+        }
+
+        MMOItem oldMMO = MMOItems.plugin.getMMOItem(type, oldId);
+        if (oldMMO == null) {
+            logReturn.add("§cGemstone '§e" + gemType + " " + oldId + "§c' not found!");
+            return 0;
+        }
+
+        // Check if new ID already exists
+        MMOItem newMMO = MMOItems.plugin.getMMOItem(type, newId);
+        if (newMMO != null) {
+            logReturn.add("§cGemstone '§e" + gemType + " " + newId + "§c' already exists! Delete it first.");
+            return 0;
+        }
+
+        try {
+            // Create new MMOItem template with new ID
+            MMOItemTemplate oldTemplate = MMOItems.plugin.getTemplates().getTemplate(type, oldId);
+            if (oldTemplate == null) {
+                logReturn.add("§cNo template found for gemstone '§e" + gemType + " " + oldId + "§c'!");
+                return 0;
+            }
+
+            // Build the old MMOItem to get its stats
+            MMOItem oldMMOItem = oldTemplate.newBuilder().build();
+            if (oldMMOItem == null) {
+                logReturn.add("§cFailed to build old gemstone '§e" + gemType + " " + oldId + "§c'!");
+                return 0;
+            }
+
+            // Create new template with new ID
+            MMOItemTemplate newTemplate = new MMOItemTemplate(type, newId);
+
+            // Copy base data from old template using reflection-free approach
+            // We'll use the newBuilder approach to copy stats
+            Map<ItemStat, RandomStatData> baseData = oldTemplate.getBaseItemData();
+            for (Map.Entry<ItemStat, RandomStatData> entry : baseData.entrySet()) {
+                // Use reflection to set base data
+                try {
+                    java.lang.reflect.Field baseField = MMOItemTemplate.class.getDeclaredField("base");
+                    baseField.setAccessible(true);
+                    @SuppressWarnings("unchecked")
+                    Map<ItemStat, RandomStatData> newBase = (Map<ItemStat, RandomStatData>) baseField.get(newTemplate);
+                    newBase.put(entry.getKey(), entry.getValue());
+                } catch (Exception e) {
+                    // Skip this stat if we can't copy it
+                }
+            }
+
+            // Register the new template
+            MMOItems.plugin.getTemplates().registerTemplate(newTemplate);
+
+            logReturn.add("§aCreated new gemstone template: §e" + gemType + " " + newId);
+
+            // Migrate items that have the old gemstone socketed
+            int itemsMigrated = 0;
+            for (Player player : Bukkit.getOnlinePlayers()) {
+                for (ItemStack item : player.getInventory().getContents()) {
+                    if (item == null || !IsMMOItem(item)) continue;
+
+                    try {
+                        LiveMMOItem mmoitem = new LiveMMOItem(NBTItem.get(item));
+                        GemSocketsData sockets = (GemSocketsData) mmoitem.getData(Stat(GooPMMOItemsItemStats.GEM_SOCKETS));
+
+                        if (sockets == null || sockets.getGemstones().isEmpty()) continue;
+
+                        boolean modified = false;
+                        List<GemstoneData> newGems = new ArrayList<>();
+
+                        for (GemstoneData gd : sockets.getGems()) {
+                            if (gd.getMMOItemType().equals(gemType) && gd.getMMOItemID().equals(oldId)) {
+                                GemstoneData newGd = new GemstoneData(gemType, newId, gd.getSocketColor(), gd.getHistoricUUID().toString());
+                                newGd.setLevel(gd.getLevel());
+                                newGems.add(newGd);
+                                modified = true;
+                            } else {
+                                newGems.add(gd);
+                            }
+                        }
+
+                        if (modified) {
+                            GemSocketsData newSockets = new GemSocketsData(new ArrayList<>(sockets.getEmptySlots()));
+                            for (GemstoneData gd : newGems) {
+                                newSockets.add(gd);
+                            }
+                            mmoitem.setData(Stat(GooPMMOItemsItemStats.GEM_SOCKETS), newSockets);
+                            ItemStack result = mmoitem.newBuilder().build();
+                            if (result != null) {
+                                item.setItemMeta(result.getItemMeta());
+                                itemsMigrated++;
+                            }
+                        }
+                    } catch (Exception ignored) {
+                        // Skip items that can't be processed
+                    }
+                }
+            }
+
+            logReturn.add("§aMigrated §e" + itemsMigrated + "§a item(s) with gemstones socketed.");
+            return 1;
+
+        } catch (Exception e) {
+            logReturn.add("§cError migrating gemstones: " + e.getMessage());
+            return 0;
+        }
+    }
+
+    //endregion
+
+    //region Gemstone List & Info
+
+    /**
+     * Lists all gemstones of a specific type.
+     */
+    public static void ListGemstones(@NotNull String gemType, @NotNull List<String> logReturn) {
+        Type type = MMOItems.plugin.getTypes().get(gemType);
+        if (type == null) {
+            logReturn.add("§cGemstone type '§e" + gemType + "§c' not found!");
+            return;
+        }
+
+        List<String> templateIds = MMOItems.plugin.getTemplates().getTemplateNames(type);
+        if (templateIds == null || templateIds.isEmpty()) {
+            logReturn.add("§7No gemstones found for type '§e" + gemType + "§7'.");
+            return;
+        }
+
+        logReturn.add("§3Gemstones of type §e" + gemType + "§3:");
+        for (String id : templateIds) {
+            logReturn.add("  §7- §e" + id);
+        }
+    }
+
+    /**
+     * Gets information about a specific gemstone.
+     */
+    public static void GetGemstoneInfo(@NotNull String gemType, @NotNull String gemId, @NotNull List<String> logReturn) {
+        Type type = MMOItems.plugin.getTypes().get(gemType);
+        if (type == null) {
+            logReturn.add("§cGemstone type '§e" + gemType + "§c' not found!");
+            return;
+        }
+
+        MMOItem mmo = MMOItems.plugin.getMMOItem(type, gemId);
+        if (mmo == null) {
+            logReturn.add("§cGemstone '§e" + gemType + " " + gemId + "§c' not found!");
+            return;
+        }
+
+        logReturn.add("§3Gemstone Info: §e" + gemType + " " + gemId);
+        if (mmo.hasData(ItemStats.NAME)) {
+            NameData nameData = (NameData) mmo.getData(ItemStats.NAME);
+            logReturn.add("§7Name: §f" + (nameData != null ? nameData.getString() : "N/A"));
+        } else {
+            logReturn.add("§7Name: §fN/A");
+        }
+    }
+
     //endregion
 
     //region Converting from Vanilla to MMOItem
@@ -5026,7 +5341,9 @@ public class GooPMMOItems {
                 int playerIndex = 2;
                 if (subsonic.equals("addgemslot") ||
                     subsonic.equals("stat") ||
-                    subsonic.equals("countgems")) { playerIndex++; }
+                    subsonic.equals("countgems") ||
+                    subsonic.equals("gemstoneextract") ||
+                    subsonic.equals("gemstoneswap")) { playerIndex++; }
                 if (args.length > playerIndex) {
                     targets = OotilityCeption.GetPlayers(senderLocation, args[playerIndex], null);
                     asDroppedItem = OotilityCeption.getEntityByUniqueId(args[playerIndex]); }
@@ -6834,17 +7151,243 @@ public class GooPMMOItems {
 
                             break;
                         //endregion
+                        //region Gemstone Extract
+                        case "gemstoneextract":
+                            argsMinLength = 4;
+                            argsMaxLength = 5;
+                            usage = "/goop mmoitems gemstoneextract <player> <slot> [socketIndex]";
+                            subcommand = "Gemstone Extract";
+                            subcategory = "MMOItems - Gemstone Extract";
+
+                            if (args.length == 2) {
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Extracts a gemstone from an item.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the item.");
+                                logReturn.add("§3 - §e[socketIndex] §7Index of the gemstone to extract (0-based, default: 0).");
+                            } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
+                                if (targets.isEmpty()) {
+                                    failure = true;
+                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Target must be an online player!"));
+                                }
+                                if (!failure) {
+                                    // Parse slot from string
+                                    org.bukkit.inventory.EquipmentSlot slot = null;
+                                    int slotIndex = -1;
+                                    String slotArg = args[3].toLowerCase();
+                                    switch (slotArg) {
+                                        case "head": slot = org.bukkit.inventory.EquipmentSlot.HEAD; break;
+                                        case "chest": slot = org.bukkit.inventory.EquipmentSlot.CHEST; break;
+                                        case "legs": slot = org.bukkit.inventory.EquipmentSlot.LEGS; break;
+                                        case "feet": slot = org.bukkit.inventory.EquipmentSlot.FEET; break;
+                                        case "mainhand": case "hand": slot = org.bukkit.inventory.EquipmentSlot.HAND; break;
+                                        case "offhand": slot = org.bukkit.inventory.EquipmentSlot.OFF_HAND; break;
+                                        default:
+                                            try { slotIndex = Integer.parseInt(args[3]); } catch (NumberFormatException ignored) {
+                                                failure = true;
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Invalid slot: §e" + args[3]));
+                                            }
+                                            break;
+                                    }
+                                    if (!failure) {
+                                        int socketIndex = 0;
+                                        if (args.length >= 5) {
+                                            try { socketIndex = Integer.parseInt(args[4]); } catch (NumberFormatException e) {
+                                                failure = true;
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Invalid socket index: §e" + args[4]));
+                                            }
+                                        }
+                                        if (!failure) {
+                                            ItemStack item = null;
+                                            Player target = targets.get(0);
+                                            if (slot != null) { item = target.getEquipment().getItem(slot); }
+                                            else if (slotIndex >= 0) { item = target.getInventory().getItem(slotIndex); }
+                                            if (item == null || item.getType().isAir()) {
+                                                failure = true;
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "No item in slot §e" + args[3]));
+                                            }
+                                            if (!failure) {
+                                                List<String> extractLog = new ArrayList<>();
+                                                ItemStack modifiedItem = ExtractGemstone(item, socketIndex, extractLog);
+                                                logReturn.addAll(extractLog);
+                                                if (modifiedItem != null) {
+                                                    if (slot != null) { target.getEquipment().setItem(slot, modifiedItem); }
+                                                    else { target.getInventory().setItem(slotIndex, modifiedItem); }
+                                                    logReturn.add("§aGemstone extracted successfully!");
+                                                } else { failure = true; }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage. For info: §e/goop mmoitems " + subsonic));
+                                logReturn.add("§3Usage: §e" + usage);
+                            }
+                            break;
+                        //endregion
+                        //region Gemstone Swap
+                        case "gemstoneswap":
+                            argsMinLength = 7;
+                            argsMaxLength = 7;
+                            usage = "/goop mmoitems gemstoneswap <player> <slot> <socketIndex> <newGemType> <newGemId>";
+                            subcommand = "Gemstone Swap";
+                            subcategory = "MMOItems - Gemstone Swap";
+
+                            if (args.length == 2) {
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Swaps a gemstone in an item.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<player> §7Player who has the item.");
+                                logReturn.add("§3 - §e<slot> §7Slot of the item.");
+                                logReturn.add("§3 - §e<socketIndex> §7Index of the gemstone to swap (0-based).");
+                                logReturn.add("§3 - §e<newGemType> §7Type of the new gemstone (e.g., GEM_STONE).");
+                                logReturn.add("§3 - §e<newGemId> §7ID of the new gemstone (e.g., atk1).");
+                            } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
+                                if (targets.isEmpty()) {
+                                    failure = true;
+                                    if (Gunging_Ootilities_Plugin.sendGooPFailFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Target must be an online player!"));
+                                }
+                                if (!failure) {
+                                    // Parse slot from string
+                                    org.bukkit.inventory.EquipmentSlot slot = null;
+                                    int slotIndex = -1;
+                                    String slotArg = args[3].toLowerCase();
+                                    switch (slotArg) {
+                                        case "head": slot = org.bukkit.inventory.EquipmentSlot.HEAD; break;
+                                        case "chest": slot = org.bukkit.inventory.EquipmentSlot.CHEST; break;
+                                        case "legs": slot = org.bukkit.inventory.EquipmentSlot.LEGS; break;
+                                        case "feet": slot = org.bukkit.inventory.EquipmentSlot.FEET; break;
+                                        case "mainhand": case "hand": slot = org.bukkit.inventory.EquipmentSlot.HAND; break;
+                                        case "offhand": slot = org.bukkit.inventory.EquipmentSlot.OFF_HAND; break;
+                                        default:
+                                            try { slotIndex = Integer.parseInt(args[3]); } catch (NumberFormatException ignored) {
+                                                failure = true;
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Invalid slot: §e" + args[3]));
+                                            }
+                                            break;
+                                    }
+                                    if (!failure) {
+                                        int socketIndex = 0;
+                                        try { socketIndex = Integer.parseInt(args[4]); } catch (NumberFormatException e) {
+                                            failure = true;
+                                            if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "Invalid socket index: §e" + args[4]));
+                                        }
+                                        if (!failure) {
+                                            String newGemType = args[5];
+                                            String newGemId = args[6];
+                                            ItemStack item = null;
+                                            Player target = targets.get(0);
+                                            if (slot != null) { item = target.getEquipment().getItem(slot); }
+                                            else if (slotIndex >= 0) { item = target.getInventory().getItem(slotIndex); }
+                                            if (item == null || item.getType().isAir()) {
+                                                failure = true;
+                                                if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat(subcategory, "No item in slot §e" + args[3]));
+                                            }
+                                            if (!failure) {
+                                                List<String> swapLog = new ArrayList<>();
+                                                ItemStack modifiedItem = SwapGemstone(item, socketIndex, newGemType, newGemId, swapLog);
+                                                logReturn.addAll(swapLog);
+                                                if (modifiedItem != null) {
+                                                    if (slot != null) { target.getEquipment().setItem(slot, modifiedItem); }
+                                                    else { target.getInventory().setItem(slotIndex, modifiedItem); }
+                                                    logReturn.add("§aGemstone swapped successfully!");
+                                                } else { failure = true; }
+                                            }
+                                        }
+                                    }
+                                }
+                            } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage. For info: §e/goop mmoitems " + subsonic));
+                                logReturn.add("§3Usage: §e" + usage);
+                            }
+                            break;
+                        //endregion
+                        //region Gemstone Migration
+                        case "gemstonemigrate":
+                            argsMinLength = 5;
+                            argsMaxLength = 5;
+                            usage = "/goop mmoitems gemstonemigrate <gemType> <oldId> <newId>";
+                            subcommand = "Gemstone Migration";
+                            subcategory = "MMOItems - Gemstone Migration";
+
+                            if (args.length == 2) {
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Migrates gemstone IDs across the server.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<gemType> §7Type of gemstone (e.g., GEM_STONE).");
+                                logReturn.add("§3 - §e<oldId> §7Current gemstone ID (e.g., atk_1).");
+                                logReturn.add("§3 - §e<newId> §7New gemstone ID (e.g., atk1).");
+                            } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
+                                String gemType = args[2];
+                                String oldId = args[3];
+                                String newId = args[4];
+                                List<String> migrateLog = new ArrayList<>();
+                                int result = MigrateGemstones(gemType, oldId, newId, migrateLog);
+                                logReturn.addAll(migrateLog);
+                                if (result > 0) { logReturn.add("§aGemstone migration completed!"); }
+                                else { failure = true; }
+                            } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage. For info: §e/goop mmoitems " + subsonic));
+                                logReturn.add("§3Usage: §e" + usage);
+                            }
+                            break;
+                        //endregion
+                        //region Gemstone List
+                        case "gemstonelist":
+                            argsMinLength = 3;
+                            argsMaxLength = 3;
+                            usage = "/goop mmoitems gemstonelist <gemType>";
+                            subcommand = "Gemstone List";
+                            subcategory = "MMOItems - Gemstone List";
+
+                            if (args.length == 2) {
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Lists all gemstones of a type.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<gemType> §7Type of gemstone (e.g., GEM_STONE).");
+                            } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
+                                String gemType = args[2];
+                                List<String> listLog = new ArrayList<>();
+                                ListGemstones(gemType, listLog);
+                                logReturn.addAll(listLog);
+                            } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage. For info: §e/goop mmoitems " + subsonic));
+                                logReturn.add("§3Usage: §e" + usage);
+                            }
+                            break;
+                        //endregion
+                        //region Gemstone Info
+                        case "gemstoneinfo":
+                            argsMinLength = 4;
+                            argsMaxLength = 4;
+                            usage = "/goop mmoitems gemstoneinfo <gemType> <gemId>";
+                            subcommand = "Gemstone Info";
+                            subcategory = "MMOItems - Gemstone Info";
+
+                            if (args.length == 2) {
+                                logReturn.add("§e______________________________________________");
+                                logReturn.add("§3MMOItems - §b" + subcommand + ",§7 Shows info about a gemstone.");
+                                logReturn.add("§3Usage: §e" + usage);
+                                logReturn.add("§3 - §e<gemType> §7Type of gemstone (e.g., GEM_STONE).");
+                                logReturn.add("§3 - §e<gemId> §7ID of the gemstone (e.g., atk1).");
+                            } else if (args.length >= argsMinLength && args.length <= argsMaxLength) {
+                                String gemType = args[2];
+                                String gemId = args[3];
+                                List<String> infoLog = new ArrayList<>();
+                                GetGemstoneInfo(gemType, gemId, infoLog);
+                                logReturn.addAll(infoLog);
+                            } else if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) {
+                                logReturn.add(OotilityCeption.LogFormat(subcategory, "Incorrect usage. For info: §e/goop mmoitems " + subsonic));
+                                logReturn.add("§3Usage: §e" + usage);
+                            }
+                            break;
+                        //endregion
                         default:
                             // I have no memory of that shit
                             if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("MMOItems", "'§3" + args[1] + "§7' is not a valid MMOItems action! do §e/goop mmoitems§7 for the list of actions."));
                             break;
                     }
-
-                } else {
-
-                    // Tell him lmao
-                    if (!Gunging_Ootilities_Plugin.blockImportantErrorFeedback) logReturn.add(OotilityCeption.LogFormat("§cLack of permission to proceed."));
-                }
 
             } else if (args.length == 1) {
                 logReturn.add("§e______________________________________________");
@@ -6855,6 +7398,10 @@ public class GooPMMOItems {
                 logReturn.add("§3 --> §estat§7,§e regenerate§7,§e upgrade§7,§e modifier");
                 logReturn.add("§3 --> §efixStacks [player]");
                 logReturn.add("§3      * §7Updates MMOItems to the newest format, so that they stack.");
+                logReturn.add("§3 --> §egemstoneExtract§7,§e gemstoneSwap§7,§e gemstoneMigrate");
+                logReturn.add("§3      * §7Extract gemstones from items, swap them, or migrate IDs.");
+                logReturn.add("§3 --> §egemstoneList <type>§7,§e gemstoneInfo <type> <id>");
+                logReturn.add("§3      * §7List gemstones or get info about a specific gemstone.");
                 if (Gunging_Ootilities_Plugin.usingMMOItemShrubs) {
                     logReturn.add("§3 --> §enewShrub <type> [w] [x] [y] [z]");
                     logReturn.add("§3      * §7Creates a new shrub of type <type>");
@@ -6883,4 +7430,5 @@ public class GooPMMOItems {
         //Set Log Return Urn Value
         logReturnUrn.SetValue(logReturn);
     }
+}
 }
