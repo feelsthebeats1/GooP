@@ -17,7 +17,9 @@ import gunging.ootilities.gunging_ootilities_plugin.misc.mmoitemstats.ConverterT
 import me.clip.placeholderapi.PlaceholderAPI;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.InvalidConfigurationException;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Player;
@@ -1019,6 +1021,17 @@ public final class Gunging_Ootilities_Plugin extends JavaPlugin implements Liste
 
             mmoitemsConverterPair = GetConfigAt(null, "mmoitems-converter.yml", true, false);
             //STORE//if (mmoitemsConverterPair != null) { storageRoots.put(mmoitemsConverterPair.getStorage(), mmoitemsConverterPair); }
+
+            // Run Gemstone Migration from config (if configured in mmoitems-converter.yml)
+            ConfigurationSection gemstoneMigrationSection = mmoitemsConverterPair.getStorage().getConfigurationSection("Gemstone_Migration");
+            if (gemstoneMigrationSection != null) {
+                List<String> migrationLog = GooPMMOItems.LoadGemstoneMigrationConfig(gemstoneMigrationSection);
+                if (!migrationLog.isEmpty()) {
+                    for (String logLine : migrationLog) {
+                        theOots.CLog(logLine);
+                    }
+                }
+            }
         }
         //endregion
 

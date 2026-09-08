@@ -156,12 +156,30 @@ Allow_MythicItems: true
 ###
 ###
 ###
-###  AXE:
-###    OnCraft:
-###      Tier:
-###      - COMMON 3
-###      - UNCOMMON 3
-###      - RARE 3
-###      - EPIC 3
-###      Epic:
-###      - attack-damage: +4
+# ---------------------------- Gemstone_Migration
+#   Automatically migrates gemstone IDs when the plugin loads.
+#   This is useful when you want to rename gemstones across your entire server.
+#
+#   When the plugin starts, it will scan all online players' inventories and
+#   replace any socketed gemstones that match the old IDs with the new ones.
+#
+#   The migration will also create new MMOItem templates for the new gemstone IDs
+#   if they don't already exist (by copying the old template's stats).
+#
+#   Format:
+#     [GemType]:
+#       [OldId]: [NewId]
+#
+#   Example:
+#     GEM_STONE:
+#       atk_1: atk1
+#       def_1: def1
+#       hp_1: hp1
+#
+#   Note: This only works with MMOItems 5.x+ (API version 5.0.0 and above).
+#   For older versions, you will need to use the /gooP migrate-gemstones command instead.
+Gemstone_Migration:
+  ##  GEM_STONE:
+  ##    atk_1: atk1
+  ##    def_1: def1
+  ##    hp_1: hp1

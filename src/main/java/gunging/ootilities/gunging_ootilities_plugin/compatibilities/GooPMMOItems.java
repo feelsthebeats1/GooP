@@ -2028,6 +2028,55 @@ public class GooPMMOItems {
 
     //endregion
 
+    //region Load Gemstone Migration from Config
+    // Parses the Gemstone_Migration section from mmoitems-converter.yml
+    // and runs automated migration for each old->new gemstone ID pair.
+    // Returns a list of log messages describing what was done.
+    @NotNull
+    public static List<String> LoadGemstoneMigrationConfig(@Nullable ConfigurationSection gemstoneMigrationSection) {
+        List<String> logReturn = new ArrayList<>();
+
+        // No section? Nothing to do.
+        if (gemstoneMigrationSection == null) {
+            logReturn.add("§7§o[GooP] Gemstone_Migration section not found in config. Skipping.");
+            return logReturn;
+        }
+
+        // Iterate over each gemstone type (e.g., GEM_STONE)
+        for (String gemType : gemstoneMigrationSection.getKeys(false)) {
+            ConfigurationSection typeSection = gemstoneMigrationSection.getConfigurationSection(gemType);
+            if (typeSection == null) {
+                logReturn.add("§c§o[GooP] Invalid Gemstone_Migration entry for type '§e" + gemType + "§c'. Skipping.");
+                continue;
+            }
+
+            // Iterate over each old->new mapping
+            for (String oldId : typeSection.getKeys(false)) {
+                String newId = typeSection.getString(oldId);
+
+                // Validate entries
+                if (newId == null || newId.isBlank()) {
+                    logReturn.add("§c§o[GooP] Empty or invalid new ID for '§e" + oldId + "§c' in type '§e" + gemType + "§c'. Skipping.");
+                    continue;
+                }
+
+                // Skip if old and new are the same
+                if (oldId.equalsIgnoreCase(newId)) {
+                    logReturn.add("§7§o[GooP] Skipping '§e" + oldId + "§7' -> '§e" + newId + "§7': same ID.");
+                    continue;
+                }
+
+                // Run the migration and log the result
+                logReturn.add("§6§o[GooP] Migrating gemstone '§e" + gemType + " " + oldId + "§6' -> '§e" + gemType + " " + newId + "§6'...");
+                MigrateGemstones(gemType, oldId, newId, logReturn);
+            }
+        }
+
+        return logReturn;
+    }
+
+    //endregion
+
     //region Converting from Vanilla to MMOItem
     public static String VANILLA_MIID = "VANILLA";
     @NotNull public static NBTItem ConvertVanillaToMMOItemAsNBT(@NotNull ItemStack base) {
